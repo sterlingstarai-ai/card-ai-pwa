@@ -1,0 +1,1316 @@
+{
+  "lastUpdated": "2026-01-14",
+  "source": "Web search results from official websites, namu.wiki, trip.com, booking.com, etc.",
+  "places": [
+    {
+      "id": "hotel-signiel-seoul",
+      "name": "시그니엘 서울",
+      "nameEn": "Signiel Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "롯데", "잠실"],
+      "address": "서울특별시 송파구 올림픽로 300 롯데월드타워 76-101층",
+      "lat": 37.5125,
+      "lng": 127.1025
+    },
+    {
+      "id": "hotel-four-seasons-seoul",
+      "name": "포시즌스 호텔 서울",
+      "nameEn": "Four Seasons Hotel Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "광화문"],
+      "address": "서울특별시 종로구 새문안로 97",
+      "lat": 37.5726,
+      "lng": 126.9755
+    },
+    {
+      "id": "hotel-lotte-seoul",
+      "name": "롯데호텔 서울",
+      "nameEn": "Lotte Hotel Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "롯데", "명동"],
+      "address": "서울특별시 중구 을지로 30",
+      "lat": 37.5656,
+      "lng": 126.9815
+    },
+    {
+      "id": "hotel-shilla-seoul",
+      "name": "서울신라호텔",
+      "nameEn": "The Shilla Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "신라", "장충동"],
+      "address": "서울특별시 중구 동호로 249",
+      "lat": 37.5572,
+      "lng": 127.0056
+    },
+    {
+      "id": "hotel-grand-hyatt-seoul",
+      "name": "그랜드 하얏트 서울",
+      "nameEn": "Grand Hyatt Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "하얏트", "이태원"],
+      "address": "서울특별시 용산구 소월로 322",
+      "lat": 37.5388,
+      "lng": 126.9971
+    },
+    {
+      "id": "hotel-park-hyatt-seoul",
+      "name": "파크 하얏트 서울",
+      "nameEn": "Park Hyatt Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "하얏트", "강남"],
+      "address": "서울특별시 강남구 테헤란로 606",
+      "lat": 37.5085,
+      "lng": 127.0633
+    },
+    {
+      "id": "hotel-conrad-seoul",
+      "name": "콘래드 서울",
+      "nameEn": "Conrad Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "힐튼", "여의도"],
+      "address": "서울특별시 영등포구 국제금융로 10",
+      "lat": 37.5253,
+      "lng": 126.9269
+    },
+    {
+      "id": "hotel-intercontinental-parnas",
+      "name": "그랜드 인터컨티넨탈 서울 파르나스",
+      "nameEn": "Grand InterContinental Seoul Parnas",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "IHG", "코엑스", "삼성"],
+      "address": "서울특별시 강남구 테헤란로 521",
+      "lat": 37.5085,
+      "lng": 127.0600
+    },
+    {
+      "id": "hotel-intercontinental-coex",
+      "name": "인터컨티넨탈 서울 코엑스",
+      "nameEn": "InterContinental Seoul COEX",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "IHG", "코엑스"],
+      "address": "서울특별시 강남구 봉은사로 524",
+      "lat": 37.5118,
+      "lng": 127.0595
+    },
+    {
+      "id": "hotel-jw-marriott-seoul",
+      "name": "JW 메리어트 동대문 스퀘어 서울",
+      "nameEn": "JW Marriott Dongdaemun Square Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "메리어트", "동대문"],
+      "address": "서울특별시 종로구 청계천로 279",
+      "lat": 37.5704,
+      "lng": 127.0094
+    },
+    {
+      "id": "hotel-westin-chosun-seoul",
+      "name": "웨스틴 조선 서울",
+      "nameEn": "The Westin Chosun Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "메리어트", "시청"],
+      "address": "서울특별시 중구 소공로 106",
+      "lat": 37.5647,
+      "lng": 126.9812
+    },
+    {
+      "id": "hotel-banyan-tree-seoul",
+      "name": "반얀트리 클럽 앤 스파 서울",
+      "nameEn": "Banyan Tree Club & Spa Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "남산"],
+      "address": "서울특별시 중구 장충단로 60",
+      "lat": 37.5533,
+      "lng": 127.0010
+    },
+    {
+      "id": "hotel-w-seoul",
+      "name": "W 서울 워커힐",
+      "nameEn": "W Seoul Walkerhill",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "메리어트", "광진구"],
+      "address": "서울특별시 광진구 워커힐로 177",
+      "lat": 37.5516,
+      "lng": 127.1083
+    },
+    {
+      "id": "hotel-andaz-seoul",
+      "name": "안다즈 서울 강남",
+      "nameEn": "Andaz Seoul Gangnam",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "하얏트", "강남"],
+      "address": "서울특별시 강남구 논현로 854",
+      "lat": 37.5146,
+      "lng": 127.0221
+    },
+    {
+      "id": "hotel-grand-walkerhill",
+      "name": "그랜드 워커힐 서울",
+      "nameEn": "Grand Walkerhill Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "광진구"],
+      "address": "서울특별시 광진구 워커힐로 177",
+      "lat": 37.5516,
+      "lng": 127.1083
+    },
+    {
+      "id": "hotel-fairmont-seoul",
+      "name": "페어몬트 앰배서더 서울",
+      "nameEn": "Fairmont Ambassador Seoul",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "여의도"],
+      "address": "서울특별시 영등포구 국제금융로 108",
+      "lat": 37.5260,
+      "lng": 126.9280
+    },
+    {
+      "id": "hotel-novotel-ambassador-gangnam",
+      "name": "노보텔 앰배서더 서울 강남",
+      "nameEn": "Novotel Ambassador Seoul Gangnam",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "아코르", "강남"],
+      "address": "서울특별시 강남구 봉은사로 130",
+      "lat": 37.5076,
+      "lng": 127.0232
+    },
+    {
+      "id": "hotel-paradise-city",
+      "name": "파라다이스시티",
+      "nameEn": "Paradise City",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "인천", "영종도"],
+      "address": "인천광역시 중구 영종해안남로321번길 186",
+      "lat": 37.4446,
+      "lng": 126.4505
+    },
+    {
+      "id": "hotel-shilla-jeju",
+      "name": "제주신라호텔",
+      "nameEn": "The Shilla Jeju",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "신라", "제주", "중문"],
+      "address": "제주특별자치도 서귀포시 중문관광로72번길 75",
+      "lat": 33.2479,
+      "lng": 126.4123
+    },
+    {
+      "id": "hotel-lotte-jeju",
+      "name": "롯데호텔 제주",
+      "nameEn": "Lotte Hotel Jeju",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "롯데", "제주", "중문"],
+      "address": "제주특별자치도 서귀포시 중문관광로72번길 35",
+      "lat": 33.2485,
+      "lng": 126.4102
+    },
+    {
+      "id": "hotel-grand-hyatt-jeju",
+      "name": "그랜드 하얏트 제주",
+      "nameEn": "Grand Hyatt Jeju",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "하얏트", "제주", "드림타워"],
+      "address": "제주특별자치도 제주시 노연로 925",
+      "lat": 33.4888,
+      "lng": 126.4939
+    },
+    {
+      "id": "hotel-jw-marriott-jeju",
+      "name": "JW 메리어트 제주 리조트 앤 스파",
+      "nameEn": "JW Marriott Jeju Resort & Spa",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "메리어트", "제주", "서귀포"],
+      "address": "제주특별자치도 서귀포시 태평로 152",
+      "lat": 33.2520,
+      "lng": 126.5616
+    },
+    {
+      "id": "hotel-grand-josun-jeju",
+      "name": "그랜드 조선 제주",
+      "nameEn": "Grand Josun Jeju",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "조선호텔", "제주"],
+      "address": "제주특별자치도 서귀포시 중문관광로72번길 60",
+      "lat": 33.2480,
+      "lng": 126.4115
+    },
+    {
+      "id": "hotel-haevichi-jeju",
+      "name": "해비치 호텔앤드리조트 제주",
+      "nameEn": "Haevichi Hotel & Resort Jeju",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "제주", "표선"],
+      "address": "제주특별자치도 서귀포시 표선면 민속해안로 537",
+      "lat": 33.3287,
+      "lng": 126.8421
+    },
+    {
+      "id": "hotel-parnas-jeju",
+      "name": "파르나스 호텔 제주",
+      "nameEn": "Parnas Hotel Jeju",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "파르나스", "제주", "성산"],
+      "address": "제주특별자치도 서귀포시 성산읍 섭지코지로 107",
+      "lat": 33.4346,
+      "lng": 126.9245
+    },
+    {
+      "id": "hotel-signiel-busan",
+      "name": "시그니엘 부산",
+      "nameEn": "Signiel Busan",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "롯데", "부산", "해운대"],
+      "address": "부산광역시 해운대구 달맞이길 30",
+      "lat": 35.1591,
+      "lng": 129.1606
+    },
+    {
+      "id": "hotel-park-hyatt-busan",
+      "name": "파크 하얏트 부산",
+      "nameEn": "Park Hyatt Busan",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "하얏트", "부산", "해운대"],
+      "address": "부산광역시 해운대구 마린시티1로 51",
+      "lat": 35.1572,
+      "lng": 129.1445
+    },
+    {
+      "id": "hotel-paradise-busan",
+      "name": "파라다이스 호텔 부산",
+      "nameEn": "Paradise Hotel Busan",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "부산", "해운대"],
+      "address": "부산광역시 해운대구 해운대해변로 296",
+      "lat": 35.1592,
+      "lng": 129.1607
+    },
+    {
+      "id": "hotel-westin-chosun-busan",
+      "name": "웨스틴 조선 부산",
+      "nameEn": "The Westin Chosun Busan",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "메리어트", "부산", "해운대"],
+      "address": "부산광역시 해운대구 해운대해변로 67",
+      "lat": 35.1597,
+      "lng": 129.1511
+    },
+    {
+      "id": "hotel-grand-josun-busan",
+      "name": "그랜드 조선 부산",
+      "nameEn": "Grand Josun Busan",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "조선호텔", "부산", "해운대"],
+      "address": "부산광역시 해운대구 해운대해변로 292",
+      "lat": 35.1590,
+      "lng": 129.1603
+    },
+    {
+      "id": "hotel-lotte-busan",
+      "name": "롯데호텔 부산",
+      "nameEn": "Lotte Hotel Busan",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "롯데", "부산", "서면"],
+      "address": "부산광역시 부산진구 가야대로 772",
+      "lat": 35.1555,
+      "lng": 129.0593
+    },
+    {
+      "id": "hotel-ananti-cove",
+      "name": "아난티 앳 부산",
+      "nameEn": "Ananti at Busan",
+      "type": "hotel",
+      "tags": ["5성급", "프리미엄", "부산", "기장"],
+      "address": "부산광역시 기장군 기장읍 기장해안로 268-31",
+      "lat": 35.2439,
+      "lng": 129.2221
+    },
+    {
+      "id": "airport-incheon-t1",
+      "name": "인천국제공항 제1터미널",
+      "nameEn": "Incheon International Airport Terminal 1",
+      "type": "airport",
+      "tags": ["국제공항", "인천"],
+      "address": "인천광역시 중구 공항로 272",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "airport-incheon-t2",
+      "name": "인천국제공항 제2터미널",
+      "nameEn": "Incheon International Airport Terminal 2",
+      "type": "airport",
+      "tags": ["국제공항", "인천"],
+      "address": "인천광역시 중구 제2터미널대로 500",
+      "lat": 37.4602,
+      "lng": 126.4407
+    },
+    {
+      "id": "airport-gimpo",
+      "name": "김포국제공항",
+      "nameEn": "Gimpo International Airport",
+      "type": "airport",
+      "tags": ["국제공항", "서울", "김포"],
+      "address": "서울특별시 강서구 하늘길 112",
+      "lat": 37.5583,
+      "lng": 126.7910
+    },
+    {
+      "id": "airport-gimhae",
+      "name": "김해국제공항",
+      "nameEn": "Gimhae International Airport",
+      "type": "airport",
+      "tags": ["국제공항", "부산", "김해"],
+      "address": "부산광역시 강서구 공항진입로 108",
+      "lat": 35.1743,
+      "lng": 128.9363
+    },
+    {
+      "id": "airport-jeju",
+      "name": "제주국제공항",
+      "nameEn": "Jeju International Airport",
+      "type": "airport",
+      "tags": ["국제공항", "제주"],
+      "address": "제주특별자치도 제주시 공항로 2",
+      "lat": 33.5068,
+      "lng": 126.4892
+    },
+    {
+      "id": "airport-daegu",
+      "name": "대구국제공항",
+      "nameEn": "Daegu International Airport",
+      "type": "airport",
+      "tags": ["국제공항", "대구"],
+      "address": "대구광역시 동구 공항로 221",
+      "lat": 35.8941,
+      "lng": 128.6590
+    },
+    {
+      "id": "airport-cheongju",
+      "name": "청주국제공항",
+      "nameEn": "Cheongju International Airport",
+      "type": "airport",
+      "tags": ["국제공항", "청주", "충북"],
+      "address": "충청북도 청주시 청원구 내수읍 오창대로 980",
+      "lat": 36.7098,
+      "lng": 127.4928
+    },
+    {
+      "id": "airport-gwangju",
+      "name": "광주공항",
+      "nameEn": "Gwangju Airport",
+      "type": "airport",
+      "tags": ["국내공항", "광주"],
+      "address": "광주광역시 광산구 상무대로 420-25",
+      "lat": 35.1265,
+      "lng": 126.8089
+    },
+    {
+      "id": "airport-ulsan",
+      "name": "울산공항",
+      "nameEn": "Ulsan Airport",
+      "type": "airport",
+      "tags": ["국내공항", "울산"],
+      "address": "울산광역시 북구 산업로 1103",
+      "lat": 35.5936,
+      "lng": 129.3519
+    },
+    {
+      "id": "airport-muan",
+      "name": "무안국제공항",
+      "nameEn": "Muan International Airport",
+      "type": "airport",
+      "tags": ["국제공항", "무안", "전남"],
+      "address": "전라남도 무안군 망운면 공항로 970-260",
+      "lat": 34.9914,
+      "lng": 126.3829
+    },
+    {
+      "id": "airport-yeosu",
+      "name": "여수공항",
+      "nameEn": "Yeosu Airport",
+      "type": "airport",
+      "tags": ["국내공항", "여수"],
+      "address": "전라남도 여수시 율촌면 여수공항로 55",
+      "lat": 34.8423,
+      "lng": 127.6152
+    },
+    {
+      "id": "lounge-matina-icn-t1-east",
+      "name": "마티나 라운지 인천공항 T1 동편",
+      "nameEn": "Matina Lounge ICN T1 East",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제1터미널", "워커힐"],
+      "address": "인천국제공항 제1터미널 4층 면세지역 Gate 11 부근",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "lounge-matina-icn-t1-west",
+      "name": "마티나 라운지 인천공항 T1 서편",
+      "nameEn": "Matina Lounge ICN T1 West",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제1터미널", "워커힐"],
+      "address": "인천국제공항 제1터미널 4층 면세지역 Gate 43 부근",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "lounge-matina-icn-t2",
+      "name": "마티나 라운지 인천공항 T2",
+      "nameEn": "Matina Lounge ICN T2",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제2터미널", "워커힐"],
+      "address": "인천국제공항 제2터미널 4층 면세지역 Gate 252 부근",
+      "lat": 37.4602,
+      "lng": 126.4407
+    },
+    {
+      "id": "lounge-skyhub-icn-t1-gate29",
+      "name": "스카이허브 라운지 인천공항 T1 Gate29",
+      "nameEn": "Sky Hub Lounge ICN T1 Gate 29",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제1터미널"],
+      "address": "인천국제공항 제1터미널 4층 면세지역 Gate 29 부근",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "lounge-skyhub-icn-t1-gate25",
+      "name": "스카이허브 라운지 인천공항 T1 Gate25",
+      "nameEn": "Sky Hub Lounge ICN T1 Gate 25",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제1터미널"],
+      "address": "인천국제공항 제1터미널 4층 면세지역 Gate 25 부근",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "lounge-skyhub-icn-t1-transit",
+      "name": "스카이허브 라운지 인천공항 T1 환승구역",
+      "nameEn": "Sky Hub Lounge ICN T1 Transit",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제1터미널", "환승"],
+      "address": "인천국제공항 제1터미널 4층 면세지역 Gate 42 부근",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "lounge-skyhub-icn-t2-gate247",
+      "name": "스카이허브 라운지 인천공항 T2 Gate247",
+      "nameEn": "Sky Hub Lounge ICN T2 Gate 247",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제2터미널"],
+      "address": "인천국제공항 제2터미널 4층 면세지역 Gate 247 부근",
+      "lat": 37.4602,
+      "lng": 126.4407
+    },
+    {
+      "id": "lounge-skyhub-icn-t2-gate268",
+      "name": "스카이허브 라운지 인천공항 T2 Gate268",
+      "nameEn": "Sky Hub Lounge ICN T2 Gate 268",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제2터미널"],
+      "address": "인천국제공항 제2터미널 4층 면세지역 Gate 268 부근",
+      "lat": 37.4602,
+      "lng": 126.4407
+    },
+    {
+      "id": "lounge-skyhub-gimpo",
+      "name": "스카이허브 라운지 김포공항",
+      "nameEn": "Sky Hub Lounge Gimpo",
+      "type": "lounge",
+      "tags": ["공항라운지", "김포공항"],
+      "address": "김포공항 3층 면세지역 Gate 35 부근",
+      "lat": 37.5583,
+      "lng": 126.7910
+    },
+    {
+      "id": "lounge-kal-icn-t2",
+      "name": "대한항공 프레스티지 클래스 라운지 인천공항 T2",
+      "nameEn": "Korean Air Prestige Class Lounge ICN T2",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제2터미널", "대한항공"],
+      "address": "인천국제공항 제2터미널 3층 면세지역",
+      "lat": 37.4602,
+      "lng": 126.4407
+    },
+    {
+      "id": "lounge-asiana-icn-t1",
+      "name": "아시아나 비즈니스 라운지 인천공항 T1",
+      "nameEn": "Asiana Business Lounge ICN T1",
+      "type": "lounge",
+      "tags": ["공항라운지", "인천공항", "제1터미널", "아시아나"],
+      "address": "인천국제공항 제1터미널 4층 면세지역",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "dept-lotte-main",
+      "name": "롯데백화점 본점",
+      "nameEn": "Lotte Department Store Main",
+      "type": "department",
+      "tags": ["백화점", "롯데", "명동", "서울"],
+      "address": "서울특별시 중구 남대문로 81",
+      "lat": 37.5648,
+      "lng": 126.9816
+    },
+    {
+      "id": "dept-lotte-jamsil",
+      "name": "롯데백화점 잠실점",
+      "nameEn": "Lotte Department Store Jamsil",
+      "type": "department",
+      "tags": ["백화점", "롯데", "잠실", "서울"],
+      "address": "서울특별시 송파구 올림픽로 240",
+      "lat": 37.5113,
+      "lng": 127.0980
+    },
+    {
+      "id": "dept-lotte-gangnam",
+      "name": "롯데백화점 강남점",
+      "nameEn": "Lotte Department Store Gangnam",
+      "type": "department",
+      "tags": ["백화점", "롯데", "강남", "서울"],
+      "address": "서울특별시 강남구 도곡로 401",
+      "lat": 37.4970,
+      "lng": 127.0483
+    },
+    {
+      "id": "dept-lotte-busan-main",
+      "name": "롯데백화점 부산본점",
+      "nameEn": "Lotte Department Store Busan Main",
+      "type": "department",
+      "tags": ["백화점", "롯데", "서면", "부산"],
+      "address": "부산광역시 부산진구 가야대로 772",
+      "lat": 35.1555,
+      "lng": 129.0593
+    },
+    {
+      "id": "dept-lotte-centum",
+      "name": "롯데백화점 센텀시티점",
+      "nameEn": "Lotte Department Store Centum City",
+      "type": "department",
+      "tags": ["백화점", "롯데", "해운대", "부산"],
+      "address": "부산광역시 해운대구 센텀남대로 59",
+      "lat": 35.1696,
+      "lng": 129.1313
+    },
+    {
+      "id": "dept-lotte-gwangbok",
+      "name": "롯데백화점 광복점",
+      "nameEn": "Lotte Department Store Gwangbok",
+      "type": "department",
+      "tags": ["백화점", "롯데", "남포동", "부산"],
+      "address": "부산광역시 중구 중앙대로 2",
+      "lat": 35.0987,
+      "lng": 129.0316
+    },
+    {
+      "id": "dept-lotte-yeongdeungpo",
+      "name": "롯데백화점 영등포점",
+      "nameEn": "Lotte Department Store Yeongdeungpo",
+      "type": "department",
+      "tags": ["백화점", "롯데", "영등포", "서울"],
+      "address": "서울특별시 영등포구 경인로 846",
+      "lat": 37.5164,
+      "lng": 126.9073
+    },
+    {
+      "id": "dept-lotte-nowon",
+      "name": "롯데백화점 노원점",
+      "nameEn": "Lotte Department Store Nowon",
+      "type": "department",
+      "tags": ["백화점", "롯데", "노원", "서울"],
+      "address": "서울특별시 노원구 동일로 1414",
+      "lat": 37.6550,
+      "lng": 127.0616
+    },
+    {
+      "id": "dept-lotte-bundang",
+      "name": "롯데백화점 분당점",
+      "nameEn": "Lotte Department Store Bundang",
+      "type": "department",
+      "tags": ["백화점", "롯데", "분당", "성남"],
+      "address": "경기도 성남시 분당구 황새울로 200",
+      "lat": 37.3771,
+      "lng": 127.1151
+    },
+    {
+      "id": "dept-lotte-suwon",
+      "name": "롯데백화점 수원점",
+      "nameEn": "Lotte Department Store Suwon",
+      "type": "department",
+      "tags": ["백화점", "롯데", "수원"],
+      "address": "경기도 수원시 권선구 세화로 134",
+      "lat": 37.2660,
+      "lng": 127.0012
+    },
+    {
+      "id": "dept-lotte-incheon",
+      "name": "롯데백화점 인천점",
+      "nameEn": "Lotte Department Store Incheon",
+      "type": "department",
+      "tags": ["백화점", "롯데", "구월동", "인천"],
+      "address": "인천광역시 남동구 구월로 1426",
+      "lat": 37.4454,
+      "lng": 126.7023
+    },
+    {
+      "id": "dept-lotte-daegu",
+      "name": "롯데백화점 대구점",
+      "nameEn": "Lotte Department Store Daegu",
+      "type": "department",
+      "tags": ["백화점", "롯데", "대구"],
+      "address": "대구광역시 중구 동성로2가 149",
+      "lat": 35.8676,
+      "lng": 128.5956
+    },
+    {
+      "id": "dept-lotte-daejeon",
+      "name": "롯데백화점 대전점",
+      "nameEn": "Lotte Department Store Daejeon",
+      "type": "department",
+      "tags": ["백화점", "롯데", "대전"],
+      "address": "대전광역시 서구 계룡로 598",
+      "lat": 36.3511,
+      "lng": 127.3789
+    },
+    {
+      "id": "dept-lotte-gwangju",
+      "name": "롯데백화점 광주점",
+      "nameEn": "Lotte Department Store Gwangju",
+      "type": "department",
+      "tags": ["백화점", "롯데", "광주"],
+      "address": "광주광역시 동구 독립로 268",
+      "lat": 35.1444,
+      "lng": 126.9270
+    },
+    {
+      "id": "dept-lotte-jeonju",
+      "name": "롯데백화점 전주점",
+      "nameEn": "Lotte Department Store Jeonju",
+      "type": "department",
+      "tags": ["백화점", "롯데", "전주"],
+      "address": "전라북도 전주시 완산구 온고을로 2",
+      "lat": 35.8164,
+      "lng": 127.1087
+    },
+    {
+      "id": "dept-lotte-ulsan",
+      "name": "롯데백화점 울산점",
+      "nameEn": "Lotte Department Store Ulsan",
+      "type": "department",
+      "tags": ["백화점", "롯데", "울산"],
+      "address": "울산광역시 남구 삼산로 288",
+      "lat": 35.5389,
+      "lng": 129.3379
+    },
+    {
+      "id": "dept-lotte-changwon",
+      "name": "롯데백화점 창원점",
+      "nameEn": "Lotte Department Store Changwon",
+      "type": "department",
+      "tags": ["백화점", "롯데", "창원"],
+      "address": "경상남도 창원시 성산구 중앙대로 124",
+      "lat": 35.2262,
+      "lng": 128.6816
+    },
+    {
+      "id": "dept-shinsegae-main",
+      "name": "신세계백화점 본점",
+      "nameEn": "Shinsegae Department Store Main",
+      "type": "department",
+      "tags": ["백화점", "신세계", "명동", "서울"],
+      "address": "서울특별시 중구 소공로 63",
+      "lat": 37.5607,
+      "lng": 126.9810
+    },
+    {
+      "id": "dept-shinsegae-gangnam",
+      "name": "신세계백화점 강남점",
+      "nameEn": "Shinsegae Department Store Gangnam",
+      "type": "department",
+      "tags": ["백화점", "신세계", "강남", "서울", "센트럴시티"],
+      "address": "서울특별시 서초구 신반포로 176",
+      "lat": 37.5049,
+      "lng": 127.0045
+    },
+    {
+      "id": "dept-shinsegae-centum",
+      "name": "신세계백화점 센텀시티점",
+      "nameEn": "Shinsegae Department Store Centum City",
+      "type": "department",
+      "tags": ["백화점", "신세계", "해운대", "부산", "세계최대"],
+      "address": "부산광역시 해운대구 센텀남대로 35",
+      "lat": 35.1696,
+      "lng": 129.1296
+    },
+    {
+      "id": "dept-shinsegae-yeongdeungpo",
+      "name": "신세계백화점 영등포점",
+      "nameEn": "Shinsegae Department Store Yeongdeungpo",
+      "type": "department",
+      "tags": ["백화점", "신세계", "영등포", "서울", "타임스퀘어"],
+      "address": "서울특별시 영등포구 영중로 9",
+      "lat": 37.5175,
+      "lng": 126.9025
+    },
+    {
+      "id": "dept-shinsegae-gyeonggi",
+      "name": "신세계백화점 경기점",
+      "nameEn": "Shinsegae Department Store Gyeonggi",
+      "type": "department",
+      "tags": ["백화점", "신세계", "용인"],
+      "address": "경기도 용인시 수지구 포은대로 536",
+      "lat": 37.3245,
+      "lng": 127.0978
+    },
+    {
+      "id": "dept-shinsegae-gwangju",
+      "name": "광주신세계",
+      "nameEn": "Shinsegae Department Store Gwangju",
+      "type": "department",
+      "tags": ["백화점", "신세계", "광주"],
+      "address": "광주광역시 서구 무진대로 932",
+      "lat": 35.1385,
+      "lng": 126.8689
+    },
+    {
+      "id": "dept-shinsegae-daegu",
+      "name": "대구신세계",
+      "nameEn": "Shinsegae Department Store Daegu",
+      "type": "department",
+      "tags": ["백화점", "신세계", "대구"],
+      "address": "대구광역시 동구 동부로 149",
+      "lat": 35.8785,
+      "lng": 128.6283
+    },
+    {
+      "id": "dept-shinsegae-incheon",
+      "name": "신세계백화점 인천점",
+      "nameEn": "Shinsegae Department Store Incheon",
+      "type": "department",
+      "tags": ["백화점", "신세계", "인천"],
+      "address": "인천광역시 남동구 인천대로 810",
+      "lat": 37.4445,
+      "lng": 126.7027
+    },
+    {
+      "id": "dept-shinsegae-cheonan",
+      "name": "신세계백화점 천안아산점",
+      "nameEn": "Shinsegae Department Store Cheonan-Asan",
+      "type": "department",
+      "tags": ["백화점", "신세계", "천안", "아산"],
+      "address": "충청남도 천안시 동남구 만남로 43",
+      "lat": 36.7984,
+      "lng": 127.0886
+    },
+    {
+      "id": "dept-shinsegae-masan",
+      "name": "신세계백화점 마산점",
+      "nameEn": "Shinsegae Department Store Masan",
+      "type": "department",
+      "tags": ["백화점", "신세계", "창원", "마산"],
+      "address": "경상남도 창원시 마산합포구 동서동로 31",
+      "lat": 35.1860,
+      "lng": 128.5653
+    },
+    {
+      "id": "dept-shinsegae-gimhae",
+      "name": "신세계백화점 김해점",
+      "nameEn": "Shinsegae Department Store Gimhae",
+      "type": "department",
+      "tags": ["백화점", "신세계", "김해"],
+      "address": "경상남도 김해시 가야로 450",
+      "lat": 35.2286,
+      "lng": 128.8826
+    },
+    {
+      "id": "dept-hyundai-main",
+      "name": "현대백화점 압구정본점",
+      "nameEn": "Hyundai Department Store Main",
+      "type": "department",
+      "tags": ["백화점", "현대", "압구정", "서울"],
+      "address": "서울특별시 강남구 압구정로 165",
+      "lat": 37.5272,
+      "lng": 127.0282
+    },
+    {
+      "id": "dept-hyundai-trade",
+      "name": "현대백화점 무역센터점",
+      "nameEn": "Hyundai Department Store Trade Center",
+      "type": "department",
+      "tags": ["백화점", "현대", "삼성", "서울", "코엑스"],
+      "address": "서울특별시 강남구 테헤란로 517",
+      "lat": 37.5086,
+      "lng": 127.0601
+    },
+    {
+      "id": "dept-hyundai-pangyo",
+      "name": "현대백화점 판교점",
+      "nameEn": "Hyundai Department Store Pangyo",
+      "type": "department",
+      "tags": ["백화점", "현대", "판교", "성남"],
+      "address": "경기도 성남시 분당구 판교역로146번길 20",
+      "lat": 37.3942,
+      "lng": 127.1116
+    },
+    {
+      "id": "dept-hyundai-seoul",
+      "name": "더현대 서울",
+      "nameEn": "The Hyundai Seoul",
+      "type": "department",
+      "tags": ["백화점", "현대", "여의도", "서울"],
+      "address": "서울특별시 영등포구 여의대로 108",
+      "lat": 37.5258,
+      "lng": 126.9281
+    },
+    {
+      "id": "dept-hyundai-cheonho",
+      "name": "현대백화점 천호점",
+      "nameEn": "Hyundai Department Store Cheonho",
+      "type": "department",
+      "tags": ["백화점", "현대", "천호", "서울"],
+      "address": "서울특별시 강동구 천호대로 1005",
+      "lat": 37.5377,
+      "lng": 127.1232
+    },
+    {
+      "id": "dept-hyundai-sinchon",
+      "name": "현대백화점 신촌점",
+      "nameEn": "Hyundai Department Store Sinchon",
+      "type": "department",
+      "tags": ["백화점", "현대", "신촌", "서울"],
+      "address": "서울특별시 서대문구 신촌로 83",
+      "lat": 37.5563,
+      "lng": 126.9362
+    },
+    {
+      "id": "dept-hyundai-mia",
+      "name": "현대백화점 미아점",
+      "nameEn": "Hyundai Department Store Mia",
+      "type": "department",
+      "tags": ["백화점", "현대", "미아", "서울"],
+      "address": "서울특별시 성북구 동소문로 315",
+      "lat": 37.6032,
+      "lng": 127.0252
+    },
+    {
+      "id": "dept-hyundai-mokdong",
+      "name": "현대백화점 목동점",
+      "nameEn": "Hyundai Department Store Mokdong",
+      "type": "department",
+      "tags": ["백화점", "현대", "목동", "서울"],
+      "address": "서울특별시 양천구 목동동로 257",
+      "lat": 37.5265,
+      "lng": 126.8750
+    },
+    {
+      "id": "dept-hyundai-jungdong",
+      "name": "현대백화점 중동점",
+      "nameEn": "Hyundai Department Store Jungdong",
+      "type": "department",
+      "tags": ["백화점", "현대", "중동", "부천"],
+      "address": "경기도 부천시 길주로 180",
+      "lat": 37.5053,
+      "lng": 126.7643
+    },
+    {
+      "id": "dept-hyundai-kintex",
+      "name": "현대백화점 킨텍스점",
+      "nameEn": "Hyundai Department Store Kintex",
+      "type": "department",
+      "tags": ["백화점", "현대", "일산", "고양"],
+      "address": "경기도 고양시 일산서구 킨텍스로 217-6",
+      "lat": 37.6684,
+      "lng": 126.7461
+    },
+    {
+      "id": "dept-hyundai-ulsan",
+      "name": "현대백화점 울산점",
+      "nameEn": "Hyundai Department Store Ulsan",
+      "type": "department",
+      "tags": ["백화점", "현대", "울산"],
+      "address": "울산광역시 남구 삼산로 261",
+      "lat": 35.5374,
+      "lng": 129.3370
+    },
+    {
+      "id": "dept-hyundai-ulsan-dong",
+      "name": "현대백화점 울산동구점",
+      "nameEn": "Hyundai Department Store Ulsan Donggu",
+      "type": "department",
+      "tags": ["백화점", "현대", "울산", "동구"],
+      "address": "울산광역시 동구 방어진순환도로 899",
+      "lat": 35.5057,
+      "lng": 129.4152
+    },
+    {
+      "id": "dept-hyundai-daegu",
+      "name": "더현대 대구",
+      "nameEn": "The Hyundai Daegu",
+      "type": "department",
+      "tags": ["백화점", "현대", "대구"],
+      "address": "대구광역시 중구 달구벌대로 2077",
+      "lat": 35.8656,
+      "lng": 128.5867
+    },
+    {
+      "id": "dept-hyundai-chungcheong",
+      "name": "현대백화점 충청점",
+      "nameEn": "Hyundai Department Store Chungcheong",
+      "type": "department",
+      "tags": ["백화점", "현대", "청주"],
+      "address": "충청북도 청주시 흥덕구 2순환로 1240",
+      "lat": 36.6440,
+      "lng": 127.4263
+    },
+    {
+      "id": "dept-galleria-luxury",
+      "name": "갤러리아백화점 명품관",
+      "nameEn": "Galleria Department Store Luxury Hall",
+      "type": "department",
+      "tags": ["백화점", "갤러리아", "한화", "압구정", "서울"],
+      "address": "서울특별시 강남구 압구정로 343",
+      "lat": 37.5280,
+      "lng": 127.0397
+    },
+    {
+      "id": "dept-galleria-timeworld",
+      "name": "갤러리아백화점 타임월드",
+      "nameEn": "Galleria Department Store Time World",
+      "type": "department",
+      "tags": ["백화점", "갤러리아", "한화", "대전"],
+      "address": "대전광역시 서구 대덕대로 211",
+      "lat": 36.3529,
+      "lng": 127.3787
+    },
+    {
+      "id": "dept-galleria-centercity",
+      "name": "갤러리아백화점 센터시티",
+      "nameEn": "Galleria Department Store Center City",
+      "type": "department",
+      "tags": ["백화점", "갤러리아", "한화", "천안"],
+      "address": "충청남도 천안시 서북구 광장로 215",
+      "lat": 36.8225,
+      "lng": 127.1557
+    },
+    {
+      "id": "dept-galleria-jinju",
+      "name": "갤러리아백화점 진주점",
+      "nameEn": "Galleria Department Store Jinju",
+      "type": "department",
+      "tags": ["백화점", "갤러리아", "한화", "진주"],
+      "address": "경상남도 진주시 진양호로 1",
+      "lat": 35.1898,
+      "lng": 128.0798
+    },
+    {
+      "id": "dept-galleria-gwanggyo",
+      "name": "갤러리아백화점 광교",
+      "nameEn": "Galleria Department Store Gwanggyo",
+      "type": "department",
+      "tags": ["백화점", "갤러리아", "한화", "수원", "광교"],
+      "address": "경기도 수원시 영통구 광교중앙로 124",
+      "lat": 37.2861,
+      "lng": 127.0547
+    },
+    {
+      "id": "dutyfree-lotte-main",
+      "name": "롯데면세점 본점",
+      "nameEn": "Lotte Duty Free Main",
+      "type": "dutyfree",
+      "tags": ["면세점", "롯데", "명동", "서울"],
+      "address": "서울특별시 중구 을지로 30",
+      "lat": 37.5656,
+      "lng": 126.9815
+    },
+    {
+      "id": "dutyfree-lotte-world",
+      "name": "롯데면세점 월드타워점",
+      "nameEn": "Lotte Duty Free World Tower",
+      "type": "dutyfree",
+      "tags": ["면세점", "롯데", "잠실", "서울"],
+      "address": "서울특별시 송파구 올림픽로 300",
+      "lat": 37.5125,
+      "lng": 127.1025
+    },
+    {
+      "id": "dutyfree-lotte-busan",
+      "name": "롯데면세점 부산점",
+      "nameEn": "Lotte Duty Free Busan",
+      "type": "dutyfree",
+      "tags": ["면세점", "롯데", "서면", "부산"],
+      "address": "부산광역시 부산진구 가야대로 772",
+      "lat": 35.1555,
+      "lng": 129.0593
+    },
+    {
+      "id": "dutyfree-lotte-jeju",
+      "name": "롯데면세점 제주점",
+      "nameEn": "Lotte Duty Free Jeju",
+      "type": "dutyfree",
+      "tags": ["면세점", "롯데", "제주"],
+      "address": "제주특별자치도 제주시 도령로 83",
+      "lat": 33.4882,
+      "lng": 126.4989
+    },
+    {
+      "id": "dutyfree-lotte-icn-t1",
+      "name": "롯데면세점 인천공항 제1터미널",
+      "nameEn": "Lotte Duty Free ICN T1",
+      "type": "dutyfree",
+      "tags": ["면세점", "롯데", "인천공항"],
+      "address": "인천광역시 중구 공항로 272",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "dutyfree-shilla-main",
+      "name": "신라면세점 서울점",
+      "nameEn": "Shilla Duty Free Seoul",
+      "type": "dutyfree",
+      "tags": ["면세점", "신라", "장충동", "서울"],
+      "address": "서울특별시 중구 동호로 249",
+      "lat": 37.5572,
+      "lng": 127.0056
+    },
+    {
+      "id": "dutyfree-shilla-jeju",
+      "name": "신라면세점 제주점",
+      "nameEn": "Shilla Duty Free Jeju",
+      "type": "dutyfree",
+      "tags": ["면세점", "신라", "제주"],
+      "address": "제주특별자치도 서귀포시 중문관광로72번길 75",
+      "lat": 33.2479,
+      "lng": 126.4123
+    },
+    {
+      "id": "dutyfree-shilla-icn-t1",
+      "name": "신라면세점 인천공항 제1터미널",
+      "nameEn": "Shilla Duty Free ICN T1",
+      "type": "dutyfree",
+      "tags": ["면세점", "신라", "인천공항"],
+      "address": "인천광역시 중구 공항로 272",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "dutyfree-shilla-icn-t2",
+      "name": "신라면세점 인천공항 제2터미널",
+      "nameEn": "Shilla Duty Free ICN T2",
+      "type": "dutyfree",
+      "tags": ["면세점", "신라", "인천공항"],
+      "address": "인천광역시 중구 제2터미널대로 500",
+      "lat": 37.4602,
+      "lng": 126.4407
+    },
+    {
+      "id": "dutyfree-shinsegae-main",
+      "name": "신세계면세점 명동점",
+      "nameEn": "Shinsegae Duty Free Myeongdong",
+      "type": "dutyfree",
+      "tags": ["면세점", "신세계", "명동", "서울"],
+      "address": "서울특별시 중구 소공로 63",
+      "lat": 37.5607,
+      "lng": 126.9810
+    },
+    {
+      "id": "dutyfree-shinsegae-icn-t1",
+      "name": "신세계면세점 인천공항 제1터미널",
+      "nameEn": "Shinsegae Duty Free ICN T1",
+      "type": "dutyfree",
+      "tags": ["면세점", "신세계", "인천공항"],
+      "address": "인천광역시 중구 공항로 272",
+      "lat": 37.4491,
+      "lng": 126.4501
+    },
+    {
+      "id": "dutyfree-shinsegae-icn-t2",
+      "name": "신세계면세점 인천공항 제2터미널",
+      "nameEn": "Shinsegae Duty Free ICN T2",
+      "type": "dutyfree",
+      "tags": ["면세점", "신세계", "인천공항"],
+      "address": "인천광역시 중구 제2터미널대로 500",
+      "lat": 37.4602,
+      "lng": 126.4407
+    },
+    {
+      "id": "dutyfree-hyundai-main",
+      "name": "현대백화점면세점 무역센터점",
+      "nameEn": "Hyundai Duty Free Trade Center",
+      "type": "dutyfree",
+      "tags": ["면세점", "현대", "삼성", "서울"],
+      "address": "서울특별시 강남구 테헤란로 517",
+      "lat": 37.5086,
+      "lng": 127.0601
+    },
+    {
+      "id": "dutyfree-hdc-shilla",
+      "name": "HDC신라아이파크면세점",
+      "nameEn": "HDC Shilla I'Park Duty Free",
+      "type": "dutyfree",
+      "tags": ["면세점", "신라", "HDC", "용산", "서울"],
+      "address": "서울특별시 용산구 한강대로23길 55",
+      "lat": 37.5295,
+      "lng": 126.9649
+    },
+    {
+      "id": "golf-jack-nicklaus",
+      "name": "잭니클라우스 골프클럽 코리아",
+      "nameEn": "Jack Nicklaus Golf Club Korea",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "인천", "송도"],
+      "address": "인천광역시 연수구 송도문화로 120",
+      "lat": 37.3986,
+      "lng": 126.6404
+    },
+    {
+      "id": "golf-nine-bridges",
+      "name": "클럽나인브릿지",
+      "nameEn": "Club Nine Bridges",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "제주", "서귀포"],
+      "address": "제주특별자치도 서귀포시 안덕면 산록남로762번길 16",
+      "lat": 33.3046,
+      "lng": 126.3619
+    },
+    {
+      "id": "golf-southcape-owners",
+      "name": "사우스케이프 오너스클럽",
+      "nameEn": "South Cape Owners Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "경남", "남해"],
+      "address": "경상남도 남해군 상주면 양아로 1190",
+      "lat": 34.7645,
+      "lng": 127.9127
+    },
+    {
+      "id": "golf-pine-beach",
+      "name": "파인비치 골프링크스",
+      "nameEn": "Pine Beach Golf Links",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "전남", "해남"],
+      "address": "전라남도 해남군 북평면 남창길 125-12",
+      "lat": 34.6213,
+      "lng": 126.5432
+    },
+    {
+      "id": "golf-anyang-cc",
+      "name": "안양컨트리클럽",
+      "nameEn": "Anyang Country Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "삼성", "군포"],
+      "address": "경기도 군포시 속달로 100",
+      "lat": 37.3361,
+      "lng": 126.8986
+    },
+    {
+      "id": "golf-asiana-cc",
+      "name": "아시아나컨트리클럽",
+      "nameEn": "Asiana Country Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "금호아시아나", "용인"],
+      "address": "경기도 용인시 처인구 양지면 대대로 95",
+      "lat": 37.2186,
+      "lng": 127.2874
+    },
+    {
+      "id": "golf-haesley",
+      "name": "헤슬리나인브릿지",
+      "nameEn": "Haesley Nine Bridges",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "여주"],
+      "address": "경기도 여주시 강천면 부평로 936",
+      "lat": 37.3518,
+      "lng": 127.5328
+    },
+    {
+      "id": "golf-phoenix",
+      "name": "휘닉스파크 골프클럽",
+      "nameEn": "Phoenix Park Golf Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "강원", "평창"],
+      "address": "강원특별자치도 평창군 봉평면 태기로 174",
+      "lat": 37.5887,
+      "lng": 128.3247
+    },
+    {
+      "id": "golf-high1",
+      "name": "하이원 골프클럽",
+      "nameEn": "High1 Golf Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "강원", "정선"],
+      "address": "강원특별자치도 정선군 고한읍 하이원길 424",
+      "lat": 37.2043,
+      "lng": 128.8379
+    },
+    {
+      "id": "golf-yangji-pine",
+      "name": "양지파인리조트 골프클럽",
+      "nameEn": "Yangji Pine Resort Golf Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "용인"],
+      "address": "경기도 용인시 처인구 양지면 남평로 112",
+      "lat": 37.2334,
+      "lng": 127.2879
+    },
+    {
+      "id": "golf-lotte-skyhill-jeju",
+      "name": "롯데스카이힐 제주컨트리클럽",
+      "nameEn": "Lotte Skyhill Jeju Country Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "롯데", "제주"],
+      "address": "제주특별자치도 서귀포시 안덕면 산록남로 863",
+      "lat": 33.3127,
+      "lng": 126.3423
+    },
+    {
+      "id": "golf-pinx",
+      "name": "핀크스 골프클럽",
+      "nameEn": "Pinx Golf Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "제주", "서귀포"],
+      "address": "제주특별자치도 서귀포시 상예동 산1-3",
+      "lat": 33.2958,
+      "lng": 126.5012
+    },
+    {
+      "id": "golf-elysian-jeju",
+      "name": "엘리시안 제주",
+      "nameEn": "Elysian Jeju",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "제주"],
+      "address": "제주특별자치도 서귀포시 남원읍 태위로 502",
+      "lat": 33.2785,
+      "lng": 126.7124
+    },
+    {
+      "id": "golf-ora-cc",
+      "name": "오라컨트리클럽",
+      "nameEn": "Ora Country Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "제주"],
+      "address": "제주특별자치도 제주시 오라2동 산56",
+      "lat": 33.4656,
+      "lng": 126.5123
+    },
+    {
+      "id": "golf-korea-cc",
+      "name": "코리아컨트리클럽",
+      "nameEn": "Korea Country Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "용인"],
+      "address": "경기도 용인시 처인구 양지면 정수리 424",
+      "lat": 37.2145,
+      "lng": 127.2567
+    },
+    {
+      "id": "golf-namseoul-cc",
+      "name": "남서울컨트리클럽",
+      "nameEn": "Nam Seoul Country Club",
+      "type": "golf",
+      "tags": ["골프장", "프리미엄", "성남"],
+      "address": "경기도 성남시 수정구 금토동 산42",
+      "lat": 37.4312,
+      "lng": 127.0845
+    }
+  ]
+}

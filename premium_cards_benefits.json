@@ -1,0 +1,800 @@
+{
+  "lastUpdated": "2026-01-14",
+  "dataSource": "웹 검색 기반 수집",
+  "cardIssuers": {
+    "하나카드": {
+      "issuerName": "하나카드",
+      "issuerNameEn": "Hana Card",
+      "customerService": "1800-1111",
+      "website": "https://www.hanacard.co.kr",
+      "premiumCards": [
+        {
+          "cardName": "G-DRAGON Centum by JADE",
+          "cardType": "프리미엄",
+          "annualFee": 1000000,
+          "annualFeeNote": "연회비 100만원",
+          "cardMaterial": "듀랄루민 메탈카드 (전용 메탈케이스 제공)",
+          "releaseDate": "2025-11",
+          "benefits": {
+            "발렛파킹": {
+              "available": true,
+              "details": "인천국제공항 및 국내 특급호텔 무료 발렛 파킹 서비스"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "전세계 공항라운지 무료입장 (본인/가족/동반)"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "바우처 형태로 연회비 수준의 혜택 제공"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "해외/항공/숙박/면세 하나머니 적립, 국내 모든 가맹점 및 디지털 콘텐츠 하나머니 적립"
+            }
+          }
+        },
+        {
+          "cardName": "G-DRAGON by JADE",
+          "cardType": "프리미엄",
+          "annualFee": null,
+          "annualFeeNote": "최대 100만원",
+          "cardMaterial": "듀랄루민 메탈카드",
+          "releaseDate": "2025-11",
+          "benefits": {
+            "발렛파킹": {
+              "available": true,
+              "details": "인천국제공항 및 국내 특급호텔 무료 발렛 파킹 서비스"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "전세계 공항라운지 무료입장 (본인/가족/동반)"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "연간 이용금액에 따라 연회비 수준의 혜택을 바우처로 제공"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "해외/항공/숙박/면세 하나머니 적립"
+            }
+          }
+        },
+        {
+          "cardName": "JADE Classic",
+          "cardType": "프리미엄",
+          "annualFee": {
+            "domestic": 115000,
+            "international_VISA": 120000,
+            "family": 25000
+          },
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "DragonPass 제휴 전세계 공항 라운지 연간 3회 무료 이용 (본인/가족/동반자 통합 연 3회, 일 3회)"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "프리미엄 바우처 (연 1회): 호텔 다이닝 10만원권 또는 신세계상품권 10만원권 등 5택 1 (발급 후 50만원 이상 사용 시, 이후 연간 600만원 이상 사용 시 제공)"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "국내외 가맹점 1% 하나머니 적립, 해외/항공/면세/여행 1.5%, 쇼핑/주유 1.2% (월 적립 한도 10만 하나머니), 스트리밍 서비스 자동납부 50% 적립"
+            }
+          }
+        },
+        {
+          "cardName": "JADE Prime",
+          "cardType": "프리미엄",
+          "annualFee": null,
+          "annualFeeNote": "정보 없음",
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "공항라운지 이용 가능 (상세 횟수 확인 필요)"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "HOTEL 바우처: 제휴 호텔 다이닝 가맹점에서 20만원 이상 결제 시 20만원 현장 할인"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "신세계 상품권 20만원 모바일 교환권 바우처, 연 누적 이용금액 2,400만원 이상 시 10만 하나머니 적립 (연1회)"
+            }
+          }
+        },
+        {
+          "cardName": "CLUB Signature SKYPASS",
+          "cardType": "시그니처",
+          "annualFee": null,
+          "annualFeeNote": "정보 없음",
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "LoungeKey 제휴 전세계 라운지 무료 입장 (월 2회, 연 6회 한도, 전월 실적 필요, VISA 브랜드 한정)"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "Special Service 연 1회 제공 (플래티넘 호텔 외식통합 이용권 포함)"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "1,500원당 2~1마일 적립, 신라면세점 이용권 제공"
+            }
+          },
+          "conditions": {
+            "specialService": {
+              "firstYear": "카드 발급 시 자동 제공",
+              "afterFirstYear": "연회비 납부 및 지난해 국내외 일시불/할부금액 600만원 이상 시 제공"
+            }
+          }
+        },
+        {
+          "cardName": "트래블로그 신용카드",
+          "cardType": "여행특화",
+          "annualFee": null,
+          "annualFeeNote": "정보 없음",
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "해외 가맹점/항공/면세점/여행 가맹점 3% 하나머니 적립 (월 최대 10만 하나머니), 전월 실적 조건 없음, 58종 통화 무료환전 (환율우대 100%, 2026년 말까지), 해외이용수수료 무료, 해외 ATM 인출 수수료 무료"
+            }
+          },
+          "specialFeatures": [
+            "58종 통화 무료환전 (환율우대 100%)",
+            "해외이용수수료 무료",
+            "해외 ATM 인출 수수료 무료",
+            "연간 환전 한도 USD 100,000"
+          ]
+        },
+        {
+          "cardName": "하나 원큐(1Q) 카드",
+          "cardType": "일반",
+          "annualFee": 15000,
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "국내 전가맹점 0.8% 적립, 해외 전가맹점 1.8% 적립, 하나원큐페이 결제 시 1.8% 적립, 전월 실적 없음, 적립한도 무제한"
+            }
+          }
+        },
+        {
+          "cardName": "하나 Mile 1.6/1.8 카드",
+          "cardType": "마일리지",
+          "annualFee": null,
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": true,
+              "details": "스타벅스 4천원 청구할인 (월 1회/연 12회), CGV/롯데시네마 4천원 청구할인 (월 1회/연 12회)"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "해외 1,500원당 1.8 HANA Mile 적립 (월 1천 HANA Mile까지), 국내 1,500원당 1.6 HANA Mile 적립, HANA Mile 유효기간 5년"
+            }
+          }
+        }
+      ]
+    },
+    "NH농협카드": {
+      "issuerName": "NH농협카드",
+      "issuerNameEn": "NH NongHyup Card",
+      "customerService": "1644-4000",
+      "website": "https://card.nonghyup.com",
+      "premiumCards": [
+        {
+          "cardName": "zgm.휴가중",
+          "cardType": "여행특화",
+          "annualFee": 25000,
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "국내/해외 통합 월 1회, 연 2회 무료 이용 (더라운지 앱 통해 이용, 전월실적 40만원 이상 시 제공)"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "호텔스닷컴 20% 할인 (객실 요금에만 적용, 세금/수수료 제외)"
+            },
+            "골프": {
+              "available": true,
+              "details": "휴일 및 골프 중 상해보상 보험 (유효한 카드 보유 시 적용)"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "항공권/면세점 업종 0.5% 적립, 여행자보험 무료가입"
+            }
+          },
+          "conditions": {
+            "monthlySpending": "전월 실적 없이 기본 혜택 제공 (공항라운지는 40만원 이상 필요)"
+          }
+        },
+        {
+          "cardName": "zgm.rounding",
+          "cardType": "골프특화",
+          "annualFee": null,
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": true,
+              "details": "골프장/골프연습장/스크린골프 5% 할인, 쇼골프 연습장 50% 할인, 홀인원 축하금 100만원"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": false,
+              "details": "정보 없음"
+            }
+          }
+        },
+        {
+          "cardName": "ON PLATINUM (포인트형)",
+          "cardType": "플래티넘",
+          "annualFee": {
+            "min": 118000,
+            "max": 120000
+          },
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "전 세계 공항 라운지 무료 이용 서비스"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": true,
+              "details": "골프장 더블적립 1.6% (전월실적 50만원 이상 시)"
+            },
+            "카페_영화": {
+              "available": true,
+              "details": "스타벅스 더블적립 1.6%, 넷플릭스/유튜브 프리미엄 더블적립 1.6%, CGV 영화관람권 최대 4천원 즉시할인 (2025년)"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "국내외 0.8% NH포인트 적립 (전월실적 조건 없음, 무제한), 5개 영역 더블적립 1.6% (전월실적 50만원 이상), 분기별 보너스 포인트 (150만원 이상: 2.5만점, 100만~150만원: 1.5만점)"
+            }
+          },
+          "doubleEarnCategories": [
+            "온라인쇼핑 (G마켓, 옥션, 11번가, 쿠팡, 농협몰)",
+            "오프라인쇼핑 (백화점)",
+            "여가/커피 (골프장, 면세점, 스타벅스)",
+            "구독 (넷플릭스, 유튜브 프리미엄, 밀리의 서재)",
+            "편리미엄 (배달의민족, 런드리고)"
+          ]
+        },
+        {
+          "cardName": "ON PLATINUM (마일리지형)",
+          "cardType": "플래티넘/마일리지",
+          "annualFee": {
+            "min": 128000,
+            "max": 130000
+          },
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "전 세계 공항 라운지 무료 이용 서비스"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": true,
+              "details": "골프장 더블적립"
+            },
+            "카페_영화": {
+              "available": true,
+              "details": "스타벅스 더블적립, 넷플릭스/유튜브 프리미엄 더블적립, CGV 영화관람권 최대 4천원 즉시할인 (2025년)"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "스카이패스: 1,500원당 1마일리지 (전월실적 조건 없음, 무제한), 아시아나클럽: 1,000원당 1마일리지, 분기별 보너스 마일리지 (150만원 이상: 1,500마일, 100만~150만원: 750마일)"
+            }
+          }
+        },
+        {
+          "cardName": "올바른 FLEX",
+          "cardType": "일반",
+          "annualFee": 10000,
+          "conditions": {
+            "monthlySpending": 300000
+          },
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": true,
+              "details": "스타벅스(사이렌오더 포함) 50% 청구할인, 영화 30% 할인"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "유튜브프리미엄/넷플릭스/멜론 정기결제 20% 청구할인, 배달의민족/요기요 10% 청구할인, 지하철/버스 7% 청구할인, 통신 7% 청구할인"
+            }
+          }
+        },
+        {
+          "cardName": "올바른 SAFE Platinum",
+          "cardType": "플래티넘",
+          "annualFee": null,
+          "annualFeeNote": "정보 없음",
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "THE LOUNGE 여행가득 서비스 PLUS 등급 혜택 대상 카드"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": false,
+              "details": "정보 없음"
+            }
+          },
+          "note": "상세 혜택 정보는 NH농협카드 고객센터(1644-4000) 문의 필요"
+        }
+      ],
+      "commonServices": {
+        "THE_LOUNGE_공항라운지": {
+          "description": "NH농협 개인신용카드로 국내/외 공항라운지 최대 45,000원 할인",
+          "period": "2025.09.01 ~ 2025.12.31",
+          "conditions": "전월 카드 이용실적 30만원 이상",
+          "limits": "항목별 1회 1매, 월 1회, 연 2회 한도",
+          "excludedCards": ["체크카드", "비씨카드", "기업카드", "선불카드", "기프트카드"]
+        }
+      }
+    },
+    "BC카드": {
+      "issuerName": "BC카드",
+      "issuerNameEn": "BC Card",
+      "customerService": {
+        "general": "1566-1000",
+        "VIP": "1566-7890",
+        "BLISS": "02-2250-4070"
+      },
+      "website": "https://www.bccard.com",
+      "vipWebsite": "https://vip.bccard.com",
+      "premiumCards": [
+        {
+          "cardName": "BLISS.7",
+          "cardType": "VIP/프리미엄",
+          "annualFee": null,
+          "annualFeeNote": "약 20만원 상당 바우처 제공",
+          "benefits": {
+            "발렛파킹": {
+              "available": true,
+              "details": "특급호텔 및 인천공항 통합 월 5회 발렛파킹 서비스 (전월 30만원 이상 실적 시, 인천공항 24시간, 김포공항 05:30~20:30, 김해공항 06:30~22:00)"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "Priority Pass 공항라운지 멤버십 제공 (본인 무료, 동반자 유료), 더 라운지(THE LOUNGE) 멤버십 제공"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "제휴 호텔 F&B 및 객실 할인 서비스, 국내 특급호텔 무료 숙박권, 호텔 스페셜 서비스"
+            },
+            "골프": {
+              "available": true,
+              "details": "정규홀 그린피 지원, 주중 골프 그린피 및 특급호텔 1박 무료, 골프라운지 멤버십 할인 가입, 골프 홀인원 축하금, 제주/해외 골프장 할인"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "1,500원당 15P 적립, 1,500원당 최대 20P 특별적립, 바우처 20만원 상당 제공 (TOP 포인트 15만점 적립 바우처 선택 가능)"
+            }
+          },
+          "voucherConditions": {
+            "firstYear": "카드 발급 후 바우처 신청일 이전까지 이용실적 30만원 이상 + 연회비 납부",
+            "afterFirstYear": "연회비 청구월 기준 전년도 이용실적 300만원 이상 + 연회비 납부",
+            "excludedFromSpending": ["국세", "지방세", "제세공과금", "상품권 업종"]
+          }
+        },
+        {
+          "cardName": "BLISS.5 PRESTIGE",
+          "cardType": "VIP/프리미엄",
+          "annualFee": null,
+          "annualFeeNote": "약 10만원 상당 바우처 제공",
+          "benefits": {
+            "발렛파킹": {
+              "available": true,
+              "details": "호텔 발렛파킹 월 1회 (1일 3시간 주차비 포함), 대상 호텔: JW 메리어트 서울(5만원 이상), 레스케이프/JW메리어트 동대문(3만원 이상), 몬드리안/코리아나(2.5만원 이상), 파크하얏트 서울(2만원 이상)"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "공항라운지 서비스 제공"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "제휴 호텔 F&B 및 객실 할인 서비스"
+            },
+            "골프": {
+              "available": true,
+              "details": "파3 주중 무료 이용, 골프 멤버십 할인 및 무료부킹"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "신세계 모바일 상품권 10만원권 바우처 또는 신라면세점 선불카드 10만원권 교환 바우처, TOP 포인트 8만점 적립 바우처 선택 가능"
+            }
+          },
+          "voucherConditions": {
+            "firstYear": "카드 발급 후 바우처 신청일 이전까지 이용실적 30만원 이상 + 연회비 납부",
+            "afterFirstYear": "연회비 청구월 기준 전년도 이용실적 300만원 이상 + 연회비 납부"
+          }
+        },
+        {
+          "cardName": "BLISS.5 PRESTIGE+",
+          "cardType": "VIP/프리미엄",
+          "annualFee": null,
+          "benefits": {
+            "발렛파킹": {
+              "available": true,
+              "details": "호텔 발렛파킹 월 2회 (1일 3시간 주차비 포함)"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "공항라운지 서비스 제공"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "제휴 호텔 F&B 및 객실 할인 서비스"
+            },
+            "골프": {
+              "available": true,
+              "details": "파3 주중 무료 이용, 골프 멤버십 할인 및 무료부킹"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "바우처 서비스 제공"
+            }
+          }
+        },
+        {
+          "cardName": "플래티넘 카드",
+          "cardType": "플래티넘",
+          "annualFee": null,
+          "benefits": {
+            "발렛파킹": {
+              "available": true,
+              "details": "국내 발렛파킹 서비스 (VISA/MASTER)"
+            },
+            "공항라운지": {
+              "available": true,
+              "details": "Priority Pass 공항라운지 멤버십"
+            },
+            "호텔_다이닝": {
+              "available": true,
+              "details": "다이닝클럽, 미각여행 초대권 (2인 이상 식사 시 1인분 BC카드 부담), 특급호텔 무료식사권, 패밀리 레스토랑 할인"
+            },
+            "골프": {
+              "available": true,
+              "details": "파3 주중 무료 이용, 골프 멤버십 할인 및 무료부킹, 정규홀 그린피 지원, 골프 홀인원 축하금, 제주/해외 골프장 할인, J골프 리더스 회원 혜택"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "TOP 포인트 적립"
+            }
+          }
+        },
+        {
+          "cardName": "에어플러스 시즌2 - 에어 마스터",
+          "cardType": "마일리지/주유교통특화",
+          "annualFee": 29000,
+          "brandInfo": "국내BC/해외Master",
+          "releaseDate": "2025-12",
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "기본 적립: 1,500원당 1마일리지, 보너스: 100만원당 200마일리지, 주유소/LPG/전기차충전소/대중교통 추가 적립 1,500원당 1마일리지 (전월실적 50만원 이상), 월 최대 2,000마일리지 추가 적립, 2~3개월 상시 무이자 할부"
+            }
+          },
+          "earnExample": {
+            "monthlySpending": 1000000,
+            "basicMiles": 667,
+            "additionalMiles": 667,
+            "bonusMiles": 200,
+            "totalMiles": 1534
+          }
+        },
+        {
+          "cardName": "에어플러스 시즌2 - 에어 맥스",
+          "cardType": "마일리지/생활특화",
+          "annualFee": 43000,
+          "brandInfo": "국내BC/해외AMEX",
+          "releaseDate": "2025-12",
+          "benefits": {
+            "발렛파킹": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "공항라운지": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "호텔_다이닝": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "골프": {
+              "available": false,
+              "details": "정보 없음"
+            },
+            "카페_영화": {
+              "available": true,
+              "details": "스타벅스/투썸플레이스 카페 추가 적립"
+            },
+            "마일리지_포인트": {
+              "available": true,
+              "details": "기본 적립: 1,500원당 1마일리지, 보너스: 100만원당 200마일리지, 온라인쇼핑(쿠팡/컬리)/다이소/올리브영/카페(스타벅스/투썸)/해외가맹점 추가 적립, 아파트관리비 적립 (월 최대 500마일리지), 월 최대 2,000마일리지 추가 적립, 2~3개월 상시 무이자 할부"
+            }
+          }
+        }
+      ],
+      "commonServices": {
+        "Priority_Pass": {
+          "description": "세계 최대의 공항라운지 프로그램",
+          "renewal": "최근 1년 기간 내 VIP카드의 해외이용 실적 또는 공항라운지 이용실적 있을 경우 자동 갱신",
+          "companionFee": "동반자 이용료 별도 청구"
+        },
+        "THE_LOUNGE": {
+          "description": "전 세계 국제 공항 라운지 이용 멤버십 서비스 (실물카드 필요 없는 온라인 서비스)"
+        },
+        "valetParking": {
+          "freeHotels": [
+            "그랜드 하얏트 서울",
+            "오크우드 프리미어 코엑스센터",
+            "호텔 나루 서울 엠갤러리",
+            "JW 메리어트 동대문 스퀘어 서울",
+            "그랜드조선 부산",
+            "웨스틴 조선 부산",
+            "세인트존스 호텔"
+          ],
+          "note": "당일 호텔 이용 영수증 제시 시 무료 발렛파킹 및 무료 주차"
+        }
+      },
+      "pointSystem": {
+        "TOP포인트": {
+          "usage": [
+            "주유소",
+            "마트",
+            "편의점",
+            "외식 프랜차이즈",
+            "영화 티켓 구매",
+            "커피값 결제"
+          ],
+          "conversion": "포인트파크(pointpark.com)에서 포인트파크 포인트로 전환 가능"
+        },
+        "BCMile포인트": {
+          "conversion": "대한항공 마일리지 전환 가능"
+        }
+      }
+    }
+  },
+  "benefitCategories": {
+    "발렛파킹": {
+      "description": "공항 및 특급호텔 발렛파킹 서비스",
+      "providers": ["하나카드", "BC카드"]
+    },
+    "공항라운지": {
+      "description": "국내외 공항라운지 무료 이용",
+      "programs": ["Priority Pass", "LoungeKey", "DragonPass", "THE LOUNGE"],
+      "providers": ["하나카드", "NH농협카드", "BC카드"]
+    },
+    "호텔_다이닝": {
+      "description": "특급호텔 숙박 및 다이닝 할인/무료 이용",
+      "providers": ["하나카드", "NH농협카드", "BC카드"]
+    },
+    "골프": {
+      "description": "골프장 할인, 그린피 지원, 홀인원 보험 등",
+      "providers": ["NH농협카드", "BC카드"]
+    },
+    "카페_영화": {
+      "description": "카페 할인, 영화관 할인",
+      "providers": ["하나카드", "NH농협카드", "BC카드"]
+    },
+    "마일리지_포인트": {
+      "description": "항공 마일리지 및 포인트 적립",
+      "mileagePrograms": ["대한항공 스카이패스", "아시아나클럽", "HANA Mile"],
+      "pointPrograms": ["하나머니", "NH포인트", "TOP포인트"],
+      "providers": ["하나카드", "NH농협카드", "BC카드"]
+    }
+  },
+  "disclaimer": "본 정보는 2026년 1월 기준 웹 검색을 통해 수집된 정보입니다. 실제 카드 혜택은 카드사 정책에 따라 변경될 수 있으므로, 정확한 정보는 각 카드사 공식 홈페이지 또는 고객센터를 통해 확인하시기 바랍니다."
+}

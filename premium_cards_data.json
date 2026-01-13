@@ -1,0 +1,854 @@
+{
+  "lastUpdated": "2026-01-14",
+  "dataSource": "웹 검색 기반 수집 데이터",
+  "cardCompanies": [
+    {
+      "company": "KB국민카드",
+      "premiumCards": [
+        {
+          "cardName": "TANTUM (탄툼)",
+          "cardGrade": "Ultra Premium",
+          "annualFee": "초청제 (비공개)",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 발렛파킹 무료",
+              "locations": ["인천국제공항", "국내 특급호텔"],
+              "conditions": "실물 카드 지참 필수"
+            },
+            "airportLounge": {
+              "description": "전세계 공항라운지 무료 이용",
+              "type": "American Express Ultra 등급",
+              "annualLimit": "무제한",
+              "additionalBenefits": "공항 리무진/철도 티켓 무료 제공"
+            },
+            "hotelDining": {
+              "hotels": [
+                {
+                  "name": "쉐라톤 그랜드 워커힐",
+                  "benefit": "F&B 10% 할인"
+                },
+                {
+                  "name": "JW 메리어트 호텔 서울",
+                  "benefit": "F&B 10% 할인"
+                }
+              ],
+              "additionalBenefits": "Luxury 여행 전용상품 할인"
+            },
+            "golf": {
+              "description": "TANTUM 전용 골프 서비스",
+              "conditions": "프리미엄 고객 전용"
+            },
+            "cafeMovie": {
+              "description": "별도 제공 없음 (최상위 카드 특성상 일반 할인 혜택보다 Wealth Management 중심)"
+            },
+            "mileagePoints": {
+              "description": "포인트리 적립",
+              "additionalBenefits": "KB강남/명동 스타 PB센터 내 TANTUM 전용 룸"
+            }
+          }
+        },
+        {
+          "cardName": "헤리티지 클래식 (할인형)",
+          "cardGrade": "Premium",
+          "annualFee": "127,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 발렛파킹",
+              "conditions": "국내외 겸용 카드 발급 시"
+            },
+            "airportLounge": {
+              "description": "전세계 공항라운지 무료 이용",
+              "annualLimit": "연 2회",
+              "conditions": "국내외 겸용 카드 발급 시"
+            },
+            "hotelDining": {
+              "description": "호텔/다이닝 할인 혜택",
+              "discountRate": "최대 30%"
+            },
+            "golf": {
+              "description": "골프장 할인 혜택 포함",
+              "additionalInfo": "Flex 영역 추가 할인"
+            },
+            "cafeMovie": {
+              "description": "쇼핑/생활/교육/건강 영역 1.2% 청구할인"
+            },
+            "mileagePoints": {
+              "type": "청구할인형",
+              "rate": "국내외 가맹점 1% 청구할인 (한도 없음)",
+              "additionalRate": "생활밀착 4개 영역 추가 0.2% (총 1.2%)"
+            }
+          },
+          "conditions": {
+            "priorMonthUsage": "50만원 이상",
+            "premiumCouponCondition": "연간 600만원 이상 이용 시 (초년도 무조건)"
+          }
+        },
+        {
+          "cardName": "헤리티지 클래식 (스카이패스형)",
+          "cardGrade": "Premium",
+          "annualFee": "157,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 발렛파킹",
+              "conditions": "국내외 겸용 카드 발급 시"
+            },
+            "airportLounge": {
+              "description": "전세계 공항라운지 무료 이용",
+              "annualLimit": "연 3회",
+              "conditions": "국내외 겸용 카드 발급 시"
+            },
+            "hotelDining": {
+              "description": "항공/호텔/골프 Flex 영역 추가 적립"
+            },
+            "golf": {
+              "description": "골프장 Flex 영역 마일리지 추가 적립"
+            },
+            "cafeMovie": {
+              "description": "쇼핑/생활/교육/건강 영역 추가 마일리지 적립"
+            },
+            "mileagePoints": {
+              "type": "대한항공 스카이패스",
+              "rate": "1,500원당 1마일 기본 적립 (한도 없음)",
+              "additionalRate": "생활밀착 4개 영역 및 Flex 영역 1,500원당 추가 1마일 (최대 2마일)"
+            }
+          },
+          "conditions": {
+            "priorMonthUsage": "50만원 이상",
+            "premiumCouponCondition": "연간 600만원 이상 이용 시 (초년도 무조건)"
+          }
+        },
+        {
+          "cardName": "스카이패스 티타늄",
+          "cardGrade": "Titanium",
+          "annualFee": "45,000원 (국내전용/해외겸용 동일)",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 발렛파킹",
+              "conditions": "전월 실적 30만원 이상"
+            },
+            "airportLounge": {
+              "description": "국내 공항라운지 무료 이용",
+              "annualLimit": "연 2회",
+              "conditions": "전월 실적 30만원 이상"
+            },
+            "hotelDining": {
+              "description": "호텔 할인 혜택"
+            },
+            "golf": {
+              "description": "기본 서비스 미포함"
+            },
+            "cafeMovie": {
+              "description": "기본 서비스 미포함"
+            },
+            "mileagePoints": {
+              "type": "대한항공 스카이패스",
+              "domesticRate": "1,000원당 1마일",
+              "overseasRate": "1,000원당 2마일 (해외/면세점)",
+              "monthlyLimit": "월 5,000마일"
+            }
+          }
+        },
+        {
+          "cardName": "myOne KB국민카드",
+          "cardGrade": "Standard",
+          "annualFee": "15,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "미제공"
+            },
+            "airportLounge": {
+              "description": "미제공"
+            },
+            "hotelDining": {
+              "description": "패밀리레스토랑(아웃백, TGI, 세븐스프링스) 10% 할인"
+            },
+            "golf": {
+              "description": "미제공"
+            },
+            "cafeMovie": {
+              "cafe": "스타벅스 10% 청구할인",
+              "movie": "CGV, 메가박스 4,000원 청구할인",
+              "annualLimit": "연 8회"
+            },
+            "mileagePoints": {
+              "type": "포인트리",
+              "description": "기본 적립"
+            }
+          }
+        }
+      ],
+      "commonBenefits": {
+        "hotelDiscount": "전세계 호텔 예약 사이트 최대 16~30% 할인",
+        "golfEvent": "회원제 명문 골프장 KB Pay 이벤트 (프리미엄 등급 대상)",
+        "loungeCondition": "전월 실적 30만원 초과 시 공항라운지 이용 가능"
+      }
+    },
+    {
+      "company": "롯데카드",
+      "premiumCards": [
+        {
+          "cardName": "AVENUEL BLACK",
+          "cardGrade": "Ultra Premium",
+          "annualFee": "50,000원 (카드 연회비) + 백화점 등급 유지 필요",
+          "selectionCriteria": "최상위 777명 선정",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 무료 발렛파킹",
+              "conditions": "상시 이용 가능"
+            },
+            "airportLounge": {
+              "description": "PP카드(Priority Pass) 증정",
+              "coverage": "전세계 1,300개 라운지"
+            },
+            "hotelDining": {
+              "description": "블랙본점/청담점/반얀트리점 20% 할인",
+              "voucher": "바우처 서비스 (FINE STAY, GOURMET, SPA&BEAUTY 등)"
+            },
+            "golf": {
+              "description": "골프 홀인원 축하, 골프 상해보험",
+              "validUntil": "2026년 12월 31일"
+            },
+            "cafeMovie": {
+              "description": "별도 할인 없음 (프리미엄 바우처 중심)"
+            },
+            "mileagePoints": {
+              "type": "L.POINT",
+              "rate": "국내외 가맹점 0.5% 적립"
+            }
+          },
+          "additionalBenefits": {
+            "installment": "2/3/6/10개월 무이자 할부",
+            "yachtTour": "프라이빗 요트 투어 30% + 비수기 10만원 추가 할인",
+            "loungeGuests": "본인 포함 4명까지 라운지 이용"
+          }
+        },
+        {
+          "cardName": "AVENUEL EMERALD",
+          "cardGrade": "Premium",
+          "annualFee": "50,000원",
+          "selectionCriteria": "연 1억 2,000만원 이상 이용",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 무료 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "PP카드(Priority Pass) 증정",
+              "coverage": "전세계 1,300개 라운지"
+            },
+            "hotelDining": {
+              "description": "블랙본점/청담점/반얀트리점 15% 할인",
+              "voucher": "60만원 이상 사용 시 60만원 상당 바우처 제공"
+            },
+            "golf": {
+              "description": "골프 홀인원 축하, 골프 상해보험"
+            },
+            "cafeMovie": {
+              "description": "별도 할인 없음"
+            },
+            "mileagePoints": {
+              "type": "L.POINT",
+              "rate": "국내외 가맹점 0.5% 적립"
+            }
+          },
+          "additionalBenefits": {
+            "installment": "2/3/6/10개월 무이자 할부",
+            "yachtTour": "프라이빗 요트 투어 30% + 비수기 10만원 추가 할인"
+          }
+        },
+        {
+          "cardName": "AVENUEL PURPLE",
+          "cardGrade": "Premium",
+          "annualFee": "50,000원",
+          "selectionCriteria": "연 5,000만원 이상 이용",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 무료 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "국내 공항라운지 무료 이용",
+              "annualLimit": "연 2회"
+            },
+            "hotelDining": {
+              "description": "블랙본점/청담점/반얀트리점 10% 할인"
+            },
+            "golf": {
+              "description": "골프 홀인원 축하, 골프 상해보험"
+            },
+            "cafeMovie": {
+              "description": "별도 할인 없음"
+            },
+            "mileagePoints": {
+              "type": "L.POINT",
+              "rate": "국내외 가맹점 0.5% 적립"
+            }
+          },
+          "additionalBenefits": {
+            "installment": "2/3/6개월 무이자 할부",
+            "yachtTour": "프라이빗 요트 투어 30% (7~8월 성수기 제외)",
+            "enuriLimit": {
+              "50000000": "100만원",
+              "60000000": "150만원",
+              "70000000": "200만원",
+              "80000000": "250만원"
+            }
+          }
+        },
+        {
+          "cardName": "AVENUEL ORANGE",
+          "cardGrade": "Entry Premium",
+          "annualFee": "50,000원",
+          "selectionCriteria": "연 3,000만원 이상 이용 (지점별 상이)",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항/특급호텔 무료 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "국내 공항라운지 무료 이용",
+              "annualLimit": "연 2회"
+            },
+            "hotelDining": {
+              "description": "블랙본점/청담점/반얀트리점 10% 할인"
+            },
+            "golf": {
+              "description": "골프 홀인원 축하, 골프 상해보험"
+            },
+            "cafeMovie": {
+              "description": "별도 할인 없음"
+            },
+            "mileagePoints": {
+              "type": "L.POINT",
+              "rate": "국내외 가맹점 0.5% 적립"
+            }
+          }
+        },
+        {
+          "cardName": "LOCA PLATINUM (마일리지형)",
+          "cardGrade": "Platinum",
+          "annualFee": "100,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "기본 제공 확인 필요"
+            },
+            "airportLounge": {
+              "description": "공항라운지 이용 가능"
+            },
+            "hotelDining": {
+              "description": "플래티넘 등급 혜택"
+            },
+            "golf": {
+              "description": "기본 서비스 확인 필요"
+            },
+            "cafeMovie": {
+              "description": "기본 서비스 확인 필요"
+            },
+            "mileagePoints": {
+              "type": "마일리지",
+              "description": "한도없는 마일리지 적립"
+            }
+          }
+        },
+        {
+          "cardName": "LOCA Professional",
+          "cardGrade": "World MasterCard",
+          "annualFee": "확인 필요",
+          "benefits": {
+            "valetParking": {
+              "description": "인천공항 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "공항라운지 무료 이용",
+              "annualLimit": "연 2회"
+            },
+            "hotelDining": {
+              "description": "주요 특급호텔 혜택"
+            },
+            "golf": {
+              "description": "기본 서비스 확인 필요"
+            },
+            "cafeMovie": {
+              "description": "기본 서비스 확인 필요"
+            },
+            "mileagePoints": {
+              "type": "캐시백",
+              "rate": "국내/해외 전 가맹점 1% 캐시백",
+              "additionalBenefits": "국세/지방세 최대 2% 캐시백"
+            }
+          },
+          "additionalBenefits": {
+            "giftCard": "롯데 상품권카드 5만원 (3개월마다)"
+          }
+        },
+        {
+          "cardName": "LOCA LIKIT",
+          "cardGrade": "Standard",
+          "annualFee": "10,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "미제공"
+            },
+            "airportLounge": {
+              "description": "미제공"
+            },
+            "hotelDining": {
+              "description": "미제공"
+            },
+            "golf": {
+              "description": "미제공"
+            },
+            "cafeMovie": {
+              "cafe": "스타벅스 60% 할인",
+              "movie": "영화 50% 할인",
+              "transport": "교통 10% 할인",
+              "monthlyLimit": "월 최대 35,000원"
+            },
+            "mileagePoints": {
+              "type": "L.POINT",
+              "description": "롯데카드 L.POINT 적립 미제공 (타 제휴사 적립 가능)"
+            }
+          },
+          "conditions": {
+            "priorMonthUsage": "40만원"
+          }
+        },
+        {
+          "cardName": "LOCA LIKIT 1.2",
+          "cardGrade": "Standard",
+          "annualFee": "10,000원 (국내/해외겸용 동일)",
+          "benefits": {
+            "valetParking": {
+              "description": "미제공"
+            },
+            "airportLounge": {
+              "description": "미제공"
+            },
+            "hotelDining": {
+              "description": "미제공"
+            },
+            "golf": {
+              "description": "미제공"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 할인 없음 (전 가맹점 할인)"
+            },
+            "mileagePoints": {
+              "type": "청구할인",
+              "domesticRate": "국내/해외 1.2% 청구할인",
+              "onlineRate": "온라인 결제 1.5% 청구할인",
+              "limit": "무제한"
+            }
+          },
+          "conditions": {
+            "priorMonthUsage": "무실적 카드 (실적 조건 없음)"
+          }
+        }
+      ],
+      "commonBenefits": {
+        "hiltonPromotion": "힐튼 아너스 카드 무료숙박권 제공 (환산가 500,000원)",
+        "insuranceBenefits": "여행자보험, 구매물품보상 서비스"
+      }
+    },
+    {
+      "company": "우리카드",
+      "premiumCards": [
+        {
+          "cardName": "ALL 우리카드 Infinite",
+          "cardGrade": "Infinite",
+          "annualFee": "500,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "프리미엄 발렛파킹 서비스",
+              "conditions": "전월 실적 50만원 이상"
+            },
+            "airportLounge": {
+              "description": "The Lounge Members 전세계 라운지 무료 이용",
+              "companions": "본인 + 동반 1인",
+              "conditions": "전월 실적 50만원 이상"
+            },
+            "hotelDining": {
+              "description": "아코르 플러스 유료 멤버십 자동 가입",
+              "benefit": "아시아 태평양 아코르 호텔 숙박/F&B 50% 할인"
+            },
+            "golf": {
+              "description": "골프 서비스 제공",
+              "conditions": "전월 실적 50만원 이상"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "ALL 리워드 포인트",
+              "welcomeBonus": "연회비 납부 완료 후 14,000 포인트 자동 적립",
+              "membershipGrade": "ALL 회원 GOLD 등급 제공, 2년차부터 PLATINUM 업그레이드 가능"
+            }
+          },
+          "additionalBenefits": {
+            "limousineService": "리무진 서비스",
+            "travelInsurance": "여행자 보험"
+          }
+        },
+        {
+          "cardName": "블루다이아몬드II (포인트형)",
+          "cardGrade": "Premium",
+          "annualFee": "확인 필요",
+          "benefits": {
+            "valetParking": {
+              "description": "프리미엄 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "Priority Pass 카드 제공",
+              "coverage": "전세계 800개 공항라운지",
+              "limit": "통합 월 1회, 연 5회 무료"
+            },
+            "hotelDining": {
+              "hotel": "국내호텔/리조트/카라반/글램핑 2박 연박 시 1박 무료",
+              "jejuRentcar": "제주도 렌터카 48H/24H 무료"
+            },
+            "golf": {
+              "description": "전국 120개 지정 골프장 예약 및 할인",
+              "weekdayDiscount": "주중 5~40%",
+              "weekendDiscount": "주말 5~20%"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "포인트",
+              "rate": "0.5~1.5% 적립"
+            }
+          },
+          "additionalBenefits": {
+            "ktxDiscount": "KTX 승차권 10% 할인"
+          }
+        },
+        {
+          "cardName": "블루다이아몬드II (대한항공 마일리지형)",
+          "cardGrade": "Premium",
+          "annualFee": "확인 필요",
+          "benefits": {
+            "valetParking": {
+              "description": "프리미엄 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "Priority Pass 카드 제공",
+              "coverage": "전세계 800개 공항라운지",
+              "limit": "통합 월 1회, 연 5회 무료"
+            },
+            "hotelDining": {
+              "hotel": "국내호텔/리조트/카라반/글램핑 2박 연박 시 1박 무료"
+            },
+            "golf": {
+              "description": "전국 120개 지정 골프장 예약 및 할인"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "대한항공 SKYPASS",
+              "rate": "1,500원당 1마일 적립"
+            }
+          }
+        },
+        {
+          "cardName": "블루다이아몬드II (아시아나 마일리지형)",
+          "cardGrade": "Premium",
+          "annualFee": "확인 필요",
+          "benefits": {
+            "valetParking": {
+              "description": "프리미엄 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "Priority Pass 카드 제공"
+            },
+            "hotelDining": {
+              "description": "프리미엄 호텔 혜택"
+            },
+            "golf": {
+              "description": "골프장 예약 및 할인"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "아시아나 마일리지",
+              "rate": "1,000원당 1마일 적립"
+            }
+          }
+        },
+        {
+          "cardName": "카드의정석 PREMIUM POINT",
+          "cardGrade": "Premium",
+          "annualFee": "확인 필요",
+          "benefits": {
+            "valetParking": {
+              "description": "Visa 프리미엄 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "The Lounge Members 국내외 공항라운지 무료 이용"
+            },
+            "hotelDining": {
+              "description": "해외 박물관/미술관 50% 할인 (루브르, 오르세, 반고흐 등)",
+              "limit": "통합 월 1회, 연 3회, 건당 1만원"
+            },
+            "golf": {
+              "description": "골프보험 무료 제공",
+              "conditions": "전월 국내 가맹점 이용금액 50만원 이상"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "포인트",
+              "rate": "전월실적 조건 없이 0.8~2% 적립"
+            }
+          },
+          "additionalBenefits": {
+            "premiumGift": {
+              "description": "연 1회 프리미엄 기프트 (택1)",
+              "options": [
+                "외식통합 이용권 10만원",
+                "CJ ONE 포인트 9만점",
+                "스타벅스 기프트카드 8만원",
+                "신세계 백화점 상품권 8만원",
+                "SK상품권 4만원 + 대명리조트 워터파크 2인 이용권"
+              ],
+              "conditions": "초년도 30만원, 2차년도~ 전년도/당해년도 200만원 이상"
+            },
+            "insurance": "해외여행, 국내여행, 휴일교통상해, 골프보험"
+          }
+        },
+        {
+          "cardName": "카드의정석 PREMIUM MILEAGE (SKYPASS)",
+          "cardGrade": "Premium",
+          "annualFee": "확인 필요",
+          "benefits": {
+            "valetParking": {
+              "description": "Visa 프리미엄 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "The Lounge Members 국내외 공항라운지 무료 이용"
+            },
+            "hotelDining": {
+              "description": "프리미엄 투어 서비스",
+              "hotel": "2박 연박 시 1박 무료",
+              "jejuRentcar": "제주도 렌터카 무료"
+            },
+            "golf": {
+              "description": "골프보험 무료 제공"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "대한항공 SKYPASS",
+              "rate": "1,000원당 1~2마일 적립"
+            }
+          },
+          "additionalBenefits": {
+            "premiumGift": "연 1회 프리미엄 기프트",
+            "ktxDiscount": "KTX/SRT 왕복 승차권 10% 할인 (연 2회)"
+          }
+        },
+        {
+          "cardName": "카드의정석 PREMIUM MILEAGE (아시아나)",
+          "cardGrade": "Premium",
+          "annualFee": "135,000원 (가족카드 30,000원)",
+          "benefits": {
+            "valetParking": {
+              "description": "프리미엄 발렛파킹"
+            },
+            "airportLounge": {
+              "description": "국내외 공항라운지 무료 이용"
+            },
+            "hotelDining": {
+              "description": "프리미엄 호텔 혜택"
+            },
+            "golf": {
+              "description": "골프 서비스"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "아시아나 마일리지",
+              "rate": "1,000원당 1.5마일 적립"
+            }
+          },
+          "additionalBenefits": {
+            "fuelDiscount": "주유 리터당 60원 할인",
+            "premiumGift": "프리미엄 기프트 서비스"
+          }
+        },
+        {
+          "cardName": "카드의정석 EVERY MILE SKYPASS",
+          "cardGrade": "Standard-Premium",
+          "annualFee": "확인 필요",
+          "benefits": {
+            "valetParking": {
+              "description": "미제공 또는 제한적"
+            },
+            "airportLounge": {
+              "description": "국내 공항라운지 무료이용",
+              "annualLimit": "연 2회",
+              "companions": "동반자 1인 무료",
+              "conditions": "전월실적 조건 있음 (해외결제 제외)"
+            },
+            "hotelDining": {
+              "description": "기본 서비스"
+            },
+            "golf": {
+              "description": "미제공"
+            },
+            "cafeMovie": {
+              "description": "별도 특화 혜택 없음"
+            },
+            "mileagePoints": {
+              "type": "대한항공 SKYPASS",
+              "domesticRate": "1,000원당 1마일",
+              "overseasRate": "1,000원당 2마일 (100만원까지)",
+              "additionalBenefits": "해외결제 수수료 면제"
+            }
+          }
+        },
+        {
+          "cardName": "카드의정석 D4 II",
+          "cardGrade": "Standard",
+          "annualFee": "12,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "미제공"
+            },
+            "airportLounge": {
+              "description": "미제공"
+            },
+            "hotelDining": {
+              "description": "미제공"
+            },
+            "golf": {
+              "description": "미제공"
+            },
+            "cafeMovie": {
+              "cafe": "커피 55% 할인",
+              "movie": "영화관 청구할인",
+              "transport": "대중교통 33% 할인",
+              "convenience": "편의점 11% 할인"
+            },
+            "mileagePoints": {
+              "type": "청구할인",
+              "description": "카테고리별 차등 할인"
+            }
+          }
+        },
+        {
+          "cardName": "카드의정석 TEN",
+          "cardGrade": "Standard",
+          "annualFee": "12,000원",
+          "benefits": {
+            "valetParking": {
+              "description": "미제공"
+            },
+            "airportLounge": {
+              "description": "미제공"
+            },
+            "hotelDining": {
+              "description": "미제공"
+            },
+            "golf": {
+              "description": "미제공"
+            },
+            "cafeMovie": {
+              "cafe": "커피 10% 할인",
+              "convenience": "편의점 10% 할인",
+              "transport": "교통 10% 할인",
+              "telecom": "통신 10% 할인",
+              "overseas": "해외 10% 할인"
+            },
+            "mileagePoints": {
+              "type": "청구할인",
+              "description": "TEN Discount 10% 할인"
+            }
+          }
+        },
+        {
+          "cardName": "위비트래블 체크카드",
+          "cardGrade": "Check Card",
+          "annualFee": "없음",
+          "benefits": {
+            "valetParking": {
+              "description": "미제공"
+            },
+            "airportLounge": {
+              "description": "THE LOUNGE 전세계 공항라운지 무료이용권",
+              "limit": "반기별 1회 (연 2회)",
+              "note": "2025년 7월 이후 신규발급은 연 1회로 변경"
+            },
+            "hotelDining": {
+              "description": "미제공"
+            },
+            "golf": {
+              "description": "미제공"
+            },
+            "cafeMovie": {
+              "description": "미제공"
+            },
+            "mileagePoints": {
+              "description": "체크카드 기본 혜택"
+            }
+          }
+        }
+      ],
+      "commonBenefits": {
+        "visaInfinite": "Visa Infinite 등급 카드는 인천/김포/김해공항 스카이허브 라운지 이용 (전월 50만원 이상, 횟수 무제한)",
+        "companions": "동반자 최대 2인 할인가 이용 가능"
+      }
+    }
+  ],
+  "benefitCategories": {
+    "valetParking": {
+      "description": "발렛파킹 서비스",
+      "commonLocations": ["인천국제공항", "김포공항", "주요 특급호텔"],
+      "generalConditions": "실물 카드 및 Visa/MasterCard 프리미엄 등급 로고 확인 필수",
+      "freeHours": "일반적으로 1일 3시간 이내 주차비 무료"
+    },
+    "airportLounge": {
+      "description": "공항라운지 서비스",
+      "types": [
+        "PP카드 (Priority Pass) - 전세계 1,300개 라운지",
+        "The Lounge Members - 국내외 제휴 라운지",
+        "국내 공항라운지 (스카이허브 등)"
+      ],
+      "generalConditions": "탑승권 + 해당 카드 제시 필수"
+    },
+    "hotelDining": {
+      "description": "호텔/다이닝 서비스",
+      "benefits": ["객실 할인", "F&B(식음료) 할인", "무료 숙박 바우처", "연박 할인"]
+    },
+    "golf": {
+      "description": "골프 서비스",
+      "benefits": ["그린피 할인", "골프장 부킹 서비스", "골프 홀인원 축하금", "골프 상해보험"]
+    },
+    "cafeMovie": {
+      "description": "카페/영화 할인",
+      "cafeBrands": ["스타벅스", "메가커피", "투썸플레이스"],
+      "movieTheaters": ["CGV", "롯데시네마", "메가박스"]
+    },
+    "mileagePoints": {
+      "description": "마일리지/포인트 적립",
+      "types": [
+        "대한항공 SKYPASS",
+        "아시아나 마일리지",
+        "포인트리 (KB국민카드)",
+        "L.POINT (롯데카드)",
+        "ALL 리워드 (우리카드 아코르)"
+      ]
+    }
+  },
+  "notes": {
+    "disclaimer": "본 데이터는 2026년 1월 웹 검색 기반으로 수집되었으며, 실제 혜택은 카드사 정책에 따라 변경될 수 있습니다.",
+    "recommendation": "정확한 혜택 및 조건은 각 카드사 공식 홈페이지 또는 고객센터에서 확인하시기 바랍니다.",
+    "customerService": {
+      "KB국민카드": "1588-1688",
+      "롯데카드": "1588-8100",
+      "우리카드": "1588-9955, 프리미엄 상담데스크 1599-2600"
+    }
+  }
+}

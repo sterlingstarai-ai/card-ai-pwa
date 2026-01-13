@@ -1,0 +1,1230 @@
+{
+  "lastUpdated": "2025-01-14",
+  "source": "card-gorilla.com, banksalad.com, official card company websites",
+  "cards": [
+    {
+      "id": "hyundai-the-black",
+      "issuer": "현대카드",
+      "name": "the Black",
+      "network": "VISA/Mastercard",
+      "grade": "VVIP",
+      "annualFee": 3000000,
+      "invitationOnly": true
+    },
+    {
+      "id": "hyundai-the-purple",
+      "issuer": "현대카드",
+      "name": "the Purple",
+      "network": "VISA/Mastercard",
+      "grade": "VIP",
+      "annualFee": 1000000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hyundai-the-red-stripe-edition2",
+      "issuer": "현대카드",
+      "name": "the Red Stripe Edition2",
+      "network": "VISA/Mastercard",
+      "grade": "Premium",
+      "annualFee": 500000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hyundai-the-green-edition3",
+      "issuer": "현대카드",
+      "name": "the Green Edition3",
+      "network": "VISA/Mastercard",
+      "grade": "Premium",
+      "annualFee": 150000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hyundai-the-pink-edition2",
+      "issuer": "현대카드",
+      "name": "the Pink Edition2",
+      "network": "VISA/Mastercard",
+      "grade": "Premium",
+      "annualFee": 150000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hyundai-amex-platinum",
+      "issuer": "현대카드",
+      "name": "아메리칸 익스프레스 플래티늄",
+      "network": "AMEX",
+      "grade": "Platinum",
+      "annualFee": 150000,
+      "invitationOnly": false
+    },
+    {
+      "id": "samsung-amex-platinum",
+      "issuer": "삼성카드",
+      "name": "아메리칸 익스프레스 플래티늄",
+      "network": "AMEX",
+      "grade": "Platinum",
+      "annualFee": 300000,
+      "invitationOnly": false,
+      "discontinued": true,
+      "discontinuedDate": "2023-04-30"
+    },
+    {
+      "id": "samsung-reserve",
+      "issuer": "삼성카드",
+      "name": "리저브 카드",
+      "network": "AMEX",
+      "grade": "Premium",
+      "annualFee": 500000,
+      "invitationOnly": false
+    },
+    {
+      "id": "samsung-amex-mileage-platinum",
+      "issuer": "삼성카드",
+      "name": "앤 마일리지 플래티넘 (스카이패스)",
+      "network": "AMEX",
+      "grade": "Platinum",
+      "annualFee": 49000,
+      "invitationOnly": false
+    },
+    {
+      "id": "samsung-amex-blue",
+      "issuer": "삼성카드",
+      "name": "아메리칸 익스프레스 블루",
+      "network": "AMEX",
+      "grade": "Standard",
+      "annualFee": 15000,
+      "invitationOnly": false
+    },
+    {
+      "id": "shinhan-the-best-plus",
+      "issuer": "신한카드",
+      "name": "The BEST+",
+      "network": "VISA/Mastercard",
+      "grade": "Premium",
+      "annualFee": 300000,
+      "invitationOnly": false
+    },
+    {
+      "id": "shinhan-the-best-f",
+      "issuer": "신한카드",
+      "name": "The BEST-F",
+      "network": "VISA/Mastercard",
+      "grade": "Premium",
+      "annualFee": 500000,
+      "invitationOnly": false
+    },
+    {
+      "id": "shinhan-the-best-xo",
+      "issuer": "신한카드",
+      "name": "The BEST-XO",
+      "network": "Mastercard World",
+      "grade": "VIP",
+      "annualFee": 1000000,
+      "invitationOnly": false
+    },
+    {
+      "id": "shinhan-the-premier-gold",
+      "issuer": "신한카드",
+      "name": "The PREMIER GOLD EDITION",
+      "network": "VISA",
+      "grade": "VVIP",
+      "annualFee": 2000000,
+      "invitationOnly": true
+    },
+    {
+      "id": "shinhan-marriott-bonvoy-best",
+      "issuer": "신한카드",
+      "name": "메리어트 본보이 더 베스트",
+      "network": "VISA/Mastercard",
+      "grade": "Premium",
+      "annualFee": 150000,
+      "invitationOnly": false
+    },
+    {
+      "id": "shinhan-the-classic-amex",
+      "issuer": "신한카드",
+      "name": "The CLASSIC+",
+      "network": "AMEX",
+      "grade": "Platinum",
+      "annualFee": 100000,
+      "invitationOnly": false
+    },
+    {
+      "id": "kb-heritage-classic",
+      "issuer": "KB국민카드",
+      "name": "헤리티지 클래식",
+      "network": "Mastercard/VISA/JCB",
+      "grade": "Platinum",
+      "annualFee": 200000,
+      "invitationOnly": false
+    },
+    {
+      "id": "kb-liiv-mate",
+      "issuer": "KB국민카드",
+      "name": "리브메이트 톡톡",
+      "network": "Mastercard/VISA",
+      "grade": "Premium",
+      "annualFee": 15000,
+      "invitationOnly": false
+    },
+    {
+      "id": "lotte-loca-likit",
+      "issuer": "롯데카드",
+      "name": "LOCA LIKIT",
+      "network": "Mastercard",
+      "grade": "Standard",
+      "annualFee": 10000,
+      "invitationOnly": false
+    },
+    {
+      "id": "lotte-loca-likit-12",
+      "issuer": "롯데카드",
+      "name": "LOCA LIKIT 1.2",
+      "network": "Mastercard/AMEX",
+      "grade": "Standard",
+      "annualFee": 10000,
+      "invitationOnly": false
+    },
+    {
+      "id": "lotte-lenith",
+      "issuer": "롯데카드",
+      "name": "LENITH",
+      "network": "VISA/Mastercard",
+      "grade": "VVIP",
+      "annualFee": 25000,
+      "invitationOnly": true,
+      "note": "롯데백화점 MVG-LENITH 고객 전용"
+    },
+    {
+      "id": "lotte-amex-platinum-premium-biz",
+      "issuer": "롯데카드",
+      "name": "아메리칸 익스프레스 플래티넘 프리미엄 비즈니스",
+      "network": "AMEX",
+      "grade": "Platinum",
+      "annualFee": 300000,
+      "invitationOnly": false,
+      "cardType": "corporate"
+    },
+    {
+      "id": "woori-premium-point",
+      "issuer": "우리카드",
+      "name": "카드의정석 PREMIUM POINT",
+      "network": "Mastercard/VISA",
+      "grade": "Premium",
+      "annualFee": 150000,
+      "invitationOnly": false
+    },
+    {
+      "id": "woori-premium-mileage",
+      "issuer": "우리카드",
+      "name": "카드의정석 PREMIUM MILEAGE (SKYPASS)",
+      "network": "Mastercard/VISA",
+      "grade": "Premium",
+      "annualFee": 150000,
+      "invitationOnly": false
+    },
+    {
+      "id": "woori-blue-diamond-2",
+      "issuer": "우리카드",
+      "name": "블루다이아몬드II",
+      "network": "Mastercard Diamond",
+      "grade": "Premium",
+      "annualFee": 100000,
+      "invitationOnly": false
+    },
+    {
+      "id": "woori-dear-shopper",
+      "issuer": "우리카드",
+      "name": "카드의정석 디어쇼퍼",
+      "network": "Mastercard/VISA",
+      "grade": "Premium",
+      "annualFee": 150000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hana-jade-classic",
+      "issuer": "하나카드",
+      "name": "JADE Classic",
+      "network": "VISA",
+      "grade": "Premium",
+      "annualFee": 120000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hana-jade-prime",
+      "issuer": "하나카드",
+      "name": "JADE Prime",
+      "network": "VISA",
+      "grade": "Premium",
+      "annualFee": 250000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hana-signature",
+      "issuer": "하나카드",
+      "name": "시그니처 카드",
+      "network": "VISA Signature",
+      "grade": "Premium",
+      "annualFee": 100000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hana-skypass-amex-platinum",
+      "issuer": "하나카드",
+      "name": "스카이패스 아멕스 플래티넘",
+      "network": "AMEX",
+      "grade": "Platinum",
+      "annualFee": 50000,
+      "invitationOnly": false
+    },
+    {
+      "id": "hana-gd-centum",
+      "issuer": "하나카드",
+      "name": "지드래곤 센텀 바이 제이드",
+      "network": "VISA Infinite",
+      "grade": "VVIP",
+      "annualFee": 1000000,
+      "invitationOnly": false,
+      "limitedEdition": true
+    },
+    {
+      "id": "nh-chaeum-cheonjiin",
+      "issuer": "NH농협카드",
+      "name": "채움카드(천지인)",
+      "network": "Mastercard/VISA",
+      "grade": "Standard",
+      "annualFee": 5000,
+      "invitationOnly": false
+    },
+    {
+      "id": "nh-allone",
+      "issuer": "NH농협카드",
+      "name": "올원카드",
+      "network": "Mastercard/VISA",
+      "grade": "Standard",
+      "annualFee": 15000,
+      "invitationOnly": false
+    },
+    {
+      "id": "nh-classy-travel",
+      "issuer": "NH농협카드",
+      "name": "클래시 트래블카드",
+      "network": "Mastercard/VISA",
+      "grade": "Premium",
+      "annualFee": 100000,
+      "invitationOnly": false
+    },
+    {
+      "id": "nh-zgm-travel",
+      "issuer": "NH농협카드",
+      "name": "zgm.휴가중",
+      "network": "Mastercard/VISA",
+      "grade": "Standard",
+      "annualFee": 15000,
+      "invitationOnly": false
+    }
+  ],
+  "benefits": [
+    {
+      "cardId": "hyundai-the-black",
+      "category": "voucher",
+      "title": "프리미엄 바우처",
+      "value": "연 200만원 (50만원권 x 4매)",
+      "placeTags": ["hotel", "dining", "golf", "shopping"],
+      "desc": "호텔, 다이닝, 골프, 쇼핑 등에서 사용 가능한 바우처"
+    },
+    {
+      "cardId": "hyundai-the-black",
+      "category": "airport-lounge",
+      "title": "공항라운지 무료 이용",
+      "value": "무제한",
+      "placeTags": ["airport-lounge"],
+      "desc": "전세계 공항라운지 무료 이용"
+    },
+    {
+      "cardId": "hyundai-the-black",
+      "category": "valet-parking",
+      "title": "발렛파킹 서비스",
+      "value": "무제한",
+      "placeTags": ["airport", "hotel"],
+      "desc": "공항 및 호텔 발렛파킹 무료"
+    },
+    {
+      "cardId": "hyundai-the-black",
+      "category": "points",
+      "title": "M포인트 적립",
+      "value": "1.5%",
+      "placeTags": [],
+      "desc": "전 가맹점 1.5% M포인트 적립 또는 1,000원당 1마일리지"
+    },
+    {
+      "cardId": "hyundai-the-purple",
+      "category": "voucher",
+      "title": "프리미엄 바우처",
+      "value": "연 100만원",
+      "placeTags": ["hotel", "dining", "golf"],
+      "desc": "호텔, 다이닝, 골프 등에서 사용 가능"
+    },
+    {
+      "cardId": "hyundai-the-purple",
+      "category": "airport-lounge",
+      "title": "Priority Pass",
+      "value": "연 10회",
+      "placeTags": ["airport-lounge"],
+      "desc": "전세계 공항라운지 연 10회 무료"
+    },
+    {
+      "cardId": "hyundai-the-purple",
+      "category": "points",
+      "title": "M포인트 적립",
+      "value": "1.5%",
+      "placeTags": [],
+      "desc": "전 가맹점 1.5% 적립 (전월 50만원 이상 시)"
+    },
+    {
+      "cardId": "hyundai-the-red-stripe-edition2",
+      "category": "voucher",
+      "title": "연간 바우처",
+      "value": "최대 50만원",
+      "placeTags": ["hotel", "dining", "travel"],
+      "desc": "누적실적 기준 바우처 제공"
+    },
+    {
+      "cardId": "hyundai-the-red-stripe-edition2",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "연 10회",
+      "placeTags": ["airport-lounge"],
+      "desc": "공항라운지 연 10회 무료 이용"
+    },
+    {
+      "cardId": "hyundai-the-red-stripe-edition2",
+      "category": "valet-parking",
+      "title": "발렛파킹",
+      "value": "월 10회",
+      "placeTags": ["airport", "hotel"],
+      "desc": "공항 및 특급호텔 발렛파킹 월 10회 무료"
+    },
+    {
+      "cardId": "hyundai-the-red-stripe-edition2",
+      "category": "mileage",
+      "title": "마일리지 적립",
+      "value": "1,500원당 1마일",
+      "placeTags": [],
+      "desc": "항공마일리지 또는 M포인트 1.5% 선택"
+    },
+    {
+      "cardId": "hyundai-the-green-edition3",
+      "category": "points",
+      "title": "M포인트 적립",
+      "value": "기본 1.5% + 여행/해외 5%",
+      "placeTags": ["travel", "overseas"],
+      "desc": "전월 50만원 이상 시 기본 1.5%, 100만원 이상 시 여행/해외 5%"
+    },
+    {
+      "cardId": "hyundai-the-pink-edition2",
+      "category": "points",
+      "title": "M포인트 적립",
+      "value": "기본 1.5% + 프리미엄쇼핑 5%",
+      "placeTags": ["department-store", "outlet"],
+      "desc": "백화점, 아울렛 등 프리미엄 쇼핑 5% 적립"
+    },
+    {
+      "cardId": "hyundai-amex-platinum",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "연 10회",
+      "placeTags": ["airport-lounge"],
+      "desc": "전세계 공항라운지 연 10회 무료 (전월 50만원 이상)"
+    },
+    {
+      "cardId": "hyundai-amex-platinum",
+      "category": "airport-service",
+      "title": "공항 리무진/철도",
+      "value": "연 12회",
+      "placeTags": ["airport"],
+      "desc": "공항 리무진 및 공항 철도 연 12회 무료"
+    },
+    {
+      "cardId": "hyundai-amex-platinum",
+      "category": "valet-parking",
+      "title": "공항 발렛파킹",
+      "value": "월 5회",
+      "placeTags": ["airport"],
+      "desc": "공항 발렛파킹 월 5회 무료"
+    },
+    {
+      "cardId": "hyundai-amex-platinum",
+      "category": "hotel",
+      "title": "Fine Hotels + Resorts",
+      "value": "특별 혜택",
+      "placeTags": ["luxury-hotel"],
+      "desc": "전세계 1,100개 호텔 - 조식 2인, $100 크레딧, 업그레이드"
+    },
+    {
+      "cardId": "hyundai-amex-platinum",
+      "category": "hotel-membership",
+      "title": "호텔 멤버십",
+      "value": "골드 엘리트",
+      "placeTags": ["marriott", "hilton"],
+      "desc": "메리어트 본보이 골드, 힐튼 아너스 골드 제공"
+    },
+    {
+      "cardId": "samsung-amex-mileage-platinum",
+      "category": "mileage",
+      "title": "마일리지 적립",
+      "value": "1,000원당 1~2마일",
+      "placeTags": [],
+      "desc": "국내외 1,000원당 1마일, 특별가맹점 2마일 (월 최대 2,000마일)"
+    },
+    {
+      "cardId": "samsung-amex-mileage-platinum",
+      "category": "airport-lounge",
+      "title": "마티나 라운지",
+      "value": "무료",
+      "placeTags": ["airport-lounge", "incheon-airport"],
+      "desc": "인천공항 마티나 라운지 무료 이용"
+    },
+    {
+      "cardId": "samsung-amex-mileage-platinum",
+      "category": "hotel",
+      "title": "호텔 다이닝 할인",
+      "value": "10~20%",
+      "placeTags": ["hotel-dining", "shilla", "conrad"],
+      "desc": "신라호텔, 콘래드 서울 등 호텔 뷔페/레스토랑 10~20% 할인"
+    },
+    {
+      "cardId": "samsung-amex-mileage-platinum",
+      "category": "duty-free",
+      "title": "면세점 할인",
+      "value": "최대 15%",
+      "placeTags": ["duty-free"],
+      "desc": "면세점 최대 15% 할인"
+    },
+    {
+      "cardId": "shinhan-the-best-plus",
+      "category": "mileage",
+      "title": "마일리지 적립",
+      "value": "1,500원당 1.5마일 (국내), 3마일 (해외)",
+      "placeTags": [],
+      "desc": "대한항공 또는 아시아나 마일리지 적립 (전월 200만원 이상)"
+    },
+    {
+      "cardId": "shinhan-the-best-plus",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "월 4회, 연 20회",
+      "placeTags": ["airport-lounge"],
+      "desc": "전세계 1,100여개 공항라운지 무료 이용"
+    },
+    {
+      "cardId": "shinhan-the-best-plus",
+      "category": "golf",
+      "title": "골프 할인",
+      "value": "월 2만원, 연 10만원",
+      "placeTags": ["golf"],
+      "desc": "국내 실외골프장 건당 10만원 이상 결제 시 1만원 할인"
+    },
+    {
+      "cardId": "shinhan-the-best-plus",
+      "category": "hotel",
+      "title": "호텔 라운지",
+      "value": "월 1회 2잔, 연 4회 8잔",
+      "placeTags": ["hotel-lounge"],
+      "desc": "국내 제휴 특급호텔 라운지 무료 음료"
+    },
+    {
+      "cardId": "shinhan-the-premier-gold",
+      "category": "mileage",
+      "title": "마일리지 적립",
+      "value": "1,500원당 1마일 (국내), 2마일 (해외)",
+      "placeTags": [],
+      "desc": "대한항공 또는 아시아나 마일리지 적립"
+    },
+    {
+      "cardId": "shinhan-the-premier-gold",
+      "category": "airport-lounge",
+      "title": "Priority Pass",
+      "value": "무료",
+      "placeTags": ["airport-lounge"],
+      "desc": "전세계 900여개 공항라운지 무료 Priority Pass"
+    },
+    {
+      "cardId": "shinhan-the-premier-gold",
+      "category": "flight-upgrade",
+      "title": "항공 좌석 업그레이드",
+      "value": "연 1회",
+      "placeTags": ["airline"],
+      "desc": "항공 좌석 업그레이드 또는 동반자 무료 항공권 (택1)"
+    },
+    {
+      "cardId": "shinhan-the-premier-gold",
+      "category": "hotel",
+      "title": "특급호텔 스페셜 패키지",
+      "value": "연 1회",
+      "placeTags": ["luxury-hotel"],
+      "desc": "특급호텔 스페셜 패키지 서비스"
+    },
+    {
+      "cardId": "shinhan-the-premier-gold",
+      "category": "limousine",
+      "title": "프리미엄 리무진",
+      "value": "연 1회",
+      "placeTags": ["airport", "golf"],
+      "desc": "프리미엄 공항/골프장 리무진 서비스 (택1)"
+    },
+    {
+      "cardId": "shinhan-marriott-bonvoy-best",
+      "category": "hotel-membership",
+      "title": "메리어트 본보이 골드",
+      "value": "자동 부여",
+      "placeTags": ["marriott"],
+      "desc": "카드 발급/갱신 시 골드 엘리트 자동 부여, 6천만원 이용 시 플래티넘"
+    },
+    {
+      "cardId": "shinhan-marriott-bonvoy-best",
+      "category": "hotel",
+      "title": "무료 숙박권",
+      "value": "연 1회",
+      "placeTags": ["marriott"],
+      "desc": "전세계 메리어트 호텔 1박 무료 숙박권 (35,000포인트 이하 호텔)"
+    },
+    {
+      "cardId": "shinhan-marriott-bonvoy-best",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "월 30만원 이상 시",
+      "placeTags": ["airport-lounge"],
+      "desc": "더라운지멤버스 앱으로 공항라운지 무료 이용"
+    },
+    {
+      "cardId": "kb-heritage-classic",
+      "category": "discount",
+      "title": "할인 혜택",
+      "value": "국내 1%, 해외 3%",
+      "placeTags": [],
+      "desc": "국내 1%, 해외 3% 청구할인, 생활밀착영역 추가 0.2%"
+    },
+    {
+      "cardId": "kb-heritage-classic",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "연 2~3회",
+      "placeTags": ["airport-lounge"],
+      "desc": "할인형 연 2회, 스카이패스형 연 3회 (동반 1인 포함)"
+    },
+    {
+      "cardId": "kb-heritage-classic",
+      "category": "valet-parking",
+      "title": "발렛파킹",
+      "value": "연 15회, 월 5회",
+      "placeTags": ["airport", "hotel"],
+      "desc": "인천/김포공항 및 국내호텔 발렛파킹 통합 연 15회"
+    },
+    {
+      "cardId": "kb-liiv-mate",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "연 3회",
+      "placeTags": ["airport-lounge"],
+      "desc": "본인+가족카드 합산 연 3회 (전월 30만원 이상, 동반 1인 포함)"
+    },
+    {
+      "cardId": "lotte-loca-likit",
+      "category": "cafe",
+      "title": "스타벅스 할인",
+      "value": "60%",
+      "placeTags": ["starbucks"],
+      "desc": "스타벅스 60% 할인"
+    },
+    {
+      "cardId": "lotte-loca-likit",
+      "category": "movie",
+      "title": "영화 할인",
+      "value": "50%",
+      "placeTags": ["movie"],
+      "desc": "영화 50% 할인"
+    },
+    {
+      "cardId": "lotte-loca-likit",
+      "category": "transportation",
+      "title": "교통비 할인",
+      "value": "10%",
+      "placeTags": ["transportation"],
+      "desc": "교통비 10% 할인"
+    },
+    {
+      "cardId": "lotte-loca-likit",
+      "category": "telecom",
+      "title": "통신비 할인",
+      "value": "10%",
+      "placeTags": ["telecom"],
+      "desc": "통신비 10% 할인"
+    },
+    {
+      "cardId": "lotte-loca-likit-12",
+      "category": "discount",
+      "title": "전 가맹점 할인",
+      "value": "1.2~1.5%",
+      "placeTags": [],
+      "desc": "국내외 전 가맹점 1.2%, 온라인 1.5% 결제일 할인 (무실적)"
+    },
+    {
+      "cardId": "woori-premium-point",
+      "category": "points",
+      "title": "포인트 적립",
+      "value": "0.8~2%",
+      "placeTags": [],
+      "desc": "전월실적 무관 0.8~2% 적립"
+    },
+    {
+      "cardId": "woori-premium-point",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "무료",
+      "placeTags": ["airport-lounge"],
+      "desc": "The Lounge Members 국내외 공항라운지 무료"
+    },
+    {
+      "cardId": "woori-premium-point",
+      "category": "voucher",
+      "title": "프리미엄 기프트",
+      "value": "연 1회 택1",
+      "placeTags": ["dining", "shopping", "cafe"],
+      "desc": "외식 10만원, CJ ONE 9만점, 스타벅스 8만원, 신세계상품권 8만원 중 택1"
+    },
+    {
+      "cardId": "hana-jade-classic",
+      "category": "voucher",
+      "title": "프리미엄 바우처",
+      "value": "연 10만원",
+      "placeTags": ["hotel-dining", "shopping", "gas", "delivery"],
+      "desc": "호텔다이닝/신세계상품권/SK주유권/배민상품권/하나머니 중 택1"
+    },
+    {
+      "cardId": "hana-jade-classic",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "연 3회",
+      "placeTags": ["airport-lounge"],
+      "desc": "THE Lounge 전세계 제휴 공항라운지 연 3회 (동반 포함)"
+    },
+    {
+      "cardId": "hana-jade-classic",
+      "category": "points",
+      "title": "하나머니 적립",
+      "value": "1.2~1.5%",
+      "placeTags": [],
+      "desc": "국내외 결제금액 1.2~1.5% 하나머니 적립"
+    },
+    {
+      "cardId": "hana-jade-classic",
+      "category": "digital",
+      "title": "디지털 콘텐츠 적립",
+      "value": "50%",
+      "placeTags": ["streaming", "digital"],
+      "desc": "디지털 콘텐츠 자동납부 시 50% 하나머니 적립 (월 1만 한도)"
+    },
+    {
+      "cardId": "hana-jade-prime",
+      "category": "voucher",
+      "title": "프리미엄 바우처",
+      "value": "최대 20만원",
+      "placeTags": ["hotel-dining", "shopping", "gas", "delivery"],
+      "desc": "프리미엄 바우처 최대 20만원 제공"
+    },
+    {
+      "cardId": "hana-jade-prime",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "연 6회",
+      "placeTags": ["airport-lounge"],
+      "desc": "THE Lounge 공항라운지 연 6회 무료"
+    },
+    {
+      "cardId": "hana-signature",
+      "category": "movie",
+      "title": "영화 할인",
+      "value": "4,000원",
+      "placeTags": ["movie", "cgv"],
+      "desc": "CGV/티켓링크/인터파크 영화 월 2회, 연 12회 4,000원 할인"
+    },
+    {
+      "cardId": "hana-signature",
+      "category": "performance",
+      "title": "공연 할인",
+      "value": "최대 30%",
+      "placeTags": ["theater", "performance"],
+      "desc": "티켓링크 특정 연극/공연 최대 30% 예매할인"
+    },
+    {
+      "cardId": "hana-signature",
+      "category": "golf",
+      "title": "골프 보험",
+      "value": "1억원",
+      "placeTags": ["golf"],
+      "desc": "골프상해보험 1억원 무료가입"
+    },
+    {
+      "cardId": "hana-signature",
+      "category": "travel-insurance",
+      "title": "해외여행자보험",
+      "value": "최고 10억원",
+      "placeTags": ["travel"],
+      "desc": "본인 및 가족 해외여행 최대 90일간 무료 보험"
+    },
+    {
+      "cardId": "hana-signature",
+      "category": "resort",
+      "title": "한화콘도",
+      "value": "연 1회 2박",
+      "placeTags": ["hanwha-condo"],
+      "desc": "전국 한화콘도 회원가 이용 (연 1회 2박)"
+    },
+    {
+      "cardId": "hana-skypass-amex-platinum",
+      "category": "mileage",
+      "title": "마일리지 적립",
+      "value": "1,000원당 1~2마일",
+      "placeTags": [],
+      "desc": "국내 1,000원당 1마일, 해외 1,000원당 2마일 (무실적)"
+    },
+    {
+      "cardId": "hana-skypass-amex-platinum",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "전월 50만원 이상",
+      "placeTags": ["airport-lounge"],
+      "desc": "전월 50만원 이상 시 공항라운지 무료"
+    },
+    {
+      "cardId": "nh-classy-travel",
+      "category": "points",
+      "title": "해외 적립",
+      "value": "최대 4%",
+      "placeTags": ["overseas"],
+      "desc": "해외 이용 시 최대 4% NH포인트 적립"
+    },
+    {
+      "cardId": "nh-classy-travel",
+      "category": "forex",
+      "title": "해외 수수료",
+      "value": "면제",
+      "placeTags": ["overseas"],
+      "desc": "해외 이용 수수료 면제"
+    },
+    {
+      "cardId": "nh-classy-travel",
+      "category": "airport-lounge",
+      "title": "공항라운지",
+      "value": "월 2회, 연 4회",
+      "placeTags": ["airport-lounge"],
+      "desc": "전세계 공항라운지 무료 입장 (월 2회, 연 4회)"
+    },
+    {
+      "cardId": "nh-classy-travel",
+      "category": "bonus",
+      "title": "연간 이용 보너스",
+      "value": "5만 포인트",
+      "placeTags": [],
+      "desc": "연간 국내외 합산 1,000만원 이상 이용 시 5만 NH포인트"
+    },
+    {
+      "cardId": "nh-allone",
+      "category": "points",
+      "title": "포인트 적립",
+      "value": "0.7~0.9%",
+      "placeTags": [],
+      "desc": "전월실적 무관 0.7~0.9% 적립, 해외 0.9%"
+    }
+  ],
+  "places": [
+    {
+      "id": "incheon-airport",
+      "name": "인천국제공항",
+      "type": "airport",
+      "tags": ["airport", "airport-lounge", "valet-parking"]
+    },
+    {
+      "id": "gimpo-airport",
+      "name": "김포국제공항",
+      "type": "airport",
+      "tags": ["airport", "airport-lounge", "valet-parking"]
+    },
+    {
+      "id": "gimhae-airport",
+      "name": "김해국제공항",
+      "type": "airport",
+      "tags": ["airport", "airport-lounge", "valet-parking"]
+    },
+    {
+      "id": "matina-lounge",
+      "name": "마티나 라운지",
+      "type": "airport-lounge",
+      "tags": ["airport-lounge", "incheon-airport"]
+    },
+    {
+      "id": "sky-hub-lounge",
+      "name": "스카이 허브 라운지",
+      "type": "airport-lounge",
+      "tags": ["airport-lounge", "incheon-airport"]
+    },
+    {
+      "id": "four-seasons-seoul",
+      "name": "포시즌스 호텔 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "park-hyatt-seoul",
+      "name": "파크 하얏트 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "grand-hyatt-seoul",
+      "name": "그랜드 하얏트 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "jw-marriott-seoul",
+      "name": "JW 메리어트 호텔 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining", "marriott"]
+    },
+    {
+      "id": "jw-marriott-dongdaemun",
+      "name": "JW 메리어트 동대문 스퀘어 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining", "marriott"]
+    },
+    {
+      "id": "shilla-seoul",
+      "name": "신라호텔 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "dining", "shilla"]
+    },
+    {
+      "id": "conrad-seoul",
+      "name": "콘래드 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "dining", "hilton"]
+    },
+    {
+      "id": "mondrian-seoul",
+      "name": "몬드리안 서울 이태원",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "lescape-hotel",
+      "name": "레스케이프 호텔",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "imperial-palace-seoul",
+      "name": "임피리얼 팰리스 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "hotel-koreana",
+      "name": "호텔 코리아나",
+      "type": "hotel",
+      "tags": ["hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "hotel-naru-seoul",
+      "name": "호텔 나루 서울 엠갤러리",
+      "type": "hotel",
+      "tags": ["hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "oakwood-premier-coex",
+      "name": "오크우드 프리미어 코엑스센터",
+      "type": "hotel",
+      "tags": ["hotel", "valet-parking"]
+    },
+    {
+      "id": "novotel-ambassador-busan",
+      "name": "노보텔 앰배서더 부산",
+      "type": "hotel",
+      "tags": ["hotel", "valet-parking"]
+    },
+    {
+      "id": "grand-josun-busan",
+      "name": "그랜드조선 부산",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "westin-josun-busan",
+      "name": "웨스틴 조선 부산",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining", "marriott"]
+    },
+    {
+      "id": "grand-josun-jeju",
+      "name": "그랜드 조선 제주",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "grand-walkerhill-seoul",
+      "name": "그랜드 워커힐 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "vista-walkerhill-seoul",
+      "name": "비스타 워커힐 서울",
+      "type": "hotel",
+      "tags": ["hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "haeundae-grand-hotel",
+      "name": "해운대 그랜드 호텔",
+      "type": "hotel",
+      "tags": ["hotel", "valet-parking"]
+    },
+    {
+      "id": "paradise-hotel-busan",
+      "name": "파라다이스 호텔 부산",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "st-johns-hotel",
+      "name": "세인트존스 호텔",
+      "type": "hotel",
+      "tags": ["hotel", "valet-parking"]
+    },
+    {
+      "id": "seoul-dragon-city",
+      "name": "서울드래곤시티",
+      "type": "hotel-complex",
+      "tags": ["hotel", "valet-parking", "dining"]
+    },
+    {
+      "id": "the-plaza-seoul",
+      "name": "더 플라자 서울",
+      "type": "hotel",
+      "tags": ["luxury-hotel", "dining"]
+    },
+    {
+      "id": "starbucks",
+      "name": "스타벅스",
+      "type": "cafe",
+      "tags": ["cafe", "starbucks"]
+    },
+    {
+      "id": "cgv",
+      "name": "CGV",
+      "type": "movie-theater",
+      "tags": ["movie", "cgv"]
+    },
+    {
+      "id": "lotte-cinema",
+      "name": "롯데시네마",
+      "type": "movie-theater",
+      "tags": ["movie", "lotte-cinema"]
+    },
+    {
+      "id": "megabox",
+      "name": "메가박스",
+      "type": "movie-theater",
+      "tags": ["movie", "megabox"]
+    },
+    {
+      "id": "lotte-department",
+      "name": "롯데백화점",
+      "type": "department-store",
+      "tags": ["shopping", "department-store", "valet-parking"]
+    },
+    {
+      "id": "shinsegae-department",
+      "name": "신세계백화점",
+      "type": "department-store",
+      "tags": ["shopping", "department-store", "valet-parking"]
+    },
+    {
+      "id": "hyundai-department",
+      "name": "현대백화점",
+      "type": "department-store",
+      "tags": ["shopping", "department-store", "valet-parking"]
+    },
+    {
+      "id": "galleria-department",
+      "name": "갤러리아백화점",
+      "type": "department-store",
+      "tags": ["shopping", "department-store", "valet-parking"]
+    },
+    {
+      "id": "lotte-duty-free",
+      "name": "롯데면세점",
+      "type": "duty-free",
+      "tags": ["shopping", "duty-free"]
+    },
+    {
+      "id": "shilla-duty-free",
+      "name": "신라면세점",
+      "type": "duty-free",
+      "tags": ["shopping", "duty-free"]
+    },
+    {
+      "id": "hanwha-resort",
+      "name": "한화리조트",
+      "type": "resort",
+      "tags": ["resort", "hanwha-condo"]
+    },
+    {
+      "id": "korean-air",
+      "name": "대한항공",
+      "type": "airline",
+      "tags": ["airline", "skypass"]
+    },
+    {
+      "id": "asiana-airlines",
+      "name": "아시아나항공",
+      "type": "airline",
+      "tags": ["airline", "asiana-club"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "valet-parking",
+      "name": "발렛파킹",
+      "nameEn": "Valet Parking",
+      "icon": "car"
+    },
+    {
+      "id": "airport-lounge",
+      "name": "공항라운지",
+      "nameEn": "Airport Lounge",
+      "icon": "plane"
+    },
+    {
+      "id": "hotel",
+      "name": "호텔",
+      "nameEn": "Hotel",
+      "icon": "building"
+    },
+    {
+      "id": "dining",
+      "name": "다이닝",
+      "nameEn": "Dining",
+      "icon": "utensils"
+    },
+    {
+      "id": "golf",
+      "name": "골프",
+      "nameEn": "Golf",
+      "icon": "golf-ball"
+    },
+    {
+      "id": "cafe",
+      "name": "카페",
+      "nameEn": "Cafe",
+      "icon": "coffee"
+    },
+    {
+      "id": "movie",
+      "name": "영화",
+      "nameEn": "Movie",
+      "icon": "film"
+    },
+    {
+      "id": "shopping",
+      "name": "쇼핑",
+      "nameEn": "Shopping",
+      "icon": "shopping-bag"
+    },
+    {
+      "id": "mileage",
+      "name": "마일리지",
+      "nameEn": "Mileage",
+      "icon": "plane-departure"
+    },
+    {
+      "id": "points",
+      "name": "포인트",
+      "nameEn": "Points",
+      "icon": "coins"
+    },
+    {
+      "id": "voucher",
+      "name": "바우처",
+      "nameEn": "Voucher",
+      "icon": "gift"
+    },
+    {
+      "id": "discount",
+      "name": "할인",
+      "nameEn": "Discount",
+      "icon": "percent"
+    },
+    {
+      "id": "travel",
+      "name": "여행",
+      "nameEn": "Travel",
+      "icon": "suitcase"
+    },
+    {
+      "id": "overseas",
+      "name": "해외",
+      "nameEn": "Overseas",
+      "icon": "globe"
+    }
+  ],
+  "issuers": [
+    {
+      "id": "hyundai",
+      "name": "현대카드",
+      "nameEn": "Hyundai Card",
+      "website": "https://www.hyundaicard.com"
+    },
+    {
+      "id": "samsung",
+      "name": "삼성카드",
+      "nameEn": "Samsung Card",
+      "website": "https://www.samsungcard.com"
+    },
+    {
+      "id": "shinhan",
+      "name": "신한카드",
+      "nameEn": "Shinhan Card",
+      "website": "https://www.shinhancard.com"
+    },
+    {
+      "id": "kb",
+      "name": "KB국민카드",
+      "nameEn": "KB Kookmin Card",
+      "website": "https://card.kbcard.com"
+    },
+    {
+      "id": "lotte",
+      "name": "롯데카드",
+      "nameEn": "Lotte Card",
+      "website": "https://www.lottecard.co.kr"
+    },
+    {
+      "id": "woori",
+      "name": "우리카드",
+      "nameEn": "Woori Card",
+      "website": "https://www.wooricard.com"
+    },
+    {
+      "id": "hana",
+      "name": "하나카드",
+      "nameEn": "Hana Card",
+      "website": "https://www.hanacard.co.kr"
+    },
+    {
+      "id": "nh",
+      "name": "NH농협카드",
+      "nameEn": "NH NongHyup Card",
+      "website": "https://card.nonghyup.com"
+    }
+  ]
+}
