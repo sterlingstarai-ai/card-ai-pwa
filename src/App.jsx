@@ -564,88 +564,201 @@ const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
 };
 
 const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose }) => {
-  const [zoom, setZoom] = useState(CONFIG.MAP.DEFAULT_ZOOM);
-  const [center, setCenter] = useState({ lat: 37.0, lng: 127.5 });
+  const mapContainerRef = useRef(null);
+  const mapRef = useRef(null);
+  const markersRef = useRef([]);
+  const userMarkerRef = useRef(null);
+  const [mapReady, setMapReady] = useState(false);
+  const [activeRegion, setActiveRegion] = useState('서울');
 
   const regions = [
-    { name: '전체', lat: 37.0, lng: 127.5, zoom: 1 },
-    { name: '서울', lat: 37.55, lng: 127.0, zoom: 3 },
-    { name: '인천', lat: 37.46, lng: 126.7, zoom: 3 },
-    { name: '부산', lat: 35.16, lng: 129.1, zoom: 3 },
-    { name: '제주', lat: 33.38, lng: 126.55, zoom: 3 }
+    { name: '전체', lat: 36.5, lng: 127.5, zoom: 7 },
+    { name: '서울', lat: 37.55, lng: 127.0, zoom: 11 },
+    { name: '인천', lat: 37.46, lng: 126.7, zoom: 11 },
+    { name: '부산', lat: 35.16, lng: 129.1, zoom: 11 },
+    { name: '제주', lat: 33.38, lng: 126.55, zoom: 10 }
   ];
 
-  const toSvg = (lat, lng) => {
-    const baseScale = 150 * zoom;
-    const x = 200 + (lng - center.lng) * baseScale;
-    const y = 200 + (center.lat - lat) * baseScale * CONFIG.MAP.LAT_SCALE;
-    return { x, y };
+  // 카카오맵 초기화
+  useEffect(() => {
+    if (!window.kakao || !window.kakao.maps) {
+      Logger.error('Kakao Maps SDK not loaded');
+      return;
+    }
+
+    window.kakao.maps.load(() => {
+      if (!mapContainerRef.current) return;
+
+      const initialCenter = userLocation
+        ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
+        : new window.kakao.maps.LatLng(37.55, 127.0);
+
+      const options = {
+        center: initialCenter,
+        level: userLocation ? 5 : 8
+      };
+
+      mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, options);
+      setMapReady(true);
+    });
+
+    return () => {
+      markersRef.current.forEach(m => m.setMap(null));
+      if (userMarkerRef.current) userMarkerRef.current.setMap(null);
+    };
+  }, []);
+
+  // 장소 마커 생성
+  useEffect(() => {
+    if (!mapReady || !mapRef.current) return;
+
+    // 기존 마커 제거
+    markersRef.current.forEach(m => m.setMap(null));
+    markersRef.current = [];
+
+    places.forEach(place => {
+      const position = new window.kakao.maps.LatLng(place.lat, place.lng);
+      const emoji = placeTypeConfig[place.type]?.emoji || '📍';
+      const isSelected = selectedPlaceId === place.id;
+
+      // 커스텀 오버레이로 이모지 마커 생성
+      const content = document.createElement('div');
+      content.innerHTML = `
+        <div style="
+          width: ${isSelected ? '44px' : '36px'};
+          height: ${isSelected ? '44px' : '36px'};
+          background: ${isSelected ? '#3b82f6' : '#1e293b'};
+          border: 2px solid ${isSelected ? '#60a5fa' : '#475569'};
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: ${isSelected ? '20px' : '16px'};
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          transition: all 0.2s;
+        ">${emoji}</div>
+      `;
+      content.style.cursor = 'pointer';
+      content.onclick = () => onPlaceSelect(place.id);
+
+      const overlay = new window.kakao.maps.CustomOverlay({
+        position: position,
+        content: content,
+        yAnchor: 0.5,
+        xAnchor: 0.5
+      });
+
+      overlay.setMap(mapRef.current);
+      markersRef.current.push(overlay);
+    });
+  }, [mapReady, places, selectedPlaceId, onPlaceSelect]);
+
+  // 사용자 위치 마커
+  useEffect(() => {
+    if (!mapReady || !mapRef.current || !userLocation) return;
+
+    if (userMarkerRef.current) {
+      userMarkerRef.current.setMap(null);
+    }
+
+    const position = new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng);
+
+    const content = document.createElement('div');
+    content.innerHTML = `
+      <div style="position: relative;">
+        <div style="
+          width: 40px;
+          height: 40px;
+          background: rgba(59, 130, 246, 0.3);
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation: pulse 2s infinite;
+        "></div>
+        <div style="
+          width: 16px;
+          height: 16px;
+          background: #3b82f6;
+          border: 3px solid white;
+          border-radius: 50%;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        "></div>
+      </div>
+      <style>
+        @keyframes pulse {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+          50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+        }
+      </style>
+    `;
+
+    const overlay = new window.kakao.maps.CustomOverlay({
+      position: position,
+      content: content,
+      yAnchor: 0.5,
+      xAnchor: 0.5
+    });
+
+    overlay.setMap(mapRef.current);
+    userMarkerRef.current = overlay;
+  }, [mapReady, userLocation]);
+
+  const handleRegionClick = (region) => {
+    if (!mapRef.current) return;
+    setActiveRegion(region.name);
+    const moveLatLng = new window.kakao.maps.LatLng(region.lat, region.lng);
+    mapRef.current.setCenter(moveLatLng);
+    mapRef.current.setLevel(region.zoom);
   };
 
-  const handleZoomIn = () => setZoom(z => Math.min(CONFIG.MAP.MAX_ZOOM, z + CONFIG.MAP.ZOOM_STEP));
-  const handleZoomOut = () => setZoom(z => Math.max(CONFIG.MAP.MIN_ZOOM, z - CONFIG.MAP.ZOOM_STEP));
   const handleMyLocation = () => {
-    if (userLocation) {
-      setCenter({ lat: userLocation.lat, lng: userLocation.lng });
-      setZoom(CONFIG.MAP.FOCUSED_ZOOM);
-    }
+    if (!mapRef.current || !userLocation) return;
+    const moveLatLng = new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng);
+    mapRef.current.setCenter(moveLatLng);
+    mapRef.current.setLevel(5);
+  };
+
+  const handleZoomIn = () => {
+    if (!mapRef.current) return;
+    mapRef.current.setLevel(mapRef.current.getLevel() - 1);
+  };
+
+  const handleZoomOut = () => {
+    if (!mapRef.current) return;
+    mapRef.current.setLevel(mapRef.current.getLevel() + 1);
   };
 
   return (
-    <div role="application" aria-label="장소 선택 지도" style={{ width: '100%', height: '100%', background: 'linear-gradient(to bottom, #0f172a, #1e293b)', position: 'relative' }}>
+    <div role="application" aria-label="장소 선택 지도" style={{ width: '100%', height: '100%', position: 'relative' }}>
+      {/* 헤더 */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '16px', zIndex: 30, background: 'linear-gradient(to bottom, rgba(15,23,42,0.95), transparent)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <span style={{ fontSize: '12px', color: '#94a3b8' }}>📍 핀을 탭하면 바로 선택됩니다</span>
+          <span style={{ fontSize: '12px', color: '#94a3b8' }}>📍 마커를 탭하면 장소가 선택됩니다</span>
           <button onClick={onClose} aria-label="지도 닫기" style={{ width: '32px', height: '32px', background: '#334155', borderRadius: '50%', border: 'none', color: 'white', cursor: 'pointer' }}>✕</button>
         </div>
         <div role="tablist" style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
           {regions.map(r => (
-            <button key={r.name} onClick={() => { setCenter({ lat: r.lat, lng: r.lng }); setZoom(r.zoom); }} role="tab" aria-selected={center.lat === r.lat}
-              style={{ padding: '6px 12px', background: center.lat === r.lat ? '#3b82f6' : '#334155', borderRadius: '20px', border: 'none', color: 'white', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+            <button key={r.name} onClick={() => handleRegionClick(r)} role="tab" aria-selected={activeRegion === r.name}
+              style={{ padding: '6px 12px', background: activeRegion === r.name ? '#3b82f6' : '#334155', borderRadius: '20px', border: 'none', color: 'white', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', whiteSpace: 'nowrap' }}>
               {r.name}
             </button>
           ))}
         </div>
       </div>
 
-      <svg width="100%" height="100%" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" style={{ paddingTop: '90px' }}>
-        <rect x="0" y="0" width="400" height="400" fill="#1e293b"/>
-        {[...Array(11)].map((_, i) => (
-          <g key={i}>
-            <line x1={i * 40} y1="0" x2={i * 40} y2="400" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
-            <line x1="0" y1={i * 40} x2="400" y2={i * 40} stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
-          </g>
-        ))}
-        {userLocation && (() => {
-          const pos = toSvg(userLocation.lat, userLocation.lng);
-          if (pos.x < 0 || pos.x > 400 || pos.y < 0 || pos.y > 400) return null;
-          return (
-            <g aria-label="내 현재 위치">
-              <circle cx={pos.x} cy={pos.y} r="20" fill="#3b82f6" opacity="0.3"><animate attributeName="r" values="15;25;15" dur="2s" repeatCount="indefinite"/></circle>
-              <circle cx={pos.x} cy={pos.y} r="8" fill="#3b82f6" stroke="white" strokeWidth="3"/>
-            </g>
-          );
-        })()}
-        {places.map(place => {
-          const pos = toSvg(place.lat, place.lng);
-          if (pos.x < 10 || pos.x > 390 || pos.y < 10 || pos.y > 390) return null;
-          const isSelected = selectedPlaceId === place.id;
-          const emoji = placeTypeConfig[place.type]?.emoji || '📍';
-          return (
-            <g key={place.id} onClick={() => onPlaceSelect(place.id)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPlaceSelect(place.id); } }} style={{ cursor: 'pointer' }} role="button" aria-label={`${place.name} 선택`} tabIndex={0}>
-              <ellipse cx={pos.x} cy={pos.y + 12} rx="10" ry="5" fill="rgba(0,0,0,0.4)"/>
-              <circle cx={pos.x} cy={pos.y} r={isSelected ? 20 : 16} fill={isSelected ? "#3b82f6" : "#1e293b"} stroke={isSelected ? "#60a5fa" : "#475569"} strokeWidth="2"/>
-              <text x={pos.x} y={pos.y + 5} textAnchor="middle" fontSize={isSelected ? "16" : "14"}>{emoji}</text>
-            </g>
-          );
-        })}
-      </svg>
+      {/* 카카오맵 컨테이너 */}
+      <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
 
+      {/* 줌 컨트롤 */}
       <div style={{ position: 'absolute', bottom: '100px', right: '16px', display: 'flex', flexDirection: 'column', gap: '8px', zIndex: 30 }}>
         <button onClick={handleZoomIn} aria-label="확대" style={{ width: '40px', height: '40px', background: '#334155', borderRadius: '8px', border: 'none', color: 'white', fontSize: '20px', cursor: 'pointer' }}>+</button>
         <button onClick={handleZoomOut} aria-label="축소" style={{ width: '40px', height: '40px', background: '#334155', borderRadius: '8px', border: 'none', color: 'white', fontSize: '20px', cursor: 'pointer' }}>−</button>
       </div>
 
+      {/* 내 위치 버튼 */}
       {userLocation && (
         <button onClick={handleMyLocation} aria-label="내 위치로 이동"
           style={{ position: 'absolute', bottom: '100px', left: '16px', width: '40px', height: '40px', background: '#3b82f6', borderRadius: '8px', border: 'none', color: 'white', fontSize: '18px', cursor: 'pointer', zIndex: 30 }}>🎯</button>
@@ -753,6 +866,35 @@ export default function CardBenefitsApp() {
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  // 앱 시작 시 자동 위치 권한 요청
+  useEffect(() => {
+    if (dataLoaded && locationStatus === 'idle') {
+      // 데이터 로드 완료 후 자동으로 위치 요청
+      const timer = setTimeout(() => {
+        if (navigator.geolocation) {
+          setLocationStatus('loading');
+          navigator.geolocation.getCurrentPosition(
+            pos => {
+              setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+              setLocationStatus('success');
+            },
+            err => {
+              if (err.code === 1) {
+                setUserLocation(null);
+                setLocationStatus('denied');
+              } else {
+                setUserLocation(CONFIG.DEFAULTS.LOCATION);
+                setLocationStatus('fallback');
+              }
+            },
+            { timeout: CONFIG.TIMEOUTS.LOCATION, enableHighAccuracy: true, maximumAge: 60000 }
+          );
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [dataLoaded, locationStatus]);
 
   // 오프라인 상태 감지
   useEffect(() => {
