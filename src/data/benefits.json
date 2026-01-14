@@ -1,7 +1,7 @@
 {
   "hyundai-black-valet": { "cardId": "hyundai-black", "category": "valet", "title": "호텔/공항 무료 발렛", "value": "무제한", "placeTags": ["hotel", "airport", "parnas", "luxury"], "desc": "전월 실적 무관. 국내 특급 호텔(파르나스, 신라, 롯데 등) 및 인천공항 발렛파킹 무료 제공." },
   "hyundai-black-lounge": { "cardId": "hyundai-black", "category": "lounge", "title": "PP 공항라운지", "value": "무제한", "placeTags": ["airport", "lounge"], "desc": "전월 실적 무관. 전 세계 Priority Pass 라운지 무제한 이용 가능." },
-  "hyundai-black-points": { "cardId": "hyundai-black", "category": "points", "title": "M포인트 최대 2%", "value": "2%", "placeTags": [], "desc": "업종별 0.5~2% M포인트 적립." },
+  "hyundai-black-points": { "cardId": "hyundai-black", "category": "points", "title": "M포인트 최대 1.5%", "value": "1.5%", "placeTags": [], "desc": "업종별 0.5~1.5% M포인트 적립." },
   "hyundai-black-golf": { "cardId": "hyundai-black", "category": "golf", "title": "프리미엄 골프", "value": "무료부킹", "placeTags": ["golf"], "desc": "제휴 골프장 그린피 할인 및 무료 부킹 서비스." },
   "hyundai-purple-valet": { "cardId": "hyundai-purple", "category": "valet", "title": "호텔/공항 무료 발렛", "value": "월 5회", "placeTags": ["hotel", "airport", "parnas", "luxury", "ihg", "marriott", "hyatt", "lotte"], "desc": "전월 실적 50만원 이상 시 제공. 인천공항, 파르나스호텔, 신라호텔, 롯데호텔, JW메리어트 등 국내 주요 특급호텔 발렛파킹 무료." },
   "hyundai-purple-lounge": { "cardId": "hyundai-purple", "category": "lounge", "title": "PP 라운지", "value": "PP카드", "placeTags": ["airport", "lounge"], "desc": "전 세계 800여 공항 라운지 무료 이용 (본인 한정)." },
@@ -22,7 +22,7 @@
 
   "samsung-id-platinum-lounge": { "cardId": "samsung-id-platinum", "category": "lounge", "title": "The Lounge", "value": "연 6회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 50만원 이상. 통합 월 1회 제공." },
   "samsung-id-platinum-valet": { "cardId": "samsung-id-platinum", "category": "valet", "title": "호텔/공항 발렛", "value": "월 2회", "placeTags": ["hotel", "airport", "luxury"], "desc": "전월 실적 50만원 이상. 국내 특급 호텔 및 공항." },
-  "samsung-id-platinum-cafe": { "cardId": "samsung-id-platinum", "category": "cafe", "title": "스타벅스 10%", "value": "월 5천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 50만원 이상. 사이렌오더 포함." },
+  "samsung-id-platinum-cafe": { "cardId": "samsung-id-platinum", "category": "cafe", "title": "스타벅스 3천원", "value": "월 1회", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 50만원 이상. 스타벅스 3,000원 할인 (월 1회)." },
   "samsung-id-titanium-lounge": { "cardId": "samsung-id-titanium", "category": "lounge", "title": "The Lounge", "value": "연 12회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 50만원 이상. 월 2회, 연 12회." },
   "samsung-id-titanium-valet": { "cardId": "samsung-id-titanium", "category": "valet", "title": "호텔/공항 발렛", "value": "월 4회", "placeTags": ["hotel", "airport", "luxury"], "desc": "전월 실적 50만원 이상. 국내 특급 호텔 및 공항." },
   "samsung-mileage-lounge": { "cardId": "samsung-mileage", "category": "lounge", "title": "마티나 라운지", "value": "연 2회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 30만원 이상. 인천공항 마티나 라운지 본인 무료." },
@@ -72,7 +72,7 @@
   "lotte-avenuel-emerald-hotel": { "cardId": "lotte-avenuel-emerald", "category": "hotel", "title": "호텔 15%", "value": "15%", "placeTags": ["hotel", "lotte"], "desc": "블랙본점/청담점/반얀트리점 15% 할인." },
   "lotte-avenuel-purple-valet": { "cardId": "lotte-avenuel-purple", "category": "valet", "title": "무료 발렛", "value": "무제한", "placeTags": ["hotel", "airport", "lotte"], "desc": "인천공항/특급호텔 무료 발렛파킹." },
   "lotte-avenuel-purple-lounge": { "cardId": "lotte-avenuel-purple", "category": "lounge", "title": "국내라운지", "value": "연 2회", "placeTags": ["airport", "lounge"], "desc": "국내 공항라운지 연 2회 무료 이용." },
-  "lotte-loca-likit-cafe": { "cardId": "lotte-loca-likit", "category": "cafe", "title": "스타벅스 60%", "value": "월 3.5만원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 40만원 이상. 스타벅스 60% 할인." },
+  "lotte-loca-likit-cafe": { "cardId": "lotte-loca-likit", "category": "cafe", "title": "스타벅스 50%", "value": "월 1만원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 40만원 이상. 스타벅스 50% 할인 (월 최대 1만원)." },
   "lotte-loca-likit-movie": { "cardId": "lotte-loca-likit", "category": "entertainment", "title": "영화 50%", "value": "월 2회", "placeTags": ["entertainment", "movie"], "desc": "전월 실적 40만원 이상. CGV/롯데시네마 50% 할인." },
   "lotte-loca-likit-transport": { "cardId": "lotte-loca-likit", "category": "shopping", "title": "교통 10%", "value": "월 3.5만원", "placeTags": ["shopping"], "desc": "대중교통 10% 할인." },
   "lotte-loca-likit-12-discount": { "cardId": "lotte-loca-likit-12", "category": "points", "title": "전가맹점 1.2%", "value": "무제한", "placeTags": [], "desc": "전월 실적 무관. 국내/해외 전 가맹점 1.2% 청구할인, 온라인 1.5%." },
@@ -114,7 +114,7 @@
   "hana-mile1-movie": { "cardId": "hana-mile1", "category": "entertainment", "title": "CGV 4천원", "value": "연 12회", "placeTags": ["entertainment", "movie", "cgv"], "desc": "CGV/롯데시네마 4천원 청구할인 월 1회/연 12회." },
   "hana-1q-points": { "cardId": "hana-1q", "category": "points", "title": "전가맹점 0.8%", "value": "무제한", "placeTags": [], "desc": "국내 전가맹점 0.8%, 해외 1.8%, 하나원큐페이 1.8% 적립, 무실적/무제한." },
   "hana-club-cafe": { "cardId": "hana-club", "category": "cafe", "title": "스타벅스 10%", "value": "월 5천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 30만원 이상. 커피빈/스타벅스 10% 할인." },
-  "hana-club-movie": { "cardId": "hana-club", "category": "entertainment", "title": "CGV", "value": "5천원", "placeTags": ["entertainment", "movie", "cgv"], "desc": "전월 실적 30만원 이상. CGV 영화 5천원 할인." },
+  "hana-club-movie": { "cardId": "hana-club", "category": "entertainment", "title": "CGV", "value": "3천원", "placeTags": ["entertainment", "movie", "cgv"], "desc": "전월 실적 30만원 이상. CGV 영화 3,000원 할인." },
   "hana-my-shopping": { "cardId": "hana-my", "category": "shopping", "title": "온라인쇼핑 3%", "value": "월 1만원", "placeTags": ["shopping"], "desc": "전월 실적 30만원 이상. 주요 온라인몰 3% 청구할인." },
   "hana-mile1-lounge": { "cardId": "hana-mile1", "category": "lounge", "title": "공항 라운지", "value": "연 2회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 30만원 이상. 국내 공항 라운지 무료." },
   "hana-big-pot-cafe": { "cardId": "hana-big-pot", "category": "cafe", "title": "카페 10%", "value": "월 5천원", "placeTags": ["cafe"], "desc": "전월 실적 20만원 이상. 커피전문점 10% 할인." },
@@ -155,27 +155,26 @@
 
   "hyundai-black-mpoint-conv": { "cardId": "hyundai-black", "category": "points", "title": "M포인트 편의점", "value": "100%사용", "placeTags": ["convenience", "mpoint", "cu", "gs25", "7eleven", "emart24"], "desc": "CU, GS25, 세븐일레븐, 이마트24 등 편의점에서 M포인트 100% 사용 가능." },
   "hyundai-purple-mpoint-conv": { "cardId": "hyundai-purple", "category": "points", "title": "M포인트 편의점", "value": "100%사용", "placeTags": ["convenience", "mpoint", "cu", "gs25", "7eleven", "emart24"], "desc": "CU, GS25, 세븐일레븐, 이마트24 등 편의점에서 M포인트 100% 사용 가능." },
-  "hyundai-purple-osee-mpoint": { "cardId": "hyundai-purple-osee", "category": "points", "title": "M포인트 적립", "value": "1.5%", "placeTags": ["mpoint"], "desc": "일반가맹점 1.5% M포인트 적립, 편의점/온라인 사용 가능." },
+  "hyundai-purple-osee-mpoint": { "cardId": "hyundai-purple-osee", "category": "points", "title": "M포인트 적립", "value": "0.5~1.5%", "placeTags": ["mpoint"], "desc": "실적구간별 차등 적립: 50만원 미만 0.5%, 50만원 이상 1%, 100만원 이상 1.5%. 편의점/온라인 사용 가능." },
   "hyundai-red-mpoint": { "cardId": "hyundai-red", "category": "points", "title": "M포인트 적립", "value": "1%", "placeTags": ["mpoint", "convenience"], "desc": "일반가맹점 1% M포인트 적립, 편의점/온라인 사용 가능." },
   "hyundai-green-mpoint": { "cardId": "hyundai-green", "category": "points", "title": "M포인트 적립", "value": "0.8%", "placeTags": ["mpoint", "convenience"], "desc": "일반가맹점 0.8% M포인트 적립." },
 
-  "hyundai-black-gas": { "cardId": "hyundai-black", "category": "gas", "title": "주유 M포인트", "value": "L당100원", "placeTags": ["gas", "gs-caltex", "sk-energy", "s-oil", "hyundai-oil"], "desc": "주유 시 리터당 100원 M포인트 적립, 전국 주유소." },
+  "hyundai-black-gas": { "cardId": "hyundai-black", "category": "gas", "title": "주유 10%", "value": "월 한도", "placeTags": ["gas", "gs-caltex", "sk-energy", "s-oil", "hyundai-oil"], "desc": "전월 실적 무관. 주유 10% 할인 (월 한도 내)." },
   "hyundai-purple-gas": { "cardId": "hyundai-purple", "category": "gas", "title": "주유 M포인트", "value": "L당80원", "placeTags": ["gas", "gs-caltex", "sk-energy", "s-oil"], "desc": "주유 시 리터당 80원 M포인트 적립." },
   "hyundai-red-gas": { "cardId": "hyundai-red", "category": "gas", "title": "주유 할인", "value": "L당60원", "placeTags": ["gas"], "desc": "전월 실적 50만원 이상. 리터당 60원 청구할인." },
 
   "samsung-mileage-conv": { "cardId": "samsung-mileage", "category": "shopping", "title": "편의점 5%", "value": "월 5천원", "placeTags": ["convenience", "cu", "gs25", "7eleven"], "desc": "전월 실적 30만원 이상. 편의점 5% 청구할인." },
-  "samsung-taptap-conv": { "cardId": "samsung-taptap-o", "category": "shopping", "title": "편의점 10%", "value": "월 5천원", "placeTags": ["convenience", "cu", "gs25", "7eleven", "emart24"], "desc": "전월 실적 30만원 이상. 편의점 10% 청구할인." },
-  "samsung-5-gas": { "cardId": "samsung-5-v2", "category": "gas", "title": "주유 5%", "value": "월 5천원", "placeTags": ["gas", "sk-energy", "gs-caltex", "s-oil"], "desc": "전월 실적 30만원 이상. 주유소 5% 청구할인." },
+  "samsung-taptap-conv": { "cardId": "samsung-taptap-o", "category": "shopping", "title": "편의점 7%", "value": "월 5천원", "placeTags": ["convenience", "cu", "gs25", "7eleven", "emart24"], "desc": "전월 실적 30만원 이상. 편의점 7% 청구할인." },
+  "samsung-5-gas": { "cardId": "samsung-5-v2", "category": "gas", "title": "주유 포인트", "value": "L당40P", "placeTags": ["gas", "sk-energy", "gs-caltex", "s-oil"], "desc": "전월 실적 30만원 이상. 주유 리터당 40포인트 적립." },
   "samsung-2-gas": { "cardId": "samsung-2-v2", "category": "gas", "title": "주유 3%", "value": "월 3천원", "placeTags": ["gas"], "desc": "전월 실적 30만원 이상. 주유소 3% 청구할인." },
 
-  "kb-nori2-kbpay-conv": { "cardId": "kb-nori2-kbpay", "category": "shopping", "title": "편의점 10%", "value": "월 5천원", "placeTags": ["convenience", "cu", "gs25", "7eleven", "emart24"], "desc": "전월 실적 30만원 이상. 편의점 10% 청구할인." },
+  "kb-nori2-kbpay-conv": { "cardId": "kb-nori2-kbpay", "category": "shopping", "title": "편의점 5%", "value": "월 5천원", "placeTags": ["convenience", "cu", "gs25", "7eleven", "emart24"], "desc": "전월 실적 30만원 이상. 편의점 5% 청구할인." },
   "kb-myone-gas": { "cardId": "kb-myone", "category": "gas", "title": "주유 5%", "value": "월 3천원", "placeTags": ["gas"], "desc": "전월 실적 30만원 이상. 주유소 5% 청구할인." },
   "kb-wise-gas": { "cardId": "kb-wise", "category": "gas", "title": "SK주유 10%", "value": "월 5천원", "placeTags": ["gas", "sk-energy"], "desc": "전월 실적 30만원 이상. SK에너지 10% 청구할인." },
   "kb-tong-conv": { "cardId": "kb-tong", "category": "shopping", "title": "편의점 5%", "value": "월 3천원", "placeTags": ["convenience", "cu", "gs25"], "desc": "전월 실적 30만원 이상. 편의점 5% 청구할인." },
 
   "shinhan-mr-life-conv": { "cardId": "shinhan-mr-life", "category": "shopping", "title": "편의점 10%", "value": "21~09시", "placeTags": ["convenience", "cu", "gs25", "7eleven", "emart24"], "desc": "전월 실적 30만원 이상. 밤 9시~아침 9시 편의점 10% 할인." },
   "shinhan-deep-dream-gas": { "cardId": "shinhan-deep-dream", "category": "gas", "title": "주유 5%", "value": "월 5천원", "placeTags": ["gas", "sk-energy", "gs-caltex"], "desc": "전월 실적 30만원 이상. 주유소 5% 청구할인 (드림영역)." },
-  "shinhan-sol-travel-mart": { "cardId": "shinhan-sol-travel", "category": "shopping", "title": "대형마트 3%", "value": "월 5천원", "placeTags": ["mart", "emart", "homeplus", "lottemart"], "desc": "전월 실적 30만원 이상. 대형마트 3% 청구할인." },
 
   "lotte-loca-likit-conv": { "cardId": "lotte-loca-likit", "category": "shopping", "title": "편의점 10%", "value": "월 5천원", "placeTags": ["convenience", "cu", "gs25", "7eleven"], "desc": "전월 실적 40만원 이상. 편의점 10% 청구할인." },
   "lotte-loca-everyday-gas": { "cardId": "lotte-loca-everyday", "category": "gas", "title": "주유 5%", "value": "월 5천원", "placeTags": ["gas", "gs-caltex", "s-oil"], "desc": "전월 실적 40만원 이상. 주유소 5% 청구할인." },
@@ -184,7 +183,6 @@
 
   "woori-d4-conv": { "cardId": "woori-d4", "category": "shopping", "title": "편의점 11%", "value": "월 한도", "placeTags": ["convenience", "cu", "gs25", "7eleven", "emart24"], "desc": "편의점 11% 청구할인." },
   "woori-ten-conv": { "cardId": "woori-ten", "category": "shopping", "title": "편의점 10%", "value": "월 한도", "placeTags": ["convenience", "cu", "gs25", "7eleven"], "desc": "편의점 10% 청구할인." },
-  "woori-ten-gas": { "cardId": "woori-ten", "category": "gas", "title": "주유 10%", "value": "월 한도", "placeTags": ["gas"], "desc": "주유소 10% 청구할인." },
   "woori-cookie-conv": { "cardId": "woori-cookie", "category": "shopping", "title": "편의점 5%", "value": "월 2천원", "placeTags": ["convenience", "cu", "gs25"], "desc": "전월 실적 20만원 이상. 편의점 5% 할인." },
 
   "hana-club-gas": { "cardId": "hana-club", "category": "gas", "title": "주유 5%", "value": "월 5천원", "placeTags": ["gas", "sk-energy", "gs-caltex"], "desc": "전월 실적 30만원 이상. 주유소 5% 청구할인." },
@@ -194,7 +192,6 @@
 
   "nh-all-one-gas": { "cardId": "nh-all-one", "category": "gas", "title": "주유 5%", "value": "월 5천원", "placeTags": ["gas", "gs-caltex", "sk-energy"], "desc": "전월 실적 30만원 이상. 주유소 5% 청구할인." },
   "nh-all-one-conv": { "cardId": "nh-all-one", "category": "shopping", "title": "편의점 5%", "value": "월 3천원", "placeTags": ["convenience", "cu", "gs25"], "desc": "전월 실적 30만원 이상. 편의점 5% 청구할인." },
-  "nh-olbareun-flex-mart": { "cardId": "nh-olbareun-flex", "category": "shopping", "title": "대형마트 10%", "value": "월 5천원", "placeTags": ["mart", "emart", "homeplus", "lottemart", "costco"], "desc": "전월 실적 30만원 이상. 대형마트 10% 청구할인." },
   "nh-zgm-online": { "cardId": "nh-zgm", "category": "shopping", "title": "온라인쇼핑 5%", "value": "월 5천원", "placeTags": ["online", "coupang", "ssg", "11st"], "desc": "전월 실적 30만원 이상. 온라인쇼핑 5% 청구할인." },
 
   "bc-baro-conv": { "cardId": "bc-baro", "category": "shopping", "title": "편의점 5%", "value": "월 3천원", "placeTags": ["convenience", "cu", "gs25", "7eleven"], "desc": "전월 실적 30만원 이상. 편의점 5% 할인." },
