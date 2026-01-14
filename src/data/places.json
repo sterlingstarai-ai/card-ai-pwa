@@ -16,7 +16,7 @@
 
   "shilla-seoul": { "id": "shilla-seoul", "name": "서울신라호텔", "type": "hotel", "tags": ["hotel", "valet", "fnb", "luxury"], "lat": 37.5545, "lng": 127.0058 },
   "grand-hyatt": { "id": "grand-hyatt", "name": "그랜드하얏트 서울", "type": "hotel", "tags": ["hotel", "valet", "fnb", "luxury"], "lat": 37.5397, "lng": 127.0015 },
-  "park-hyatt-seoul": { "id": "park-hyatt-seoul", "name": "파크하얏트 서울", "type": "hotel", "tags": ["hotel", "valet", "fnb", "luxury"], "lat": 37.5085, "lng": 127.0595 },
+  "park-hyatt-seoul": { "id": "park-hyatt-seoul", "name": "파크하얏트 서울", "type": "hotel", "tags": ["hotel", "valet", "fnb", "luxury"], "lat": 37.5060, "lng": 127.0431 },
   "jw-marriott-seoul": { "id": "jw-marriott-seoul", "name": "JW메리어트 서울", "type": "hotel", "tags": ["hotel", "valet", "fnb", "marriott", "luxury"], "lat": 37.5094, "lng": 127.0594 },
   "jw-marriott-dongdaemun": { "id": "jw-marriott-dongdaemun", "name": "JW메리어트 동대문", "type": "hotel", "tags": ["hotel", "valet", "fnb", "marriott", "luxury"], "lat": 37.5704, "lng": 127.0094 },
   "four-seasons-seoul": { "id": "four-seasons-seoul", "name": "포시즌스 서울", "type": "hotel", "tags": ["hotel", "valet", "fnb", "luxury"], "lat": 37.5718, "lng": 126.9768 },

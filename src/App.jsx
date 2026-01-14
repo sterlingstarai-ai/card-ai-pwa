@@ -565,7 +565,7 @@ const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
 
 const KAKAO_APP_KEY = 'b6d42c58bb45a8e461cee9040d2677a4';
 
-const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose }) => {
+const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose, benefitsData, cardsData, myCards }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef([]);
@@ -574,6 +574,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
   const [mapError, setMapError] = useState(null);
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [activeRegion, setActiveRegion] = useState('서울');
+  const [previewPlace, setPreviewPlace] = useState(null);
 
   const regions = [
     { name: '전체', lat: 36.5, lng: 127.5, zoom: 7 },
@@ -678,7 +679,14 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
         ">${emoji}</div>
       `;
       content.style.cursor = 'pointer';
-      content.onclick = () => onPlaceSelect(place.id);
+      content.onclick = () => {
+        setPreviewPlace(place);
+        // 지도 중심을 선택한 장소로 이동
+        if (mapRef.current) {
+          const pos = new window.kakao.maps.LatLng(place.lat, place.lng);
+          mapRef.current.panTo(pos);
+        }
+      };
 
       const overlay = new window.kakao.maps.CustomOverlay({
         position: position,
@@ -810,7 +818,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
       )}
 
       {/* 줌 컨트롤 */}
-      <div style={{ position: 'absolute', bottom: '100px', right: '16px', display: 'flex', flexDirection: 'column', gap: '8px', zIndex: 30 }}>
+      <div style={{ position: 'absolute', bottom: previewPlace ? '180px' : '100px', right: '16px', display: 'flex', flexDirection: 'column', gap: '8px', zIndex: 30, transition: 'bottom 0.2s' }}>
         <button onClick={handleZoomIn} aria-label="확대" style={{ width: '40px', height: '40px', background: '#334155', borderRadius: '8px', border: 'none', color: 'white', fontSize: '20px', cursor: 'pointer' }}>+</button>
         <button onClick={handleZoomOut} aria-label="축소" style={{ width: '40px', height: '40px', background: '#334155', borderRadius: '8px', border: 'none', color: 'white', fontSize: '20px', cursor: 'pointer' }}>−</button>
       </div>
@@ -818,7 +826,46 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
       {/* 내 위치 버튼 */}
       {userLocation && (
         <button onClick={handleMyLocation} aria-label="내 위치로 이동"
-          style={{ position: 'absolute', bottom: '100px', left: '16px', width: '40px', height: '40px', background: '#3b82f6', borderRadius: '8px', border: 'none', color: 'white', fontSize: '18px', cursor: 'pointer', zIndex: 30 }}>🎯</button>
+          style={{ position: 'absolute', bottom: previewPlace ? '180px' : '100px', left: '16px', width: '40px', height: '40px', background: '#3b82f6', borderRadius: '8px', border: 'none', color: 'white', fontSize: '18px', cursor: 'pointer', zIndex: 30, transition: 'bottom 0.2s' }}>🎯</button>
+      )}
+
+      {/* 장소 미리보기 패널 */}
+      {previewPlace && (
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(15,23,42,0.98), rgba(15,23,42,0.95))', borderTopLeftRadius: '20px', borderTopRightRadius: '20px', padding: '16px', zIndex: 40 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                <span style={{ fontSize: '20px' }}>{placeTypeConfig[previewPlace.type]?.emoji || '📍'}</span>
+                <span style={{ fontSize: '16px', fontWeight: 'bold', color: 'white' }}>{previewPlace.name}</span>
+              </div>
+              {(() => {
+                // 이 장소에서 사용 가능한 혜택 계산
+                const placeBenefits = benefitsData && myCards ? Object.entries(benefitsData)
+                  .filter(([, b]) => myCards.includes(b.cardId) && b.placeTags?.some(t => previewPlace.tags?.includes(t)))
+                  .slice(0, 2)
+                  .map(([id, b]) => ({ id, ...b, card: cardsData?.[b.cardId] })) : [];
+
+                return placeBenefits.length > 0 ? (
+                  <div style={{ marginTop: '8px' }}>
+                    {placeBenefits.map(b => (
+                      <div key={b.id} style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '4px' }}>
+                        <span style={{ color: '#60a5fa' }}>{b.card?.shortName || '카드'}</span> · {b.title}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>등록된 카드로 사용 가능한 혜택 확인</div>
+                );
+              })()}
+            </div>
+            <button onClick={() => setPreviewPlace(null)} style={{ width: '28px', height: '28px', background: '#334155', borderRadius: '50%', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '14px' }}>✕</button>
+          </div>
+          <button
+            onClick={() => { onPlaceSelect(previewPlace.id); setPreviewPlace(null); }}
+            style={{ width: '100%', padding: '14px', background: '#3b82f6', borderRadius: '12px', border: 'none', color: 'white', fontSize: '15px', fontWeight: 'bold', cursor: 'pointer' }}>
+            이 장소 선택하기
+          </button>
+        </div>
       )}
     </div>
   );
@@ -924,32 +971,12 @@ export default function CardBenefitsApp() {
     loadData();
   }, [loadData]);
 
-  // 앱 시작 시 자동 위치 권한 요청
+  // 앱 시작 시 기본 위치(서울) 설정 - 권한 요청은 사용자 액션 시에만
   useEffect(() => {
     if (dataLoaded && locationStatus === 'idle') {
-      // 데이터 로드 완료 후 자동으로 위치 요청
-      const timer = setTimeout(() => {
-        if (navigator.geolocation) {
-          setLocationStatus('loading');
-          navigator.geolocation.getCurrentPosition(
-            pos => {
-              setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-              setLocationStatus('success');
-            },
-            err => {
-              if (err.code === 1) {
-                setUserLocation(null);
-                setLocationStatus('denied');
-              } else {
-                setUserLocation(CONFIG.DEFAULTS.LOCATION);
-                setLocationStatus('fallback');
-              }
-            },
-            { timeout: CONFIG.TIMEOUTS.LOCATION, enableHighAccuracy: true, maximumAge: 60000 }
-          );
-        }
-      }, 500);
-      return () => clearTimeout(timer);
+      // 권한 요청 없이 기본 위치(서울)로 시작
+      setUserLocation(CONFIG.DEFAULTS.LOCATION);
+      setLocationStatus('fallback');
     }
   }, [dataLoaded, locationStatus]);
 
@@ -1744,7 +1771,7 @@ export default function CardBenefitsApp() {
                   ))}
                 </div>
               ) : (
-                <MapView userLocation={userLocation} places={Object.values(placesData)} selectedPlaceId={selectedPlaceId} onPlaceSelect={id => selectPlace(id)} onClose={() => setShowPlaceSheet(false)} />
+                <MapView userLocation={userLocation} places={Object.values(placesData)} selectedPlaceId={selectedPlaceId} onPlaceSelect={id => selectPlace(id)} onClose={() => setShowPlaceSheet(false)} benefitsData={benefitsData} cardsData={cardsData} myCards={myCards} />
               )}
             </div>
           </div>
