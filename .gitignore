@@ -22,3 +22,18 @@ npm-debug.log*
 # Environment
 .env
 .env.local
+
+# Capacitor
+ios/App/App/public/
+ios/App/Pods/
+ios/DerivedData/
+android/app/src/main/assets/public/
+android/.gradle/
+android/app/build/
+android/build/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcshareddata/
+*.apk
+*.aab
+*.ipa

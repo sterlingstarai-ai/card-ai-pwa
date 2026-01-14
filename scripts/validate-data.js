@@ -128,13 +128,15 @@ if (networkBenefits.length > 0) {
 }
 
 // 5. Check for duplicate benefit IDs (sanity check)
+// Only check top-level object keys (benefit IDs), not nested property keys
 console.log('\n5️⃣ Checking for duplicate benefit IDs...');
 const benefitIdCounts = {};
 const rawBenefitsText = readFileSync(join(dataDir, 'benefits.json'), 'utf8');
-const idMatches = rawBenefitsText.match(/"[^"]+"\s*:/g) || [];
-idMatches.forEach(match => {
-  const id = match.replace(/[":\s]/g, '');
-  benefitIdCounts[id] = (benefitIdCounts[id] || 0) + 1;
+// Match only top-level keys: lines starting with 2 spaces, then "key": {
+const topLevelIdMatches = rawBenefitsText.match(/^  "[^"]+"\s*:\s*\{/gm) || [];
+topLevelIdMatches.forEach(match => {
+  const id = match.match(/"([^"]+)"/)?.[1];
+  if (id) benefitIdCounts[id] = (benefitIdCounts[id] || 0) + 1;
 });
 const duplicateIds = Object.entries(benefitIdCounts).filter(([_, count]) => count > 1);
 

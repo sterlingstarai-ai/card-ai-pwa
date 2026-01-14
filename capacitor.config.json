@@ -1,0 +1,25 @@
+{
+  "appId": "com.cardai.app",
+  "appName": "Card AI",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "Camera": {
+      "promptText": "카드 스캔을 위해 카메라 접근이 필요합니다."
+    },
+    "Geolocation": {
+      "enabled": true
+    }
+  },
+  "ios": {
+    "contentInset": "automatic",
+    "allowsLinkPreview": false,
+    "scrollEnabled": true
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

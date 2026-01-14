@@ -14,9 +14,20 @@
     "validate": "node scripts/validate-data.js",
     "secrets:check": "node scripts/secrets-check.js",
     "test:e2e": "playwright test",
-    "ci": "npm run lint && npm run validate && npm run build && npm run secrets:check"
+    "ci": "npm run lint && npm run validate && npm run build && npm run secrets:check",
+    "cap:sync": "npm run build && npx cap sync",
+    "cap:ios": "npm run cap:sync && npx cap open ios",
+    "cap:android": "npm run cap:sync && npx cap open android",
+    "cap:build:ios": "npm run build && npx cap sync ios",
+    "cap:build:android": "npm run build && npx cap sync android"
   },
   "dependencies": {
+    "@capacitor/android": "^8.0.1",
+    "@capacitor/camera": "^8.0.0",
+    "@capacitor/cli": "^8.0.1",
+    "@capacitor/core": "^8.0.1",
+    "@capacitor/geolocation": "^8.0.0",
+    "@capacitor/ios": "^8.0.1",
     "@sentry/react": "^10.33.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

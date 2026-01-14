@@ -161,6 +161,29 @@ const CONFIG = {
     UNLIMITED: 30000,
     PERCENT_MULTIPLIER: 200,
   },
+
+  // 기능 킬스위치 (긴급시 기능 비활성화)
+  FEATURES: {
+    MAP_ENABLED: true,      // 지도 기능 활성화
+    OCR_ENABLED: true,      // OCR 스캔 기능 활성화
+    LOCATION_ENABLED: true, // 위치 기반 기능 활성화
+  },
+
+  // 링크 및 연락처
+  LINKS: {
+    PRIVACY_POLICY: 'https://cardai.app/privacy',
+    TERMS_OF_SERVICE: 'https://cardai.app/terms',
+    SUPPORT_EMAIL: 'support@cardai.app',
+    FEEDBACK_EMAIL: 'feedback@cardai.app',
+  },
+
+  // 빌드 정보
+  BUILD: {
+    VERSION: '1.0.0',
+    BUILD_NUMBER: '1',
+    COMMIT_HASH: import.meta.env.VITE_COMMIT_HASH || 'dev',
+    BUILD_DATE: import.meta.env.VITE_BUILD_DATE || new Date().toISOString().split('T')[0],
+  },
 };
 
 // ============================================================================
@@ -757,7 +780,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
     // Check if API key is configured
     if (!KAKAO_APP_KEY) {
       setMapError('지도 API 키가 설정되지 않았습니다');
-      onError?.('no_api_key');
+      // Keep showing error UI instead of navigating away
       return;
     }
 
@@ -778,7 +801,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
     script.onerror = (e) => {
       console.error('Kakao SDK load error:', e);
       setMapError('카카오맵 SDK 로드 실패');
-      onError?.('sdk_load_failed');
+      // Keep showing error UI instead of navigating away
     };
 
     document.head.appendChild(script);
@@ -1399,7 +1422,7 @@ export default function CardBenefitsApp() {
     const best = cardRanking[0], second = cardRanking[1];
     // Build explanation 3 lines
     const summaryText = best.benefitSummary.slice(0, 3).map(s => s.title).join(' + ');
-    const caveatText = best.caveats.length > 0 ? best.caveats.slice(0, 2).join(' / ') : '전월실적 미반영';
+    const caveatText = best.caveats.length > 0 ? best.caveats.slice(0, 2).join(' / ') : '전월실적 반영';
     return {
       ...best,
       diff: second ? best.totalValue - second.totalValue : 0,
@@ -2066,18 +2089,51 @@ export default function CardBenefitsApp() {
               <h3 className="font-bold mb-2">💾 저장소</h3>
               <p className="text-sm text-slate-400">{storage.getMode()} 사용 중 (오프라인 지원)</p>
             </div>
+
+            {/* 문의 및 지원 */}
+            <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
+              <h3 className="font-bold mb-3">💬 문의 및 지원</h3>
+              <a href={`mailto:${CONFIG.LINKS.SUPPORT_EMAIL}?subject=[Card AI] 문의사항`} className="block w-full py-2.5 bg-blue-600/20 text-blue-400 rounded-xl text-sm font-medium text-center border border-blue-500/30 mb-2">📧 문의하기</a>
+              <button onClick={() => {
+                const diagInfo = `앱 버전: ${CONFIG.BUILD.VERSION} (${CONFIG.BUILD.BUILD_NUMBER})\n빌드: ${CONFIG.BUILD.COMMIT_HASH}\n플랫폼: ${navigator.userAgent.includes('iPhone') ? 'iOS' : navigator.userAgent.includes('Android') ? 'Android' : 'Web'}\n저장소: ${storage.getMode()}\n카드 수: ${myCards.length}\n`;
+                if (navigator.share) {
+                  navigator.share({ title: 'Card AI 진단 정보', text: diagInfo });
+                } else {
+                  navigator.clipboard.writeText(diagInfo);
+                  showToast('진단 정보가 복사되었습니다');
+                }
+              }} className="w-full py-2.5 bg-slate-700/50 text-slate-300 rounded-xl text-sm font-medium border border-white/5">🔧 진단 정보 복사</button>
+            </div>
+
+            {/* 개인정보 및 이용약관 */}
+            <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
+              <h3 className="font-bold mb-3">📋 약관 및 정책</h3>
+              <a href={CONFIG.LINKS.PRIVACY_POLICY} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 text-sm text-slate-300">
+                <span>🔒 개인정보처리방침</span><span className="text-slate-500">→</span>
+              </a>
+              <a href={CONFIG.LINKS.TERMS_OF_SERVICE} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 text-sm text-slate-300 border-t border-white/5">
+                <span>📄 이용약관</span><span className="text-slate-500">→</span>
+              </a>
+            </div>
+
             <button onClick={handleReset} className="w-full py-3 bg-red-600/20 text-red-400 rounded-2xl text-sm font-medium border border-red-500/30">🗑️ 초기화</button>
-            <p className="text-center text-[10px] text-slate-600 mt-4">{CONFIG.APP.NAME} {versionBadge} · 49카드 · 28장소 · 69혜택</p>
+
+            {/* 앱 정보 */}
+            <div className="text-center text-[10px] text-slate-600 mt-4 space-y-1">
+              <p>{CONFIG.APP.NAME} v{CONFIG.BUILD.VERSION} ({CONFIG.BUILD.BUILD_NUMBER})</p>
+              <p>{Object.keys(cardsData || {}).length}카드 · {Object.keys(placesData || {}).length}장소 · {Object.keys(benefitsData || {}).length}혜택</p>
+              <p className="text-slate-700">Build: {CONFIG.BUILD.COMMIT_HASH} · {CONFIG.BUILD.BUILD_DATE}</p>
+            </div>
           </div>
         )}
       </main>
 
       <nav className="safe-nav fixed bottom-6 left-4 right-4 h-16 bg-[#1a1a1f]/90 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl flex items-center z-40" style={{ maxWidth: '398px', margin: '0 auto' }} role="navigation">
-        <button onClick={handleHomeClick} className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'home' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">🏠</span><span className="text-[10px]">홈</span></button>
-        <button onClick={() => { setActiveTab('benefits'); clearBenefitsFilter(); }} className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'benefits' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">✨</span><span className="text-[10px]">내 혜택</span></button>
-        <div className="relative -top-4"><button onClick={() => setShowOcrModal(true)} className="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center text-2xl shadow-lg shadow-blue-500/30 border-4 border-[#0a0a0f]">📷</button></div>
-        <button onClick={() => setActiveTab('wallet')} className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'wallet' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">💳</span><span className="text-[10px]">지갑</span></button>
-        <button onClick={() => setActiveTab('settings')} className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'settings' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">⚙️</span><span className="text-[10px]">설정</span></button>
+        <button onClick={handleHomeClick} aria-label="홈" className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'home' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">🏠</span><span className="text-[10px]">홈</span></button>
+        <button onClick={() => { setActiveTab('benefits'); clearBenefitsFilter(); }} aria-label="혜택" className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'benefits' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">✨</span><span className="text-[10px]">내 혜택</span></button>
+        <div className="relative -top-4"><button onClick={() => CONFIG.FEATURES.OCR_ENABLED ? setShowOcrModal(true) : showToast('OCR 기능이 일시적으로 비활성화되어 있습니다')} aria-label="OCR" className={`w-14 h-14 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center text-2xl shadow-lg shadow-blue-500/30 border-4 border-[#0a0a0f] ${!CONFIG.FEATURES.OCR_ENABLED ? 'opacity-50' : ''}`}>📷</button></div>
+        <button onClick={() => setActiveTab('wallet')} aria-label="지갑" className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'wallet' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">💳</span><span className="text-[10px]">지갑</span></button>
+        <button onClick={() => setActiveTab('settings')} aria-label="설정" className={`flex-1 flex flex-col items-center gap-0.5 ${activeTab === 'settings' ? 'text-white' : 'text-slate-500'}`}><span className="text-xl">⚙️</span><span className="text-[10px]">설정</span></button>
       </nav>
 
       {showPlaceSheet && (
@@ -2087,7 +2143,7 @@ export default function CardBenefitsApp() {
               <div><div className="w-10 h-1 bg-slate-600 rounded-full mx-auto mb-3" /><h2 className="text-lg font-bold">장소 선택</h2></div>
               <div className="flex gap-2" role="tablist">
                 <button onClick={() => setPlaceSheetView('list')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'list' ? 'bg-blue-600' : 'bg-slate-700'}`} role="tab">📋</button>
-                <button onClick={() => setPlaceSheetView('map')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'map' ? 'bg-blue-600' : 'bg-slate-700'}`} role="tab">🗺️</button>
+                <button onClick={() => CONFIG.FEATURES.MAP_ENABLED ? setPlaceSheetView('map') : showToast('지도 기능이 일시적으로 비활성화되어 있습니다')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'map' ? 'bg-blue-600' : 'bg-slate-700'} ${!CONFIG.FEATURES.MAP_ENABLED ? 'opacity-50' : ''}`} role="tab">🗺️</button>
               </div>
             </div>
             <div className="h-[calc(75vh-80px)] overflow-hidden">
