@@ -200,5 +200,56 @@
   "bc-baro-conv": { "cardId": "bc-baro", "category": "shopping", "title": "편의점 5%", "value": "월 3천원", "placeTags": ["convenience", "cu", "gs25", "7eleven"], "desc": "전월 실적 30만원 이상. 편의점 5% 할인." },
   "bc-baro-gas": { "cardId": "bc-baro", "category": "gas", "title": "주유 5%", "value": "월 5천원", "placeTags": ["gas", "gs-caltex", "sk-energy", "s-oil"], "desc": "전월 실적 30만원 이상. 주유소 5% 할인." },
   "bc-payback-gas": { "cardId": "bc-payback", "category": "gas", "title": "주유 3%", "value": "월 3천원", "placeTags": ["gas"], "desc": "전월 실적 30만원 이상. 주유소 3% 청구할인." },
-  "bc-top-online": { "cardId": "bc-top", "category": "shopping", "title": "온라인쇼핑 5%", "value": "월 5천원", "placeTags": ["online", "coupang", "gmarket", "auction"], "desc": "전월 실적 30만원 이상. 온라인쇼핑 5% 청구할인." }
+  "bc-top-online": { "cardId": "bc-top", "category": "shopping", "title": "온라인쇼핑 5%", "value": "월 5천원", "placeTags": ["online", "coupang", "gmarket", "auction"], "desc": "전월 실적 30만원 이상. 온라인쇼핑 5% 청구할인." },
+
+  "hyundai-amex-platinum-lounge": { "cardId": "hyundai-amex-platinum", "category": "lounge", "title": "아멕스 라운지", "value": "연 4회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 50만원 이상. 인천공항 AMEX 라운지 연 4회." },
+  "hyundai-amex-platinum-cafe": { "cardId": "hyundai-amex-platinum", "category": "cafe", "title": "스타벅스 10%", "value": "월 5천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 30만원 이상. 스타벅스 10% 청구할인." },
+  "hyundai-amex-platinum-mpoint": { "cardId": "hyundai-amex-platinum", "category": "points", "title": "M포인트 적립", "value": "0.7%", "placeTags": ["mpoint"], "desc": "일반가맹점 0.7% M포인트 적립." },
+
+  "samsung-amex-blue-points": { "cardId": "samsung-amex-blue", "category": "points", "title": "포인트 적립", "value": "0.5%", "placeTags": [], "desc": "전 가맹점 0.5% 포인트 적립." },
+  "samsung-amex-blue-cafe": { "cardId": "samsung-amex-blue", "category": "cafe", "title": "스타벅스 5%", "value": "월 3천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 30만원 이상. 스타벅스 5% 청구할인." },
+  "samsung-amex-blue-movie": { "cardId": "samsung-amex-blue", "category": "entertainment", "title": "CGV 2천원", "value": "월 2회", "placeTags": ["entertainment", "movie", "cgv"], "desc": "전월 실적 30만원 이상. CGV 2,000원 할인." },
+
+  "shinhan-the-best-f-lounge": { "cardId": "shinhan-the-best-f", "category": "lounge", "title": "전세계 라운지", "value": "연 30회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 무관. The Lounge 앱 이용 시 연 30회 무료." },
+  "shinhan-the-best-f-golf": { "cardId": "shinhan-the-best-f", "category": "golf", "title": "골프장 할인", "value": "2만원", "placeTags": ["golf"], "desc": "전월 실적 30만원 이상. 제휴 골프장 2만원 결제일 할인." },
+  "shinhan-the-best-f-valet": { "cardId": "shinhan-the-best-f", "category": "valet", "title": "호텔/공항 발렛", "value": "월 5회", "placeTags": ["hotel", "airport", "luxury"], "desc": "전월 실적 30만원 이상. 인천공항 및 주요 호텔 발렛." },
+  "shinhan-the-best-f-hotel": { "cardId": "shinhan-the-best-f", "category": "hotel", "title": "호텔 할인", "value": "10%", "placeTags": ["hotel", "luxury"], "desc": "제휴 호텔 객실 및 F&B 10% 할인." },
+
+  "kb-liiv-mate-points": { "cardId": "kb-liiv-mate", "category": "points", "title": "KB Pay 적립", "value": "0.8%", "placeTags": [], "desc": "KB Pay 결제 시 0.8% 적립." },
+  "kb-liiv-mate-cafe": { "cardId": "kb-liiv-mate", "category": "cafe", "title": "스타벅스 10%", "value": "월 3천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 30만원 이상. 스타벅스 10% 청구할인." },
+  "kb-liiv-mate-conv": { "cardId": "kb-liiv-mate", "category": "shopping", "title": "편의점 5%", "value": "월 2천원", "placeTags": ["convenience", "cu", "gs25"], "desc": "전월 실적 30만원 이상. 편의점 5% 청구할인." },
+
+  "lotte-loca-platinum-lounge": { "cardId": "lotte-loca-platinum", "category": "lounge", "title": "공항 라운지", "value": "연 4회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 50만원 이상. 국내/해외 공항 라운지 연 4회." },
+  "lotte-loca-platinum-valet": { "cardId": "lotte-loca-platinum", "category": "valet", "title": "인천공항 발렛", "value": "연 2회", "placeTags": ["airport"], "desc": "전월 실적 50만원 이상. 인천공항 발렛파킹 연 2회." },
+  "lotte-loca-platinum-cafe": { "cardId": "lotte-loca-platinum", "category": "cafe", "title": "스타벅스 10%", "value": "월 5천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 50만원 이상. 스타벅스 10% 할인." },
+
+  "woori-premium-mileage-lounge": { "cardId": "woori-premium-mileage", "category": "lounge", "title": "The Lounge", "value": "연 6회", "placeTags": ["airport", "lounge"], "desc": "The Lounge Members 국내외 공항라운지 무료 이용." },
+  "woori-premium-mileage-valet": { "cardId": "woori-premium-mileage", "category": "valet", "title": "발렛파킹", "value": "월 3회", "placeTags": ["hotel", "airport"], "desc": "프리미엄 발렛파킹 서비스." },
+  "woori-premium-mileage-points": { "cardId": "woori-premium-mileage", "category": "points", "title": "마일리지 적립", "value": "1.5마일", "placeTags": [], "desc": "1,500원당 1마일리지 적립." },
+
+  "woori-dear-shopper-shopping": { "cardId": "woori-dear-shopper", "category": "shopping", "title": "쇼핑 10%", "value": "월 1만원", "placeTags": ["shopping", "department"], "desc": "전월 실적 50만원 이상. 백화점/아울렛 10% 할인." },
+  "woori-dear-shopper-cafe": { "cardId": "woori-dear-shopper", "category": "cafe", "title": "카페 10%", "value": "월 5천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 50만원 이상. 커피전문점 10% 할인." },
+  "woori-dear-shopper-online": { "cardId": "woori-dear-shopper", "category": "shopping", "title": "온라인쇼핑 5%", "value": "월 5천원", "placeTags": ["online", "coupang", "ssg"], "desc": "전월 실적 50만원 이상. 온라인쇼핑 5% 할인." },
+
+  "woori-every-mile-points": { "cardId": "woori-every-mile", "category": "points", "title": "마일리지 적립", "value": "1마일", "placeTags": [], "desc": "2,000원당 1마일 적립, 해외 2배." },
+  "woori-every-mile-lounge": { "cardId": "woori-every-mile", "category": "lounge", "title": "공항 라운지", "value": "연 2회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 30만원 이상. 공항 라운지 연 2회." },
+
+  "hana-signature-lounge": { "cardId": "hana-signature", "category": "lounge", "title": "공항 라운지", "value": "연 4회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 50만원 이상. 국내/해외 공항 라운지 연 4회." },
+  "hana-signature-valet": { "cardId": "hana-signature", "category": "valet", "title": "호텔 발렛", "value": "월 2회", "placeTags": ["hotel", "airport"], "desc": "전월 실적 50만원 이상. 호텔/공항 발렛파킹." },
+  "hana-signature-cafe": { "cardId": "hana-signature", "category": "cafe", "title": "스타벅스 10%", "value": "월 5천원", "placeTags": ["cafe", "starbucks"], "desc": "전월 실적 50만원 이상. 스타벅스 10% 할인." },
+
+  "hana-skypass-amex-lounge": { "cardId": "hana-skypass-amex", "category": "lounge", "title": "아멕스 라운지", "value": "연 2회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 30만원 이상. 아멕스 라운지 연 2회." },
+  "hana-skypass-amex-points": { "cardId": "hana-skypass-amex", "category": "points", "title": "스카이패스", "value": "1마일", "placeTags": [], "desc": "1,500원당 1마일리지 적립." },
+
+  "nh-on-platinum-mileage-lounge": { "cardId": "nh-on-platinum-mileage", "category": "lounge", "title": "전세계 라운지", "value": "무제한", "placeTags": ["airport", "lounge"], "desc": "전 세계 공항 라운지 무료 이용 서비스." },
+  "nh-on-platinum-mileage-points": { "cardId": "nh-on-platinum-mileage", "category": "points", "title": "마일리지 적립", "value": "1.2마일", "placeTags": [], "desc": "1,000원당 1.2마일리지 적립." },
+  "nh-on-platinum-mileage-golf": { "cardId": "nh-on-platinum-mileage", "category": "golf", "title": "골프 할인", "value": "10%", "placeTags": ["golf"], "desc": "전월 실적 50만원 이상. 골프장 10% 할인." },
+
+  "nh-classy-travel-lounge": { "cardId": "nh-classy-travel", "category": "lounge", "title": "공항 라운지", "value": "연 4회", "placeTags": ["airport", "lounge"], "desc": "전월 실적 50만원 이상. 공항 라운지 연 4회." },
+  "nh-classy-travel-hotel": { "cardId": "nh-classy-travel", "category": "hotel", "title": "호텔 15%", "value": "15%", "placeTags": ["hotel"], "desc": "제휴 호텔 15% 할인." },
+  "nh-classy-travel-valet": { "cardId": "nh-classy-travel", "category": "valet", "title": "공항 발렛", "value": "연 2회", "placeTags": ["airport"], "desc": "전월 실적 50만원 이상. 인천공항 발렛 연 2회." },
+
+  "nh-chaeum-points": { "cardId": "nh-chaeum", "category": "points", "title": "포인트 적립", "value": "0.5%", "placeTags": [], "desc": "전 가맹점 0.5% 포인트 적립." },
+  "nh-chaeum-conv": { "cardId": "nh-chaeum", "category": "shopping", "title": "편의점 3%", "value": "월 2천원", "placeTags": ["convenience", "cu", "gs25"], "desc": "전월 실적 20만원 이상. 편의점 3% 할인." },
+  "nh-chaeum-gas": { "cardId": "nh-chaeum", "category": "gas", "title": "주유 3%", "value": "월 2천원", "placeTags": ["gas"], "desc": "전월 실적 20만원 이상. 주유소 3% 할인." }
 }
