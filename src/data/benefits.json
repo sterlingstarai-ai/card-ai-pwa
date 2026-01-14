@@ -251,23 +251,5 @@
 
   "nh-chaeum-points": { "cardId": "nh-chaeum", "category": "points", "title": "포인트 적립", "value": "0.5%", "placeTags": [], "desc": "전 가맹점 0.5% 포인트 적립." },
   "nh-chaeum-conv": { "cardId": "nh-chaeum", "category": "shopping", "title": "편의점 3%", "value": "월 2천원", "placeTags": ["convenience", "cu", "gs25"], "desc": "전월 실적 20만원 이상. 편의점 3% 할인." },
-  "nh-chaeum-gas": { "cardId": "nh-chaeum", "category": "gas", "title": "주유 3%", "value": "월 2천원", "placeTags": ["gas"], "desc": "전월 실적 20만원 이상. 주유소 3% 할인." },
-
-  "network-visa-infinite-lounge": { "cardId": "_network_visa_infinite", "category": "lounge", "title": "VISA 인피니트 라운지", "value": "무료이용", "placeTags": ["airport", "lounge"], "networkGrade": "Infinite", "network": "VISA", "desc": "전 세계 공항 VISA 제휴 라운지 무료 이용. 카드사별 횟수 제한 상이." },
-  "network-visa-infinite-concierge": { "cardId": "_network_visa_infinite", "category": "service", "title": "VISA 컨시어지", "value": "24시간", "placeTags": [], "networkGrade": "Infinite", "network": "VISA", "desc": "24시간 프리미엄 컨시어지 서비스, 여행/호텔/레스토랑 예약 지원." },
-  "network-visa-signature-lounge": { "cardId": "_network_visa_signature", "category": "lounge", "title": "VISA 시그니처 라운지", "value": "할인이용", "placeTags": ["airport", "lounge"], "networkGrade": "Signature", "network": "VISA", "desc": "VISA 제휴 공항 라운지 할인 이용." },
-  "network-visa-platinum-insurance": { "cardId": "_network_visa_platinum", "category": "insurance", "title": "VISA 해외여행보험", "value": "자동가입", "placeTags": [], "networkGrade": "Platinum", "network": "VISA", "desc": "해외 결제 시 여행자보험 자동 가입." },
-
-  "network-mc-world-elite-lounge": { "cardId": "_network_mc_world_elite", "category": "lounge", "title": "MC 월드엘리트 라운지", "value": "무료이용", "placeTags": ["airport", "lounge"], "networkGrade": "World Elite", "network": "Mastercard", "desc": "LoungeKey 전 세계 1,000개+ 공항 라운지 무료 이용." },
-  "network-mc-world-elite-concierge": { "cardId": "_network_mc_world_elite", "category": "service", "title": "MC 컨시어지", "value": "24시간", "placeTags": [], "networkGrade": "World Elite", "network": "Mastercard", "desc": "24시간 프리미엄 컨시어지 서비스." },
-  "network-mc-world-lounge": { "cardId": "_network_mc_world", "category": "lounge", "title": "MC 월드 라운지", "value": "할인이용", "placeTags": ["airport", "lounge"], "networkGrade": "World", "network": "Mastercard", "desc": "LoungeKey 공항 라운지 할인 이용 가능." },
-  "network-mc-platinum-insurance": { "cardId": "_network_mc_platinum", "category": "insurance", "title": "MC 해외여행보험", "value": "자동가입", "placeTags": [], "networkGrade": "Platinum", "network": "Mastercard", "desc": "해외 결제 시 여행자보험 자동 가입." },
-
-  "network-amex-centurion-lounge": { "cardId": "_network_amex_centurion", "category": "lounge", "title": "AMEX 센추리온 라운지", "value": "무료이용", "placeTags": ["airport", "lounge"], "networkGrade": "Centurion", "network": "AMEX", "desc": "전 세계 AMEX 센추리온 라운지 무료 이용 (프리미엄 카드)." },
-  "network-amex-platinum-lounge": { "cardId": "_network_amex_platinum", "category": "lounge", "title": "AMEX 라운지", "value": "무료이용", "placeTags": ["airport", "lounge"], "networkGrade": "Platinum", "network": "AMEX", "desc": "인천공항 AMEX 라운지 및 PP 라운지 이용 가능." },
-  "network-amex-shopping": { "cardId": "_network_amex", "category": "shopping", "title": "AMEX 오퍼", "value": "할인혜택", "placeTags": ["shopping", "online"], "network": "AMEX", "desc": "AMEX 제휴 가맹점 및 온라인몰 할인 혜택." },
-  "network-amex-travel": { "cardId": "_network_amex", "category": "travel", "title": "AMEX 트래블", "value": "특별혜택", "placeTags": ["hotel", "travel"], "network": "AMEX", "desc": "AMEX 트래블 파인 호텔 & 리조트 특별 혜택." },
-
-  "network-unionpay-lounge": { "cardId": "_network_unionpay", "category": "lounge", "title": "유니온페이 라운지", "value": "할인이용", "placeTags": ["airport", "lounge"], "network": "UnionPay", "desc": "중국 주요 공항 라운지 이용 가능." },
-  "network-unionpay-china": { "cardId": "_network_unionpay", "category": "shopping", "title": "중국 결제 할인", "value": "5~10%", "placeTags": ["shopping"], "network": "UnionPay", "desc": "중국 현지 가맹점 결제 시 추가 할인 혜택." }
+  "nh-chaeum-gas": { "cardId": "nh-chaeum", "category": "gas", "title": "주유 3%", "value": "월 2천원", "placeTags": ["gas"], "desc": "전월 실적 20만원 이상. 주유소 3% 할인." }
 }

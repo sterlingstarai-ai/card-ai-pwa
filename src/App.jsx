@@ -1,5 +1,11 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 
+// 📊 Analytics & Observability
+import { initSentry, trackEvent, trackError, EventType } from './lib/analytics';
+
+// Initialize Sentry on module load
+initSentry();
+
 // 📦 Data imports from JSON files
 import CARDS_DATA from './data/cards.json';
 import PLACES_DATA from './data/places.json';
@@ -53,9 +59,15 @@ const CONFIG = {
 
   // 기본값
   DEFAULTS: {
-    CARDS: ['hyundai-purple', 'samsung-taptap-o', 'shinhan-the-best'],
+    CARDS: [], // Empty by default for onboarding demo
     LOCATION: { lat: 37.5665, lng: 126.9780 }, // 서울시청
     RECENT_PLACES: [],
+  },
+
+  // 데모 모드 카드 (온보딩용)
+  DEMO: {
+    CARDS: ['hyundai-purple', 'samsung-taptap-o', 'shinhan-the-best'],
+    PLACE: 'incheon-t2', // 인천공항 T2
   },
 
   // 타임아웃 (ms)
@@ -86,6 +98,38 @@ const CONFIG = {
     MAX_CARD_RANKING: 4,
     MAX_BENEFITS_PER_CATEGORY: 5,
     MAX_OCR_CANDIDATES: 3,
+  },
+
+  // 검색 동의어/별칭 (검색 품질 향상)
+  SEARCH_SYNONYMS: {
+    // 편의점
+    '세븐': ['세븐일레븐', '7eleven', 'seven'],
+    '씨유': ['cu', 'CU'],
+    'gs': ['gs25', 'GS25', 'gs편의점'],
+    '이마트': ['emart', 'e마트', '이마트24'],
+    // 주유소
+    'gs칼텍스': ['gscaltex', '칼텍스', 'caltex'],
+    'sk': ['sk에너지', 'sk주유소', 'sk오일'],
+    '에쓰오일': ['s-oil', 'soil', 'S-OIL'],
+    '현대오일뱅크': ['현대오일', 'oilbank'],
+    // 카페
+    '스벅': ['스타벅스', 'starbucks'],
+    '투썸': ['투썸플레이스', 'twosome'],
+    '이디야': ['ediya'],
+    '메가커피': ['메가', 'mega'],
+    // 공항
+    '인천공항': ['icn', 'incheon', '인천', 't1', 't2'],
+    '김포공항': ['gimpo', '김포'],
+    // 백화점
+    '신세계': ['shinsegae', '센텀', '신세계백화점'],
+    '현백': ['현대백화점', '현대'],
+    '롯백': ['롯데백화점', '롯데'],
+    // 호텔
+    '메리어트': ['marriott', 'jw', 'jw메리어트'],
+    '힐튼': ['hilton', '콘래드', 'conrad'],
+    // 기타
+    '발렛': ['valet', '발렛파킹'],
+    '라운지': ['lounge', '공항라운지'],
   },
 
   // 지도 설정
@@ -370,8 +414,12 @@ class StorageService {
     await this.ready;
 
     if (this.useLocalStorage) {
-      localStorage.removeItem(key);
-      return true;
+      try {
+        localStorage.removeItem(key);
+        return true;
+      } catch {
+        return false;
+      }
     }
 
     return new Promise((resolve) => {
@@ -384,8 +432,12 @@ class StorageService {
       } catch {
         // transaction 생성 실패 시 localStorage 폴백
         this.useLocalStorage = true;
-        localStorage.removeItem(key);
-        resolve(true);
+        try {
+          localStorage.removeItem(key);
+          resolve(true);
+        } catch {
+          resolve(false);
+        }
       }
     });
   }
@@ -412,7 +464,16 @@ class DataService {
   async fetchPlaces() {
     if (this.cache.places) return this.cache.places;
     await new Promise(r => setTimeout(r, CONFIG.TIMEOUTS.API_SIMULATE));
-    this.cache.places = PLACES_DATA;
+    // Normalize places: ensure id, type, and common aliases are in tags
+    const normalized = {};
+    Object.entries(PLACES_DATA).forEach(([id, place]) => {
+      const baseTags = place.tags || [];
+      const autoTags = [id, place.type].filter(Boolean);
+      // Merge without duplicates
+      const mergedTags = [...new Set([...baseTags, ...autoTags])];
+      normalized[id] = { ...place, tags: mergedTags };
+    });
+    this.cache.places = normalized;
     return this.cache.places;
   }
 
@@ -490,22 +551,43 @@ const keywordToTag = {
   '영화': 'entertainment', '공항': 'airport', '포인트': 'points' 
 };
 
-const findTag = (q) => { 
-  const t = q.toLowerCase().trim(); 
-  return keywordToTag[t] || Object.entries(keywordToTag).find(([k]) => t.includes(k) || k.includes(t))?.[1] || t; 
+const findTag = (q) => {
+  const t = q.toLowerCase().trim();
+  return keywordToTag[t] || Object.entries(keywordToTag).find(([k]) => t.includes(k) || k.includes(t))?.[1] || t;
+};
+
+// Expand search query using synonyms (returns array of search terms)
+const expandSearchQuery = (query) => {
+  const q = query.toLowerCase().trim();
+  const terms = [q];
+
+  // Check synonyms
+  Object.entries(CONFIG.SEARCH_SYNONYMS).forEach(([canonical, aliases]) => {
+    const allTerms = [canonical.toLowerCase(), ...aliases.map(a => a.toLowerCase())];
+    if (allTerms.some(term => q.includes(term) || term.includes(q))) {
+      terms.push(canonical.toLowerCase());
+      aliases.forEach(a => terms.push(a.toLowerCase()));
+    }
+  });
+
+  return [...new Set(terms)];
 };
 
 const categoryConfig = {
-  airport: { emoji: "✈️", label: "공항" }, 
-  valet: { emoji: "🚗", label: "발렛" }, 
+  airport: { emoji: "✈️", label: "공항" },
+  valet: { emoji: "🚗", label: "발렛" },
   lounge: { emoji: "🛋️", label: "라운지" },
-  fnb: { emoji: "🍽️", label: "다이닝" }, 
-  hotel: { emoji: "🏨", label: "호텔" }, 
+  fnb: { emoji: "🍽️", label: "다이닝" },
+  hotel: { emoji: "🏨", label: "호텔" },
   golf: { emoji: "⛳", label: "골프" },
-  cafe: { emoji: "☕", label: "카페" }, 
-  shopping: { emoji: "🛍️", label: "쇼핑" }, 
+  cafe: { emoji: "☕", label: "카페" },
+  shopping: { emoji: "🛍️", label: "쇼핑" },
   points: { emoji: "💰", label: "포인트" },
-  entertainment: { emoji: "🎬", label: "문화" }
+  entertainment: { emoji: "🎬", label: "문화" },
+  gas: { emoji: "⛽", label: "주유" },
+  insurance: { emoji: "🛡️", label: "보험" },
+  service: { emoji: "📞", label: "서비스" },
+  travel: { emoji: "🧳", label: "여행" }
 };
 
 const placeTypeConfig = {
@@ -576,21 +658,31 @@ const ErrorScreen = ({ onRetry }) => (
   </div>
 );
 
-// 혜택 상세 모달 (Gemini 제안)
+// 혜택 상세 모달 (Gemini 제안 + 출처/검증일 추가)
 const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
   if (!benefit) return null;
   const card = cardsData?.[benefit.cardId];
-  
+
+  // Calculate verification status
+  const getVerificationStatus = () => {
+    if (!benefit.lastVerifiedAt) return { status: 'unknown', text: '출처 미기재 (검증 필요)', color: 'text-amber-400' };
+    const verifiedDate = new Date(benefit.lastVerifiedAt);
+    const daysSince = Math.floor((Date.now() - verifiedDate.getTime()) / (1000 * 60 * 60 * 24));
+    if (daysSince > 90) return { status: 'stale', text: `${daysSince}일 전 검증 (업데이트 필요)`, color: 'text-amber-400' };
+    return { status: 'fresh', text: `${daysSince}일 전 검증됨`, color: 'text-green-400' };
+  };
+  const verification = getVerificationStatus();
+
   return (
-    <div 
-      className="fixed inset-0 bg-black/80 z-[100] flex items-end sm:items-center justify-center animate-fadeIn" 
+    <div
+      className="fixed inset-0 bg-black/80 z-[100] flex items-end sm:items-center justify-center animate-fadeIn"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="benefit-modal-title"
     >
-      <div 
-        className="bg-[#1a1a1f] w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 space-y-4 border-t border-white/10" 
+      <div
+        className="bg-[#1a1a1f] w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 space-y-4 border-t border-white/10"
         onClick={e => e.stopPropagation()}
         style={{ paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}
       >
@@ -611,8 +703,25 @@ const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
         <div className="bg-slate-800/50 rounded-2xl p-4 text-sm text-slate-300 leading-relaxed border border-white/5">
           {benefit.desc || "이 혜택은 선택하신 장소에서 바로 사용 가능합니다. 자세한 사용 조건은 카드사 앱을 확인해 주세요."}
         </div>
-        <button 
-          onClick={onClose} 
+        {/* Source & Verification Section */}
+        <div className="bg-slate-900/50 rounded-xl p-3 text-[11px] space-y-1.5 border border-white/5">
+          <div className="flex items-center justify-between">
+            <span className="text-slate-500">출처</span>
+            {benefit.sourceUrl ? (
+              <a href={benefit.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline truncate max-w-[200px]">
+                {benefit.sourceUrl.replace(/^https?:\/\//, '').split('/')[0]}
+              </a>
+            ) : (
+              <span className="text-slate-500">미기재</span>
+            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-slate-500">검증일</span>
+            <span className={verification.color}>{verification.text}</span>
+          </div>
+        </div>
+        <button
+          onClick={onClose}
           className="w-full py-4 bg-blue-600 rounded-2xl font-bold active:scale-[0.98] transition-transform"
         >
           확인
@@ -622,9 +731,9 @@ const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
   );
 };
 
-const KAKAO_APP_KEY = 'b6d42c58bb45a8e461cee9040d2677a4';
+const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_APP_KEY || '';
 
-const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose, benefitsData, cardsData, myCards }) => {
+const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose, onError, benefitsData, cardsData, myCards }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef([]);
@@ -645,6 +754,13 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
 
   // 카카오맵 SDK 동적 로드
   useEffect(() => {
+    // Check if API key is configured
+    if (!KAKAO_APP_KEY) {
+      setMapError('지도 API 키가 설정되지 않았습니다');
+      onError?.('no_api_key');
+      return;
+    }
+
     if (window.kakao && window.kakao.maps) {
       setSdkLoaded(true);
       return;
@@ -662,6 +778,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
     script.onerror = (e) => {
       console.error('Kakao SDK load error:', e);
       setMapError('카카오맵 SDK 로드 실패');
+      onError?.('sdk_load_failed');
     };
 
     document.head.appendChild(script);
@@ -961,10 +1078,12 @@ export default function CardBenefitsApp() {
   const [toastMessage, setToastMessage] = useState(null);
   const [walletSearch, setWalletSearch] = useState(''); // 지갑 검색용
   const [recentPlaceIds, setRecentPlaceIds] = useState(CONFIG.DEFAULTS.RECENT_PLACES);
+  const [favoritePlaceIds, setFavoritePlaceIds] = useState([]); // 즐겨찾기 장소
   const [benefitsFilterTag, setBenefitsFilterTag] = useState(null);
   const [pendingScrollCat, setPendingScrollCat] = useState(null);
   const [isOffline, setIsOffline] = useState(false); // 오프라인 감지
   const [selectedBenefit, setSelectedBenefit] = useState(null); // 혜택 상세 모달
+  const [showDemoMode, setShowDemoMode] = useState(false); // 온보딩 데모 모드
 
   const categorySectionRefs = useRef({});
   const saveTimerRef = useRef(null);
@@ -994,7 +1113,26 @@ export default function CardBenefitsApp() {
     if (toast) showToast(MESSAGES.PLACE.SELECTED(placesData[placeId]?.name || '선택됨'));
     vibrate([8]);
     if (focusHome) setActiveTab('home');
+
+    // Track place selection
+    const place = placesData[placeId];
+    trackEvent(EventType.PLACE_SELECTED, { placeId, placeType: place?.type, placeName: place?.name });
   }, [placesData, showToast, vibrate]);
+
+  // Toggle favorite place
+  const toggleFavorite = useCallback((placeId) => {
+    setFavoritePlaceIds(prev => {
+      const isFav = prev.includes(placeId);
+      if (isFav) {
+        showToast('즐겨찾기에서 제거됨');
+        return prev.filter(id => id !== placeId);
+      } else {
+        showToast('⭐ 즐겨찾기에 추가됨');
+        return [...prev, placeId];
+      }
+    });
+    vibrate([5]);
+  }, [showToast, vibrate]);
 
 
   // Data loading
@@ -1013,6 +1151,9 @@ export default function CardBenefitsApp() {
 
       if (Array.isArray(savedUserData?.recentPlaceIds)) setRecentPlaceIds(savedUserData.recentPlaceIds.slice(0, CONFIG.UI.MAX_RECENT_PLACES));
       else setRecentPlaceIds(CONFIG.DEFAULTS.RECENT_PLACES);
+
+      if (Array.isArray(savedUserData?.favoritePlaceIds)) setFavoritePlaceIds(savedUserData.favoritePlaceIds);
+      else setFavoritePlaceIds([]);
 
       const { cards, places, benefits, networks } = await dataService.fetchAll();
       setCardsData(cards);
@@ -1074,12 +1215,12 @@ export default function CardBenefitsApp() {
     if (!dataLoaded) return;
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(() => {
-      void storage.set(CONFIG.DB.KEY, { myCards, selectedPlaceId, recentPlaceIds });
+      void storage.set(CONFIG.DB.KEY, { myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds });
     }, 400);
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
-  }, [myCards, selectedPlaceId, recentPlaceIds, dataLoaded]);
+  }, [myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds, dataLoaded]);
 
   // Debounce search
   useEffect(() => {
@@ -1144,11 +1285,25 @@ export default function CardBenefitsApp() {
 
   const searchResults = useMemo(() => {
     if (!debouncedQuery.trim()) return { places: [], benefits: [] };
-    const q = debouncedQuery.toLowerCase().trim(), tag = findTag(q);
-    const places = Object.values(placesData).filter(p => p.name.toLowerCase().includes(q) || p.tags.includes(tag)).slice(0, CONFIG.UI.MAX_SEARCH_RESULTS.PLACES);
+    const q = debouncedQuery.toLowerCase().trim();
+    const expandedTerms = expandSearchQuery(q);
+    const tag = findTag(q);
+
+    // Match places using expanded terms
+    const places = Object.values(placesData).filter(p => {
+      const nameLower = p.name.toLowerCase();
+      return expandedTerms.some(term => nameLower.includes(term)) || p.tags.includes(tag);
+    }).slice(0, CONFIG.UI.MAX_SEARCH_RESULTS.PLACES);
+
     const mySet = new Set(myCards);
     const benefits = Object.entries(benefitsData)
-      .filter(([_, b]) => mySet.has(b.cardId) && (b.category === tag || b.title.toLowerCase().includes(q) || b.placeTags?.includes(tag)))
+      .filter(([_, b]) => {
+        if (!mySet.has(b.cardId)) return false;
+        const titleLower = b.title.toLowerCase();
+        return b.category === tag ||
+          expandedTerms.some(term => titleLower.includes(term)) ||
+          b.placeTags?.includes(tag);
+      })
       .map(([id, b]) => ({ id, ...b, card: cardsData[b.cardId], estimatedValue: estimateValue(b) }))
       .sort((a, b) => b.estimatedValue - a.estimatedValue)
       .slice(0, CONFIG.UI.MAX_SEARCH_RESULTS.BENEFITS);
@@ -1172,6 +1327,23 @@ export default function CardBenefitsApp() {
     Object.keys(g).forEach(c => g[c].sort((a, b) => b.estimatedValue - a.estimatedValue));
     return g;
   }, [myCards, benefitsData, cardsData]);
+
+  // Demo mode calculations for onboarding
+  const demoData = useMemo(() => {
+    if (myCards.length > 0 || !dataLoaded) return null;
+    const demoPlace = placesData[CONFIG.DEMO.PLACE];
+    if (!demoPlace) return null;
+    const tags = demoPlace.tags || [];
+    const demoCardSet = new Set(CONFIG.DEMO.CARDS);
+    const demoBenefits = Object.entries(benefitsData)
+      .filter(([_, b]) => demoCardSet.has(b.cardId) && b.placeTags?.some(t => tags.includes(t)))
+      .map(([id, b]) => ({ id, ...b, card: cardsData[b.cardId], estimatedValue: estimateValue(b) }))
+      .sort((a, b) => b.estimatedValue - a.estimatedValue)
+      .slice(0, 5);
+    const demoCards = CONFIG.DEMO.CARDS.map(id => cardsData[id]).filter(Boolean);
+    const totalValue = demoBenefits.reduce((sum, b) => sum + b.estimatedValue, 0);
+    return { place: demoPlace, benefits: demoBenefits, cards: demoCards, totalValue };
+  }, [myCards.length, dataLoaded, placesData, benefitsData, cardsData]);
 
   const availableBenefits = useMemo(() => {
     if (!selectedPlace || myCards.length === 0) return { cardBenefits: [], networkBenefits: [] };
@@ -1199,26 +1371,58 @@ export default function CardBenefitsApp() {
     if (cardBenefits.length === 0 && netBen.length === 0) return [];
     const v = {};
     cardBenefits.forEach(b => {
-      if (!v[b.cardId]) v[b.cardId] = { card: b.card, totalValue: 0, reasons: [], count: 0 };
+      if (!v[b.cardId]) v[b.cardId] = { card: b.card, totalValue: 0, reasons: [], benefitIds: [], benefitSummary: [], caveats: new Set(), count: 0 };
       v[b.cardId].totalValue += b.estimatedValue;
       v[b.cardId].count++;
+      v[b.cardId].benefitIds.push(b.id);
+      v[b.cardId].benefitSummary.push({ emoji: categoryConfig[b.category]?.emoji, title: b.title, value: b.value });
       v[b.cardId].reasons.push(`${categoryConfig[b.category]?.emoji} ${b.title}`);
+      // Extract caveats from benefit conditions
+      if (b.conditions) v[b.cardId].caveats.add(b.conditions);
+      if (b.limit) v[b.cardId].caveats.add(`한도: ${b.limit}`);
     });
     netBen.forEach(b => {
       const id = b.card.id;
-      if (!v[id]) v[id] = { card: b.card, totalValue: 0, reasons: [], count: 0 };
+      if (!v[id]) v[id] = { card: b.card, totalValue: 0, reasons: [], benefitIds: [], benefitSummary: [], caveats: new Set(), count: 0 };
       v[id].totalValue += b.estimatedValue;
       v[id].count++;
+      v[id].benefitSummary.push({ emoji: '🌐', title: b.title, value: `${b.estimatedValue?.toLocaleString()}원` });
       v[id].reasons.push(`🌐 ${b.title}`);
     });
+    // Convert caveats Set to Array
+    Object.values(v).forEach(item => { item.caveats = Array.from(item.caveats); });
     return Object.values(v).sort((a, b) => b.totalValue - a.totalValue);
   }, [availableBenefits]);
 
   const smartBest = useMemo(() => {
     if (cardRanking.length === 0) return null;
     const best = cardRanking[0], second = cardRanking[1];
-    return { ...best, diff: second ? best.totalValue - second.totalValue : 0 };
+    // Build explanation 3 lines
+    const summaryText = best.benefitSummary.slice(0, 3).map(s => s.title).join(' + ');
+    const caveatText = best.caveats.length > 0 ? best.caveats.slice(0, 2).join(' / ') : '전월실적 미반영';
+    return {
+      ...best,
+      diff: second ? best.totalValue - second.totalValue : 0,
+      explanation: {
+        summary: summaryText || '매칭된 혜택 없음',
+        estimatedValue: best.totalValue,
+        caveats: caveatText
+      }
+    };
   }, [cardRanking]);
+
+  // Track benefit count when place changes
+  useEffect(() => {
+    if (selectedPlace && availableBenefits) {
+      const totalBenefits = availableBenefits.cardBenefits.length + availableBenefits.networkBenefits.length;
+      trackEvent(EventType.PLACE_BENEFIT_COUNT, {
+        placeId: selectedPlace.id,
+        benefitCount: totalBenefits,
+        cardBenefitCount: availableBenefits.cardBenefits.length,
+        networkBenefitCount: availableBenefits.networkBenefits.length
+      });
+    }
+  }, [selectedPlace?.id, availableBenefits]);
 
   // Handlers
   const resetHomeContext = () => {
@@ -1248,10 +1452,12 @@ export default function CardBenefitsApp() {
   const requestLocation = () => {
     if (locationStatus === 'loading') return;
     setLocationStatus('loading');
+    trackEvent(EventType.LOCATION_PROMPT);
     if (!navigator.geolocation) {
       setUserLocation(null);
       setLocationStatus('denied');
       showToast(MESSAGES.LOCATION.NOT_SUPPORTED);
+      trackEvent(EventType.LOCATION_DENIED, { reason: 'not_supported' });
       return;
     }
     navigator.geolocation.getCurrentPosition(
@@ -1259,16 +1465,19 @@ export default function CardBenefitsApp() {
         setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
         setLocationStatus('success');
         showToast(MESSAGES.LOCATION.SUCCESS);
+        trackEvent(EventType.LOCATION_GRANTED);
       },
       err => {
         if (err.code === 1) {
           setUserLocation(null);
           setLocationStatus('denied');
           showToast(MESSAGES.LOCATION.DENIED);
+          trackEvent(EventType.LOCATION_DENIED, { reason: 'user_denied' });
         } else {
           setUserLocation(CONFIG.DEFAULTS.LOCATION);
           setLocationStatus('fallback');
           showToast(MESSAGES.LOCATION.FALLBACK);
+          trackEvent(EventType.LOCATION_DENIED, { reason: 'error', code: err.code });
         }
       },
       { timeout: CONFIG.TIMEOUTS.LOCATION, enableHighAccuracy: true, maximumAge: 60000 }
@@ -1301,11 +1510,13 @@ export default function CardBenefitsApp() {
     const safeSet = (fn) => { if (ocrRunIdRef.current === runId) fn(); };
 
     safeSet(() => setOcrStatus('loading'));
+    trackEvent(EventType.OCR_START);
 
     // 오프라인 체크
     if (!navigator.onLine) {
       showToast('📵 오프라인 상태입니다');
       safeSet(() => setOcrStatus('network_error'));
+      trackEvent(EventType.OCR_FAIL, { reason: 'offline' });
       return;
     }
 
@@ -1324,83 +1535,98 @@ export default function CardBenefitsApp() {
       // 취소 확인
       if (ocrRunIdRef.current !== runId) return;
 
-      safeSet(() => setOcrStatus('Google Vision 분석중...'));
+      safeSet(() => setOcrStatus('카드 분석중...'));
 
-      // Google Cloud Vision API 호출
-      const VISION_API_KEY = 'AIzaSyCd7z1S04BxKDiOajQws8WbmgqxBond7vQ';
-      const response = await fetch(
-        `https://vision.googleapis.com/v1/images:annotate?key=${VISION_API_KEY}`,
-        {
+      // AbortController for timeout/cancellation
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUTS.OCR);
+
+      try {
+        // Call serverless OCR proxy (keeps API key secure)
+        const response = await fetch('/api/ocr', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            requests: [{
-              image: { content: base64Image },
-              features: [{ type: 'TEXT_DETECTION', maxResults: 10 }]
-            }]
-          })
-        }
-      );
+          body: JSON.stringify({ image: base64Image }),
+          signal: controller.signal
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error?.message || `API 오류: ${response.status}`);
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || `OCR 서비스 오류: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // 취소 확인
+        if (ocrRunIdRef.current !== runId) return;
+
+        // 텍스트 추출
+        const recognizedText = data.text || '';
+
+        Logger.log('OCR recognized:', recognizedText.substring(0, 300));
+
+        // 공백 제거 + 소문자 변환
+        const normalizedText = recognizedText.toLowerCase().replace(/\s/g, '');
+        Logger.log('Normalized:', normalizedText.substring(0, 200));
+
+        // 카드 매칭
+        const candidates = Object.values(cardsData)
+          .map(c => ({
+            card: c,
+            match: [
+              ...(c.ocrKeywords || []),
+              c.issuer,
+              c.name,
+              c.issuer + c.name
+            ].filter(k => normalizedText.includes(k.toLowerCase().replace(/\s/g, ''))).length
+          }))
+          .filter(c => c.match > 0)
+          .sort((a, b) => b.match - a.match)
+          .slice(0, CONFIG.UI.MAX_OCR_CANDIDATES)
+          .map(c => ({ ...c.card, matchScore: c.match }));
+
+        safeSet(() => {
+          if (candidates.length > 0) {
+            setOcrCandidates(candidates);
+            setOcrStatus('confirm');
+            showToast(`✨ ${candidates.length}개 카드 인식됨`);
+            trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidates.length });
+          } else {
+            setOcrStatus('notfound');
+            showToast(`인식된 텍스트: ${recognizedText.substring(0, 30)}...`);
+            trackEvent(EventType.OCR_FAIL, { reason: 'no_match', textLength: recognizedText.length });
+          }
+        });
+      } catch (fetchErr) {
+        clearTimeout(timeoutId);
+        if (ocrRunIdRef.current !== runId) return;
+
+        // AbortController timeout
+        if (fetchErr.name === 'AbortError') {
+          showToast('⏱️ OCR 시간 초과 (30초)');
+          safeSet(() => setOcrStatus('timeout'));
+          trackEvent(EventType.OCR_FAIL, { reason: 'timeout' });
+          return;
+        }
+        throw fetchErr; // Re-throw for outer catch
       }
-
-      const data = await response.json();
-
-      // 취소 확인
-      if (ocrRunIdRef.current !== runId) return;
-
-      // 텍스트 추출
-      const recognizedText = data.responses?.[0]?.fullTextAnnotation?.text ||
-                             data.responses?.[0]?.textAnnotations?.[0]?.description || '';
-
-      Logger.log('Vision API recognized:', recognizedText.substring(0, 300));
-
-      // 공백 제거 + 소문자 변환
-      const normalizedText = recognizedText.toLowerCase().replace(/\s/g, '');
-      Logger.log('Normalized:', normalizedText.substring(0, 200));
-
-      // 카드 매칭
-      const candidates = Object.values(cardsData)
-        .map(c => ({
-          card: c,
-          match: [
-            ...(c.ocrKeywords || []),
-            c.issuer,
-            c.name,
-            c.issuer + c.name
-          ].filter(k => normalizedText.includes(k.toLowerCase().replace(/\s/g, ''))).length
-        }))
-        .filter(c => c.match > 0)
-        .sort((a, b) => b.match - a.match)
-        .slice(0, CONFIG.UI.MAX_OCR_CANDIDATES)
-        .map(c => ({ ...c.card, matchScore: c.match }));
-
-      safeSet(() => {
-        if (candidates.length > 0) {
-          setOcrCandidates(candidates);
-          setOcrStatus('confirm');
-          showToast(`✨ ${candidates.length}개 카드 인식됨`);
-        } else {
-          setOcrStatus('notfound');
-          // 디버그: 인식된 텍스트 일부 표시
-          showToast(`인식된 텍스트: ${recognizedText.substring(0, 30)}...`);
-        }
-      });
     } catch (err) {
       if (ocrRunIdRef.current !== runId) return;
 
-      Logger.error('Vision API Error:', err);
+      Logger.error('OCR Error:', err);
       const errMsg = err?.message || String(err);
 
       if (!navigator.onLine) {
         showToast('📵 오프라인 상태입니다');
         safeSet(() => setOcrStatus('network_error'));
+        trackEvent(EventType.OCR_FAIL, { reason: 'network_error' });
       } else {
         showToast(`⚠️ 오류: ${errMsg.substring(0, 50)}`);
-        safeSet(() => setOcrStatus('notfound'));
+        safeSet(() => setOcrStatus('error'));
+        trackEvent(EventType.OCR_FAIL, { reason: 'error', message: errMsg.substring(0, 100) });
+        trackError(err, { context: 'OCR' });
       }
     }
   };
@@ -1409,12 +1635,20 @@ export default function CardBenefitsApp() {
     if (!myCards.includes(card.id)) {
       setMyCards(prev => (prev.includes(card.id) ? prev : [...prev, card.id]));
       showToast(MESSAGES.CARD.ADDED(card.name));
+      trackEvent(EventType.WALLET_ADD, { cardId: card.id, cardName: card.name, source: 'ocr' });
     } else {
       showToast(MESSAGES.CARD.ALREADY_EXISTS);
     }
     setShowOcrModal(false);
     setOcrStatus('idle');
     setOcrCandidates([]);
+  };
+
+  // Track benefit open
+  const openBenefitDetail = (benefit) => {
+    vibrate();
+    setSelectedBenefit(benefit);
+    trackEvent(EventType.BENEFIT_OPEN, { benefitId: benefit.id, category: benefit.category, cardId: benefit.cardId });
   };
 
   const handleReset = async () => {
@@ -1438,7 +1672,7 @@ export default function CardBenefitsApp() {
     setActiveTab('home');
 
     try {
-      await storage.set(CONFIG.DB.KEY, { myCards: CONFIG.DEFAULTS.CARDS, selectedPlaceId: null, recentPlaceIds: CONFIG.DEFAULTS.RECENT_PLACES });
+      await storage.set(CONFIG.DB.KEY, { myCards: CONFIG.DEFAULTS.CARDS, selectedPlaceId: null, recentPlaceIds: CONFIG.DEFAULTS.RECENT_PLACES, favoritePlaceIds: [] });
     } catch {}
 
     showToast(MESSAGES.SYSTEM.RESET);
@@ -1562,19 +1796,42 @@ export default function CardBenefitsApp() {
             </div>
 
             {selectedPlace && smartBest && (
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600/30 via-purple-600/20 to-transparent border border-blue-500/30 p-5">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/20 blur-3xl rounded-full" />
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] px-2.5 py-1 rounded-full font-bold">🏆 BEST</span>
-                    {smartBest.diff > 0 && <span className="text-[10px] text-green-400">2위보다 +{smartBest.diff.toLocaleString()}원</span>}
+              <div className="sticky top-0 z-10 -mx-5 px-5 pt-2 pb-3 bg-[#0a0a0f]/95 backdrop-blur-xl">
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600/30 via-purple-600/20 to-transparent border border-blue-500/30 p-4">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full" />
+                  <div className="relative z-10">
+                    {/* Card Header */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-8 rounded-lg shadow-lg border border-white/20" style={{ background: `linear-gradient(135deg, ${smartBest.card.color}, #1a1a1a)` }} />
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[9px] px-2 py-0.5 rounded-full font-bold">🏆 BEST</span>
+                            <span className="text-sm font-bold">{smartBest.card.name}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">{smartBest.totalValue.toLocaleString()}원</p>
+                        {smartBest.diff > 0 && <p className="text-[10px] text-green-400">2위보다 +{smartBest.diff.toLocaleString()}원</p>}
+                      </div>
+                    </div>
+                    {/* Explanation 3 Lines */}
+                    <div className="bg-slate-900/50 rounded-xl p-3 space-y-1.5">
+                      <p className="text-xs text-slate-300 flex items-start gap-2">
+                        <span className="text-blue-400 shrink-0">1.</span>
+                        <span className="truncate">{smartBest.explanation.summary}</span>
+                      </p>
+                      <p className="text-xs text-slate-300 flex items-start gap-2">
+                        <span className="text-green-400 shrink-0">2.</span>
+                        <span>예상 가치: <span className="text-green-400 font-medium">{smartBest.explanation.estimatedValue.toLocaleString()}원</span> (추정)</span>
+                      </p>
+                      <p className="text-xs text-slate-400 flex items-start gap-2">
+                        <span className="text-amber-400 shrink-0">3.</span>
+                        <span className="truncate">조건: {smartBest.explanation.caveats}</span>
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-10 rounded-xl shadow-2xl border border-white/20" style={{ background: `linear-gradient(135deg, ${smartBest.card.color}, #1a1a1a)` }} />
-                    <div className="flex-1"><h3 className="text-lg font-bold">{smartBest.card.name}</h3><p className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">약 {smartBest.totalValue.toLocaleString()}원</p></div>
-                  </div>
-                  <div className="mt-3 space-y-1">{smartBest.reasons.slice(0, 2).map((r, i) => <p key={i} className="text-xs text-slate-300">• {r}</p>)}</div>
-                  <p className="mt-3 text-[10px] text-slate-500">⚠️ 실적/한도 조건 미반영</p>
                 </div>
               </div>
             )}
@@ -1604,7 +1861,7 @@ export default function CardBenefitsApp() {
                 <h3 className="text-sm font-bold text-slate-400 mb-3">📋 혜택 ({availableBenefits.cardBenefits.length + availableBenefits.networkBenefits.length})</h3>
                 <div className="space-y-2">
                   {availableBenefits.cardBenefits.map(b => (
-                    <button key={b.id} onClick={() => { vibrate(); setSelectedBenefit(b); }} className="w-full flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl border border-white/5 active:bg-slate-700/50 transition-colors text-left">
+                    <button key={b.id} onClick={() => openBenefitDetail(b)} className="w-full flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl border border-white/5 active:bg-slate-700/50 transition-colors text-left">
                       <div className="w-10 h-10 rounded-full bg-slate-700/50 flex items-center justify-center text-lg">{categoryConfig[b.category]?.emoji}</div>
                       <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{b.title}</p><p className="text-[10px] text-slate-500">{b.card?.name}</p></div>
                       <span className="text-xs bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded-full">{b.value}</span>
@@ -1625,11 +1882,66 @@ export default function CardBenefitsApp() {
               </div>
             )}
 
-            {!selectedPlace && (
+            {!selectedPlace && myCards.length > 0 && (
               <div className="text-center py-12">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center"><span className="text-4xl">📍</span></div>
                 <p className="text-slate-400 mb-4">장소를 선택하면<br/>최적의 카드를 추천해드려요</p>
                 <button onClick={handleNearby} className="px-6 py-3 bg-blue-600 rounded-xl font-bold active:scale-95">🎯 내 주변에서 찾기</button>
+              </div>
+            )}
+
+            {/* Onboarding Demo Mode */}
+            {!selectedPlace && myCards.length === 0 && demoData && (
+              <div className="space-y-5">
+                {/* Demo Banner */}
+                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-2xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="bg-purple-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">DEMO</span>
+                    <span className="text-sm font-bold">이렇게 추천해드려요</span>
+                  </div>
+                  <p className="text-xs text-slate-400">예시: {demoData.place?.name}에서 사용 가능한 혜택</p>
+                </div>
+
+                {/* Demo Best Card */}
+                {demoData.benefits.length > 0 && (
+                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600/20 via-purple-600/10 to-transparent border border-blue-500/20 p-4 opacity-90">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-6 rounded bg-gradient-to-r from-purple-600 to-blue-600" />
+                        <span className="text-sm font-bold">{demoData.benefits[0]?.card?.name}</span>
+                      </div>
+                      <span className="text-green-400 font-bold">{demoData.totalValue.toLocaleString()}원</span>
+                    </div>
+                    <div className="space-y-1">
+                      {demoData.benefits.slice(0, 3).map((b, i) => (
+                        <p key={i} className="text-xs text-slate-400">• {categoryConfig[b.category]?.emoji} {b.title}</p>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* CTA Buttons */}
+                <div className="space-y-3">
+                  <p className="text-center text-sm font-bold text-slate-300">내 카드를 등록하면 실시간 추천!</p>
+                  <button
+                    onClick={() => { setShowOcrModal(true); setActiveTab('home'); }}
+                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold text-white active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <span>📸</span> OCR로 카드 스캔하기
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('wallet')}
+                    className="w-full py-4 bg-slate-800/80 border border-white/10 rounded-2xl font-bold text-slate-200 active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <span>🏦</span> 카드사에서 직접 선택
+                  </button>
+                  <button
+                    onClick={() => { setMyCards(CONFIG.DEMO.CARDS); showToast('데모 카드 3장이 추가되었습니다'); }}
+                    className="w-full py-3 text-sm text-slate-500 active:text-slate-300"
+                  >
+                    나중에 할게요 (데모로 체험하기)
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -1654,7 +1966,7 @@ export default function CardBenefitsApp() {
                 <h3 className="text-sm font-bold text-amber-400 mb-3">💰 어디서든 ({filteredUniversalBenefits.length})</h3>
                 <div className="space-y-2">
                   {filteredUniversalBenefits.map(b => (
-                    <button key={b.id} onClick={() => { vibrate(); setSelectedBenefit(b); }} className="w-full flex items-center gap-3 p-3 bg-amber-500/10 rounded-xl border border-amber-500/20 active:bg-amber-500/20 transition-colors text-left">
+                    <button key={b.id} onClick={() => openBenefitDetail(b)} className="w-full flex items-center gap-3 p-3 bg-amber-500/10 rounded-xl border border-amber-500/20 active:bg-amber-500/20 transition-colors text-left">
                       <span className="text-lg">{categoryConfig[b.category]?.emoji}</span>
                       <div className="flex-1 min-w-0"><p className="text-sm font-medium">{b.title}</p><p className="text-[10px] text-slate-500">{b.card?.name}</p></div>
                       <span className="text-xs bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full">{b.value}</span>
@@ -1668,7 +1980,7 @@ export default function CardBenefitsApp() {
                 <h3 className="text-sm font-bold text-slate-400 mb-3">{categoryConfig[cat]?.emoji} {categoryConfig[cat]?.label} ({benefits.length})</h3>
                 <div className="space-y-2">
                   {benefits.slice(0, CONFIG.UI.MAX_BENEFITS_PER_CATEGORY).map(b => (
-                    <button key={b.id} onClick={() => { vibrate(); setSelectedBenefit(b); }} className="w-full flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl border border-white/5 active:bg-slate-700/50 transition-colors text-left">
+                    <button key={b.id} onClick={() => openBenefitDetail(b)} className="w-full flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl border border-white/5 active:bg-slate-700/50 transition-colors text-left">
                       <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{b.title}</p><p className="text-[10px] text-slate-500">{b.card?.name}</p></div>
                       <span className="text-xs text-green-400 font-medium">{b.value}</span>
                     </button>
@@ -1800,11 +2112,26 @@ export default function CardBenefitsApp() {
                     </div>
                   )}
 
+                  {/* Favorites */}
+                  {favoritePlaceIds.length > 0 && placeCategoryFilter === 'all' && (
+                    <div className="mb-4">
+                      <p className="text-xs text-amber-400 font-bold mb-2">⭐ 즐겨찾기</p>
+                      <div className="flex flex-wrap gap-2">
+                        {favoritePlaceIds.map(id => placesData[id]).filter(Boolean).map(p => (
+                          <button key={p.id} onClick={() => selectPlace(p.id)} className={`px-3 py-2 rounded-full text-xs border active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-amber-600 border-amber-400/40' : 'bg-amber-500/10 border-amber-500/30'}`}>
+                            <span className="mr-1">{placeTypeConfig[p.type]?.emoji}</span>{p.name}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Recent places */}
                   {recentPlaceIds.length > 0 && placeCategoryFilter === 'all' && (
                     <div className="mb-4">
                       <p className="text-xs text-slate-500 font-bold mb-2">🕘 최근</p>
                       <div className="flex flex-wrap gap-2">
-                        {recentPlaceIds.map(id => placesData[id]).filter(Boolean).map(p => (
+                        {recentPlaceIds.filter(id => !favoritePlaceIds.includes(id)).map(id => placesData[id]).filter(Boolean).map(p => (
                           <button key={p.id} onClick={() => selectPlace(p.id)} className={`px-3 py-2 rounded-full text-xs border active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-blue-600 border-blue-400/40' : 'bg-slate-800/50 border-white/10'}`}>
                             <span className="mr-1">{placeTypeConfig[p.type]?.emoji}</span>{p.name}
                           </button>
@@ -1845,13 +2172,21 @@ export default function CardBenefitsApp() {
                   {Object.values(placesData)
                     .filter(p => placeCategoryFilter === 'all' || p.type === placeCategoryFilter)
                     .map(p => (
-                    <button key={p.id} onClick={() => selectPlace(p.id)} className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-blue-600' : 'bg-slate-800/30'}`}>
-                      <span className="text-xl">{placeTypeConfig[p.type]?.emoji}</span><span className="font-medium text-sm">{p.name}</span>
-                    </button>
+                    <div key={p.id} className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 ${selectedPlaceId === p.id ? 'bg-blue-600' : 'bg-slate-800/30'}`}>
+                      <button onClick={() => selectPlace(p.id)} className="flex-1 flex items-center gap-3 text-left active:scale-[0.98]">
+                        <span className="text-xl">{placeTypeConfig[p.type]?.emoji}</span>
+                        <span className="font-medium text-sm">{p.name}</span>
+                      </button>
+                      <button onClick={(e) => { e.stopPropagation(); toggleFavorite(p.id); }} className="p-2 rounded-lg active:scale-90">
+                        <span className={favoritePlaceIds.includes(p.id) ? 'text-amber-400' : 'text-slate-600'}>
+                          {favoritePlaceIds.includes(p.id) ? '★' : '☆'}
+                        </span>
+                      </button>
+                    </div>
                   ))}
                 </div>
               ) : (
-                <MapView userLocation={userLocation} places={Object.values(placesData)} selectedPlaceId={selectedPlaceId} onPlaceSelect={id => selectPlace(id)} onClose={() => setShowPlaceSheet(false)} benefitsData={benefitsData} cardsData={cardsData} myCards={myCards} />
+                <MapView userLocation={userLocation} places={Object.values(placesData)} selectedPlaceId={selectedPlaceId} onPlaceSelect={id => selectPlace(id)} onClose={() => setShowPlaceSheet(false)} onError={() => setPlaceSheetView('list')} benefitsData={benefitsData} cardsData={cardsData} myCards={myCards} />
               )}
             </div>
           </div>
