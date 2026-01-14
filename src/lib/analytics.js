@@ -157,10 +157,10 @@ function flushEvents() {
  * Get or create session ID
  */
 function getSessionId() {
-  let sessionId = sessionStorage.getItem('cardai_session_id');
+  let sessionId = window.sessionStorage.getItem('cardai_session_id');
   if (!sessionId) {
     sessionId = `sess_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    sessionStorage.setItem('cardai_session_id', sessionId);
+    window.sessionStorage.setItem('cardai_session_id', sessionId);
   }
   return sessionId;
 }

@@ -1112,7 +1112,7 @@ export default function CardBenefitsApp() {
   const saveTimerRef = useRef(null);
 
   const vibrate = useCallback((pattern = [8]) => {
-    try { if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(pattern); } catch {}
+    try { if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(pattern); } catch { /* vibration not supported */ }
   }, []);
 
   const fileInputRef = useRef(null);
@@ -1696,7 +1696,7 @@ export default function CardBenefitsApp() {
 
     try {
       await storage.set(CONFIG.DB.KEY, { myCards: CONFIG.DEFAULTS.CARDS, selectedPlaceId: null, recentPlaceIds: CONFIG.DEFAULTS.RECENT_PLACES, favoritePlaceIds: [] });
-    } catch {}
+    } catch { /* storage error ignored on reset */ }
 
     showToast(MESSAGES.SYSTEM.RESET);
   };
