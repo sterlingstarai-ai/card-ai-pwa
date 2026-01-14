@@ -569,6 +569,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
   const markersRef = useRef([]);
   const userMarkerRef = useRef(null);
   const [mapReady, setMapReady] = useState(false);
+  const [mapError, setMapError] = useState(null);
   const [activeRegion, setActiveRegion] = useState('서울');
 
   const regions = [
@@ -582,25 +583,36 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
   // 카카오맵 초기화
   useEffect(() => {
     if (!window.kakao || !window.kakao.maps) {
-      Logger.error('Kakao Maps SDK not loaded');
+      setMapError('카카오맵 SDK 로드 실패');
       return;
     }
 
-    window.kakao.maps.load(() => {
-      if (!mapContainerRef.current) return;
+    try {
+      window.kakao.maps.load(() => {
+        if (!mapContainerRef.current) return;
 
-      const initialCenter = userLocation
-        ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
-        : new window.kakao.maps.LatLng(37.55, 127.0);
+        try {
+          const initialCenter = userLocation
+            ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
+            : new window.kakao.maps.LatLng(37.55, 127.0);
 
-      const options = {
-        center: initialCenter,
-        level: userLocation ? 5 : 8
-      };
+          const options = {
+            center: initialCenter,
+            level: userLocation ? 5 : 8
+          };
 
-      mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, options);
-      setMapReady(true);
-    });
+          mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, options);
+          setMapReady(true);
+          setMapError(null);
+        } catch (err) {
+          console.error('Map init error:', err);
+          setMapError('지도 초기화 실패 - 도메인 등록 필요');
+        }
+      });
+    } catch (err) {
+      console.error('Kakao load error:', err);
+      setMapError('카카오맵 로드 실패');
+    }
 
     return () => {
       markersRef.current.forEach(m => m.setMap(null));
@@ -751,6 +763,25 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
 
       {/* 카카오맵 컨테이너 */}
       <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
+
+      {/* 로딩/에러 상태 */}
+      {!mapReady && !mapError && (
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: '#94a3b8' }}>
+          <div style={{ fontSize: '24px', marginBottom: '8px' }}>🗺️</div>
+          <div>지도 로딩 중...</div>
+        </div>
+      )}
+      {mapError && (
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: '#f87171', padding: '20px' }}>
+          <div style={{ fontSize: '24px', marginBottom: '8px' }}>⚠️</div>
+          <div style={{ marginBottom: '12px' }}>{mapError}</div>
+          <div style={{ fontSize: '11px', color: '#94a3b8', lineHeight: '1.5' }}>
+            카카오 개발자 콘솔에서<br/>
+            플랫폼 → Web 도메인 등록 필요:<br/>
+            <span style={{ color: '#60a5fa' }}>card-ai-pi.vercel.app</span>
+          </div>
+        </div>
+      )}
 
       {/* 줌 컨트롤 */}
       <div style={{ position: 'absolute', bottom: '100px', right: '16px', display: 'flex', flexDirection: 'column', gap: '8px', zIndex: 30 }}>
