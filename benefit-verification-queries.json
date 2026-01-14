@@ -1,0 +1,682 @@
+[
+  {
+    "benefitId": "hyundai-black-valet",
+    "card": "현대카드 the Black",
+    "category": "valet",
+    "title": "호텔/공항 무료 발렛",
+    "value": "무제한",
+    "searchQuery": "현대카드 the Black 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-black-lounge",
+    "card": "현대카드 the Black",
+    "category": "lounge",
+    "title": "PP 공항라운지",
+    "value": "무제한",
+    "searchQuery": "현대카드 the Black 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-purple-valet",
+    "card": "현대카드 the Purple",
+    "category": "valet",
+    "title": "호텔/공항 무료 발렛",
+    "value": "월 5회",
+    "searchQuery": "현대카드 the Purple 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-purple-lounge",
+    "card": "현대카드 the Purple",
+    "category": "lounge",
+    "title": "PP 라운지",
+    "value": "PP카드",
+    "searchQuery": "현대카드 the Purple 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-purple-osee-valet",
+    "card": "현대카드 the Purple osée",
+    "category": "valet",
+    "title": "호텔/공항 무료 발렛",
+    "value": "월 5회",
+    "searchQuery": "현대카드 the Purple osée 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-purple-osee-lounge",
+    "card": "현대카드 the Purple osée",
+    "category": "lounge",
+    "title": "800+ 공항라운지",
+    "value": "무제한",
+    "searchQuery": "현대카드 the Purple osée 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-red-valet",
+    "card": "현대카드 the Red",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 3회",
+    "searchQuery": "현대카드 the Red 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-red-lounge",
+    "card": "현대카드 the Red",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 10회",
+    "searchQuery": "현대카드 the Red 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-red-stripe-valet",
+    "card": "현대카드 the Red Stripe Edition2",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 5회",
+    "searchQuery": "현대카드 the Red Stripe Edition2 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-red-stripe-lounge",
+    "card": "현대카드 the Red Stripe Edition2",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 12회",
+    "searchQuery": "현대카드 the Red Stripe Edition2 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-green-valet",
+    "card": "현대카드 the Green Edition3",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 2회",
+    "searchQuery": "현대카드 the Green Edition3 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-green-lounge",
+    "card": "현대카드 the Green Edition3",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 10회",
+    "searchQuery": "현대카드 the Green Edition3 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-pink-valet",
+    "card": "현대카드 the Pink Edition2",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 2회",
+    "searchQuery": "현대카드 the Pink Edition2 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-pink-lounge",
+    "card": "현대카드 the Pink Edition2",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 10회",
+    "searchQuery": "현대카드 the Pink Edition2 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-korean-air-lounge",
+    "card": "현대카드 대한항공",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "현대카드 대한항공 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "samsung-id-platinum-lounge",
+    "card": "삼성카드 iD PLATINUM",
+    "category": "lounge",
+    "title": "The Lounge",
+    "value": "연 6회",
+    "searchQuery": "삼성카드 iD PLATINUM 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "samsung-id-platinum-valet",
+    "card": "삼성카드 iD PLATINUM",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 2회",
+    "searchQuery": "삼성카드 iD PLATINUM 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "samsung-id-titanium-lounge",
+    "card": "삼성카드 iD TITANIUM",
+    "category": "lounge",
+    "title": "The Lounge",
+    "value": "연 12회",
+    "searchQuery": "삼성카드 iD TITANIUM 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "samsung-id-titanium-valet",
+    "card": "삼성카드 iD TITANIUM",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 4회",
+    "searchQuery": "삼성카드 iD TITANIUM 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "samsung-mileage-lounge",
+    "card": "삼성카드 앤 마일리지 플래티넘",
+    "category": "lounge",
+    "title": "마티나 라운지",
+    "value": "연 2회",
+    "searchQuery": "삼성카드 앤 마일리지 플래티넘 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "samsung-reserve-lounge",
+    "card": "삼성카드 리저브 카드",
+    "category": "lounge",
+    "title": "프리미엄 라운지",
+    "value": "무제한",
+    "searchQuery": "삼성카드 리저브 카드 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "samsung-reserve-valet",
+    "card": "삼성카드 리저브 카드",
+    "category": "valet",
+    "title": "프리미엄 발렛",
+    "value": "무제한",
+    "searchQuery": "삼성카드 리저브 카드 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-the-best-lounge",
+    "card": "신한카드 The BEST+",
+    "category": "lounge",
+    "title": "전세계 라운지",
+    "value": "연 20회",
+    "searchQuery": "신한카드 The BEST+ 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-the-best-valet",
+    "card": "신한카드 The BEST+",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 3회",
+    "searchQuery": "신한카드 The BEST+ 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-the-best-xo-lounge",
+    "card": "신한카드 The BEST-XO",
+    "category": "lounge",
+    "title": "PP 라운지",
+    "value": "무제한",
+    "searchQuery": "신한카드 The BEST-XO 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-the-best-xo-valet",
+    "card": "신한카드 The BEST-XO",
+    "category": "valet",
+    "title": "프리미엄 발렛",
+    "value": "무제한",
+    "searchQuery": "신한카드 The BEST-XO 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-the-classic-lounge",
+    "card": "신한카드 The CLASSIC+",
+    "category": "lounge",
+    "title": "해외 라운지",
+    "value": "무제한",
+    "searchQuery": "신한카드 The CLASSIC+ 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-sol-travel-lounge",
+    "card": "신한카드 SOL트래블",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "신한카드 SOL트래블 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-asiana-lounge",
+    "card": "신한카드 아시아나 Air",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "신한카드 아시아나 Air 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "kb-tantum-valet",
+    "card": "KB국민카드 TANTUM",
+    "category": "valet",
+    "title": "프리미엄 발렛",
+    "value": "무제한",
+    "searchQuery": "KB국민카드 TANTUM 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "kb-tantum-lounge",
+    "card": "KB국민카드 TANTUM",
+    "category": "lounge",
+    "title": "전세계 라운지",
+    "value": "무제한",
+    "searchQuery": "KB국민카드 TANTUM 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "kb-heritage-valet",
+    "card": "KB국민카드 헤리티지 클래식",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "연 5회",
+    "searchQuery": "KB국민카드 헤리티지 클래식 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "kb-heritage-lounge",
+    "card": "KB국민카드 헤리티지 클래식",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 3회",
+    "searchQuery": "KB국민카드 헤리티지 클래식 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "kb-skypass-titanium-lounge",
+    "card": "KB국민카드 스카이패스 티타늄",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "KB국민카드 스카이패스 티타늄 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "kb-skypass-titanium-valet",
+    "card": "KB국민카드 스카이패스 티타늄",
+    "category": "valet",
+    "title": "인천공항 발렛",
+    "value": "연 2회",
+    "searchQuery": "KB국민카드 스카이패스 티타늄 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "kb-nori2-global-lounge",
+    "card": "KB국민카드 노리2 Global",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 1회",
+    "searchQuery": "KB국민카드 노리2 Global 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "kb-korean-air-lounge",
+    "card": "KB국민카드 대한항공",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "KB국민카드 대한항공 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-avenuel-black-valet",
+    "card": "롯데카드 AVENUEL BLACK",
+    "category": "valet",
+    "title": "무료 발렛",
+    "value": "무제한",
+    "searchQuery": "롯데카드 AVENUEL BLACK 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-avenuel-black-lounge",
+    "card": "롯데카드 AVENUEL BLACK",
+    "category": "lounge",
+    "title": "PP라운지",
+    "value": "무제한",
+    "searchQuery": "롯데카드 AVENUEL BLACK 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-avenuel-emerald-valet",
+    "card": "롯데카드 AVENUEL EMERALD",
+    "category": "valet",
+    "title": "무료 발렛",
+    "value": "무제한",
+    "searchQuery": "롯데카드 AVENUEL EMERALD 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-avenuel-emerald-lounge",
+    "card": "롯데카드 AVENUEL EMERALD",
+    "category": "lounge",
+    "title": "PP라운지",
+    "value": "무제한",
+    "searchQuery": "롯데카드 AVENUEL EMERALD 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-avenuel-purple-valet",
+    "card": "롯데카드 AVENUEL PURPLE",
+    "category": "valet",
+    "title": "무료 발렛",
+    "value": "무제한",
+    "searchQuery": "롯데카드 AVENUEL PURPLE 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-avenuel-purple-lounge",
+    "card": "롯데카드 AVENUEL PURPLE",
+    "category": "lounge",
+    "title": "국내라운지",
+    "value": "연 2회",
+    "searchQuery": "롯데카드 AVENUEL PURPLE 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-loca-professional-valet",
+    "card": "롯데카드 LOCA Professional",
+    "category": "valet",
+    "title": "인천공항 발렛",
+    "value": "연 2회",
+    "searchQuery": "롯데카드 LOCA Professional 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-loca-professional-lounge",
+    "card": "롯데카드 LOCA Professional",
+    "category": "lounge",
+    "title": "공항라운지",
+    "value": "연 2회",
+    "searchQuery": "롯데카드 LOCA Professional 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "woori-all-infinite-valet",
+    "card": "우리카드 ALL 인피니트",
+    "category": "valet",
+    "title": "프리미엄 발렛",
+    "value": "무제한",
+    "searchQuery": "우리카드 ALL 인피니트 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "woori-all-infinite-lounge",
+    "card": "우리카드 ALL 인피니트",
+    "category": "lounge",
+    "title": "The Lounge 무제한",
+    "value": "무제한",
+    "searchQuery": "우리카드 ALL 인피니트 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "woori-blue-diamond-valet",
+    "card": "우리카드 블루다이아몬드II",
+    "category": "valet",
+    "title": "프리미엄 발렛",
+    "value": "월 1회",
+    "searchQuery": "우리카드 블루다이아몬드II 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "woori-blue-diamond-lounge",
+    "card": "우리카드 블루다이아몬드II",
+    "category": "lounge",
+    "title": "PP라운지",
+    "value": "연 5회",
+    "searchQuery": "우리카드 블루다이아몬드II 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "woori-premium-point-valet",
+    "card": "우리카드 카드의정석 PREMIUM POINT",
+    "category": "valet",
+    "title": "Visa 발렛",
+    "value": "월 3회",
+    "searchQuery": "우리카드 카드의정석 PREMIUM POINT 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "woori-premium-point-lounge",
+    "card": "우리카드 카드의정석 PREMIUM POINT",
+    "category": "lounge",
+    "title": "The Lounge",
+    "value": "연 6회",
+    "searchQuery": "우리카드 카드의정석 PREMIUM POINT 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "woori-wibi-travel-lounge",
+    "card": "우리카드 위비트래블 체크",
+    "category": "lounge",
+    "title": "공항라운지",
+    "value": "연 2회",
+    "searchQuery": "우리카드 위비트래블 체크 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "woori-skypass-lounge",
+    "card": "우리카드 스카이패스",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "우리카드 스카이패스 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-gd-centum-valet",
+    "card": "하나카드 G-DRAGON Centum by JADE",
+    "category": "valet",
+    "title": "무료 발렛",
+    "value": "무제한",
+    "searchQuery": "하나카드 G-DRAGON Centum by JADE 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hana-gd-centum-lounge",
+    "card": "하나카드 G-DRAGON Centum by JADE",
+    "category": "lounge",
+    "title": "전세계 라운지",
+    "value": "무제한",
+    "searchQuery": "하나카드 G-DRAGON Centum by JADE 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-jade-classic-lounge",
+    "card": "하나카드 JADE Classic",
+    "category": "lounge",
+    "title": "DragonPass",
+    "value": "연 3회",
+    "searchQuery": "하나카드 JADE Classic 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-jade-prime-lounge",
+    "card": "하나카드 JADE Prime",
+    "category": "lounge",
+    "title": "공항라운지",
+    "value": "월 2회",
+    "searchQuery": "하나카드 JADE Prime 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-club-signature-lounge",
+    "card": "하나카드 CLUB Signature SKYPASS",
+    "category": "lounge",
+    "title": "LoungeKey",
+    "value": "연 6회",
+    "searchQuery": "하나카드 CLUB Signature SKYPASS 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-mile1-lounge",
+    "card": "하나카드 Mile 1.6/1.8",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "하나카드 Mile 1.6/1.8 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-skypass-lounge",
+    "card": "하나카드 스카이패스",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "하나카드 스카이패스 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "nh-zgm-vacation-lounge",
+    "card": "NH농협카드 zgm.휴가중",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "NH농협카드 zgm.휴가중 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "nh-on-platinum-lounge",
+    "card": "NH농협카드 ON PLATINUM 포인트형",
+    "category": "lounge",
+    "title": "전세계 라운지",
+    "value": "무제한",
+    "searchQuery": "NH농협카드 ON PLATINUM 포인트형 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "nh-travelers-lounge",
+    "card": "NH농협카드 트래블리",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "NH농협카드 트래블리 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "nh-skypass-lounge",
+    "card": "NH농협카드 스카이패스",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "NH농협카드 스카이패스 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "bc-bliss7-valet",
+    "card": "BC카드 BLISS.7",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 5회",
+    "searchQuery": "BC카드 BLISS.7 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "bc-bliss7-lounge",
+    "card": "BC카드 BLISS.7",
+    "category": "lounge",
+    "title": "PP 라운지",
+    "value": "무제한",
+    "searchQuery": "BC카드 BLISS.7 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "bc-bliss5-valet",
+    "card": "BC카드 BLISS.5 PRESTIGE",
+    "category": "valet",
+    "title": "호텔 발렛",
+    "value": "월 1회",
+    "searchQuery": "BC카드 BLISS.5 PRESTIGE 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "bc-bliss5-lounge",
+    "card": "BC카드 BLISS.5 PRESTIGE",
+    "category": "lounge",
+    "title": "공항라운지",
+    "value": "무제한",
+    "searchQuery": "BC카드 BLISS.5 PRESTIGE 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "bc-platinum-valet",
+    "card": "BC카드 플래티넘",
+    "category": "valet",
+    "title": "국내 발렛",
+    "value": "서비스",
+    "searchQuery": "BC카드 플래티넘 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "bc-platinum-lounge",
+    "card": "BC카드 플래티넘",
+    "category": "lounge",
+    "title": "PP 라운지",
+    "value": "무제한",
+    "searchQuery": "BC카드 플래티넘 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "bc-skypass-lounge",
+    "card": "BC카드 스카이패스",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "BC카드 스카이패스 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hyundai-amex-platinum-lounge",
+    "card": "현대카드 아멕스 플래티늄",
+    "category": "lounge",
+    "title": "아멕스 라운지",
+    "value": "연 4회",
+    "searchQuery": "현대카드 아멕스 플래티늄 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-the-best-f-lounge",
+    "card": "신한카드 The BEST-F",
+    "category": "lounge",
+    "title": "전세계 라운지",
+    "value": "연 30회",
+    "searchQuery": "신한카드 The BEST-F 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "shinhan-the-best-f-valet",
+    "card": "신한카드 The BEST-F",
+    "category": "valet",
+    "title": "호텔/공항 발렛",
+    "value": "월 5회",
+    "searchQuery": "신한카드 The BEST-F 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-loca-platinum-lounge",
+    "card": "롯데카드 LOCA PLATINUM",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "롯데카드 LOCA PLATINUM 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "lotte-loca-platinum-valet",
+    "card": "롯데카드 LOCA PLATINUM",
+    "category": "valet",
+    "title": "인천공항 발렛",
+    "value": "연 2회",
+    "searchQuery": "롯데카드 LOCA PLATINUM 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "woori-premium-mileage-lounge",
+    "card": "우리카드 카드의정석 PREMIUM MILEAGE",
+    "category": "lounge",
+    "title": "The Lounge",
+    "value": "연 6회",
+    "searchQuery": "우리카드 카드의정석 PREMIUM MILEAGE 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "woori-premium-mileage-valet",
+    "card": "우리카드 카드의정석 PREMIUM MILEAGE",
+    "category": "valet",
+    "title": "발렛파킹",
+    "value": "월 3회",
+    "searchQuery": "우리카드 카드의정석 PREMIUM MILEAGE 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "woori-every-mile-lounge",
+    "card": "우리카드 카드의정석 EVERY MILE",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 2회",
+    "searchQuery": "우리카드 카드의정석 EVERY MILE 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-signature-lounge",
+    "card": "하나카드 시그니처",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "하나카드 시그니처 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "hana-signature-valet",
+    "card": "하나카드 시그니처",
+    "category": "valet",
+    "title": "호텔 발렛",
+    "value": "월 2회",
+    "searchQuery": "하나카드 시그니처 발렛 혜택 2024"
+  },
+  {
+    "benefitId": "hana-skypass-amex-lounge",
+    "card": "하나카드 스카이패스 아멕스 플래티넘",
+    "category": "lounge",
+    "title": "아멕스 라운지",
+    "value": "연 2회",
+    "searchQuery": "하나카드 스카이패스 아멕스 플래티넘 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "nh-on-platinum-mileage-lounge",
+    "card": "NH농협카드 ON PLATINUM 마일리지형",
+    "category": "lounge",
+    "title": "전세계 라운지",
+    "value": "무제한",
+    "searchQuery": "NH농협카드 ON PLATINUM 마일리지형 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "nh-classy-travel-lounge",
+    "card": "NH농협카드 클래시 트래블",
+    "category": "lounge",
+    "title": "공항 라운지",
+    "value": "연 4회",
+    "searchQuery": "NH농협카드 클래시 트래블 라운지 혜택 2024"
+  },
+  {
+    "benefitId": "nh-classy-travel-valet",
+    "card": "NH농협카드 클래시 트래블",
+    "category": "valet",
+    "title": "공항 발렛",
+    "value": "연 2회",
+    "searchQuery": "NH농협카드 클래시 트래블 발렛 혜택 2024"
+  }
+]
