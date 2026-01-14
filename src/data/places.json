@@ -101,5 +101,28 @@
   "cgv-yongsan": { "id": "cgv-yongsan", "name": "CGV 용산", "type": "entertainment", "tags": ["entertainment", "movie", "cgv"], "lat": 37.5296, "lng": 126.9651 },
   "cgv-yeongdeungpo": { "id": "cgv-yeongdeungpo", "name": "CGV 영등포", "type": "entertainment", "tags": ["entertainment", "movie", "cgv"], "lat": 37.5175, "lng": 126.9060 },
   "megabox-coex": { "id": "megabox-coex", "name": "메가박스 코엑스", "type": "entertainment", "tags": ["entertainment", "movie", "megabox"], "lat": 37.5128, "lng": 127.0590 },
-  "lotte-cinema-world": { "id": "lotte-cinema-world", "name": "롯데시네마 월드타워", "type": "entertainment", "tags": ["entertainment", "movie", "lotte-cinema"], "lat": 37.5125, "lng": 127.1025 }
+  "lotte-cinema-world": { "id": "lotte-cinema-world", "name": "롯데시네마 월드타워", "type": "entertainment", "tags": ["entertainment", "movie", "lotte-cinema"], "lat": 37.5125, "lng": 127.1025 },
+
+  "cu-conv": { "id": "cu-conv", "name": "CU 편의점", "type": "convenience", "tags": ["convenience", "points", "mpoint", "okcashbag"], "lat": 37.5665, "lng": 126.9780 },
+  "gs25-conv": { "id": "gs25-conv", "name": "GS25 편의점", "type": "convenience", "tags": ["convenience", "points", "gspoint"], "lat": 37.5665, "lng": 126.9780 },
+  "seven-eleven": { "id": "seven-eleven", "name": "세븐일레븐", "type": "convenience", "tags": ["convenience", "points"], "lat": 37.5665, "lng": 126.9780 },
+  "emart24": { "id": "emart24", "name": "이마트24", "type": "convenience", "tags": ["convenience", "points", "shinsegae-point"], "lat": 37.5665, "lng": 126.9780 },
+
+  "coupang": { "id": "coupang", "name": "쿠팡", "type": "online", "tags": ["online", "shopping", "points"], "lat": 37.5665, "lng": 126.9780 },
+  "ssg": { "id": "ssg", "name": "SSG닷컴", "type": "online", "tags": ["online", "shopping", "points", "shinsegae-point"], "lat": 37.5665, "lng": 126.9780 },
+  "gmarket": { "id": "gmarket", "name": "G마켓", "type": "online", "tags": ["online", "shopping", "points", "smilepoint"], "lat": 37.5665, "lng": 126.9780 },
+  "auction": { "id": "auction", "name": "옥션", "type": "online", "tags": ["online", "shopping", "points", "smilepoint"], "lat": 37.5665, "lng": 126.9780 },
+  "11st": { "id": "11st", "name": "11번가", "type": "online", "tags": ["online", "shopping", "points", "skpay"], "lat": 37.5665, "lng": 126.9780 },
+  "naver-shopping": { "id": "naver-shopping", "name": "네이버쇼핑", "type": "online", "tags": ["online", "shopping", "points", "naverpay"], "lat": 37.5665, "lng": 126.9780 },
+  "kakao-shopping": { "id": "kakao-shopping", "name": "카카오쇼핑", "type": "online", "tags": ["online", "shopping", "points", "kakaopay"], "lat": 37.5665, "lng": 126.9780 },
+
+  "emart": { "id": "emart", "name": "이마트", "type": "mart", "tags": ["mart", "shopping", "points", "shinsegae-point"], "lat": 37.5091, "lng": 127.0590 },
+  "homeplus": { "id": "homeplus", "name": "홈플러스", "type": "mart", "tags": ["mart", "shopping", "points", "mpoint"], "lat": 37.5407, "lng": 127.0696 },
+  "costco": { "id": "costco", "name": "코스트코", "type": "mart", "tags": ["mart", "shopping"], "lat": 37.5014, "lng": 127.0374 },
+  "lottemart": { "id": "lottemart", "name": "롯데마트", "type": "mart", "tags": ["mart", "shopping", "points", "lpoint"], "lat": 37.5648, "lng": 126.9816 },
+
+  "gs-caltex": { "id": "gs-caltex", "name": "GS칼텍스 주유소", "type": "gas", "tags": ["gas", "points", "gspoint", "bonuspoint"], "lat": 37.5665, "lng": 126.9780 },
+  "sk-energy": { "id": "sk-energy", "name": "SK에너지 주유소", "type": "gas", "tags": ["gas", "points", "okcashbag", "skpay"], "lat": 37.5665, "lng": 126.9780 },
+  "s-oil": { "id": "s-oil", "name": "S-OIL 주유소", "type": "gas", "tags": ["gas", "points", "bonuspoint"], "lat": 37.5665, "lng": 126.9780 },
+  "hyundai-oilbank": { "id": "hyundai-oilbank", "name": "현대오일뱅크", "type": "gas", "tags": ["gas", "points", "hpoint", "bluemembers"], "lat": 37.5665, "lng": 126.9780 }
 }

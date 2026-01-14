@@ -470,14 +470,35 @@ const categoryConfig = {
   entertainment: { emoji: "🎬", label: "문화" }
 };
 
-const placeTypeConfig = { 
-  airport: { emoji: "✈️" }, 
-  hotel: { emoji: "🏨" }, 
-  department: { emoji: "🛍️" }, 
-  golf: { emoji: "⛳" }, 
-  cafe: { emoji: "☕" }, 
-  entertainment: { emoji: "🎬" } 
+const placeTypeConfig = {
+  airport: { emoji: "✈️", label: "공항" },
+  lounge: { emoji: "🛋️", label: "라운지" },
+  hotel: { emoji: "🏨", label: "호텔" },
+  department: { emoji: "🛍️", label: "백화점" },
+  dutyfree: { emoji: "🎁", label: "면세점" },
+  golf: { emoji: "⛳", label: "골프" },
+  cafe: { emoji: "☕", label: "카페" },
+  entertainment: { emoji: "🎬", label: "영화" },
+  convenience: { emoji: "🏪", label: "편의점" },
+  online: { emoji: "🛒", label: "온라인" },
+  mart: { emoji: "🛒", label: "마트" },
+  gas: { emoji: "⛽", label: "주유소" }
 };
+
+const placeCategories = [
+  { id: 'all', label: '전체', emoji: '📍' },
+  { id: 'airport', label: '공항', emoji: '✈️' },
+  { id: 'lounge', label: '라운지', emoji: '🛋️' },
+  { id: 'hotel', label: '호텔', emoji: '🏨' },
+  { id: 'department', label: '백화점', emoji: '🛍️' },
+  { id: 'golf', label: '골프', emoji: '⛳' },
+  { id: 'convenience', label: '편의점', emoji: '🏪' },
+  { id: 'mart', label: '마트', emoji: '🛒' },
+  { id: 'gas', label: '주유소', emoji: '⛽' },
+  { id: 'cafe', label: '카페', emoji: '☕' },
+  { id: 'entertainment', label: '영화', emoji: '🎬' },
+  { id: 'online', label: '온라인', emoji: '💻' },
+];
 
 // ============================================================================
 // 🎨 UI COMPONENTS
@@ -894,6 +915,7 @@ export default function CardBenefitsApp() {
   const [locationStatus, setLocationStatus] = useState('idle');
   const [showPlaceSheet, setShowPlaceSheet] = useState(false);
   const [placeSheetView, setPlaceSheetView] = useState('list');
+  const [placeCategoryFilter, setPlaceCategoryFilter] = useState('all');
   const [showOcrModal, setShowOcrModal] = useState(false);
   const [ocrCandidates, setOcrCandidates] = useState([]);
   const [ocrStatus, setOcrStatus] = useState('idle');
@@ -1740,7 +1762,7 @@ export default function CardBenefitsApp() {
                     </div>
                   )}
 
-                  {recentPlaceIds.length > 0 && (
+                  {recentPlaceIds.length > 0 && placeCategoryFilter === 'all' && (
                     <div className="mb-4">
                       <p className="text-xs text-slate-500 font-bold mb-2">🕘 최근</p>
                       <div className="flex flex-wrap gap-2">
@@ -1752,7 +1774,7 @@ export default function CardBenefitsApp() {
                       </div>
                     </div>
                   )}
-                  {nearbyPlaces.length > 0 && (
+                  {nearbyPlaces.length > 0 && placeCategoryFilter === 'all' && (
                     <div className="mb-4">
                       <p className="text-xs text-blue-400 font-bold mb-2">📍 {locationStatus === 'fallback' ? '서울 기준' : '내 주변'}</p>
                       {nearbyPlaces.slice(0, CONFIG.UI.MAX_NEARBY_PLACES).map(p => (
@@ -1763,8 +1785,28 @@ export default function CardBenefitsApp() {
                       ))}
                     </div>
                   )}
-                  <p className="text-xs text-slate-500 font-bold mb-2">📋 전체</p>
-                  {Object.values(placesData).map(p => (
+
+                  {/* 카테고리 탭 */}
+                  <div className="mb-4 -mx-4 px-4 overflow-x-auto">
+                    <div className="flex gap-2 pb-2" style={{ minWidth: 'max-content' }}>
+                      {placeCategories.map(cat => (
+                        <button
+                          key={cat.id}
+                          onClick={() => setPlaceCategoryFilter(cat.id)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${placeCategoryFilter === cat.id ? 'bg-blue-600 text-white' : 'bg-slate-800/50 text-slate-400'}`}>
+                          {cat.emoji} {cat.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 필터된 장소 목록 */}
+                  <p className="text-xs text-slate-500 font-bold mb-2">
+                    {placeCategoryFilter === 'all' ? '📋 전체' : `${placeTypeConfig[placeCategoryFilter]?.emoji || '📋'} ${placeTypeConfig[placeCategoryFilter]?.label || '전체'}`}
+                  </p>
+                  {Object.values(placesData)
+                    .filter(p => placeCategoryFilter === 'all' || p.type === placeCategoryFilter)
+                    .map(p => (
                     <button key={p.id} onClick={() => selectPlace(p.id)} className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-blue-600' : 'bg-slate-800/30'}`}>
                       <span className="text-xl">{placeTypeConfig[p.type]?.emoji}</span><span className="font-medium text-sm">{p.name}</span>
                     </button>
