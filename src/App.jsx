@@ -563,6 +563,8 @@ const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
   );
 };
 
+const KAKAO_APP_KEY = 'b6d42c58bb45a8e461cee9040d2677a4';
+
 const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -570,6 +572,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
   const userMarkerRef = useRef(null);
   const [mapReady, setMapReady] = useState(false);
   const [mapError, setMapError] = useState(null);
+  const [sdkLoaded, setSdkLoaded] = useState(false);
   const [activeRegion, setActiveRegion] = useState('서울');
 
   const regions = [
@@ -580,45 +583,68 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
     { name: '제주', lat: 33.38, lng: 126.55, zoom: 10 }
   ];
 
-  // 카카오맵 초기화
+  // 카카오맵 SDK 동적 로드
   useEffect(() => {
-    if (!window.kakao || !window.kakao.maps) {
-      setMapError('카카오맵 SDK 로드 실패');
+    if (window.kakao && window.kakao.maps) {
+      setSdkLoaded(true);
       return;
     }
 
-    try {
-      window.kakao.maps.load(() => {
-        if (!mapContainerRef.current) return;
+    const script = document.createElement('script');
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&autoload=false`;
+    script.async = true;
 
-        try {
-          const initialCenter = userLocation
-            ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
-            : new window.kakao.maps.LatLng(37.55, 127.0);
+    script.onload = () => {
+      console.log('Kakao SDK script loaded');
+      setSdkLoaded(true);
+    };
 
-          const options = {
-            center: initialCenter,
-            level: userLocation ? 5 : 8
-          };
+    script.onerror = (e) => {
+      console.error('Kakao SDK load error:', e);
+      setMapError('카카오맵 SDK 로드 실패');
+    };
 
-          mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, options);
-          setMapReady(true);
-          setMapError(null);
-        } catch (err) {
-          console.error('Map init error:', err);
-          setMapError('지도 초기화 실패 - 도메인 등록 필요');
-        }
-      });
-    } catch (err) {
-      console.error('Kakao load error:', err);
-      setMapError('카카오맵 로드 실패');
+    document.head.appendChild(script);
+
+    return () => {
+      // cleanup if needed
+    };
+  }, []);
+
+  // 카카오맵 초기화
+  useEffect(() => {
+    if (!sdkLoaded || !window.kakao || !window.kakao.maps) {
+      return;
     }
+
+    window.kakao.maps.load(() => {
+      if (!mapContainerRef.current) return;
+
+      try {
+        const initialCenter = userLocation
+          ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
+          : new window.kakao.maps.LatLng(37.55, 127.0);
+
+        const options = {
+          center: initialCenter,
+          level: userLocation ? 5 : 8
+        };
+
+        mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, options);
+        setMapReady(true);
+        setMapError(null);
+        console.log('Kakao Map initialized');
+      } catch (err) {
+        console.error('Map init error:', err);
+        setMapError('지도 초기화 실패: ' + err.message);
+      }
+    });
 
     return () => {
       markersRef.current.forEach(m => m.setMap(null));
       if (userMarkerRef.current) userMarkerRef.current.setMap(null);
     };
-  }, []);
+  }, [sdkLoaded]);
 
   // 장소 마커 생성
   useEffect(() => {
