@@ -3,6 +3,10 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 // 📊 Analytics & Observability
 import { initSentry, trackEvent, trackError, EventType } from './lib/analytics';
 
+// 📱 Capacitor Plugins (네이티브 기능)
+import { Geolocation } from '@capacitor/geolocation';
+import { Capacitor } from '@capacitor/core';
+
 // Initialize Sentry on module load
 initSentry();
 
@@ -780,7 +784,6 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
     // Check if API key is configured
     if (!KAKAO_APP_KEY) {
       setMapError('지도 API 키가 설정되지 않았습니다');
-      // Keep showing error UI instead of navigating away
       return;
     }
 
@@ -789,27 +792,35 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
       return;
     }
 
+    // 로딩 타임아웃 (10초)
+    const timeout = setTimeout(() => {
+      if (!sdkLoaded) {
+        setMapError('지도 로딩 시간 초과 - 네트워크를 확인해주세요');
+      }
+    }, 10000);
+
     const script = document.createElement('script');
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&autoload=false`;
     script.async = true;
 
     script.onload = () => {
+      clearTimeout(timeout);
       console.log('Kakao SDK script loaded');
       setSdkLoaded(true);
     };
 
     script.onerror = (e) => {
+      clearTimeout(timeout);
       console.error('Kakao SDK load error:', e);
-      setMapError('카카오맵 SDK 로드 실패');
-      // Keep showing error UI instead of navigating away
+      setMapError('카카오맵 SDK 로드 실패 - 인터넷 연결을 확인해주세요');
     };
 
     document.head.appendChild(script);
 
     return () => {
-      // cleanup if needed
+      clearTimeout(timeout);
     };
-  }, []);
+  }, [sdkLoaded]);
 
   // 카카오맵 초기화
   useEffect(() => {
@@ -1011,7 +1022,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
           <div style={{ fontSize: '11px', color: '#94a3b8', lineHeight: '1.5' }}>
             카카오 개발자 콘솔에서<br/>
             플랫폼 → Web 도메인 등록 필요:<br/>
-            <span style={{ color: '#60a5fa' }}>card-ai-pi.vercel.app</span>
+            <span style={{ color: '#60a5fa' }}>localhost, capacitor://localhost</span>
           </div>
         </div>
       )}
@@ -1507,10 +1518,45 @@ export default function CardBenefitsApp() {
     }
   };
 
-  const requestLocation = () => {
+  const requestLocation = async () => {
     if (locationStatus === 'loading') return;
     setLocationStatus('loading');
     trackEvent(EventType.LOCATION_PROMPT);
+
+    // Capacitor 네이티브 앱인 경우 네이티브 플러그인 사용
+    if (Capacitor.isNativePlatform()) {
+      try {
+        // 먼저 권한 요청
+        const permission = await Geolocation.requestPermissions();
+        if (permission.location === 'denied') {
+          setUserLocation(null);
+          setLocationStatus('denied');
+          showToast(MESSAGES.LOCATION.DENIED);
+          trackEvent(EventType.LOCATION_DENIED, { reason: 'user_denied' });
+          return;
+        }
+
+        // 위치 가져오기
+        const position = await Geolocation.getCurrentPosition({
+          enableHighAccuracy: true,
+          timeout: CONFIG.TIMEOUTS.LOCATION,
+          maximumAge: 60000
+        });
+        setUserLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+        setLocationStatus('success');
+        showToast(MESSAGES.LOCATION.SUCCESS);
+        trackEvent(EventType.LOCATION_GRANTED);
+      } catch (err) {
+        console.error('Capacitor Geolocation error:', err);
+        setUserLocation(CONFIG.DEFAULTS.LOCATION);
+        setLocationStatus('fallback');
+        showToast(MESSAGES.LOCATION.FALLBACK);
+        trackEvent(EventType.LOCATION_DENIED, { reason: 'error', message: err.message });
+      }
+      return;
+    }
+
+    // 웹 브라우저인 경우 기존 API 사용
     if (!navigator.geolocation) {
       setUserLocation(null);
       setLocationStatus('denied');
@@ -1542,11 +1588,12 @@ export default function CardBenefitsApp() {
     );
   };
 
-  const handleNearby = () => {
+  const handleNearby = async () => {
     if (locationStatus === 'success' || locationStatus === 'fallback') {
       setShowPlaceSheet(true);
     } else {
-      requestLocation();
+      // 먼저 위치 권한 요청, 완료 후 시트 열기
+      await requestLocation();
       setShowPlaceSheet(true);
     }
   };
@@ -1872,7 +1919,7 @@ export default function CardBenefitsApp() {
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-lg">{selectedPlace ? placeTypeConfig[selectedPlace.type]?.emoji : '📍'}</div>
                 <div className="flex-1 text-left min-w-0"><p className="text-[10px] text-slate-400">현재 장소</p><p className="font-bold truncate text-sm">{selectedPlace ? selectedPlace.name : '선택하세요'}</p></div>
               </button>
-              <button onClick={handleNearby} className="w-14 h-14 bg-blue-600 rounded-2xl flex flex-col items-center justify-center active:scale-95" aria-label="내 주변"><span className="text-lg">🎯</span><span className="text-[8px] font-bold">내주변</span></button>
+              <button onClick={async () => { await requestLocation(); setShowPlaceSheet(true); }} className="w-14 h-14 bg-blue-600 rounded-2xl flex flex-col items-center justify-center active:scale-95" aria-label="내 주변"><span className="text-lg">🎯</span><span className="text-[8px] font-bold">내주변</span></button>
             </div>
 
             <div className="relative">
@@ -2262,7 +2309,15 @@ export default function CardBenefitsApp() {
               <div><div className="w-10 h-1 bg-slate-600 rounded-full mx-auto mb-3" /><h2 className="text-lg font-bold">장소 선택</h2></div>
               <div className="flex gap-2" role="tablist">
                 <button onClick={() => setPlaceSheetView('list')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'list' ? 'bg-blue-600' : 'bg-slate-700'}`} role="tab" aria-label="목록 보기" aria-selected={placeSheetView === 'list'}>📋 목록</button>
-                <button onClick={() => CONFIG.FEATURES.MAP_ENABLED ? setPlaceSheetView('map') : showToast('지도 기능이 일시적으로 비활성화되어 있습니다')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'map' ? 'bg-blue-600' : 'bg-slate-700'} ${!CONFIG.FEATURES.MAP_ENABLED ? 'opacity-50' : ''}`} role="tab" aria-label="지도 보기" aria-selected={placeSheetView === 'map'} disabled={!CONFIG.FEATURES.MAP_ENABLED}>🗺️ 지도</button>
+                <button onClick={() => {
+                  if (!CONFIG.FEATURES.MAP_ENABLED) {
+                    showToast('지도 기능이 일시적으로 비활성화되어 있습니다');
+                    return;
+                  }
+                  // 지도 열 때 위치 권한 요청
+                  if (locationStatus === 'idle') requestLocation();
+                  setPlaceSheetView('map');
+                }} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'map' ? 'bg-blue-600' : 'bg-slate-700'} ${!CONFIG.FEATURES.MAP_ENABLED ? 'opacity-50' : ''}`} role="tab" aria-label="지도 보기" aria-selected={placeSheetView === 'map'} disabled={!CONFIG.FEATURES.MAP_ENABLED}>🗺️ 지도</button>
               </div>
             </div>
             <div className="h-[calc(75vh-80px)] overflow-hidden">
