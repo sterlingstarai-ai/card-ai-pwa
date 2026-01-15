@@ -787,6 +787,8 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
       return;
     }
 
+    console.log('[MapView] Platform:', Capacitor.getPlatform(), 'API Key:', KAKAO_APP_KEY ? 'set' : 'missing');
+
     if (window.kakao && window.kakao.maps) {
       setSdkLoaded(true);
       return;

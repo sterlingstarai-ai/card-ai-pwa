@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CAPACITOR_DEBUG</key>
+	<key>CAPACITOR_DEBUG</key>
 	<string>$(CAPACITOR_DEBUG)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Card AI</string>
+	<string>Card AI</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,6 +24,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>카드 스캔(OCR) 기능을 위해 카메라 접근이 필요합니다. 카메라를 허용하지 않아도 직접 카드를 선택하여 등록할 수 있습니다.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>주변 혜택을 추천해드리기 위해 위치 정보가 필요합니다. 위치를 허용하지 않아도 앱의 핵심 기능(카드 검색, 지갑, 혜택 조회)은 정상 이용 가능합니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>저장된 카드 이미지를 스캔하기 위해 사진 라이브러리 접근이 필요합니다. 사진 접근을 허용하지 않아도 카메라로 직접 촬영하거나 수동 등록이 가능합니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -47,11 +53,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>주변 혜택을 추천해드리기 위해 위치 정보가 필요합니다. 위치를 허용하지 않아도 앱의 핵심 기능(카드 검색, 지갑, 혜택 조회)은 정상 이용 가능합니다.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>카드 스캔(OCR) 기능을 위해 카메라 접근이 필요합니다. 카메라를 허용하지 않아도 직접 카드를 선택하여 등록할 수 있습니다.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>저장된 카드 이미지를 스캔하기 위해 사진 라이브러리 접근이 필요합니다. 사진 접근을 허용하지 않아도 카메라로 직접 촬영하거나 수동 등록이 가능합니다.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

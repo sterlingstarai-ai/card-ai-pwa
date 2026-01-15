@@ -4,7 +4,10 @@
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "iosScheme": "https",
+    "hostname": "localhost",
+    "allowNavigation": ["dapi.kakao.com", "*.kakao.com", "*.daumcdn.net"]
   },
   "plugins": {
     "Camera": {
@@ -17,7 +20,8 @@
   "ios": {
     "contentInset": "automatic",
     "allowsLinkPreview": false,
-    "scrollEnabled": true
+    "scrollEnabled": true,
+    "limitsNavigationsToAppBoundDomains": false
   },
   "android": {
     "allowMixedContent": false
