@@ -1109,7 +1109,8 @@ export default function CardBenefitsApp() {
   const [placeCategoryFilter, setPlaceCategoryFilter] = useState('all');
   const [showOcrModal, setShowOcrModal] = useState(false);
   const [ocrCandidates, setOcrCandidates] = useState([]);
-  const [ocrStatus, setOcrStatus] = useState('idle');
+  const [ocrStatus, setOcrStatus] = useState('idle'); // 'idle' | 'loading' | 'confirm' | 'notfound' | 'network_error' | 'timeout' | 'error'
+  const [ocrMessage, setOcrMessage] = useState(''); // UI 표시용 메시지
   const [expandedIssuer, setExpandedIssuer] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
   const [walletSearch, setWalletSearch] = useState(''); // 지갑 검색용
@@ -1504,6 +1505,7 @@ export default function CardBenefitsApp() {
     setPlaceSheetView('list');
     setShowOcrModal(false);
     setOcrStatus('idle');
+    setOcrMessage('');
     setOcrCandidates([]);
     setExpandedIssuer(null);
     setWalletSearch('');
@@ -1685,7 +1687,7 @@ export default function CardBenefitsApp() {
         reader.readAsDataURL(f);
       });
 
-      safeSet(() => setOcrStatus('이미지 처리중...'));
+      safeSet(() => { setOcrStatus('loading'); setOcrMessage('이미지 처리중...'); });
 
       // 이미지 압축 (대용량 이미지 최적화)
       const compressedFile = await compressImage(file);
@@ -1694,7 +1696,7 @@ export default function CardBenefitsApp() {
       // 취소 확인
       if (ocrRunIdRef.current !== runId) return;
 
-      safeSet(() => setOcrStatus('카드 분석중...'));
+      safeSet(() => setOcrMessage('카드 분석중...'));
 
       // AbortController for timeout/cancellation
       const controller = new AbortController();
@@ -1754,7 +1756,8 @@ export default function CardBenefitsApp() {
             trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidates.length });
           } else {
             setOcrStatus('notfound');
-            showToast(`인식된 텍스트: ${recognizedText.substring(0, 30)}...`);
+            // 민감정보 보호: OCR 텍스트를 사용자에게 노출하지 않음
+            showToast('카드 정보를 찾지 못했습니다');
             trackEvent(EventType.OCR_FAIL, { reason: 'no_match', textLength: recognizedText.length });
           }
         });
@@ -1800,6 +1803,7 @@ export default function CardBenefitsApp() {
     }
     setShowOcrModal(false);
     setOcrStatus('idle');
+    setOcrMessage('');
     setOcrCandidates([]);
   };
 
@@ -1823,6 +1827,7 @@ export default function CardBenefitsApp() {
     setShowOcrModal(false);
     setOcrCandidates([]);
     setOcrStatus('idle');
+    setOcrMessage('');
     setExpandedIssuer(null);
     setSearchQuery('');
     setWalletSearch(''); // 지갑 검색어도 초기화
@@ -2428,10 +2433,10 @@ export default function CardBenefitsApp() {
       {showOcrModal && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-end" role="dialog" aria-modal="true">
           <div className="bg-[#1a1a1f] w-full rounded-t-3xl p-6 max-h-[80vh] overflow-y-auto" style={{ maxWidth: '430px', margin: '0 auto', paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}>
-            <div className="flex justify-between items-center mb-4"><h2 className="text-lg font-bold">📷 카드 스캔</h2><button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setOcrStatus('idle'); setOcrCandidates([]); }} className="text-slate-400 text-2xl">×</button></div>
+            <div className="flex justify-between items-center mb-4"><h2 className="text-lg font-bold">📷 카드 스캔</h2><button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setOcrStatus('idle'); setOcrMessage(''); setOcrCandidates([]); }} className="text-slate-400 text-2xl">×</button></div>
             <input ref={fileInputRef} type="file" accept="image/*" capture="environment" onChange={handleOCR} className="hidden" />
             {ocrStatus === 'idle' && <button onClick={() => fileInputRef.current?.click()} className="w-full py-12 bg-slate-800 rounded-2xl border-2 border-dashed border-slate-600 flex flex-col items-center gap-3 active:scale-[0.98]"><span className="text-5xl">📷</span><span className="font-medium">카드 사진 촬영</span></button>}
-            {(ocrStatus === 'loading' || ocrStatus.includes('%')) && <div className="py-16 text-center"><div className="w-16 h-16 mx-auto mb-4 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" /><p className="text-slate-400">{ocrStatus}</p></div>}
+            {ocrStatus === 'loading' && <div className="py-16 text-center"><div className="w-16 h-16 mx-auto mb-4 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" /><p className="text-slate-400">{ocrMessage || '처리중...'}</p></div>}
             {ocrStatus === 'confirm' && ocrCandidates.length > 0 && (
               <div>
                 <p className="text-sm text-blue-400 mb-4">✨ 카드를 선택하세요</p>
@@ -2444,15 +2449,15 @@ export default function CardBenefitsApp() {
                     </button>
                   ))}
                 </div>
-                <button onClick={() => { setOcrStatus('idle'); setOcrCandidates([]); }} className="w-full mt-4 py-3 text-slate-400">다시 촬영</button>
+                <button onClick={() => { setOcrStatus('idle'); setOcrMessage(''); setOcrCandidates([]); }} className="w-full mt-4 py-3 text-slate-400">다시 촬영</button>
               </div>
             )}
             {ocrStatus === 'notfound' && (
               <div className="text-center py-8">
                 <span className="text-5xl">🤔</span>
                 <p className="text-slate-400 mt-4 mb-6">카드를 인식하지 못했어요</p>
-                <button onClick={() => setOcrStatus('idle')} className="w-full py-3 bg-slate-700 rounded-xl font-medium mb-3">다시 촬영</button>
-                <button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setActiveTab('wallet'); setOcrStatus('idle'); }} className="w-full py-3 bg-blue-600 rounded-xl font-medium">직접 선택</button>
+                <button onClick={() => { setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-slate-700 rounded-xl font-medium mb-3">다시 촬영</button>
+                <button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setActiveTab('wallet'); setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-blue-600 rounded-xl font-medium">직접 선택</button>
               </div>
             )}
             {ocrStatus === 'network_error' && (
@@ -2460,8 +2465,8 @@ export default function CardBenefitsApp() {
                 <span className="text-5xl">🌐</span>
                 <p className="text-white font-bold mt-4 mb-2">인터넷 연결 필요</p>
                 <p className="text-slate-400 text-sm mb-6">카드 스캔은 인터넷 연결이 필요합니다.<br/>Wi-Fi 또는 데이터를 확인해주세요.</p>
-                <button onClick={() => setOcrStatus('idle')} className="w-full py-3 bg-slate-700 rounded-xl font-medium mb-3">다시 시도</button>
-                <button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setActiveTab('wallet'); setOcrStatus('idle'); }} className="w-full py-3 bg-blue-600 rounded-xl font-medium">직접 선택하기</button>
+                <button onClick={() => { setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-slate-700 rounded-xl font-medium mb-3">다시 시도</button>
+                <button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setActiveTab('wallet'); setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-blue-600 rounded-xl font-medium">직접 선택하기</button>
               </div>
             )}
           </div>
