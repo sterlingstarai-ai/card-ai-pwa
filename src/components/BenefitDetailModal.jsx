@@ -4,7 +4,7 @@
 
 import { categoryConfig } from '../lib/utils';
 
-export const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
+export const BenefitDetailModal = ({ benefit, cardsData, onClose, onReport }) => {
   if (!benefit) return null;
   const card = cardsData?.[benefit.cardId];
 
@@ -65,12 +65,26 @@ export const BenefitDetailModal = ({ benefit, cardsData, onClose }) => {
             <span className={verification.color}>{verification.text}</span>
           </div>
         </div>
-        <button
-          onClick={onClose}
-          className="w-full py-4 bg-blue-600 rounded-2xl font-bold active:scale-[0.98] transition-transform"
-        >
-          확인
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={onClose}
+            className="flex-1 py-4 bg-blue-600 rounded-2xl font-bold active:scale-[0.98] transition-transform"
+          >
+            확인
+          </button>
+          {onReport && (
+            <button
+              onClick={() => {
+                onClose();
+                onReport(card?.name || '');
+              }}
+              className="py-4 px-4 bg-slate-700/50 border border-white/10 rounded-2xl text-sm font-medium text-slate-300 active:scale-[0.98] transition-transform"
+              aria-label="정보 수정 제보"
+            >
+              📝
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

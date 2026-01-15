@@ -68,6 +68,10 @@ export const EventType = {
   // Search events
   SEARCH_QUERY: 'search_query',
   SEARCH_NO_RESULTS: 'search_no_results',
+
+  // Demo mode events
+  DEMO_START: 'demo_start',
+  DEMO_END: 'demo_end',
 };
 
 // Event queue for batching

@@ -1,10 +1,12 @@
 /**
  * BenefitsTab - 내 혜택 탭 컴포넌트
  * 필터링, Universal 혜택, 네트워크 혜택, 카테고리별 혜택
+ * SummaryBar: 장소 선택 시 상단 고정 요약
  */
 
 import { categoryConfig } from '../lib/utils';
 import { CONFIG } from '../constants/config';
+import { SummaryBar } from '../components/SummaryBar';
 
 export const BenefitsTab = ({
   // Data
@@ -13,14 +15,33 @@ export const BenefitsTab = ({
   filteredAllMyBenefitsEntries,
   myNetworkBenefits,
   myCards,
+  selectedPlace,
+  smartBest,
   // Handlers
   clearBenefitsFilter,
   openBenefitDetail,
+  setActiveTab,
   // Refs
   categorySectionRefs
 }) => {
+  // SummaryBar 요약 텍스트 생성
+  const getBenefitSummary = () => {
+    if (!smartBest || !smartBest.benefitSummary) return '';
+    return smartBest.benefitSummary.slice(0, 3).map(s => s.title).join(' + ');
+  };
+
   return (
     <div className="p-5 space-y-6" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* SummaryBar - 장소 선택 시 상단 고정 */}
+      {selectedPlace && smartBest && (
+        <SummaryBar
+          placeName={selectedPlace.name}
+          benefitSummary={getBenefitSummary()}
+          estimatedValue={smartBest.totalValue}
+          onClick={() => setActiveTab('home')}
+        />
+      )}
+
       {/* Filter Banner */}
       {benefitsFilterTag && (
         <div className="bg-blue-600/10 border border-blue-500/20 rounded-2xl p-4 flex items-center justify-between">

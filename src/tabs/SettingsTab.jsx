@@ -37,6 +37,7 @@ export const SettingsTab = ({
       <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
         <h3 className="font-bold mb-3">💬 문의 및 지원</h3>
         <a href={`mailto:${CONFIG.LINKS.SUPPORT_EMAIL}?subject=[Card AI] 문의사항`} className="block w-full py-2.5 bg-blue-600/20 text-blue-400 rounded-xl text-sm font-medium text-center border border-blue-500/30 mb-2">📧 문의하기</a>
+        <a href={`mailto:${CONFIG.LINKS.DATA_REPORT_EMAIL}?subject=[Card AI] 데이터 제보&body=제보 유형: (오류/누락/신규)%0A%0A관련 정보:%0A- 카드명: %0A- 장소명: %0A- 혜택 내용: %0A%0A상세 설명:%0A`} className="block w-full py-2.5 bg-amber-600/20 text-amber-400 rounded-xl text-sm font-medium text-center border border-amber-500/30 mb-2">📝 정보 수정 제보</a>
         <button onClick={() => {
           const diagInfo = `앱 버전: ${CONFIG.BUILD.VERSION} (${CONFIG.BUILD.BUILD_NUMBER})\n빌드: ${CONFIG.BUILD.COMMIT_HASH}\n플랫폼: ${navigator.userAgent.includes('iPhone') ? 'iOS' : navigator.userAgent.includes('Android') ? 'Android' : 'Web'}\n저장소: ${storage.getMode()}\n카드 수: ${myCards.length}\n`;
           if (navigator.share) {

@@ -11,14 +11,27 @@ export const WalletTab = ({
   filteredCardsByIssuer,
   myCards,
   expandedIssuer,
+  isDemo,
   // Handlers
   setWalletSearch,
   setExpandedIssuer,
   setMyCards,
-  showToast
+  showToast,
+  exitDemo
 }) => {
   return (
     <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)', paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* Demo Mode Banner */}
+      {isDemo && (
+        <div className="bg-purple-600/20 border border-purple-500/30 rounded-xl p-3 flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <span className="bg-purple-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">DEMO</span>
+            <span className="text-sm text-slate-300">체험용 카드가 표시됩니다</span>
+          </div>
+          <button onClick={exitDemo} className="text-xs text-purple-400 underline">종료</button>
+        </div>
+      )}
+
       {/* Search */}
       <input
         type="text"

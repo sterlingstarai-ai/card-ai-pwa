@@ -27,7 +27,7 @@ import {
 import { createBenefitsEngine } from './lib/benefits-engine';
 
 // 🎨 UI Components
-import { Toast, LoadingScreen, ErrorScreen, BenefitDetailModal, PlaceSheet, OcrModal } from './components';
+import { Toast, LoadingScreen, ErrorScreen, BenefitDetailModal, PlaceSheet, OcrModal, ReportModal } from './components';
 
 // 📑 Tab Components
 import { HomeTab, BenefitsTab, WalletTab, SettingsTab } from './tabs';
@@ -112,6 +112,10 @@ export default function CardBenefitsApp() {
   const [pendingScrollCat, setPendingScrollCat] = useState(null);
   const [isOffline, setIsOffline] = useState(false); // 오프라인 감지
   const [selectedBenefit, setSelectedBenefit] = useState(null); // 혜택 상세 모달
+  const [isDemo, setIsDemo] = useState(false); // 데모 모드 상태
+  const [showReportModal, setShowReportModal] = useState(false); // 제보 모달
+  const [reportPrefillCard, setReportPrefillCard] = useState(''); // 제보 모달 카드명 프리필
+  const [reportPrefillPlace, setReportPrefillPlace] = useState(''); // 제보 모달 장소명 프리필
 
   const categorySectionRefs = useRef({});
   const saveTimerRef = useRef(null);
@@ -238,8 +242,9 @@ export default function CardBenefitsApp() {
 
 
   // Save user data (debounced to reduce I/O on mobile WebView)
+  // 데모 모드일 때는 저장하지 않음
   useEffect(() => {
-    if (!dataLoaded) return;
+    if (!dataLoaded || isDemo) return;
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(() => {
       void storage.set(CONFIG.DB.KEY, { myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds });
@@ -247,7 +252,7 @@ export default function CardBenefitsApp() {
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
-  }, [myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds, dataLoaded]);
+  }, [myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds, dataLoaded, isDemo]);
 
   // Debounce search
   useEffect(() => {
@@ -824,6 +829,32 @@ export default function CardBenefitsApp() {
     setBenefitsFilterTag(null);
   };
 
+  // Demo Mode Handlers
+  const startDemo = useCallback(() => {
+    // 데모 모드 시작 - 데모 카드와 장소 설정 (저장 안 함)
+    setIsDemo(true);
+    setMyCards(CONFIG.DEMO.CARDS);
+    setSelectedPlaceId(CONFIG.DEMO.PLACE);
+    showToast('🎮 데모 모드 시작');
+    trackEvent(EventType.DEMO_START);
+  }, [showToast]);
+
+  const exitDemo = useCallback(() => {
+    // 데모 모드 종료 - 원래 상태로 복원
+    setIsDemo(false);
+    setMyCards([]);
+    setSelectedPlaceId(null);
+    showToast('데모 모드 종료');
+    trackEvent(EventType.DEMO_END);
+  }, [showToast]);
+
+  // 제보 모달 열기
+  const openReportModal = useCallback((cardName = '', placeName = '') => {
+    setReportPrefillCard(cardName);
+    setReportPrefillPlace(placeName);
+    setShowReportModal(true);
+  }, []);
+
   const handleRetry = () => {
     dataService.clearCache();
     loadData();
@@ -899,6 +930,7 @@ export default function CardBenefitsApp() {
             searchResults={searchResults}
             demoData={demoData}
             myCards={myCards}
+            isDemo={isDemo}
             setShowPlaceSheet={setShowPlaceSheet}
             requestLocation={requestLocation}
             setSearchQuery={setSearchQuery}
@@ -910,6 +942,8 @@ export default function CardBenefitsApp() {
             setActiveTab={setActiveTab}
             setMyCards={setMyCards}
             showToast={showToast}
+            startDemo={startDemo}
+            exitDemo={exitDemo}
           />
         )}
 
@@ -920,8 +954,11 @@ export default function CardBenefitsApp() {
             filteredAllMyBenefitsEntries={filteredAllMyBenefitsEntries}
             myNetworkBenefits={myNetworkBenefits}
             myCards={myCards}
+            selectedPlace={selectedPlace}
+            smartBest={smartBest}
             clearBenefitsFilter={clearBenefitsFilter}
             openBenefitDetail={openBenefitDetail}
+            setActiveTab={setActiveTab}
             categorySectionRefs={categorySectionRefs}
           />
         )}
@@ -932,10 +969,12 @@ export default function CardBenefitsApp() {
             filteredCardsByIssuer={filteredCardsByIssuer}
             myCards={myCards}
             expandedIssuer={expandedIssuer}
+            isDemo={isDemo}
             setWalletSearch={setWalletSearch}
             setExpandedIssuer={setExpandedIssuer}
             setMyCards={setMyCards}
             showToast={showToast}
+            exitDemo={exitDemo}
           />
         )}
 
@@ -1003,7 +1042,23 @@ export default function CardBenefitsApp() {
       )}
 
       {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
-      {selectedBenefit && <BenefitDetailModal benefit={selectedBenefit} cardsData={cardsData} onClose={() => setSelectedBenefit(null)} />}
+      {selectedBenefit && (
+        <BenefitDetailModal
+          benefit={selectedBenefit}
+          cardsData={cardsData}
+          onClose={() => setSelectedBenefit(null)}
+          onReport={(cardName) => openReportModal(cardName, selectedPlace?.name || '')}
+        />
+      )}
+      {showReportModal && (
+        <ReportModal
+          isOpen={showReportModal}
+          onClose={() => setShowReportModal(false)}
+          showToast={showToast}
+          prefillCardName={reportPrefillCard}
+          prefillPlaceName={reportPrefillPlace}
+        />
+      )}
     </div>
   );
 }

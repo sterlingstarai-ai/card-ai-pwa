@@ -121,6 +121,7 @@ export const CONFIG = {
     TERMS_OF_SERVICE: 'https://cardai.app/terms',
     SUPPORT_EMAIL: 'support@cardai.app',
     FEEDBACK_EMAIL: 'feedback@cardai.app',
+    DATA_REPORT_EMAIL: 'data@cardai.app',
   },
 
   // 빌드 정보
