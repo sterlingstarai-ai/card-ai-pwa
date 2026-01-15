@@ -464,7 +464,7 @@ export default function CardBenefitsApp() {
         networkBenefitCount: availableBenefits.networkBenefits.length
       });
     }
-  }, [selectedPlace?.id, availableBenefits]);
+  }, [selectedPlace, availableBenefits]);
 
   // Handlers
   const resetHomeContext = () => {

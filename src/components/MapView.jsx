@@ -8,7 +8,7 @@ import { placeTypeConfig } from '../lib/utils';
 
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_APP_KEY || '';
 
-export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose, onError, benefitsData, cardsData, myCards }) => {
+export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose, onError = () => {}, benefitsData, cardsData, myCards }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef([]);
@@ -31,7 +31,9 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
   useEffect(() => {
     // Check if API key is configured
     if (!KAKAO_APP_KEY) {
-      setMapError('지도 API 키가 설정되지 않았습니다');
+      const error = '지도 API 키가 설정되지 않았습니다';
+      setMapError(error);
+      onError(error);
       return;
     }
 
@@ -45,7 +47,9 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
     // 로딩 타임아웃 (10초)
     const timeout = setTimeout(() => {
       if (!sdkLoaded) {
-        setMapError('지도 로딩 시간 초과 - 네트워크를 확인해주세요');
+        const error = '지도 로딩 시간 초과 - 네트워크를 확인해주세요';
+        setMapError(error);
+        onError(error);
       }
     }, 10000);
 
@@ -62,7 +66,9 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
     script.onerror = (e) => {
       clearTimeout(timeout);
       console.error('Kakao SDK load error:', e);
-      setMapError('카카오맵 SDK 로드 실패 - 인터넷 연결을 확인해주세요');
+      const error = '카카오맵 SDK 로드 실패 - 인터넷 연결을 확인해주세요';
+      setMapError(error);
+      onError(error);
     };
 
     document.head.appendChild(script);
@@ -70,9 +76,10 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
     return () => {
       clearTimeout(timeout);
     };
-  }, [sdkLoaded]);
+  }, [sdkLoaded, onError]);
 
-  // 카카오맵 초기화
+  // 카카오맵 초기화 (userLocation은 초기 센터용, 변경 시 재초기화 안함)
+  const initialUserLocation = useRef(userLocation);
   useEffect(() => {
     if (!sdkLoaded || !window.kakao || !window.kakao.maps) {
       return;
@@ -82,13 +89,14 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
       if (!mapContainerRef.current) return;
 
       try {
-        const initialCenter = userLocation
-          ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
+        const loc = initialUserLocation.current;
+        const initialCenter = loc
+          ? new window.kakao.maps.LatLng(loc.lat, loc.lng)
           : new window.kakao.maps.LatLng(37.55, 127.0);
 
         const options = {
           center: initialCenter,
-          level: userLocation ? 5 : 8
+          level: loc ? 5 : 8
         };
 
         mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, options);
@@ -97,7 +105,9 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
         console.log('Kakao Map initialized');
       } catch (err) {
         console.error('Map init error:', err);
-        setMapError('지도 초기화 실패: ' + err.message);
+        const error = '지도 초기화 실패: ' + err.message;
+        setMapError(error);
+        onError(error);
       }
     });
 
@@ -105,7 +115,7 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
       markersRef.current.forEach(m => m.setMap(null));
       if (userMarkerRef.current) userMarkerRef.current.setMap(null);
     };
-  }, [sdkLoaded]);
+  }, [sdkLoaded, onError]);
 
   // 장소 마커 생성
   useEffect(() => {
