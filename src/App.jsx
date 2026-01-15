@@ -26,6 +26,9 @@ import {
   placeCategories
 } from './lib/utils';
 
+// 🎯 Benefits Engine
+import { createBenefitsEngine } from './lib/benefits-engine';
+
 // 🎨 UI Components
 import { Toast, LoadingScreen, ErrorScreen, BenefitDetailModal, MapView } from './components';
 
@@ -78,6 +81,12 @@ export default function CardBenefitsApp() {
   const [placesData, setPlacesData] = useState({});
   const [benefitsData, setBenefitsData] = useState({});
   const [networkBenefits, setNetworkBenefits] = useState({});
+
+  // Benefits Engine (인덱싱된 혜택 조회)
+  const benefitsEngine = useMemo(() => {
+    if (!dataLoaded || Object.keys(benefitsData).length === 0) return null;
+    return createBenefitsEngine(benefitsData, cardsData);
+  }, [dataLoaded, benefitsData, cardsData]);
 
   // User state
   const [myCards, setMyCards] = useState([]);
@@ -349,38 +358,20 @@ export default function CardBenefitsApp() {
       return expandedTerms.some(term => nameLower.includes(term)) || p.tags.includes(tag);
     }).slice(0, CONFIG.UI.MAX_SEARCH_RESULTS.PLACES);
 
-    const mySet = new Set(myCards);
-    const benefits = Object.entries(benefitsData)
-      .filter(([_, b]) => {
-        if (!mySet.has(b.cardId)) return false;
-        const titleLower = b.title.toLowerCase();
-        return b.category === tag ||
-          expandedTerms.some(term => titleLower.includes(term)) ||
-          b.placeTags?.includes(tag);
-      })
-      .map(([id, b]) => ({ id, ...b, card: cardsData[b.cardId], estimatedValue: estimateValue(b) }))
-      .sort((a, b) => b.estimatedValue - a.estimatedValue)
-      .slice(0, CONFIG.UI.MAX_SEARCH_RESULTS.BENEFITS);
+    // Use BenefitsEngine for optimized search
+    const benefits = benefitsEngine
+      ? benefitsEngine.search(myCards, tag, expandedTerms, CONFIG.UI.MAX_SEARCH_RESULTS.BENEFITS)
+      : [];
     return { places, benefits };
-  }, [debouncedQuery, myCards, placesData, benefitsData, cardsData]);
+  }, [debouncedQuery, myCards, placesData, benefitsEngine]);
 
   const universalBenefits = useMemo(() => {
-    const s = new Set(myCards);
-    return Object.entries(benefitsData)
-      .filter(([_, b]) => s.has(b.cardId) && (!b.placeTags || b.placeTags.length === 0))
-      .map(([id, b]) => ({ id, ...b, card: cardsData[b.cardId] }));
-  }, [myCards, benefitsData, cardsData]);
+    return benefitsEngine ? benefitsEngine.getUniversal(myCards) : [];
+  }, [myCards, benefitsEngine]);
 
   const allMyBenefits = useMemo(() => {
-    const s = new Set(myCards), g = {};
-    Object.entries(benefitsData).forEach(([id, b]) => {
-      if (!s.has(b.cardId) || !b.placeTags || b.placeTags.length === 0) return;
-      if (!g[b.category]) g[b.category] = [];
-      g[b.category].push({ id, ...b, card: cardsData[b.cardId], estimatedValue: estimateValue(b) });
-    });
-    Object.keys(g).forEach(c => g[c].sort((a, b) => b.estimatedValue - a.estimatedValue));
-    return g;
-  }, [myCards, benefitsData, cardsData]);
+    return benefitsEngine ? benefitsEngine.getGroupedByCategory(myCards) : {};
+  }, [myCards, benefitsEngine]);
 
   // Demo mode calculations for onboarding
   const demoData = useMemo(() => {
@@ -401,11 +392,14 @@ export default function CardBenefitsApp() {
 
   const availableBenefits = useMemo(() => {
     if (!selectedPlace || myCards.length === 0) return { cardBenefits: [], networkBenefits: [] };
-    const tags = selectedPlace.tags, s = new Set(myCards);
-    const cardBenefits = Object.entries(benefitsData)
-      .filter(([_, b]) => s.has(b.cardId) && b.placeTags?.some(t => tags.includes(t)))
-      .map(([id, b]) => ({ id, ...b, card: cardsData[b.cardId], estimatedValue: estimateValue(b) }))
-      .sort((a, b) => b.estimatedValue - a.estimatedValue);
+    const tags = selectedPlace.tags || [];
+
+    // Use BenefitsEngine for card benefits
+    const cardBenefits = benefitsEngine
+      ? benefitsEngine.getByPlace(myCards, tags)
+      : [];
+
+    // Network benefits (VISA, Mastercard 등)
     const netMap = new Map();
     myCardObjects.forEach(card => {
       const net = networkBenefits[card.network]?.grades[card.grade];
@@ -418,7 +412,7 @@ export default function CardBenefitsApp() {
       });
     });
     return { cardBenefits, networkBenefits: Array.from(netMap.values()) };
-  }, [selectedPlace, myCards, myCardObjects, benefitsData, cardsData, networkBenefits]);
+  }, [selectedPlace, myCards, myCardObjects, benefitsEngine, networkBenefits]);
 
   const cardRanking = useMemo(() => {
     const { cardBenefits, networkBenefits: netBen } = availableBenefits;
