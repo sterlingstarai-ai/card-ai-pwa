@@ -345,17 +345,38 @@ export default function CardBenefitsApp() {
     const expandedTerms = expandSearchQuery(q);
     const tag = findTag(q);
 
-    // Match places using expanded terms
-    const places = Object.values(placesData).filter(p => {
+    // Split query by spaces for multi-word matching (e.g., "롯데 호텔")
+    const queryParts = q.split(/\s+/).filter(Boolean);
+
+    // Match places with scoring: name match > tag match
+    const scoredPlaces = Object.values(placesData).map(p => {
       const nameLower = p.name.toLowerCase();
-      return expandedTerms.some(term => nameLower.includes(term)) || p.tags.includes(tag);
-    }).slice(0, CONFIG.UI.MAX_SEARCH_RESULTS.PLACES);
+      let score = 0;
+
+      // Exact query match in name (highest priority)
+      if (nameLower.includes(q)) score += 100;
+
+      // All query parts match in name (for space-separated queries)
+      if (queryParts.length > 1 && queryParts.every(part => nameLower.includes(part))) score += 80;
+
+      // Any expanded term matches in name
+      if (expandedTerms.some(term => nameLower.includes(term))) score += 50;
+
+      // Tag match (lowest priority)
+      if (p.tags.includes(tag)) score += 10;
+
+      return { place: p, score };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, CONFIG.UI.MAX_SEARCH_RESULTS.PLACES)
+    .map(item => item.place);
 
     // Use BenefitsEngine for optimized search
     const benefits = benefitsEngine
       ? benefitsEngine.search(myCards, tag, expandedTerms, CONFIG.UI.MAX_SEARCH_RESULTS.BENEFITS)
       : [];
-    return { places, benefits };
+    return { places: scoredPlaces, benefits };
   }, [debouncedQuery, myCards, placesData, benefitsEngine]);
 
   const universalBenefits = useMemo(() => {

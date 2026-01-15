@@ -30,7 +30,7 @@ export const NETWORKS_DATA = {
       ]},
       "World": { benefits: [
         { icon: "🛋️", title: "MC 월드 라운지", tags: ["airport", "lounge"], value: 25000, desc: "LoungeKey 공항 라운지 할인 이용 가능." },
-        { icon: "🚗", title: "호텔 발렛", tags: ["hotel", "valet"], value: 20000, desc: "제휴 호텔 발렛파킹 할인." }
+        { icon: "🚗", title: "호텔 발렛", tags: ["hotel"], value: 20000, desc: "제휴 호텔 발렛파킹 할인." }
       ]},
       "Platinum": { benefits: [
         { icon: "🛡️", title: "MC 해외여행보험", tags: ["airport"], value: 10000, desc: "해외 결제 시 여행자보험 자동 가입." }

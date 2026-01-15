@@ -63,12 +63,22 @@ export const expandSearchQuery = (query) => {
   const q = query.toLowerCase().trim();
   const terms = [q];
 
-  // Check synonyms
+  // Check synonyms - only expand when query matches canonical or alias directly
+  // (not when query is a substring of an alias, which causes over-expansion)
   Object.entries(CONFIG.SEARCH_SYNONYMS).forEach(([canonical, aliases]) => {
-    const allTerms = [canonical.toLowerCase(), ...aliases.map(a => a.toLowerCase())];
-    if (allTerms.some(term => q.includes(term) || term.includes(q))) {
-      terms.push(canonical.toLowerCase());
-      aliases.forEach(a => terms.push(a.toLowerCase()));
+    const canonicalLower = canonical.toLowerCase();
+    const allAliases = aliases.map(a => a.toLowerCase());
+
+    // Check if query matches canonical term or any alias directly
+    const isDirectMatch =
+      q === canonicalLower ||
+      allAliases.includes(q) ||
+      q.includes(canonicalLower) ||
+      allAliases.some(alias => q.includes(alias));
+
+    if (isDirectMatch) {
+      terms.push(canonicalLower);
+      allAliases.forEach(a => terms.push(a));
     }
   });
 
