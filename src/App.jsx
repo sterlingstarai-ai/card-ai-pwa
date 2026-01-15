@@ -307,40 +307,34 @@ export default function CardBenefitsApp() {
   const selectedPlace = selectedPlaceId ? placesData[selectedPlaceId] : null;
   const myCardObjects = useMemo(() => myCards.map(id => cardsData[id]).filter(Boolean), [myCards, cardsData]);
 
-  // 네트워크별 기본 혜택 데이터
-  const networkBenefitsData = {
-    VISA: {
-      icon: '💳',
-      color: 'blue',
-      benefits: [
-        { title: '해외 가맹점', desc: '전세계 100만+ 가맹점 이용', value: '글로벌' },
-        { title: '분실 보상', desc: '긴급 카드 재발급 서비스', value: '무료' },
-      ]
-    },
-    Mastercard: {
-      icon: '🌐',
-      color: 'orange',
-      benefits: [
-        { title: '글로벌 네트워크', desc: '전세계 210개국 가맹점', value: '글로벌' },
-        { title: '여행자 보험', desc: '해외 여행 시 기본 보험', value: '포함' },
-      ]
-    },
-    AMEX: {
-      icon: '✨',
-      color: 'emerald',
-      benefits: [
-        { title: '공항 라운지', desc: '국내외 공항 라운지 이용', value: '무료' },
-        { title: '콘시어지', desc: '24시간 프리미엄 컨시어지', value: '무료' },
-        { title: '쇼핑 보장', desc: '구매 상품 90일 보장', value: '포함' },
-      ]
-    }
-  };
+  // 사용자 카드의 네트워크+등급별 혜택 (NETWORKS_DATA 기반)
+  const myNetworkBenefits = useMemo(() => {
+    const result = [];
+    const seen = new Set();
 
-  // 사용자의 카드 네트워크 추출
-  const myNetworks = useMemo(() => {
-    const networks = new Set(myCardObjects.map(c => c.network).filter(Boolean));
-    return Array.from(networks);
-  }, [myCardObjects]);
+    myCardObjects.forEach(card => {
+      if (!card.network || !card.grade) return;
+      const key = `${card.network}|${card.grade}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+
+      const networkData = networkBenefits[card.network]?.grades?.[card.grade];
+      if (networkData && networkData.benefits.length > 0) {
+        result.push({
+          network: card.network,
+          grade: card.grade,
+          card,
+          benefits: networkData.benefits
+        });
+      }
+    });
+
+    // 네트워크, 등급 순으로 정렬
+    return result.sort((a, b) => {
+      if (a.network !== b.network) return a.network.localeCompare(b.network);
+      return a.grade.localeCompare(b.grade);
+    });
+  }, [myCardObjects, networkBenefits]);
   
   const nearbyPlaces = useMemo(() => 
     userLocation ? Object.values(placesData).map(p => ({ ...p, distance: haversineDistance(userLocation, p) })).sort((a, b) => a.distance - b.distance) : []
@@ -1115,35 +1109,33 @@ export default function CardBenefitsApp() {
                 </div>
               </div>
             )}
-            {!benefitsFilterTag && myNetworks.length > 0 && (
+            {!benefitsFilterTag && myNetworkBenefits.length > 0 && (
               <div>
                 <h3 className="text-sm font-bold text-purple-400 mb-3">🌍 카드 네트워크 혜택</h3>
                 <div className="space-y-3">
-                  {myNetworks.map(network => {
-                    const data = networkBenefitsData[network];
-                    if (!data) return null;
-                    const networkCards = myCardObjects.filter(c => c.network === network);
-                    return (
-                      <div key={network} className="bg-purple-500/10 rounded-xl border border-purple-500/20 p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="text-lg">{data.icon}</span>
-                          <span className="font-bold">{network}</span>
-                          <span className="text-[10px] text-slate-400">({networkCards.length}장)</span>
-                        </div>
-                        <div className="space-y-2">
-                          {data.benefits.map((b, idx) => (
-                            <div key={idx} className="flex items-center justify-between text-sm">
-                              <div>
-                                <p className="font-medium text-slate-200">{b.title}</p>
-                                <p className="text-[10px] text-slate-500">{b.desc}</p>
-                              </div>
-                              <span className="text-xs text-purple-300 bg-purple-500/20 px-2 py-1 rounded-full">{b.value}</span>
-                            </div>
-                          ))}
-                        </div>
+                  {myNetworkBenefits.map(({ network, grade, card, benefits }) => (
+                    <div key={`${network}-${grade}`} className="bg-purple-500/10 rounded-xl border border-purple-500/20 p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-lg">{network === 'AMEX' ? '✨' : network === 'VISA' ? '💳' : '🌐'}</span>
+                        <span className="font-bold">{network}</span>
+                        <span className="text-[10px] text-purple-300 bg-purple-500/30 px-2 py-0.5 rounded-full">{grade}</span>
+                        <span className="text-[10px] text-slate-400">· {card.shortName || card.name}</span>
                       </div>
-                    );
-                  })}
+                      <div className="space-y-2">
+                        {benefits.map((b, idx) => (
+                          <div key={idx} className="flex items-start justify-between text-sm gap-2">
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium text-slate-200">{b.icon} {b.title}</p>
+                              <p className="text-[10px] text-slate-500 line-clamp-2">{b.desc}</p>
+                            </div>
+                            <span className="text-[10px] text-purple-300 bg-purple-500/20 px-2 py-1 rounded-full whitespace-nowrap">
+                              {typeof b.value === 'number' ? `${(b.value / 10000).toFixed(0)}만원` : b.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
