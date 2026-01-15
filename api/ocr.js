@@ -8,10 +8,46 @@
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '10mb', // Allow larger images
+      sizeLimit: '4mb', // 압축된 이미지용 (클라이언트에서 1920px, 80% JPEG 압축)
     },
   },
 };
+
+// 간단한 인메모리 레이트 리미터 (Vercel cold start 시 리셋됨)
+// 프로덕션에서는 Vercel KV나 Upstash Redis 권장
+const rateLimitMap = new Map();
+const RATE_LIMIT = {
+  windowMs: 60 * 1000, // 1분
+  maxRequests: 10,     // 분당 10회 (IP당)
+};
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  if (!record || now - record.firstRequest > RATE_LIMIT.windowMs) {
+    rateLimitMap.set(ip, { firstRequest: now, count: 1 });
+    return { allowed: true, remaining: RATE_LIMIT.maxRequests - 1 };
+  }
+
+  if (record.count >= RATE_LIMIT.maxRequests) {
+    const resetTime = Math.ceil((record.firstRequest + RATE_LIMIT.windowMs - now) / 1000);
+    return { allowed: false, resetIn: resetTime };
+  }
+
+  record.count++;
+  return { allowed: true, remaining: RATE_LIMIT.maxRequests - record.count };
+}
+
+// 오래된 레코드 정리 (메모리 누수 방지)
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of rateLimitMap.entries()) {
+    if (now - record.firstRequest > RATE_LIMIT.windowMs * 2) {
+      rateLimitMap.delete(ip);
+    }
+  }
+}, 60 * 1000);
 
 export default async function handler(req, res) {
   // CORS headers
@@ -28,6 +64,23 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  // 레이트 리미트 체크
+  const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+                   req.headers['x-real-ip'] ||
+                   req.socket?.remoteAddress ||
+                   'unknown';
+  const rateCheck = checkRateLimit(clientIp);
+
+  if (!rateCheck.allowed) {
+    res.setHeader('Retry-After', rateCheck.resetIn);
+    return res.status(429).json({
+      error: '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.',
+      retryAfter: rateCheck.resetIn
+    });
+  }
+
+  res.setHeader('X-RateLimit-Remaining', rateCheck.remaining);
 
   const VISION_API_KEY = process.env.VISION_API_KEY;
 

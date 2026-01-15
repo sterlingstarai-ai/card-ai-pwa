@@ -981,7 +981,7 @@ const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose
       {/* 헤더 */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '16px', zIndex: 30, background: 'linear-gradient(to bottom, rgba(15,23,42,0.95), transparent)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <span style={{ fontSize: '12px', color: '#94a3b8' }}>📍 마커를 탭하면 장소가 선택됩니다</span>
+          <span style={{ fontSize: '12px', color: '#94a3b8' }}>마커를 탭하여 장소 선택</span>
           <button onClick={onClose} aria-label="지도 닫기" style={{ width: '32px', height: '32px', background: '#334155', borderRadius: '50%', border: 'none', color: 'white', cursor: 'pointer' }}>✕</button>
         </div>
         <div role="tablist" style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
@@ -1301,6 +1301,41 @@ export default function CardBenefitsApp() {
 
   const selectedPlace = selectedPlaceId ? placesData[selectedPlaceId] : null;
   const myCardObjects = useMemo(() => myCards.map(id => cardsData[id]).filter(Boolean), [myCards, cardsData]);
+
+  // 네트워크별 기본 혜택 데이터
+  const networkBenefitsData = {
+    VISA: {
+      icon: '💳',
+      color: 'blue',
+      benefits: [
+        { title: '해외 가맹점', desc: '전세계 100만+ 가맹점 이용', value: '글로벌' },
+        { title: '분실 보상', desc: '긴급 카드 재발급 서비스', value: '무료' },
+      ]
+    },
+    Mastercard: {
+      icon: '🌐',
+      color: 'orange',
+      benefits: [
+        { title: '글로벌 네트워크', desc: '전세계 210개국 가맹점', value: '글로벌' },
+        { title: '여행자 보험', desc: '해외 여행 시 기본 보험', value: '포함' },
+      ]
+    },
+    AMEX: {
+      icon: '✨',
+      color: 'emerald',
+      benefits: [
+        { title: '공항 라운지', desc: '국내외 공항 라운지 이용', value: '무료' },
+        { title: '콘시어지', desc: '24시간 프리미엄 컨시어지', value: '무료' },
+        { title: '쇼핑 보장', desc: '구매 상품 90일 보장', value: '포함' },
+      ]
+    }
+  };
+
+  // 사용자의 카드 네트워크 추출
+  const myNetworks = useMemo(() => {
+    const networks = new Set(myCardObjects.map(c => c.network).filter(Boolean));
+    return Array.from(networks);
+  }, [myCardObjects]);
   
   const nearbyPlaces = useMemo(() => 
     userLocation ? Object.values(placesData).map(p => ({ ...p, distance: haversineDistance(userLocation, p) })).sort((a, b) => a.distance - b.distance) : []
@@ -1522,6 +1557,55 @@ export default function CardBenefitsApp() {
     }
   };
 
+  // OCR 이미지 리사이즈/압축 (대용량 이미지 최적화)
+  const compressImage = (file, maxSize = 1920, quality = 0.8) => {
+    return new Promise((resolve) => {
+      // 이미 작은 파일은 그대로 반환 (500KB 이하)
+      if (file.size < 500 * 1024) {
+        resolve(file);
+        return;
+      }
+
+      const img = new Image();
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      img.onload = () => {
+        let { width, height } = img;
+
+        // 최대 크기 제한
+        if (width > maxSize || height > maxSize) {
+          if (width > height) {
+            height = Math.round((height * maxSize) / width);
+            width = maxSize;
+          } else {
+            width = Math.round((width * maxSize) / height);
+            height = maxSize;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              Logger.log(`Image compressed: ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB`);
+              resolve(blob);
+            } else {
+              resolve(file); // 압축 실패시 원본 반환
+            }
+          },
+          'image/jpeg',
+          quality
+        );
+      };
+
+      img.onerror = () => resolve(file); // 로드 실패시 원본 반환
+      img.src = URL.createObjectURL(file);
+    });
+  };
 
   const handleOCR = async (e) => {
     const file = e.target.files?.[0];
@@ -1553,7 +1637,10 @@ export default function CardBenefitsApp() {
       });
 
       safeSet(() => setOcrStatus('이미지 처리중...'));
-      const base64Image = await toBase64(file);
+
+      // 이미지 압축 (대용량 이미지 최적화)
+      const compressedFile = await compressImage(file);
+      const base64Image = await toBase64(compressedFile);
 
       // 취소 확인
       if (ocrRunIdRef.current !== runId) return;
@@ -1588,11 +1675,11 @@ export default function CardBenefitsApp() {
         // 텍스트 추출
         const recognizedText = data.text || '';
 
-        Logger.log('OCR recognized:', recognizedText.substring(0, 300));
+        // 보안: 텍스트 내용 대신 메타데이터만 로깅
+        Logger.log('OCR result:', { textLength: recognizedText.length, hasText: !!recognizedText });
 
         // 공백 제거 + 소문자 변환
         const normalizedText = recognizedText.toLowerCase().replace(/\s/g, '');
-        Logger.log('Normalized:', normalizedText.substring(0, 200));
 
         // 카드 매칭
         const candidates = Object.values(cardsData)
@@ -1779,7 +1866,7 @@ export default function CardBenefitsApp() {
 
       <main ref={mainRef} className="flex-1 overflow-y-auto pb-28 scroll-container" role="main">
         {activeTab === 'home' && (
-          <div className="p-5 space-y-5">
+          <div className="p-5 space-y-5" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
             <div className="flex gap-2">
               <button onClick={() => setShowPlaceSheet(true)} className="flex-1 p-4 bg-gradient-to-r from-slate-800/80 to-slate-800/40 rounded-2xl border border-white/10 flex items-center gap-3 active:scale-[0.98]" aria-label="장소 선택">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-lg">{selectedPlace ? placeTypeConfig[selectedPlace.type]?.emoji : '📍'}</div>
@@ -1971,7 +2058,7 @@ export default function CardBenefitsApp() {
         )}
 
         {activeTab === 'benefits' && (
-          <div className="p-5 space-y-6">
+          <div className="p-5 space-y-6" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
             {benefitsFilterTag && (
               <div className="bg-blue-600/10 border border-blue-500/20 rounded-2xl p-4 flex items-center justify-between">
                 <div>
@@ -1995,6 +2082,38 @@ export default function CardBenefitsApp() {
                       <span className="text-xs bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full">{b.value}</span>
                     </button>
                   ))}
+                </div>
+              </div>
+            )}
+            {!benefitsFilterTag && myNetworks.length > 0 && (
+              <div>
+                <h3 className="text-sm font-bold text-purple-400 mb-3">🌍 카드 네트워크 혜택</h3>
+                <div className="space-y-3">
+                  {myNetworks.map(network => {
+                    const data = networkBenefitsData[network];
+                    if (!data) return null;
+                    const networkCards = myCardObjects.filter(c => c.network === network);
+                    return (
+                      <div key={network} className="bg-purple-500/10 rounded-xl border border-purple-500/20 p-4">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-lg">{data.icon}</span>
+                          <span className="font-bold">{network}</span>
+                          <span className="text-[10px] text-slate-400">({networkCards.length}장)</span>
+                        </div>
+                        <div className="space-y-2">
+                          {data.benefits.map((b, idx) => (
+                            <div key={idx} className="flex items-center justify-between text-sm">
+                              <div>
+                                <p className="font-medium text-slate-200">{b.title}</p>
+                                <p className="text-[10px] text-slate-500">{b.desc}</p>
+                              </div>
+                              <span className="text-xs text-purple-300 bg-purple-500/20 px-2 py-1 rounded-full">{b.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -2025,7 +2144,7 @@ export default function CardBenefitsApp() {
         )}
 
         {activeTab === 'wallet' && (
-          <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+          <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)', paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
             <input 
               type="text" 
               placeholder="🔍 카드 이름 또는 카드사 검색..." 
@@ -2079,7 +2198,7 @@ export default function CardBenefitsApp() {
         )}
 
         {activeTab === 'settings' && (
-          <div className="p-5 space-y-4">
+          <div className="p-5 space-y-4" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
             <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
               <h3 className="font-bold mb-2">📍 위치 권한</h3>
               <p className="text-sm text-slate-400 mb-3">{locationStatus === 'idle' ? '위치 권한 필요' : locationStatus === 'loading' ? '확인 중...' : locationStatus === 'success' ? '✅ 허용됨' : locationStatus === 'denied' ? '❌ 거부됨' : '⚠️ 서울 기준'}</p>
@@ -2142,8 +2261,8 @@ export default function CardBenefitsApp() {
             <div className="p-4 border-b border-white/10 flex items-center justify-between">
               <div><div className="w-10 h-1 bg-slate-600 rounded-full mx-auto mb-3" /><h2 className="text-lg font-bold">장소 선택</h2></div>
               <div className="flex gap-2" role="tablist">
-                <button onClick={() => setPlaceSheetView('list')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'list' ? 'bg-blue-600' : 'bg-slate-700'}`} role="tab">📋</button>
-                <button onClick={() => CONFIG.FEATURES.MAP_ENABLED ? setPlaceSheetView('map') : showToast('지도 기능이 일시적으로 비활성화되어 있습니다')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'map' ? 'bg-blue-600' : 'bg-slate-700'} ${!CONFIG.FEATURES.MAP_ENABLED ? 'opacity-50' : ''}`} role="tab">🗺️</button>
+                <button onClick={() => setPlaceSheetView('list')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'list' ? 'bg-blue-600' : 'bg-slate-700'}`} role="tab" aria-label="목록 보기" aria-selected={placeSheetView === 'list'}>📋 목록</button>
+                <button onClick={() => CONFIG.FEATURES.MAP_ENABLED ? setPlaceSheetView('map') : showToast('지도 기능이 일시적으로 비활성화되어 있습니다')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'map' ? 'bg-blue-600' : 'bg-slate-700'} ${!CONFIG.FEATURES.MAP_ENABLED ? 'opacity-50' : ''}`} role="tab" aria-label="지도 보기" aria-selected={placeSheetView === 'map'} disabled={!CONFIG.FEATURES.MAP_ENABLED}>🗺️ 지도</button>
               </div>
             </div>
             <div className="h-[calc(75vh-80px)] overflow-hidden">

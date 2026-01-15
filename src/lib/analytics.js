@@ -22,8 +22,9 @@ export function initSentry() {
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.replayIntegration({
-        maskAllText: false,
-        blockAllMedia: false,
+        // 개인정보 보호: 모든 텍스트와 미디어 마스킹
+        maskAllText: true,
+        blockAllMedia: true,
       }),
     ],
     // Performance monitoring
