@@ -17,20 +17,20 @@ import { dataService } from './lib/data-service';
 // 🛠️ Utilities
 import {
   haversineDistance,
-  formatDistance,
   estimateValue,
   findTag,
   expandSearchQuery,
-  categoryConfig,
-  placeTypeConfig,
-  placeCategories
+  categoryConfig
 } from './lib/utils';
 
 // 🎯 Benefits Engine
 import { createBenefitsEngine } from './lib/benefits-engine';
 
 // 🎨 UI Components
-import { Toast, LoadingScreen, ErrorScreen, BenefitDetailModal, MapView } from './components';
+import { Toast, LoadingScreen, ErrorScreen, BenefitDetailModal, PlaceSheet, OcrModal } from './components';
+
+// 📑 Tab Components
+import { HomeTab, BenefitsTab, WalletTab, SettingsTab } from './tabs';
 
 // Initialize Sentry on module load
 initSentry();
@@ -120,7 +120,6 @@ export default function CardBenefitsApp() {
     try { if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(pattern); } catch { /* vibration not supported */ }
   }, []);
 
-  const fileInputRef = useRef(null);
   const mainRef = useRef(null);
   const ocrRunIdRef = useRef(0); // OCR 레이스 컨디션 방지용
 
@@ -408,33 +407,12 @@ export default function CardBenefitsApp() {
     return { cardBenefits, networkBenefits: Array.from(netMap.values()) };
   }, [selectedPlace, myCards, myCardObjects, benefitsEngine, networkBenefits]);
 
+  // 카드 랭킹 계산 (BenefitsEngine 사용)
   const cardRanking = useMemo(() => {
-    const { cardBenefits, networkBenefits: netBen } = availableBenefits;
-    if (cardBenefits.length === 0 && netBen.length === 0) return [];
-    const v = {};
-    cardBenefits.forEach(b => {
-      if (!v[b.cardId]) v[b.cardId] = { card: b.card, totalValue: 0, reasons: [], benefitIds: [], benefitSummary: [], caveats: new Set(), count: 0 };
-      v[b.cardId].totalValue += b.estimatedValue;
-      v[b.cardId].count++;
-      v[b.cardId].benefitIds.push(b.id);
-      v[b.cardId].benefitSummary.push({ emoji: categoryConfig[b.category]?.emoji, title: b.title, value: b.value });
-      v[b.cardId].reasons.push(`${categoryConfig[b.category]?.emoji} ${b.title}`);
-      // Extract caveats from benefit conditions
-      if (b.conditions) v[b.cardId].caveats.add(b.conditions);
-      if (b.limit) v[b.cardId].caveats.add(`한도: ${b.limit}`);
-    });
-    netBen.forEach(b => {
-      const id = b.card.id;
-      if (!v[id]) v[id] = { card: b.card, totalValue: 0, reasons: [], benefitIds: [], benefitSummary: [], caveats: new Set(), count: 0 };
-      v[id].totalValue += b.estimatedValue;
-      v[id].count++;
-      v[id].benefitSummary.push({ emoji: '🌐', title: b.title, value: `${b.estimatedValue?.toLocaleString()}원` });
-      v[id].reasons.push(`🌐 ${b.title}`);
-    });
-    // Convert caveats Set to Array
-    Object.values(v).forEach(item => { item.caveats = Array.from(item.caveats); });
-    return Object.values(v).sort((a, b) => b.totalValue - a.totalValue);
-  }, [availableBenefits]);
+    if (!selectedPlace || !benefitsEngine) return [];
+    const tags = selectedPlace.tags || [];
+    return benefitsEngine.calculateRanking(myCards, tags, networkBenefits, myCardObjects, categoryConfig);
+  }, [selectedPlace, myCards, benefitsEngine, networkBenefits, myCardObjects]);
 
   const smartBest = useMemo(() => {
     if (cardRanking.length === 0) return null;
@@ -890,382 +868,67 @@ export default function CardBenefitsApp() {
 
       <main ref={mainRef} className="flex-1 overflow-y-auto pb-28 scroll-container" role="main">
         {activeTab === 'home' && (
-          <div className="p-5 space-y-5" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
-            <div className="flex gap-2">
-              <button onClick={() => setShowPlaceSheet(true)} className="flex-1 p-4 bg-gradient-to-r from-slate-800/80 to-slate-800/40 rounded-2xl border border-white/10 flex items-center gap-3 active:scale-[0.98]" aria-label="장소 선택">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-lg">{selectedPlace ? placeTypeConfig[selectedPlace.type]?.emoji : '📍'}</div>
-                <div className="flex-1 text-left min-w-0"><p className="text-[10px] text-slate-400">현재 장소</p><p className="font-bold truncate text-sm">{selectedPlace ? selectedPlace.name : '선택하세요'}</p></div>
-              </button>
-              <button onClick={async () => { await requestLocation(); setShowPlaceSheet(true); }} className="w-14 h-14 bg-blue-600 rounded-2xl flex flex-col items-center justify-center active:scale-95" aria-label="내 주변"><span className="text-lg">🎯</span><span className="text-[8px] font-bold">내주변</span></button>
-            </div>
-
-            <div className="relative">
-              <input type="text" placeholder="🔍 검색 (라운지, 발렛, 호텔...)" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full bg-slate-800/50 border border-white/10 rounded-2xl px-4 py-3.5 text-sm placeholder-slate-500 focus:border-blue-500/50 focus:outline-none" aria-label="검색" />
-              {searchQuery && debouncedQuery && (searchResults.benefits.length > 0 || searchResults.places.length > 0) && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-slate-800/95 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden z-20 shadow-2xl max-h-80 overflow-y-auto" role="listbox">
-                  {searchResults.benefits.length > 0 && (
-                    <div className="p-3 border-b border-white/5">
-                      <p className="text-[10px] text-blue-400 font-bold mb-2">💳 내 카드 혜택</p>
-                      {searchResults.benefits.slice(0, 4).map(b => (
-                        <button key={b.id} type="button" onClick={() => handleSearchBenefitSelect(b)} className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 text-left" role="option">
-                          <span className="text-lg">{categoryConfig[b.category]?.emoji}</span>
-                          <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{b.title}</p><p className="text-[10px] text-slate-500">{b.card?.name}</p></div>
-                          <span className="text-xs text-green-400 font-bold">{b.value}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                  {searchResults.places.length > 0 && (
-                    <div className="p-3">
-                      <p className="text-[10px] text-purple-400 font-bold mb-2">📍 장소</p>
-                      {searchResults.places.map(p => (
-                        <button key={p.id} onClick={() => { selectPlace(p.id, { closeSheet: true }); setSearchQuery(''); }} className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 text-left" role="option">
-                          <span className="text-lg">{placeTypeConfig[p.type]?.emoji}</span><span className="text-sm">{p.name}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {selectedPlace && smartBest && (
-              <div className="sticky top-0 z-10 -mx-5 px-5 pt-2 pb-3 bg-[#0a0a0f]/95 backdrop-blur-xl">
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600/30 via-purple-600/20 to-transparent border border-blue-500/30 p-4">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full" />
-                  <div className="relative z-10">
-                    {/* Card Header */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-8 rounded-lg shadow-lg border border-white/20" style={{ background: `linear-gradient(135deg, ${smartBest.card.color}, #1a1a1a)` }} />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[9px] px-2 py-0.5 rounded-full font-bold">🏆 BEST</span>
-                            <span className="text-sm font-bold">{smartBest.card.name}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">{smartBest.totalValue.toLocaleString()}원</p>
-                        {smartBest.diff > 0 && <p className="text-[10px] text-green-400">2위보다 +{smartBest.diff.toLocaleString()}원</p>}
-                      </div>
-                    </div>
-                    {/* Explanation 3 Lines */}
-                    <div className="bg-slate-900/50 rounded-xl p-3 space-y-1.5">
-                      <p className="text-xs text-slate-300 flex items-start gap-2">
-                        <span className="text-blue-400 shrink-0">1.</span>
-                        <span className="truncate">{smartBest.explanation.summary}</span>
-                      </p>
-                      <p className="text-xs text-slate-300 flex items-start gap-2">
-                        <span className="text-green-400 shrink-0">2.</span>
-                        <span>예상 가치: <span className="text-green-400 font-medium">{smartBest.explanation.estimatedValue.toLocaleString()}원</span> (추정)</span>
-                      </p>
-                      <p className="text-xs text-slate-400 flex items-start gap-2">
-                        <span className="text-amber-400 shrink-0">3.</span>
-                        <span className="truncate">조건: {smartBest.explanation.caveats}</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {selectedPlace && cardRanking.length > 1 && (
-              <div className="bg-slate-800/30 rounded-2xl p-4 border border-white/5">
-                <h3 className="text-sm font-bold text-slate-400 mb-3">📊 내 카드 비교</h3>
-                <div className="space-y-3">
-                  {cardRanking.slice(0, CONFIG.UI.MAX_CARD_RANKING).map((item, idx) => {
-                    const pct = Math.round((item.totalValue / cardRanking[0].totalValue) * 100);
-                    return (
-                      <div key={item.card.id} className="flex items-center gap-3">
-                        <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${idx === 0 ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white' : 'bg-slate-700 text-slate-400'}`}>{idx + 1}</span>
-                        <div className="w-3 h-3 rounded-full border border-white/20" style={{ backgroundColor: item.card.color }} />
-                        <span className="text-xs w-16 truncate">{item.card.name}</span>
-                        <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden"><div className={`h-full rounded-full ${idx === 0 ? 'bg-gradient-to-r from-green-500 to-emerald-400' : 'bg-slate-500'}`} style={{ width: `${pct}%` }} /></div>
-                        <span className="text-xs text-slate-400 w-14 text-right">{item.totalValue.toLocaleString()}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {selectedPlace && (availableBenefits.cardBenefits.length > 0 || availableBenefits.networkBenefits.length > 0) && (
-              <div>
-                <h3 className="text-sm font-bold text-slate-400 mb-3">📋 혜택 ({availableBenefits.cardBenefits.length + availableBenefits.networkBenefits.length})</h3>
-                <div className="space-y-2">
-                  {availableBenefits.cardBenefits.map(b => (
-                    <button key={b.id} onClick={() => openBenefitDetail(b)} className="w-full flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl border border-white/5 active:bg-slate-700/50 transition-colors text-left">
-                      <div className="w-10 h-10 rounded-full bg-slate-700/50 flex items-center justify-center text-lg">{categoryConfig[b.category]?.emoji}</div>
-                      <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{b.title}</p><p className="text-[10px] text-slate-500">{b.card?.name}</p></div>
-                      <span className="text-xs bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded-full">{b.value}</span>
-                    </button>
-                  ))}
-                  {availableBenefits.networkBenefits.length > 0 && (
-                    <>
-                      <p className="text-[10px] text-purple-400 font-bold mt-3 mb-2">🌐 글로벌</p>
-                      {availableBenefits.networkBenefits.map((b, i) => (
-                        <div key={i} className="flex items-center gap-3 p-3 bg-purple-500/10 rounded-xl border border-purple-500/20">
-                          <span className="text-lg">{b.icon}</span>
-                          <div className="flex-1 min-w-0"><p className="text-sm font-medium">{b.title}</p><p className="text-[10px] text-purple-400">{b.network} {b.grade}</p></div>
-                        </div>
-                      ))}
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {!selectedPlace && myCards.length > 0 && (
-              <div className="text-center py-12">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center"><span className="text-4xl">📍</span></div>
-                <p className="text-slate-400 mb-4">장소를 선택하면<br/>최적의 카드를 추천해드려요</p>
-                <button onClick={handleNearby} className="px-6 py-3 bg-blue-600 rounded-xl font-bold active:scale-95">🎯 내 주변에서 찾기</button>
-              </div>
-            )}
-
-            {/* Onboarding Demo Mode */}
-            {!selectedPlace && myCards.length === 0 && demoData && (
-              <div className="space-y-5">
-                {/* Demo Banner */}
-                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-2xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="bg-purple-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">DEMO</span>
-                    <span className="text-sm font-bold">이렇게 추천해드려요</span>
-                  </div>
-                  <p className="text-xs text-slate-400">예시: {demoData.place?.name}에서 사용 가능한 혜택</p>
-                </div>
-
-                {/* Demo Best Card */}
-                {demoData.benefits.length > 0 && (
-                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600/20 via-purple-600/10 to-transparent border border-blue-500/20 p-4 opacity-90">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-6 rounded bg-gradient-to-r from-purple-600 to-blue-600" />
-                        <span className="text-sm font-bold">{demoData.benefits[0]?.card?.name}</span>
-                      </div>
-                      <span className="text-green-400 font-bold">{demoData.totalValue.toLocaleString()}원</span>
-                    </div>
-                    <div className="space-y-1">
-                      {demoData.benefits.slice(0, 3).map((b, i) => (
-                        <p key={i} className="text-xs text-slate-400">• {categoryConfig[b.category]?.emoji} {b.title}</p>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* CTA Buttons */}
-                <div className="space-y-3">
-                  <p className="text-center text-sm font-bold text-slate-300">내 카드를 등록하면 실시간 추천!</p>
-                  <button
-                    onClick={() => { setShowOcrModal(true); setActiveTab('home'); }}
-                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold text-white active:scale-[0.98] flex items-center justify-center gap-2"
-                  >
-                    <span>📸</span> OCR로 카드 스캔하기
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('wallet')}
-                    className="w-full py-4 bg-slate-800/80 border border-white/10 rounded-2xl font-bold text-slate-200 active:scale-[0.98] flex items-center justify-center gap-2"
-                  >
-                    <span>🏦</span> 카드사에서 직접 선택
-                  </button>
-                  <button
-                    onClick={() => { setMyCards(CONFIG.DEMO.CARDS); showToast('데모 카드 3장이 추가되었습니다'); }}
-                    className="w-full py-3 text-sm text-slate-500 active:text-slate-300"
-                  >
-                    나중에 할게요 (데모로 체험하기)
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+          <HomeTab
+            selectedPlace={selectedPlace}
+            smartBest={smartBest}
+            cardRanking={cardRanking}
+            availableBenefits={availableBenefits}
+            searchQuery={searchQuery}
+            debouncedQuery={debouncedQuery}
+            searchResults={searchResults}
+            demoData={demoData}
+            myCards={myCards}
+            setShowPlaceSheet={setShowPlaceSheet}
+            requestLocation={requestLocation}
+            setSearchQuery={setSearchQuery}
+            selectPlace={selectPlace}
+            handleSearchBenefitSelect={handleSearchBenefitSelect}
+            openBenefitDetail={openBenefitDetail}
+            handleNearby={handleNearby}
+            setShowOcrModal={setShowOcrModal}
+            setActiveTab={setActiveTab}
+            setMyCards={setMyCards}
+            showToast={showToast}
+          />
         )}
 
         {activeTab === 'benefits' && (
-          <div className="p-5 space-y-6" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
-            {benefitsFilterTag && (
-              <div className="bg-blue-600/10 border border-blue-500/20 rounded-2xl p-4 flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] text-blue-300 font-bold tracking-widest">FILTER</p>
-                  <p className="text-sm font-bold">{categoryConfig[benefitsFilterTag]?.emoji} {categoryConfig[benefitsFilterTag]?.label}</p>
-                </div>
-                <button type="button" onClick={clearBenefitsFilter} className="px-3 py-2 rounded-xl bg-slate-800/60 border border-white/10 text-xs text-slate-200 active:scale-[0.98]">
-                  필터 해제
-                </button>
-              </div>
-            )}
-
-            {filteredUniversalBenefits.length > 0 && (
-              <div>
-                <h3 className="text-sm font-bold text-amber-400 mb-3">💰 어디서든 ({filteredUniversalBenefits.length})</h3>
-                <div className="space-y-2">
-                  {filteredUniversalBenefits.map(b => (
-                    <button key={b.id} onClick={() => openBenefitDetail(b)} className="w-full flex items-center gap-3 p-3 bg-amber-500/10 rounded-xl border border-amber-500/20 active:bg-amber-500/20 transition-colors text-left">
-                      <span className="text-lg">{categoryConfig[b.category]?.emoji}</span>
-                      <div className="flex-1 min-w-0"><p className="text-sm font-medium">{b.title}</p><p className="text-[10px] text-slate-500">{b.card?.name}</p></div>
-                      <span className="text-xs bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full">{b.value}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            {!benefitsFilterTag && myNetworkBenefits.length > 0 && (
-              <div>
-                <h3 className="text-sm font-bold text-purple-400 mb-3">🌍 카드 네트워크 혜택</h3>
-                <div className="space-y-3">
-                  {myNetworkBenefits.map(({ network, grade, card, benefits }) => (
-                    <div key={`${network}-${grade}`} className="bg-purple-500/10 rounded-xl border border-purple-500/20 p-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-lg">{network === 'AMEX' ? '✨' : network === 'VISA' ? '💳' : '🌐'}</span>
-                        <span className="font-bold">{network}</span>
-                        <span className="text-[10px] text-purple-300 bg-purple-500/30 px-2 py-0.5 rounded-full">{grade}</span>
-                        <span className="text-[10px] text-slate-400">· {card.shortName || card.name}</span>
-                      </div>
-                      <div className="space-y-2">
-                        {benefits.map((b, idx) => (
-                          <div key={idx} className="flex items-start justify-between text-sm gap-2">
-                            <div className="flex-1 min-w-0">
-                              <p className="font-medium text-slate-200">{b.icon} {b.title}</p>
-                              <p className="text-[10px] text-slate-500 line-clamp-2">{b.desc}</p>
-                            </div>
-                            <span className="text-[10px] text-purple-300 bg-purple-500/20 px-2 py-1 rounded-full whitespace-nowrap">
-                              {typeof b.value === 'number' ? `${(b.value / 10000).toFixed(0)}만원` : b.value}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            {filteredAllMyBenefitsEntries.map(([cat, benefits]) => (
-              <div key={cat} ref={el => { if (el) categorySectionRefs.current[cat] = el; }}>
-                <h3 className="text-sm font-bold text-slate-400 mb-3">{categoryConfig[cat]?.emoji} {categoryConfig[cat]?.label} ({benefits.length})</h3>
-                <div className="space-y-2">
-                  {benefits.slice(0, CONFIG.UI.MAX_BENEFITS_PER_CATEGORY).map(b => (
-                    <button key={b.id} onClick={() => openBenefitDetail(b)} className="w-full flex items-center gap-3 p-3 bg-slate-800/40 rounded-xl border border-white/5 active:bg-slate-700/50 transition-colors text-left">
-                      <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{b.title}</p><p className="text-[10px] text-slate-500">{b.card?.name}</p></div>
-                      <span className="text-xs text-green-400 font-medium">{b.value}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-                        {benefitsFilterTag && myCards.length > 0 && filteredUniversalBenefits.length === 0 && filteredAllMyBenefitsEntries.length === 0 && (
-              <div className="text-center py-12 text-slate-500">
-                <span className="text-4xl">🫥</span>
-                <p className="mt-4">해당 카테고리 혜택이 없습니다</p>
-                <button type="button" onClick={clearBenefitsFilter} className="mt-4 px-4 py-2 bg-slate-800/60 border border-white/10 rounded-xl text-xs text-slate-200 active:scale-[0.98]">
-                  필터 해제
-                </button>
-              </div>
-            )}
-{myCards.length === 0 && <div className="text-center py-16"><span className="text-4xl">💳</span><p className="text-slate-400 mt-4">카드를 추가하면 혜택 확인 가능</p></div>}
-          </div>
+          <BenefitsTab
+            benefitsFilterTag={benefitsFilterTag}
+            filteredUniversalBenefits={filteredUniversalBenefits}
+            filteredAllMyBenefitsEntries={filteredAllMyBenefitsEntries}
+            myNetworkBenefits={myNetworkBenefits}
+            myCards={myCards}
+            clearBenefitsFilter={clearBenefitsFilter}
+            openBenefitDetail={openBenefitDetail}
+            categorySectionRefs={categorySectionRefs}
+          />
         )}
 
         {activeTab === 'wallet' && (
-          <div className="p-5 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)', paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
-            <input 
-              type="text" 
-              placeholder="🔍 카드 이름 또는 카드사 검색..." 
-              value={walletSearch}
-              onChange={(e) => setWalletSearch(e.target.value)}
-              className="w-full bg-slate-800/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm mb-4 focus:border-blue-500/50 focus:outline-none"
-            />
-            <p className="text-xs text-slate-500 mb-4">
-              {walletSearch ? `검색 결과 · ${Object.values(filteredCardsByIssuer).flat().length}장` : `카드사를 탭하여 펼치기 · ${myCards.length}장 보유`}
-            </p>
-            <div className="space-y-3">
-              {Object.keys(filteredCardsByIssuer).length > 0 ? (
-                Object.entries(filteredCardsByIssuer).sort(([a],[b]) => a.localeCompare(b, 'ko')).map(([issuer, cards]) => {
-                  const myCount = cards.filter(c => myCards.includes(c.id)).length;
-                  const isExpanded = expandedIssuer === issuer || walletSearch.length > 0;
-                  return (
-                    <div key={issuer}>
-                      <button onClick={() => setExpandedIssuer(isExpanded && !walletSearch ? null : issuer)} className="w-full flex items-center justify-between p-4 bg-slate-800/50 rounded-2xl border border-white/5" aria-expanded={isExpanded}>
-                        <span className="font-bold">{issuer}</span>
-                        <div className="flex items-center gap-2">
-                          {myCount > 0 && <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">{myCount}</span>}
-                          <span className={`text-slate-500 transition-transform ${isExpanded ? 'rotate-90' : ''}`}>›</span>
-                        </div>
-                      </button>
-                      {isExpanded && (
-                        <div className="mt-2 space-y-2 pl-2 max-h-60 overflow-y-auto">
-                          {cards.map(card => (
-                            <label key={card.id} className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all ${myCards.includes(card.id) ? 'bg-blue-500/20 border border-blue-500/50' : 'bg-slate-800/30 border border-transparent'}`}>
-                              <input type="checkbox" checked={myCards.includes(card.id)} onChange={() => {
-                                const isAdding = !myCards.includes(card.id);
-                                setMyCards(prev => isAdding ? (prev.includes(card.id) ? prev : [...prev, card.id]) : prev.filter(id => id !== card.id));
-                                showToast(isAdding ? MESSAGES.CARD.ADDED(card.name) : MESSAGES.CARD.REMOVED(card.name));
-                              }} className="w-5 h-5 rounded-full" />
-                              <div className="w-8 h-5 rounded" style={{ background: `linear-gradient(135deg, ${card.color}, #1a1a1a)` }} />
-                              <div className="flex-1"><p className="text-sm font-medium">{card.name}</p><p className="text-[10px] text-slate-500">{card.network} · {card.grade}</p></div>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })
-              ) : (
-                <div className="text-center py-16 text-slate-500">
-                  <span className="text-4xl">🔍</span>
-                  <p className="mt-4">검색 결과가 없습니다</p>
-                </div>
-              )}
-            </div>
-          </div>
+          <WalletTab
+            walletSearch={walletSearch}
+            filteredCardsByIssuer={filteredCardsByIssuer}
+            myCards={myCards}
+            expandedIssuer={expandedIssuer}
+            setWalletSearch={setWalletSearch}
+            setExpandedIssuer={setExpandedIssuer}
+            setMyCards={setMyCards}
+            showToast={showToast}
+          />
         )}
 
         {activeTab === 'settings' && (
-          <div className="p-5 space-y-4" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
-            <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
-              <h3 className="font-bold mb-2">📍 위치 권한</h3>
-              <p className="text-sm text-slate-400 mb-3">{locationStatus === 'idle' ? '위치 권한 필요' : locationStatus === 'loading' ? '확인 중...' : locationStatus === 'success' ? '✅ 허용됨' : locationStatus === 'denied' ? '❌ 거부됨' : '⚠️ 서울 기준'}</p>
-              <button onClick={requestLocation} disabled={locationStatus === 'loading'} className="w-full py-2.5 bg-blue-600 rounded-xl text-sm font-medium disabled:opacity-60">{locationStatus === 'loading' ? '위치 확인 중...' : '위치 요청'}</button>
-            </div>
-            <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
-              <h3 className="font-bold mb-2">💾 저장소</h3>
-              <p className="text-sm text-slate-400">{storage.getMode()} 사용 중 (오프라인 지원)</p>
-            </div>
-
-            {/* 문의 및 지원 */}
-            <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
-              <h3 className="font-bold mb-3">💬 문의 및 지원</h3>
-              <a href={`mailto:${CONFIG.LINKS.SUPPORT_EMAIL}?subject=[Card AI] 문의사항`} className="block w-full py-2.5 bg-blue-600/20 text-blue-400 rounded-xl text-sm font-medium text-center border border-blue-500/30 mb-2">📧 문의하기</a>
-              <button onClick={() => {
-                const diagInfo = `앱 버전: ${CONFIG.BUILD.VERSION} (${CONFIG.BUILD.BUILD_NUMBER})\n빌드: ${CONFIG.BUILD.COMMIT_HASH}\n플랫폼: ${navigator.userAgent.includes('iPhone') ? 'iOS' : navigator.userAgent.includes('Android') ? 'Android' : 'Web'}\n저장소: ${storage.getMode()}\n카드 수: ${myCards.length}\n`;
-                if (navigator.share) {
-                  navigator.share({ title: 'Card AI 진단 정보', text: diagInfo });
-                } else {
-                  navigator.clipboard.writeText(diagInfo);
-                  showToast('진단 정보가 복사되었습니다');
-                }
-              }} className="w-full py-2.5 bg-slate-700/50 text-slate-300 rounded-xl text-sm font-medium border border-white/5">🔧 진단 정보 복사</button>
-            </div>
-
-            {/* 개인정보 및 이용약관 */}
-            <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
-              <h3 className="font-bold mb-3">📋 약관 및 정책</h3>
-              <a href={CONFIG.LINKS.PRIVACY_POLICY} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 text-sm text-slate-300">
-                <span>🔒 개인정보처리방침</span><span className="text-slate-500">→</span>
-              </a>
-              <a href={CONFIG.LINKS.TERMS_OF_SERVICE} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 text-sm text-slate-300 border-t border-white/5">
-                <span>📄 이용약관</span><span className="text-slate-500">→</span>
-              </a>
-            </div>
-
-            <button onClick={handleReset} className="w-full py-3 bg-red-600/20 text-red-400 rounded-2xl text-sm font-medium border border-red-500/30">🗑️ 초기화</button>
-
-            {/* 앱 정보 */}
-            <div className="text-center text-[10px] text-slate-600 mt-4 space-y-1">
-              <p>{CONFIG.APP.NAME} v{CONFIG.BUILD.VERSION} ({CONFIG.BUILD.BUILD_NUMBER})</p>
-              <p>{Object.keys(cardsData || {}).length}카드 · {Object.keys(placesData || {}).length}장소 · {Object.keys(benefitsData || {}).length}혜택</p>
-              <p className="text-slate-700">Build: {CONFIG.BUILD.COMMIT_HASH} · {CONFIG.BUILD.BUILD_DATE}</p>
-            </div>
-          </div>
+          <SettingsTab
+            locationStatus={locationStatus}
+            myCards={myCards}
+            cardsData={cardsData}
+            placesData={placesData}
+            benefitsData={benefitsData}
+            requestLocation={requestLocation}
+            handleReset={handleReset}
+            showToast={showToast}
+          />
         )}
       </main>
 
@@ -1278,167 +941,44 @@ export default function CardBenefitsApp() {
       </nav>
 
       {showPlaceSheet && (
-        <div className="fixed inset-0 bg-black/80 z-50" onClick={() => setShowPlaceSheet(false)} role="dialog" aria-modal="true">
-          <div className="absolute bottom-0 left-0 right-0 bg-[#1a1a1f] rounded-t-3xl overflow-hidden" onClick={e => e.stopPropagation()} style={{ maxWidth: '430px', margin: '0 auto', height: '75vh' }}>
-            <div className="p-4 border-b border-white/10 flex items-center justify-between">
-              <div><div className="w-10 h-1 bg-slate-600 rounded-full mx-auto mb-3" /><h2 className="text-lg font-bold">장소 선택</h2></div>
-              <div className="flex gap-2" role="tablist">
-                <button onClick={() => setPlaceSheetView('list')} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'list' ? 'bg-blue-600' : 'bg-slate-700'}`} role="tab" aria-label="목록 보기" aria-selected={placeSheetView === 'list'}>📋 목록</button>
-                <button onClick={() => {
-                  if (!CONFIG.FEATURES.MAP_ENABLED) {
-                    showToast('지도 기능이 일시적으로 비활성화되어 있습니다');
-                    return;
-                  }
-                  // 지도 열 때 위치 권한 요청
-                  if (locationStatus === 'idle') requestLocation();
-                  setPlaceSheetView('map');
-                }} className={`px-3 py-1.5 rounded-full text-xs font-bold ${placeSheetView === 'map' ? 'bg-blue-600' : 'bg-slate-700'} ${!CONFIG.FEATURES.MAP_ENABLED ? 'opacity-50' : ''}`} role="tab" aria-label="지도 보기" aria-selected={placeSheetView === 'map'} disabled={!CONFIG.FEATURES.MAP_ENABLED}>🗺️ 지도</button>
-              </div>
-            </div>
-            <div className="h-[calc(75vh-80px)] overflow-hidden">
-              {placeSheetView === 'list' ? (
-                <div className="p-4 overflow-y-auto h-full scroll-container" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
-                  {(locationStatus === 'success' || locationStatus === 'fallback') && nearbyPlaces.length > 0 && (
-                    <button onClick={pickNearestPlace} className="w-full p-4 mb-4 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-2xl border border-green-500/30 text-left active:scale-[0.98]">
-                      <p className="font-bold text-green-400">⚡ 가장 가까운 곳</p>
-                      <p className="text-xs text-slate-400 mt-1">{nearbyPlaces[0].name} · {formatDistance(nearbyPlaces[0].distance)}</p>
-                    </button>
-                  )}
-                  {(locationStatus === 'idle' || locationStatus === 'denied') && (
-                    <button onClick={requestLocation} disabled={locationStatus === 'loading'} className="w-full p-4 mb-4 bg-blue-600/20 rounded-2xl border border-blue-500/30 text-left disabled:opacity-60">
-                      <p className="font-bold text-blue-400">📍 내 위치 찾기</p>
-                      <p className="text-xs text-slate-500 mt-1">GPS 권한 허용 시 주변 혜택 자동 추천</p>
-                    </button>
-                  )}
-                  {locationStatus === 'loading' && (
-                    <div className="w-full p-4 mb-4 bg-slate-800/40 rounded-2xl border border-white/5 text-left">
-                      <p className="font-bold text-slate-200">📍 내 위치 확인 중...</p>
-                      <p className="text-xs text-slate-500 mt-1">잠시만 기다려주세요</p>
-                    </div>
-                  )}
-
-                  {/* Favorites */}
-                  {favoritePlaceIds.length > 0 && placeCategoryFilter === 'all' && (
-                    <div className="mb-4">
-                      <p className="text-xs text-amber-400 font-bold mb-2">⭐ 즐겨찾기</p>
-                      <div className="flex flex-wrap gap-2">
-                        {favoritePlaceIds.map(id => placesData[id]).filter(Boolean).map(p => (
-                          <button key={p.id} onClick={() => selectPlace(p.id)} className={`px-3 py-2 rounded-full text-xs border active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-amber-600 border-amber-400/40' : 'bg-amber-500/10 border-amber-500/30'}`}>
-                            <span className="mr-1">{placeTypeConfig[p.type]?.emoji}</span>{p.name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Recent places */}
-                  {recentPlaceIds.length > 0 && placeCategoryFilter === 'all' && (
-                    <div className="mb-4">
-                      <p className="text-xs text-slate-500 font-bold mb-2">🕘 최근</p>
-                      <div className="flex flex-wrap gap-2">
-                        {recentPlaceIds.filter(id => !favoritePlaceIds.includes(id)).map(id => placesData[id]).filter(Boolean).map(p => (
-                          <button key={p.id} onClick={() => selectPlace(p.id)} className={`px-3 py-2 rounded-full text-xs border active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-blue-600 border-blue-400/40' : 'bg-slate-800/50 border-white/10'}`}>
-                            <span className="mr-1">{placeTypeConfig[p.type]?.emoji}</span>{p.name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {nearbyPlaces.length > 0 && placeCategoryFilter === 'all' && (
-                    <div className="mb-4">
-                      <p className="text-xs text-blue-400 font-bold mb-2">📍 {locationStatus === 'fallback' ? '서울 기준' : '내 주변'}</p>
-                      {nearbyPlaces.slice(0, CONFIG.UI.MAX_NEARBY_PLACES).map(p => (
-                        <button key={p.id} onClick={() => selectPlace(p.id)} className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-blue-600' : 'bg-slate-800/50'}`}>
-                          <span className="text-xl">{placeTypeConfig[p.type]?.emoji}</span>
-                          <div className="flex-1 text-left"><p className="font-medium text-sm">{p.name}</p><p className="text-xs text-slate-400">{formatDistance(p.distance)}</p></div>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* 카테고리 탭 */}
-                  <div className="mb-4 -mx-4 px-4 overflow-x-auto">
-                    <div className="flex gap-2 pb-2" style={{ minWidth: 'max-content' }}>
-                      {placeCategories.map(cat => (
-                        <button
-                          key={cat.id}
-                          onClick={() => setPlaceCategoryFilter(cat.id)}
-                          className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${placeCategoryFilter === cat.id ? 'bg-blue-600 text-white' : 'bg-slate-800/50 text-slate-400'}`}>
-                          {cat.emoji} {cat.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* 필터된 장소 목록 */}
-                  <p className="text-xs text-slate-500 font-bold mb-2">
-                    {placeCategoryFilter === 'all' ? '📋 전체' : `${placeTypeConfig[placeCategoryFilter]?.emoji || '📋'} ${placeTypeConfig[placeCategoryFilter]?.label || '전체'}`}
-                  </p>
-                  {Object.values(placesData)
-                    .filter(p => placeCategoryFilter === 'all' || p.type === placeCategoryFilter)
-                    .map(p => (
-                    <div key={p.id} className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 ${selectedPlaceId === p.id ? 'bg-blue-600' : 'bg-slate-800/30'}`}>
-                      <button onClick={() => selectPlace(p.id)} className="flex-1 flex items-center gap-3 text-left active:scale-[0.98]">
-                        <span className="text-xl">{placeTypeConfig[p.type]?.emoji}</span>
-                        <span className="font-medium text-sm">{p.name}</span>
-                      </button>
-                      <button onClick={(e) => { e.stopPropagation(); toggleFavorite(p.id); }} className="p-2 rounded-lg active:scale-90">
-                        <span className={favoritePlaceIds.includes(p.id) ? 'text-amber-400' : 'text-slate-600'}>
-                          {favoritePlaceIds.includes(p.id) ? '★' : '☆'}
-                        </span>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <MapView userLocation={userLocation} places={Object.values(placesData)} selectedPlaceId={selectedPlaceId} onPlaceSelect={id => selectPlace(id)} onClose={() => setShowPlaceSheet(false)} onError={() => setPlaceSheetView('list')} benefitsData={benefitsData} cardsData={cardsData} myCards={myCards} />
-              )}
-            </div>
-          </div>
-        </div>
+        <PlaceSheet
+          placesData={placesData}
+          nearbyPlaces={nearbyPlaces}
+          selectedPlaceId={selectedPlaceId}
+          recentPlaceIds={recentPlaceIds}
+          favoritePlaceIds={favoritePlaceIds}
+          placeCategoryFilter={placeCategoryFilter}
+          placeSheetView={placeSheetView}
+          locationStatus={locationStatus}
+          userLocation={userLocation}
+          benefitsData={benefitsData}
+          cardsData={cardsData}
+          myCards={myCards}
+          setShowPlaceSheet={setShowPlaceSheet}
+          setPlaceSheetView={setPlaceSheetView}
+          setPlaceCategoryFilter={setPlaceCategoryFilter}
+          selectPlace={selectPlace}
+          toggleFavorite={toggleFavorite}
+          pickNearestPlace={pickNearestPlace}
+          requestLocation={requestLocation}
+          showToast={showToast}
+        />
       )}
 
       {showOcrModal && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-end" role="dialog" aria-modal="true">
-          <div className="bg-[#1a1a1f] w-full rounded-t-3xl p-6 max-h-[80vh] overflow-y-auto" style={{ maxWidth: '430px', margin: '0 auto', paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}>
-            <div className="flex justify-between items-center mb-4"><h2 className="text-lg font-bold">📷 카드 스캔</h2><button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setOcrStatus('idle'); setOcrMessage(''); setOcrCandidates([]); }} className="text-slate-400 text-2xl">×</button></div>
-            <input ref={fileInputRef} type="file" accept="image/*" capture="environment" onChange={handleOCR} className="hidden" />
-            {ocrStatus === 'idle' && <button onClick={() => fileInputRef.current?.click()} className="w-full py-12 bg-slate-800 rounded-2xl border-2 border-dashed border-slate-600 flex flex-col items-center gap-3 active:scale-[0.98]"><span className="text-5xl">📷</span><span className="font-medium">카드 사진 촬영</span></button>}
-            {ocrStatus === 'loading' && <div className="py-16 text-center"><div className="w-16 h-16 mx-auto mb-4 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" /><p className="text-slate-400">{ocrMessage || '처리중...'}</p></div>}
-            {ocrStatus === 'confirm' && ocrCandidates.length > 0 && (
-              <div>
-                <p className="text-sm text-blue-400 mb-4">✨ 카드를 선택하세요</p>
-                <div className="space-y-3">
-                  {ocrCandidates.map(card => (
-                    <button key={card.id} onClick={() => confirmCard(card)} className="w-full p-4 bg-slate-800 rounded-2xl flex items-center gap-4 active:scale-[0.98]">
-                      <div className="w-14 h-9 rounded-lg border border-white/20" style={{ background: `linear-gradient(135deg, ${card.color}, #1a1a1a)` }} />
-                      <div className="flex-1 text-left"><p className="font-bold">{card.name}</p><p className="text-xs text-slate-500">{card.issuer}</p></div>
-                      {card.matchScore && <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded-full">{card.matchScore}개 일치</span>}
-                    </button>
-                  ))}
-                </div>
-                <button onClick={() => { setOcrStatus('idle'); setOcrMessage(''); setOcrCandidates([]); }} className="w-full mt-4 py-3 text-slate-400">다시 촬영</button>
-              </div>
-            )}
-            {ocrStatus === 'notfound' && (
-              <div className="text-center py-8">
-                <span className="text-5xl">🤔</span>
-                <p className="text-slate-400 mt-4 mb-6">카드를 인식하지 못했어요</p>
-                <button onClick={() => { setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-slate-700 rounded-xl font-medium mb-3">다시 촬영</button>
-                <button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setActiveTab('wallet'); setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-blue-600 rounded-xl font-medium">직접 선택</button>
-              </div>
-            )}
-            {ocrStatus === 'network_error' && (
-              <div className="text-center py-8">
-                <span className="text-5xl">🌐</span>
-                <p className="text-white font-bold mt-4 mb-2">인터넷 연결 필요</p>
-                <p className="text-slate-400 text-sm mb-6">카드 스캔은 인터넷 연결이 필요합니다.<br/>Wi-Fi 또는 데이터를 확인해주세요.</p>
-                <button onClick={() => { setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-slate-700 rounded-xl font-medium mb-3">다시 시도</button>
-                <button onClick={() => { cancelOcrRun(); setShowOcrModal(false); setActiveTab('wallet'); setOcrStatus('idle'); setOcrMessage(''); }} className="w-full py-3 bg-blue-600 rounded-xl font-medium">직접 선택하기</button>
-              </div>
-            )}
-          </div>
-        </div>
+        <OcrModal
+          ocrStatus={ocrStatus}
+          ocrMessage={ocrMessage}
+          ocrCandidates={ocrCandidates}
+          handleOCR={handleOCR}
+          confirmCard={confirmCard}
+          cancelOcrRun={cancelOcrRun}
+          setShowOcrModal={setShowOcrModal}
+          setOcrStatus={setOcrStatus}
+          setOcrMessage={setOcrMessage}
+          setOcrCandidates={setOcrCandidates}
+          setActiveTab={setActiveTab}
+        />
       )}
 
       {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
