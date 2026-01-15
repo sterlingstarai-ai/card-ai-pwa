@@ -3,6 +3,7 @@
  * - Proxies requests to Google Cloud Vision API
  * - Keeps VISION_API_KEY secure on server side
  * - Rate limiting and error handling included
+ * - CORS restricted to allowed origins
  */
 
 export const config = {
@@ -12,6 +13,24 @@ export const config = {
     },
   },
 };
+
+// 허용된 Origin 목록 (CORS 보안)
+const ALLOWED_ORIGINS = [
+  'https://card-ai-pi.vercel.app',
+  'https://card-ai.vercel.app',
+  'capacitor://localhost',
+  'http://localhost',
+  'http://localhost:5173', // Vite dev server
+  'http://localhost:3000',
+];
+
+// Origin 검증
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  return ALLOWED_ORIGINS.some(allowed =>
+    origin === allowed || origin.endsWith('.vercel.app')
+  );
+}
 
 // 간단한 인메모리 레이트 리미터 (Vercel cold start 시 리셋됨)
 // 프로덕션에서는 Vercel KV나 Upstash Redis 권장
@@ -50,10 +69,22 @@ setInterval(() => {
 }, 60 * 1000);
 
 export default async function handler(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+
+  // CORS 검증
+  if (origin && isAllowedOrigin(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else if (!origin) {
+    // 서버 간 호출이나 같은 origin (Vercel)
+    res.setHeader('Access-Control-Allow-Origin', 'https://card-ai-pi.vercel.app');
+  } else {
+    // 허용되지 않은 origin
+    return res.status(403).json({ error: 'Origin not allowed' });
+  }
+
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   // Handle preflight
   if (req.method === 'OPTIONS') {

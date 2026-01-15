@@ -1,0 +1,127 @@
+/**
+ * Utility functions
+ */
+
+import { CONFIG } from '../constants/config';
+
+// ============================================================================
+// Distance utilities
+// ============================================================================
+
+export const haversineDistance = (pos1, pos2) => {
+  if (!pos1 || !pos2) return 0;
+  const R = 6371000;
+  const toRad = (v) => (v * Math.PI) / 180;
+  const dLat = toRad(pos2.lat - pos1.lat);
+  const dLng = toRad(pos2.lng - pos1.lng);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(pos1.lat)) * Math.cos(toRad(pos2.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+};
+
+export const formatDistance = (m) => m < 1000 ? `${Math.round(m)}m` : `${(m / 1000).toFixed(1)}km`;
+
+// ============================================================================
+// Benefit value estimation
+// ============================================================================
+
+export const estimateValue = (benefit) => {
+  const val = benefit.value || '';
+  const category = benefit.category || '';
+  const base = CONFIG.VALUE_WEIGHTS[category] || 5000;
+  let bonus = 0;
+
+  if (val.includes('무제한') || val.includes('PP')) {
+    bonus += CONFIG.VALUE_BONUS.UNLIMITED;
+  }
+
+  const pct = val.match(/(\d+)%/);
+  if (pct) {
+    bonus += parseInt(pct[1]) * CONFIG.VALUE_BONUS.PERCENT_MULTIPLIER;
+  }
+
+  return base + bonus;
+};
+
+// ============================================================================
+// Search utilities
+// ============================================================================
+
+export const keywordToTag = {
+  '발렛': 'valet', '주차': 'valet', '라운지': 'lounge', 'pp': 'lounge',
+  '호텔': 'hotel', '다이닝': 'fnb', '골프': 'golf', '카페': 'cafe',
+  '커피': 'cafe', '쇼핑': 'shopping', '백화점': 'shopping',
+  '영화': 'entertainment', '공항': 'airport', '포인트': 'points'
+};
+
+export const findTag = (q) => {
+  const t = q.toLowerCase().trim();
+  return keywordToTag[t] || Object.entries(keywordToTag).find(([k]) => t.includes(k) || k.includes(t))?.[1] || t;
+};
+
+// Expand search query using synonyms (returns array of search terms)
+export const expandSearchQuery = (query) => {
+  const q = query.toLowerCase().trim();
+  const terms = [q];
+
+  // Check synonyms
+  Object.entries(CONFIG.SEARCH_SYNONYMS).forEach(([canonical, aliases]) => {
+    const allTerms = [canonical.toLowerCase(), ...aliases.map(a => a.toLowerCase())];
+    if (allTerms.some(term => q.includes(term) || term.includes(q))) {
+      terms.push(canonical.toLowerCase());
+      aliases.forEach(a => terms.push(a.toLowerCase()));
+    }
+  });
+
+  return [...new Set(terms)];
+};
+
+// ============================================================================
+// Category and Place Type configs
+// ============================================================================
+
+export const categoryConfig = {
+  airport: { emoji: "✈️", label: "공항" },
+  valet: { emoji: "🚗", label: "발렛" },
+  lounge: { emoji: "🛋️", label: "라운지" },
+  fnb: { emoji: "🍽️", label: "다이닝" },
+  hotel: { emoji: "🏨", label: "호텔" },
+  golf: { emoji: "⛳", label: "골프" },
+  cafe: { emoji: "☕", label: "카페" },
+  shopping: { emoji: "🛍️", label: "쇼핑" },
+  points: { emoji: "💰", label: "포인트" },
+  entertainment: { emoji: "🎬", label: "문화" },
+  gas: { emoji: "⛽", label: "주유" },
+  insurance: { emoji: "🛡️", label: "보험" },
+  service: { emoji: "📞", label: "서비스" },
+  travel: { emoji: "🧳", label: "여행" }
+};
+
+export const placeTypeConfig = {
+  airport: { emoji: "✈️", label: "공항" },
+  lounge: { emoji: "🛋️", label: "라운지" },
+  hotel: { emoji: "🏨", label: "호텔" },
+  department: { emoji: "🛍️", label: "백화점" },
+  dutyfree: { emoji: "🎁", label: "면세점" },
+  golf: { emoji: "⛳", label: "골프" },
+  cafe: { emoji: "☕", label: "카페" },
+  entertainment: { emoji: "🎬", label: "영화" },
+  convenience: { emoji: "🏪", label: "편의점" },
+  online: { emoji: "🛒", label: "온라인" },
+  mart: { emoji: "🛒", label: "마트" },
+  gas: { emoji: "⛽", label: "주유소" }
+};
+
+export const placeCategories = [
+  { id: 'all', label: '전체', emoji: '📍' },
+  { id: 'airport', label: '공항', emoji: '✈️' },
+  { id: 'lounge', label: '라운지', emoji: '🛋️' },
+  { id: 'hotel', label: '호텔', emoji: '🏨' },
+  { id: 'department', label: '백화점', emoji: '🛍️' },
+  { id: 'golf', label: '골프', emoji: '⛳' },
+  { id: 'convenience', label: '편의점', emoji: '🏪' },
+  { id: 'mart', label: '마트', emoji: '🛒' },
+  { id: 'gas', label: '주유소', emoji: '⛽' },
+  { id: 'cafe', label: '카페', emoji: '☕' },
+  { id: 'entertainment', label: '영화', emoji: '🎬' },
+  { id: 'online', label: '온라인', emoji: '💻' },
+];
