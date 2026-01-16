@@ -15,6 +15,20 @@ const REPORT_TYPES = [
 
 const COOLDOWN_MS = 30000; // 30초 로컬 디바운스
 
+// 진단 정보 생성
+const generateDiagnosticInfo = (formData) => {
+  return `[Card AI 제보 - 오프라인]
+제보 유형: ${formData.type}
+카드명: ${formData.cardName || '-'}
+장소명: ${formData.placeName || '-'}
+혜택 내용: ${formData.benefitContent || '-'}
+출처: ${formData.sourceUrl || '-'}
+설명: ${formData.description || '-'}
+---
+앱 버전: ${formData.appVersion}
+시간: ${new Date().toISOString()}`;
+};
+
 export const ReportModal = ({
   isOpen,
   onClose,
@@ -32,7 +46,20 @@ export const ReportModal = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const modalRef = useRef(null);
+
+  // 오프라인 상태 감지
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   // prefill 데이터가 변경되면 업데이트
   useEffect(() => {
@@ -74,7 +101,32 @@ export const ReportModal = ({
     setError(null);
   };
 
+  // 진단 정보 클립보드 복사
+  const copyDiagnosticInfo = async () => {
+    const diagInfo = generateDiagnosticInfo({
+      type: reportType,
+      cardName: cardName.trim(),
+      placeName: placeName.trim(),
+      benefitContent: benefitContent.trim(),
+      sourceUrl: sourceUrl.trim(),
+      description: description.trim(),
+      appVersion: CONFIG.BUILD.VERSION,
+    });
+    try {
+      await navigator.clipboard.writeText(diagInfo);
+      showToast('📋 진단 정보가 복사되었습니다');
+    } catch {
+      showToast('복사 실패 - 직접 복사해주세요');
+    }
+  };
+
   const handleSubmit = async () => {
+    // 오프라인 체크 - 온라인일 때만 제출
+    if (!navigator.onLine) {
+      setError('오프라인 상태입니다. 아래 버튼으로 진단 정보를 복사해주세요.');
+      return;
+    }
+
     // 필수 필드 검증
     if (!cardName.trim() && !placeName.trim()) {
       setError('카드명 또는 장소명을 입력해주세요');
@@ -110,6 +162,10 @@ export const ReportModal = ({
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
+        // Rate limit 특별 처리
+        if (response.status === 429) {
+          throw new Error('요청이 많아요. 잠시 후 다시 시도해주세요.');
+        }
         throw new Error(data.error || '제보 전송 실패');
       }
 
@@ -253,15 +309,33 @@ export const ReportModal = ({
 
         {/* Footer */}
         <div className="p-5 border-t border-white/5 space-y-3">
+          {/* 오프라인 폴백 UI */}
+          {isOffline && (
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-2">
+              <p className="text-sm text-amber-400 font-medium mb-3">📵 오프라인 상태 - 전송 불가</p>
+              <button
+                onClick={copyDiagnosticInfo}
+                className="w-full py-3 bg-amber-600/20 border border-amber-500/30 rounded-xl font-medium text-amber-300 active:scale-[0.98] flex items-center justify-center gap-2"
+              >
+                📋 진단 정보 복사
+              </button>
+              <p className="text-[10px] text-amber-400/70 text-center mt-2">
+                복사 후 이메일({CONFIG.LINKS.DATA_REPORT_EMAIL})로 보내주세요
+              </p>
+            </div>
+          )}
+
           <button
             onClick={handleSubmit}
-            disabled={isSubmitting}
+            disabled={isSubmitting || isOffline}
             className="w-full py-3.5 bg-blue-600 rounded-xl font-bold text-white active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {isSubmitting ? (
               <>
                 <span className="animate-spin">⏳</span> 전송 중...
               </>
+            ) : isOffline ? (
+              '📵 오프라인'
             ) : (
               '제보 보내기'
             )}

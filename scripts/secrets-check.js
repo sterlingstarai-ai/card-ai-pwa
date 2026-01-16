@@ -37,6 +37,16 @@ const SAFE_PATTERNS = [
   /placeholder/i,
 ];
 
+// Known safe values (public API keys, hashes, etc.)
+// These are intentionally public frontend keys that are domain-restricted
+// Pattern: Kakao Maps JS API keys (32-char hex, domain-restricted by Kakao)
+const isSafeKakaoKey = (value, filePath) => {
+  // Only allow in dist files (bundled from env vars)
+  if (!filePath.includes('dist/')) return false;
+  // Kakao JS keys are 32-char hex and meant to be public
+  return /^[a-f0-9]{32}$/.test(value);
+};
+
 let violations = [];
 
 function isSafeContext(content, match) {
@@ -64,6 +74,9 @@ function scanFile(filePath) {
 
         // Skip if it's a safe pattern (env var reference, example, etc.)
         if (isSafeContext(content, match)) return;
+
+        // Skip Kakao API keys in dist (public, domain-restricted)
+        if (name === 'Kakao API Key' && isSafeKakaoKey(match, relativePath)) return;
 
         // Skip very short matches that might be false positives
         if (match.length < 20) return;
