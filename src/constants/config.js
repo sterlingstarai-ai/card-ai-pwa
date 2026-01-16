@@ -20,7 +20,7 @@ export const CONFIG = {
   // 데모 모드 카드 (온보딩용)
   DEMO: {
     CARDS: ['hyundai-purple', 'samsung-taptap-o', 'shinhan-the-best'],
-    PLACE: 'incheon-t2', // 인천공항 T2
+    PLACE: 'icn-t2', // 인천공항 T2
   },
 
   // 타임아웃 (ms)
