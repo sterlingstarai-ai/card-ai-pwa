@@ -103,6 +103,20 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
         setMapReady(true);
         setMapError(null);
         console.log('Kakao Map initialized');
+
+        // Safari WebView 강제 리페인트
+        setTimeout(() => {
+          if (mapRef.current && mapContainerRef.current) {
+            mapRef.current.relayout();
+            // 추가 강제 리페인트
+            mapContainerRef.current.style.opacity = '0.99';
+            requestAnimationFrame(() => {
+              if (mapContainerRef.current) {
+                mapContainerRef.current.style.opacity = '1';
+              }
+            });
+          }
+        }, 100);
       } catch (err) {
         console.error('Map init error:', err);
         const error = '지도 초기화 실패: ' + err.message;
@@ -266,7 +280,19 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
       </div>
 
       {/* 카카오맵 컨테이너 */}
-      <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
+      <div ref={mapContainerRef} style={{
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        zIndex: 10,
+        // Safari WebView 렌더링 이슈 해결
+        WebkitTransform: 'translate3d(0,0,0)',
+        transform: 'translate3d(0,0,0)',
+        WebkitBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden',
+        willChange: 'transform',
+        isolation: 'isolate',
+      }} />
 
       {/* 로딩/에러 상태 */}
       {!mapReady && !mapError && (

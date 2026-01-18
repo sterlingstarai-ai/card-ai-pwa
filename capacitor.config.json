@@ -6,7 +6,7 @@
   "server": {
     "androidScheme": "https",
     "iosScheme": "https",
-    "hostname": "localhost",
+    "hostname": "card-ai-pi.vercel.app",
     "allowNavigation": ["dapi.kakao.com", "*.kakao.com", "*.daumcdn.net"]
   },
   "plugins": {

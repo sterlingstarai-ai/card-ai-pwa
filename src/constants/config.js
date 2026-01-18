@@ -117,8 +117,8 @@ export const CONFIG = {
 
   // 링크 및 연락처
   LINKS: {
-    PRIVACY_POLICY: 'https://cardai.app/privacy',
-    TERMS_OF_SERVICE: 'https://cardai.app/terms',
+    PRIVACY_POLICY: '/privacy.html',
+    TERMS_OF_SERVICE: '/terms.html',
     SUPPORT_EMAIL: 'support@cardai.app',
     FEEDBACK_EMAIL: 'feedback@cardai.app',
     DATA_REPORT_EMAIL: 'data@cardai.app',
