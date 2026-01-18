@@ -110,7 +110,7 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
             mapRef.current.relayout();
             // 추가 강제 리페인트
             mapContainerRef.current.style.opacity = '0.99';
-            requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
               if (mapContainerRef.current) {
                 mapContainerRef.current.style.opacity = '1';
               }
