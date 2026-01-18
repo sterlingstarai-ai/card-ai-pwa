@@ -156,7 +156,7 @@ curl -s https://card-ai-pi.vercel.app/api/report \
 - 예상 복구 시간: [시간]
 - 임시 해결: [있으면 안내]
 
-문의: support@cardai.app
+문의: sterling.star.ai@gmail.com
 ```
 
 ### 복구 완료 공지
@@ -178,7 +178,7 @@ curl -s https://card-ai-pi.vercel.app/api/report \
 불편을 드려 죄송합니다.
 
 말씀해주신 [문제]에 대해 확인 후 빠르게 개선하겠습니다.
-추가 문의사항은 support@cardai.app으로 연락 부탁드립니다.
+추가 문의사항은 sterling.star.ai@gmail.com으로 연락 부탁드립니다.
 
 감사합니다.
 ```
@@ -190,8 +190,8 @@ curl -s https://card-ai-pi.vercel.app/api/report \
 | 역할 | 연락처 | 비고 |
 |------|--------|------|
 | 개발 | - | - |
-| 데이터 | data@cardai.app | 혜택 데이터 오류 |
-| 지원 | support@cardai.app | 사용자 문의 |
+| 데이터 | sterling.star.ai@gmail.com | 혜택 데이터 오류 |
+| 지원 | sterling.star.ai@gmail.com | 사용자 문의 |
 | 인프라 | Vercel Dashboard | 배포/롤백 |
 
 ---

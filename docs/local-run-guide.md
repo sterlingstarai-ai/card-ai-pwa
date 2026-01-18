@@ -128,4 +128,4 @@ npx cap sync --force
 ## 도움말
 
 - Capacitor 공식 문서: https://capacitorjs.com/docs
-- 문의: support@cardai.app
+- 문의: sterling.star.ai@gmail.com

@@ -112,7 +112,7 @@ vercel promote <deployment_url>
 | 역할 | 담당 | 연락처 |
 |------|------|--------|
 | 개발 | - | - |
-| 데이터 | - | data@cardai.app |
+| 데이터 | - | sterling.star.ai@gmail.com |
 | 인프라 | Vercel | Dashboard |
 
 ---

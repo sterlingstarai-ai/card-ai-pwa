@@ -194,8 +194,8 @@ npm run build         # 프로덕션 빌드
 | 역할 | 연락처 |
 |------|--------|
 | 개발 | - |
-| 데이터 | data@cardai.app |
-| 지원 | support@cardai.app |
+| 데이터 | sterling.star.ai@gmail.com |
+| 지원 | sterling.star.ai@gmail.com |
 | 인프라 | Vercel Dashboard |
 
 ---
