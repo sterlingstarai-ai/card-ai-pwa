@@ -119,9 +119,9 @@ export const CONFIG = {
   LINKS: {
     PRIVACY_POLICY: '/privacy.html',
     TERMS_OF_SERVICE: '/terms.html',
-    SUPPORT_EMAIL: 'support@cardai.app',
-    FEEDBACK_EMAIL: 'feedback@cardai.app',
-    DATA_REPORT_EMAIL: 'data@cardai.app',
+    SUPPORT_EMAIL: 'sterling.star.ai@gmail.com',
+    FEEDBACK_EMAIL: 'sterling.star.ai@gmail.com',
+    DATA_REPORT_EMAIL: 'sterling.star.ai@gmail.com',
   },
 
   // 빌드 정보
