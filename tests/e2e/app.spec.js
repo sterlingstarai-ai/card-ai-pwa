@@ -27,7 +27,7 @@ test.describe('Card AI PWA', () => {
     await expect(page.locator('text=SMART WALLET')).toBeVisible({ timeout: 15000 });
 
     // Check onboarding demo is shown (no cards) - wait for data to load
-    await expect(page.locator('text=등록된 카드가 없어요').or(page.locator('text=OCR 스캔'))).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('text=등록된 카드가 없어요')).toBeVisible({ timeout: 15000 });
 
     // Check bottom navigation
     await expect(page.locator('[aria-label="홈"]')).toBeVisible();
@@ -42,7 +42,7 @@ test.describe('Card AI PWA', () => {
 
     // Go to wallet tab
     await page.locator('[aria-label="지갑"]').click();
-    await expect(page.locator('text=카드사를 탭하여').or(page.locator('text=카드사'))).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('text=카드사를 탭하여').or(page.locator('text=카드사')).first()).toBeVisible({ timeout: 10000 });
 
     // Expand an issuer and add a card
     const hyundaiCard = page.locator('text=현대카드');
@@ -133,11 +133,11 @@ test.describe('Card AI PWA', () => {
     await page.waitForTimeout(500);
 
     // Try to get nearby places - look for the target/location button
-    const locationButton = page.locator('[aria-label="내 주변"]').or(page.locator('button:has-text("내 주변")'));
+    const locationButton = page.locator('[aria-label="내 주변"]').or(page.locator('button:has-text("내 주변")')).first();
     if (await locationButton.isVisible({ timeout: 3000 })) {
       await locationButton.click();
       // Should fall back to Seoul default
-      await expect(page.locator('text=서울').or(page.locator('text=장소 선택'))).toBeVisible({ timeout: 5000 });
+      await expect(page.locator('text=서울').or(page.locator('text=장소 선택')).first()).toBeVisible({ timeout: 5000 });
     }
   });
 
@@ -157,10 +157,10 @@ test.describe('Card AI PWA', () => {
 
     // Navigate to different tabs - UI should still work
     await page.locator('[aria-label="혜택"]').click();
-    await expect(page.locator('text=어디서든').or(page.locator('text=내 혜택').or(page.locator('text=혜택')))).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('text=어디서든').or(page.locator('text=내 혜택')).first()).toBeVisible({ timeout: 5000 });
 
     await page.locator('[aria-label="지갑"]').click();
-    await expect(page.locator('text=카드사').or(page.locator('text=지갑'))).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('text=카드사').or(page.locator('text=지갑')).first()).toBeVisible({ timeout: 5000 });
 
     // Go back online
     await context.setOffline(false);
@@ -178,11 +178,11 @@ test.describe('OCR Flow (mocked)', () => {
     if (await ocrButton.isVisible({ timeout: 10000 })) {
       await ocrButton.click();
 
-      // Modal should open
-      await expect(page.locator('text=카드 스캔').or(page.locator('text=촬영'))).toBeVisible({ timeout: 5000 });
+      // Modal should open - check for modal title
+      await expect(page.getByRole('heading', { name: /카드 스캔/ })).toBeVisible({ timeout: 5000 });
 
       // Close modal
-      const closeButton = page.locator('button:has-text("×")').or(page.locator('[aria-label="닫기"]'));
+      const closeButton = page.locator('button:has-text("×")').or(page.locator('[aria-label="닫기"]')).first();
       if (await closeButton.isVisible({ timeout: 2000 })) {
         await closeButton.click();
       }
