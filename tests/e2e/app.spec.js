@@ -27,7 +27,7 @@ test.describe('Card AI PWA', () => {
     await expect(page.locator('text=SMART WALLET')).toBeVisible({ timeout: 15000 });
 
     // Check onboarding demo is shown (no cards) - wait for data to load
-    await expect(page.locator('text=DEMO').or(page.locator('text=OCR로 카드 스캔하기'))).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('text=등록된 카드가 없어요').or(page.locator('text=OCR 스캔'))).toBeVisible({ timeout: 15000 });
 
     // Check bottom navigation
     await expect(page.locator('[aria-label="홈"]')).toBeVisible();
@@ -71,7 +71,7 @@ test.describe('Card AI PWA', () => {
     await page.waitForLoadState('networkidle');
 
     // Wait for demo mode to appear and add demo cards
-    const demoButton = page.locator('text=나중에 할게요');
+    const demoButton = page.locator('text=데모로 체험해보기');
     await demoButton.waitFor({ state: 'visible', timeout: 15000 });
     await demoButton.click();
     await page.waitForTimeout(500);
@@ -99,7 +99,7 @@ test.describe('Card AI PWA', () => {
     await page.waitForLoadState('networkidle');
 
     // Add demo cards
-    const demoButton = page.locator('text=나중에 할게요');
+    const demoButton = page.locator('text=데모로 체험해보기');
     await demoButton.waitFor({ state: 'visible', timeout: 15000 });
     await demoButton.click();
     await page.waitForTimeout(500);
@@ -127,7 +127,7 @@ test.describe('Card AI PWA', () => {
     await page.waitForLoadState('networkidle');
 
     // Add demo cards
-    const demoButton = page.locator('text=나중에 할게요');
+    const demoButton = page.locator('text=데모로 체험해보기');
     await demoButton.waitFor({ state: 'visible', timeout: 15000 });
     await demoButton.click();
     await page.waitForTimeout(500);
@@ -147,7 +147,7 @@ test.describe('Card AI PWA', () => {
     await page.waitForLoadState('networkidle');
 
     // Add demo cards first while online
-    const demoButton = page.locator('text=나중에 할게요');
+    const demoButton = page.locator('text=데모로 체험해보기');
     await demoButton.waitFor({ state: 'visible', timeout: 15000 });
     await demoButton.click();
     await page.waitForTimeout(500);
@@ -174,7 +174,7 @@ test.describe('OCR Flow (mocked)', () => {
     await page.waitForSelector('text=SMART WALLET', { timeout: 15000 });
 
     // Click on OCR scan button
-    const ocrButton = page.locator('text=OCR로 카드 스캔하기');
+    const ocrButton = page.locator('text=OCR 스캔');
     if (await ocrButton.isVisible({ timeout: 10000 })) {
       await ocrButton.click();
 
