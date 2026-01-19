@@ -5,8 +5,9 @@
 | 항목 | 값 |
 |------|-----|
 | 앱 이름 | Card AI |
-| 앱 ID (iOS) | com.cardai.app |
-| 앱 ID (Android) | com.cardai.app |
+| Bundle ID (iOS) | com.sterlingstarai.cardai |
+| Application ID (Android) | com.sterlingstarai.cardai |
+| SKU (App Store) | com.sterlingstarai.cardai |
 | 버전 | 1.0.0 |
 | 빌드 번호 | 1 |
 | 카테고리 | 금융 (Finance) |

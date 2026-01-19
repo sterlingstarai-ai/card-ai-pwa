@@ -1,5 +1,5 @@
 {
-  "appId": "com.cardai.app",
+  "appId": "com.sterlingstarai.cardai",
   "appName": "Card AI",
   "webDir": "dist",
   "bundledWebRuntime": false,
