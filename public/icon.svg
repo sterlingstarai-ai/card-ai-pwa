@@ -4,7 +4,47 @@
       <stop offset="0%" style="stop-color:#3b82f6"/>
       <stop offset="100%" style="stop-color:#8b5cf6"/>
     </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="100" fill="url(#bg)"/>
-  <text x="256" y="300" font-size="240" text-anchor="middle" fill="white">💳</text>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
+
+  <!-- Credit Card -->
+  <g transform="translate(76, 140)">
+    <!-- Card body -->
+    <rect x="0" y="0" width="280" height="175" rx="16" fill="url(#card)" opacity="0.95"/>
+
+    <!-- Magnetic stripe -->
+    <rect x="0" y="35" width="280" height="35" fill="#1e293b"/>
+
+    <!-- Card chip -->
+    <rect x="30" y="90" width="45" height="35" rx="6" fill="#fbbf24"/>
+    <line x1="30" y1="100" x2="75" y2="100" stroke="#d97706" stroke-width="2"/>
+    <line x1="30" y1="110" x2="75" y2="110" stroke="#d97706" stroke-width="2"/>
+    <line x1="52" y1="90" x2="52" y2="125" stroke="#d97706" stroke-width="2"/>
+
+    <!-- Card number dots -->
+    <g fill="#64748b">
+      <circle cx="100" cy="140" r="5"/>
+      <circle cx="120" cy="140" r="5"/>
+      <circle cx="140" cy="140" r="5"/>
+      <circle cx="160" cy="140" r="5"/>
+      <circle cx="190" cy="140" r="5"/>
+      <circle cx="210" cy="140" r="5"/>
+      <circle cx="230" cy="140" r="5"/>
+      <circle cx="250" cy="140" r="5"/>
+    </g>
+  </g>
+
+  <!-- Location Pin -->
+  <g transform="translate(320, 240)">
+    <ellipse cx="50" cy="115" rx="35" ry="12" fill="#1e293b" opacity="0.3"/>
+    <path d="M50 0 C22.4 0 0 22.4 0 50 C0 85 50 120 50 120 C50 120 100 85 100 50 C100 22.4 77.6 0 50 0 Z" fill="#ffffff"/>
+    <circle cx="50" cy="48" r="22" fill="#3b82f6"/>
+    <text x="50" y="57" font-size="24" text-anchor="middle" fill="white" font-weight="bold">₩</text>
+  </g>
 </svg>
