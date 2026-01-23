@@ -653,11 +653,29 @@ export default function CardBenefitsApp() {
     }
 
     try {
-      // 이미지를 base64로 변환
+      // 이미지를 base64로 변환 (검증 포함)
       const toBase64 = (f) => new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]); // data:image/...;base64, 제거
-        reader.onerror = reject;
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          if (!dataUrl || typeof dataUrl !== 'string') {
+            reject(new Error('이미지를 읽을 수 없습니다'));
+            return;
+          }
+          const commaIndex = dataUrl.indexOf(',');
+          if (commaIndex === -1) {
+            reject(new Error('이미지 형식이 올바르지 않습니다'));
+            return;
+          }
+          const base64 = dataUrl.substring(commaIndex + 1);
+          // Base64 유효성 검증
+          if (!base64 || !/^[A-Za-z0-9+/]+=*$/.test(base64)) {
+            reject(new Error('이미지 인코딩 오류'));
+            return;
+          }
+          resolve(base64);
+        };
+        reader.onerror = () => reject(new Error('이미지 파일을 읽지 못했습니다'));
         reader.readAsDataURL(f);
       });
 
@@ -759,8 +777,17 @@ export default function CardBenefitsApp() {
         safeSet(() => setOcrStatus('network_error'));
         trackEvent(EventType.OCR_FAIL, { reason: 'network_error' });
       } else {
-        showToast(`⚠️ 오류: ${errMsg.substring(0, 50)}`);
-        safeSet(() => setOcrStatus('error'));
+        // 사용자 친화적 에러 메시지 변환
+        let userMessage = '카드 인식에 실패했습니다';
+        if (errMsg.includes('pattern') || errMsg.includes('인코딩')) {
+          userMessage = '이미지를 처리할 수 없습니다. 다시 촬영해주세요';
+        } else if (errMsg.includes('quota') || errMsg.includes('403')) {
+          userMessage = '서비스 이용량 초과. 잠시 후 다시 시도해주세요';
+        } else if (errMsg.includes('형식') || errMsg.includes('읽을 수 없')) {
+          userMessage = errMsg;
+        }
+        showToast(`⚠️ ${userMessage}`);
+        safeSet(() => setOcrStatus('notfound'));
         trackEvent(EventType.OCR_FAIL, { reason: 'error', message: errMsg.substring(0, 100) });
         trackError(err, { context: 'OCR' });
       }
