@@ -104,3 +104,27 @@ vercel --prod        # Vercel 배포
 - 개발 노하우: `docs/DEVELOPMENT_KNOWHOW.md`
 - 앱스토어 메타데이터: `docs/APP_STORE_METADATA.md`
 - 릴리즈 노트: `docs/RELEASE_NOTES_v1.0.0.md`
+
+---
+
+## 마지막 작업 세션 (2026-01-23)
+
+### 완료된 작업
+1. **iOS 버전 1.0 심사 승인 확인**
+2. **버그 수정 및 1.0.1 제출**:
+   - OCR 카드 스캔 오류 수정 ("The string did not match the expected pattern" → 사용자 친화적 메시지)
+   - 지도 호텔 좌표 오류 수정:
+     - JW메리어트 서울: 127.0594 → 127.0049 (코엑스 → 반포)
+     - 파크하얏트 서울, 시그니엘 서울, 인터컨티넨탈 등 좌표 보정
+3. **iOS 1.0.1 (빌드 3) App Store 심사 제출 완료**
+4. **Vercel 배포 완료**: https://card-ai-pi.vercel.app
+
+### 현재 상태
+- **iOS 1.0**: 출시 완료
+- **iOS 1.0.1**: 심사 대기 중 (결과 24~48시간 내 예상)
+- **Android**: 비공개 테스트 준비 중 (테스터 20명 모집 필요)
+
+### 다음 할 일
+- iOS 1.0.1 심사 결과 확인
+- Android 테스터 모집 후 비공개 테스트 시작
+- 앱스토어 리뷰/별점 확보 → 검색결과 스크린샷 미리보기 노출
