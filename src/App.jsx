@@ -690,7 +690,7 @@ export default function CardBenefitsApp() {
               return;
             }
             resolve(base64);
-          } catch (err) {
+          } catch (_err) {
             reject(new Error('이미지 처리 중 오류가 발생했습니다'));
           }
         };

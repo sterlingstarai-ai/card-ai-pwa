@@ -21,7 +21,7 @@ export const HomeTab = ({
   isDemo,
   // Handlers
   setShowPlaceSheet,
-  requestLocation,
+  requestLocation: _requestLocation,
   setSearchQuery,
   selectPlace,
   handleSearchBenefitSelect,

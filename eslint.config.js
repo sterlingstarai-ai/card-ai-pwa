@@ -42,6 +42,7 @@ export default [
         IntersectionObserver: 'readonly',
         kakao: 'readonly',
         process: 'readonly',
+        createImageBitmap: 'readonly',
       },
     },
     settings: {
