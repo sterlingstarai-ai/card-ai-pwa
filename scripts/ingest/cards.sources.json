@@ -1,0 +1,67 @@
+[
+  {
+    "cardId": "hyundai-purple",
+    "issuer": "현대카드",
+    "name": "the Purple",
+    "shortName": "퍼플",
+    "type": "credit",
+    "tier": "vip",
+    "annualFee": "1000000",
+    "ocrKeywords": ["purple", "퍼플", "the purple", "현대카드"],
+    "benefitUrls": [
+      "https://www.hyundaicard.com/cpc/cr/CPCCR0602_01.hc?cardId=CDP0601"
+    ]
+  },
+  {
+    "cardId": "hyundai-black",
+    "issuer": "현대카드",
+    "name": "the Black",
+    "shortName": "블랙",
+    "type": "credit",
+    "tier": "vip",
+    "annualFee": "3000000",
+    "ocrKeywords": ["black", "블랙", "the black", "현대카드"],
+    "benefitUrls": [
+      "https://www.hyundaicard.com/cpc/cr/CPCCR0602_01.hc?cardId=CDP0606"
+    ]
+  },
+  {
+    "cardId": "samsung-taptap-o",
+    "issuer": "삼성카드",
+    "name": "탭탭오",
+    "shortName": "탭탭오",
+    "type": "credit",
+    "tier": "mid",
+    "annualFee": "15000",
+    "ocrKeywords": ["탭탭오", "taptap", "TAP TAP O", "삼성카드"],
+    "benefitUrls": [
+      "https://www.samsungcard.com/personal/card/platinum/view/UHPPCD0140M0"
+    ]
+  },
+  {
+    "cardId": "shinhan-the-best",
+    "issuer": "신한카드",
+    "name": "The BEST",
+    "shortName": "더베스트",
+    "type": "credit",
+    "tier": "premium",
+    "annualFee": "500000",
+    "ocrKeywords": ["the best", "더베스트", "THE BEST", "신한카드"],
+    "benefitUrls": [
+      "https://www.shinhancard.com/pconts/html/card/apply/credit/1199001_2237.html"
+    ]
+  },
+  {
+    "cardId": "kb-noblesse",
+    "issuer": "KB국민카드",
+    "name": "노블레스",
+    "shortName": "노블레스",
+    "type": "credit",
+    "tier": "premium",
+    "annualFee": "500000",
+    "ocrKeywords": ["noblesse", "노블레스", "KB국민카드"],
+    "benefitUrls": [
+      "https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0076"
+    ]
+  }
+]

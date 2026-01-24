@@ -2,22 +2,25 @@
  * Kakao Maps based place selector component
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { placeTypeConfig } from '../lib/utils';
+import { fetchKakaoPlacesByRect, getCategoryCodesForType } from '../lib/kakao-places';
 
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_APP_KEY || '';
 
-export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose, onError = () => {}, benefitsData, cardsData, myCards }) => {
+export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, onClose, onError = () => {}, benefitsData, cardsData, myCards, selectedCategory = 'all' }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef([]);
   const userMarkerRef = useRef(null);
+  const liveFetchTimerRef = useRef(null);
   const [mapReady, setMapReady] = useState(false);
   const [mapError, setMapError] = useState(null);
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [activeRegion, setActiveRegion] = useState('서울');
   const [previewPlace, setPreviewPlace] = useState(null);
+  const [livePlaces, setLivePlaces] = useState({});
 
   const regions = [
     { name: '전체', lat: 36.5, lng: 127.5, zoom: 7 },
@@ -131,6 +134,59 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
     };
   }, [sdkLoaded, onError]);
 
+  // 지도 idle 이벤트에서 동적 장소 가져오기
+  useEffect(() => {
+    if (!mapReady || !mapRef.current || !window.kakao?.maps?.event) return;
+
+    const map = mapRef.current;
+
+    const fetchLivePlaces = async () => {
+      try {
+        const bounds = map.getBounds();
+        const sw = bounds.getSouthWest();
+        const ne = bounds.getNorthEast();
+        const rect = `${sw.getLng()},${sw.getLat()},${ne.getLng()},${ne.getLat()}`;
+
+        const codes = getCategoryCodesForType(selectedCategory);
+        if (codes.length === 0) return;
+
+        const results = await Promise.all(
+          codes.map((code) => fetchKakaoPlacesByRect({ rect, categoryGroupCode: code }))
+        );
+
+        const merged = {};
+        results.flat().forEach((p) => (merged[p.id] = p));
+        setLivePlaces(merged);
+      } catch (e) {
+        // 조용히 실패 처리 (키 미설정/권한 등)
+        console.warn('[MapView] Live places fetch failed:', e.message);
+      }
+    };
+
+    const onIdle = () => {
+      if (liveFetchTimerRef.current) clearTimeout(liveFetchTimerRef.current);
+      liveFetchTimerRef.current = setTimeout(fetchLivePlaces, 350);
+    };
+
+    window.kakao.maps.event.addListener(map, 'idle', onIdle);
+
+    // 최초 1회 실행
+    onIdle();
+
+    return () => {
+      if (liveFetchTimerRef.current) clearTimeout(liveFetchTimerRef.current);
+      window.kakao.maps.event.removeListener(map, 'idle', onIdle);
+    };
+  }, [mapReady, selectedCategory]);
+
+  // 정적 places + 동적 livePlaces 병합
+  const mergedPlaces = useMemo(() => {
+    const staticPlaces = Array.isArray(places)
+      ? places.reduce((acc, p) => { acc[p.id] = p; return acc; }, {})
+      : (places || {});
+    return { ...staticPlaces, ...livePlaces };
+  }, [places, livePlaces]);
+
   // 장소 마커 생성
   useEffect(() => {
     if (!mapReady || !mapRef.current) return;
@@ -139,7 +195,8 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
     markersRef.current.forEach(m => m.setMap(null));
     markersRef.current = [];
 
-    places.forEach(place => {
+    // mergedPlaces 객체를 배열로 변환하여 순회
+    Object.values(mergedPlaces).forEach(place => {
       const position = new window.kakao.maps.LatLng(place.lat, place.lng);
       const emoji = placeTypeConfig[place.type]?.emoji || '📍';
       const isSelected = selectedPlaceId === place.id;
@@ -182,7 +239,7 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
       overlay.setMap(mapRef.current);
       markersRef.current.push(overlay);
     });
-  }, [mapReady, places, selectedPlaceId, onPlaceSelect]);
+  }, [mapReady, mergedPlaces, selectedPlaceId, onPlaceSelect]);
 
   // 사용자 위치 마커 + 위치 변경 시 지도 중심 이동
   const lastPanLocationRef = useRef(null);

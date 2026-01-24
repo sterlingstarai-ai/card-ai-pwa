@@ -129,7 +129,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'No image provided' });
     }
 
-    // Call Google Vision API
+    // Call Google Vision API with enhanced detection
+    // DOCUMENT_TEXT_DETECTION: Better for dense text, card layouts
+    // LOGO_DETECTION: Helps identify card brand logos (VISA, Mastercard, etc.)
     const visionResponse = await fetch(
       `https://vision.googleapis.com/v1/images:annotate?key=${VISION_API_KEY}`,
       {
@@ -138,7 +140,13 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           requests: [{
             image: { content: image },
-            features: [{ type: 'TEXT_DETECTION', maxResults: 10 }]
+            features: [
+              { type: 'DOCUMENT_TEXT_DETECTION', maxResults: 1 },
+              { type: 'LOGO_DETECTION', maxResults: 5 }
+            ],
+            imageContext: {
+              languageHints: ['ko', 'en']
+            }
           }]
         })
       }
@@ -154,15 +162,29 @@ export default async function handler(req, res) {
     }
 
     const data = await visionResponse.json();
+    const response = data.responses?.[0] || {};
 
-    // Extract text from response
-    const textAnnotations = data.responses?.[0]?.textAnnotations;
-    const fullText = textAnnotations?.[0]?.description || '';
+    // Extract text - prefer fullTextAnnotation for better accuracy
+    const fullTextAnnotation = response.fullTextAnnotation;
+    const textAnnotations = response.textAnnotations;
+    const logoAnnotations = response.logoAnnotations || [];
+
+    // fullTextAnnotation.text has better formatting and accuracy
+    const fullText = fullTextAnnotation?.text || textAnnotations?.[0]?.description || '';
+
+    // Extract detected logos (card networks like VISA, Mastercard, etc.)
+    const logos = logoAnnotations.map(logo => ({
+      description: logo.description,
+      score: logo.score
+    }));
 
     return res.status(200).json({
       success: true,
       text: fullText,
-      annotations: textAnnotations?.slice(1) || [] // Individual word annotations
+      annotations: textAnnotations?.slice(1) || [],
+      logos: logos,
+      // Include confidence info if available
+      confidence: fullTextAnnotation?.pages?.[0]?.confidence
     });
 
   } catch (error) {
