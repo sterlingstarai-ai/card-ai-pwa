@@ -1,15 +1,15 @@
 # Data Quality Audit Report
 
-Generated: 2026-01-16
+Generated: 2026-01-24
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| Total Cards | 98 |
-| Total Places | 110 |
+| Total Cards | 128 |
+| Total Places | 157 |
 | Total Benefits | 222 |
-| **Risk Score** | **617** |
+| **Risk Score** | **767** |
 
 ## Risk Assessment
 
@@ -22,7 +22,7 @@ Generated: 2026-01-16
 | Missing sourceUrl | 199 | Medium |
 | Missing lastVerifiedAt | 199 | High |
 | Stale verification (>180d) | 20 | Medium |
-| Cards without benefits | 0 | High |
+| Cards without benefits | 30 | High |
 | Missing required fields | 0 | Critical |
 
 ## Demo Scenario Health
@@ -48,7 +48,7 @@ Generated: 2026-01-16
   - Value: PP카드
   - Source: ✅
   - Verified: 2025-01-14
-- **스타벅스 50%** (taptap O)
+- **카페 30~50%** (taptap O)
   - Category: cafe
   - Value: 월 1만원
   - Source: ✅
@@ -95,7 +95,36 @@ None
 
 ## Cards Without Benefits
 
-All cards have at least one benefit.
+- 카카오뱅크 카카오뱅크 체크카드 (`kakaobank-check`)
+- 카카오뱅크 카카오뱅크 mini (`kakaobank-mini`)
+- 카카오뱅크 카카오프렌즈 체크 (`kakaobank-friends`)
+- 토스뱅크 토스뱅크 체크카드 (`tossbank-check`)
+- 토스뱅크 토스 프라임 (`toss-prime`)
+- 케이뱅크 케이뱅크 체크카드 (`kbank-check`)
+- 케이뱅크 케이뱅크 플러스 체크 (`kbank-plus`)
+- 한국씨티은행 씨티 프레스티지 (`citi-prestige`)
+- 한국씨티은행 씨티 리워드 (`citi-rewards`)
+- 한국씨티은행 씨티 클리어 (`citi-clear`)
+- IBK기업은행 스카이패스 (`ibk-skypass`)
+- IBK기업은행 IBK PREMIUM (`ibk-premium`)
+- IBK기업은행 참! 좋은 LIFE (`ibk-life`)
+- SC제일은행 The FIRST (`sc-the-first`)
+- SC제일은행 SC Platinum (`sc-platinum`)
+- 수협은행 오션 (`suhyup-ocean`)
+- DGB대구은행 DGB 플래티넘 (`dgb-daegu`)
+- BNK부산은행 BNK 플래티넘 (`bnk-busan`)
+- 전북은행 JB 프리미엄 (`jeonbuk-jb`)
+- 광주은행 KJ 플래티넘 (`kwangju-kj`)
+- 제주은행 제주 플래티넘 (`jeju-jj`)
+- 현대카드 the X (`hyundai-x`)
+- 현대카드 M포인트 (`hyundai-m`)
+- 현대카드 ZERO Edition2 (`hyundai-zero`)
+- 삼성카드 디지털러버 (`samsung-digital`)
+- 삼성카드 쇼핑앤카드 (`samsung-shopping`)
+- 신한카드 러브 체크 (`shinhan-love`)
+- 신한카드 심플 체크 (`shinhan-simple`)
+- KB국민카드 노블레스 (`kb-noblesse`)
+- KB국민카드 청춘대로 (`kb-check`)
 
 ## Recommendations
 
