@@ -143,11 +143,11 @@ export const HomeTab = ({
 
           {/* Place Selector */}
           <div className="flex gap-2">
-            <button onClick={() => setShowPlaceSheet(true)} className="flex-1 p-4 bg-gradient-to-r from-slate-800/80 to-slate-800/40 rounded-2xl border border-white/10 flex items-center gap-3 active:scale-[0.98]" aria-label="장소 선택" style={{ minHeight: '56px' }}>
+            <button onClick={handleNearby} className="flex-1 p-4 bg-gradient-to-r from-slate-800/80 to-slate-800/40 rounded-2xl border border-white/10 flex items-center gap-3 active:scale-[0.98]" aria-label="장소 선택" style={{ minHeight: '56px' }}>
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-lg">{selectedPlace ? placeTypeConfig[selectedPlace.type]?.emoji : '📍'}</div>
               <div className="flex-1 text-left min-w-0"><p className="text-[10px] text-slate-400">현재 장소</p><p className="font-bold truncate text-sm">{selectedPlace ? selectedPlace.name : '선택하세요'}</p></div>
             </button>
-            <button onClick={async () => { await requestLocation(); setShowPlaceSheet(true); }} className="w-14 bg-blue-600 rounded-2xl flex flex-col items-center justify-center active:scale-95" aria-label="내 주변" style={{ minHeight: '56px' }}><span className="text-lg">🎯</span><span className="text-[8px] font-bold">내주변</span></button>
+            <button onClick={handleNearby} className="w-14 bg-blue-600 rounded-2xl flex flex-col items-center justify-center active:scale-95" aria-label="내 주변" style={{ minHeight: '56px' }}><span className="text-lg">🎯</span><span className="text-[8px] font-bold">내주변</span></button>
           </div>
 
           {/* Search */}

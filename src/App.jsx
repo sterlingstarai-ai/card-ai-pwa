@@ -582,53 +582,60 @@ export default function CardBenefitsApp() {
     }
   };
 
-  // OCR 이미지 리사이즈/압축 (대용량 이미지 최적화)
+  // OCR 이미지를 JPEG로 변환 (iOS HEIC 호환 + 크기 최적화)
   const compressImage = (file, maxSize = 1920, quality = 0.8) => {
-    return new Promise((resolve) => {
-      // 이미 작은 파일은 그대로 반환 (500KB 이하)
-      if (file.size < 500 * 1024) {
-        resolve(file);
-        return;
-      }
-
+    return new Promise((resolve, reject) => {
       const img = new Image();
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
+      let objectUrl = null;
 
       img.onload = () => {
-        let { width, height } = img;
+        try {
+          let { width, height } = img;
 
-        // 최대 크기 제한
-        if (width > maxSize || height > maxSize) {
-          if (width > height) {
-            height = Math.round((height * maxSize) / width);
-            width = maxSize;
-          } else {
-            width = Math.round((width * maxSize) / height);
-            height = maxSize;
-          }
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(img, 0, 0, width, height);
-
-        canvas.toBlob(
-          (blob) => {
-            if (blob) {
-              Logger.log(`Image compressed: ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB`);
-              resolve(blob);
+          // 최대 크기 제한
+          if (width > maxSize || height > maxSize) {
+            if (width > height) {
+              height = Math.round((height * maxSize) / width);
+              width = maxSize;
             } else {
-              resolve(file); // 압축 실패시 원본 반환
+              width = Math.round((width * maxSize) / height);
+              height = maxSize;
             }
-          },
-          'image/jpeg',
-          quality
-        );
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // 항상 JPEG로 변환 (iOS HEIC 문제 해결)
+          canvas.toBlob(
+            (blob) => {
+              if (objectUrl) URL.revokeObjectURL(objectUrl);
+              if (blob) {
+                Logger.log(`Image converted to JPEG: ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB`);
+                resolve(blob);
+              } else {
+                reject(new Error('이미지 변환에 실패했습니다'));
+              }
+            },
+            'image/jpeg',
+            quality
+          );
+        } catch (err) {
+          if (objectUrl) URL.revokeObjectURL(objectUrl);
+          reject(new Error('이미지 처리 중 오류가 발생했습니다'));
+        }
       };
 
-      img.onerror = () => resolve(file); // 로드 실패시 원본 반환
-      img.src = URL.createObjectURL(file);
+      img.onerror = () => {
+        if (objectUrl) URL.revokeObjectURL(objectUrl);
+        reject(new Error('이미지를 불러올 수 없습니다. 다른 사진을 선택해주세요'));
+      };
+
+      objectUrl = URL.createObjectURL(file);
+      img.src = objectUrl;
     });
   };
 
@@ -653,27 +660,31 @@ export default function CardBenefitsApp() {
     }
 
     try {
-      // 이미지를 base64로 변환 (검증 포함)
+      // 이미지를 base64로 변환 (안전한 검증)
       const toBase64 = (f) => new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
-          const dataUrl = reader.result;
-          if (!dataUrl || typeof dataUrl !== 'string') {
-            reject(new Error('이미지를 읽을 수 없습니다'));
-            return;
+          try {
+            const dataUrl = reader.result;
+            if (!dataUrl || typeof dataUrl !== 'string') {
+              reject(new Error('이미지를 읽을 수 없습니다'));
+              return;
+            }
+            const commaIndex = dataUrl.indexOf(',');
+            if (commaIndex === -1) {
+              reject(new Error('이미지 형식이 올바르지 않습니다'));
+              return;
+            }
+            const base64 = dataUrl.substring(commaIndex + 1);
+            // Base64 최소 길이 체크만 (정규식 전체 검증은 iOS에서 크래시 유발)
+            if (!base64 || base64.length < 100) {
+              reject(new Error('이미지 데이터가 너무 짧습니다'));
+              return;
+            }
+            resolve(base64);
+          } catch (err) {
+            reject(new Error('이미지 처리 중 오류가 발생했습니다'));
           }
-          const commaIndex = dataUrl.indexOf(',');
-          if (commaIndex === -1) {
-            reject(new Error('이미지 형식이 올바르지 않습니다'));
-            return;
-          }
-          const base64 = dataUrl.substring(commaIndex + 1);
-          // Base64 유효성 검증
-          if (!base64 || !/^[A-Za-z0-9+/]+=*$/.test(base64)) {
-            reject(new Error('이미지 인코딩 오류'));
-            return;
-          }
-          resolve(base64);
         };
         reader.onerror = () => reject(new Error('이미지 파일을 읽지 못했습니다'));
         reader.readAsDataURL(f);
