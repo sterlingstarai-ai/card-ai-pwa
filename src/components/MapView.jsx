@@ -184,7 +184,8 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
     });
   }, [mapReady, places, selectedPlaceId, onPlaceSelect]);
 
-  // 사용자 위치 마커
+  // 사용자 위치 마커 + 위치 변경 시 지도 중심 이동
+  const lastPanLocationRef = useRef(null);
   useEffect(() => {
     if (!mapReady || !mapRef.current || !userLocation) return;
 
@@ -193,6 +194,18 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
     }
 
     const position = new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng);
+
+    // 초기 위치(fallback)와 다른 실제 위치가 들어오면 1회 panTo
+    const lastPan = lastPanLocationRef.current;
+    if (!lastPan || (lastPan.lat !== userLocation.lat || lastPan.lng !== userLocation.lng)) {
+      // 초기 센터(서울 fallback)와 다른 경우에만 이동
+      const initLoc = initialUserLocation.current;
+      if (!initLoc || initLoc.lat !== userLocation.lat || initLoc.lng !== userLocation.lng) {
+        mapRef.current.panTo(position);
+        mapRef.current.setLevel(5);
+      }
+      lastPanLocationRef.current = { lat: userLocation.lat, lng: userLocation.lng };
+    }
 
     const content = document.createElement('div');
     content.innerHTML = `

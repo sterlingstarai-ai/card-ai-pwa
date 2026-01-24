@@ -27,6 +27,8 @@ const ALLOWED_ORIGINS = [
 // Origin 검증
 function isAllowedOrigin(origin) {
   if (!origin) return false;
+  // standalone/webview에서 Origin이 'null' 문자열로 올 수 있음
+  if (origin === 'null') return true;
   return ALLOWED_ORIGINS.some(allowed =>
     origin === allowed || origin.endsWith('.vercel.app')
   );

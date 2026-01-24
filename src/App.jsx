@@ -567,13 +567,12 @@ export default function CardBenefitsApp() {
   };
 
   const handleNearby = async () => {
-    if (locationStatus === 'success' || locationStatus === 'fallback') {
-      setShowPlaceSheet(true);
-    } else {
-      // 먼저 위치 권한 요청, 완료 후 시트 열기
+    // fallback(기본 서울)이거나 idle이면 실제 위치 요청 시도
+    // denied는 이미 거부했으므로 재요청 안 함
+    if (locationStatus === 'idle' || locationStatus === 'fallback') {
       await requestLocation();
-      setShowPlaceSheet(true);
     }
+    setShowPlaceSheet(true);
   };
 
   const pickNearestPlace = () => {
@@ -582,61 +581,70 @@ export default function CardBenefitsApp() {
     }
   };
 
-  // OCR 이미지를 JPEG로 변환 (iOS HEIC 호환 + 크기 최적화)
-  const compressImage = (file, maxSize = 1920, quality = 0.8) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      let objectUrl = null;
+  // OCR 이미지를 JPEG로 변환 (EXIF 회전 보정 + iOS HEIC 호환 + 동적 압축)
+  const compressImage = async (file, maxSize = 1920, targetMaxBytes = 3 * 1024 * 1024) => {
+    // createImageBitmap으로 EXIF 회전 자동 보정 시도
+    let imgSource;
+    let objectUrl = null;
 
-      img.onload = () => {
-        try {
-          let { width, height } = img;
+    try {
+      // createImageBitmap은 EXIF orientation을 자동 적용 (iOS Safari 15+, Chrome, Firefox)
+      if (typeof createImageBitmap === 'function') {
+        imgSource = await createImageBitmap(file, { imageOrientation: 'from-image' });
+      } else {
+        throw new Error('createImageBitmap not supported');
+      }
+    } catch {
+      // fallback: Image() 사용 (EXIF 미적용 가능성)
+      imgSource = await new Promise((resolve, reject) => {
+        const img = new Image();
+        objectUrl = URL.createObjectURL(file);
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('이미지를 불러올 수 없습니다'));
+        img.src = objectUrl;
+      });
+    }
 
-          // 최대 크기 제한
-          if (width > maxSize || height > maxSize) {
-            if (width > height) {
-              height = Math.round((height * maxSize) / width);
-              width = maxSize;
-            } else {
-              width = Math.round((width * maxSize) / height);
-              height = maxSize;
-            }
-          }
+    try {
+      let { width, height } = imgSource;
 
-          canvas.width = width;
-          canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-
-          // 항상 JPEG로 변환 (iOS HEIC 문제 해결)
-          canvas.toBlob(
-            (blob) => {
-              if (objectUrl) URL.revokeObjectURL(objectUrl);
-              if (blob) {
-                Logger.log(`Image converted to JPEG: ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB`);
-                resolve(blob);
-              } else {
-                reject(new Error('이미지 변환에 실패했습니다'));
-              }
-            },
-            'image/jpeg',
-            quality
-          );
-        } catch (err) {
-          if (objectUrl) URL.revokeObjectURL(objectUrl);
-          reject(new Error('이미지 처리 중 오류가 발생했습니다'));
+      // 최대 크기 제한
+      if (width > maxSize || height > maxSize) {
+        if (width > height) {
+          height = Math.round((height * maxSize) / width);
+          width = maxSize;
+        } else {
+          width = Math.round((width * maxSize) / height);
+          height = maxSize;
         }
-      };
+      }
 
-      img.onerror = () => {
-        if (objectUrl) URL.revokeObjectURL(objectUrl);
-        reject(new Error('이미지를 불러올 수 없습니다. 다른 사진을 선택해주세요'));
-      };
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(imgSource, 0, 0, width, height);
 
-      objectUrl = URL.createObjectURL(file);
-      img.src = objectUrl;
-    });
+      // 동적 압축: targetMaxBytes 이하가 될 때까지 quality 낮춤
+      let quality = 0.85;
+      let blob = null;
+      const minQuality = 0.4;
+
+      while (quality >= minQuality) {
+        blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+        if (!blob) {
+          throw new Error('이미지 변환에 실패했습니다');
+        }
+        if (blob.size <= targetMaxBytes) break;
+        quality -= 0.1;
+      }
+
+      Logger.log(`Image converted: ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB (quality: ${(quality * 100).toFixed(0)}%)`);
+      return blob;
+    } finally {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      if (imgSource && typeof imgSource.close === 'function') imgSource.close();
+    }
   };
 
   const handleOCR = async (e) => {
