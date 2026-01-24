@@ -1,6 +1,6 @@
 {
   "name": "card-ai",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Card AI - 신용카드 혜택 추천 앱",
   "type": "module",
   "scripts": {

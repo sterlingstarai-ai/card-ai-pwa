@@ -126,8 +126,8 @@ export const CONFIG = {
 
   // 빌드 정보
   BUILD: {
-    VERSION: '1.0.0',
-    BUILD_NUMBER: '1',
+    VERSION: '1.0.2',
+    BUILD_NUMBER: '4',
     COMMIT_HASH: import.meta.env.VITE_COMMIT_HASH || 'dev',
     BUILD_DATE: import.meta.env.VITE_BUILD_DATE || new Date().toISOString().split('T')[0],
   },
