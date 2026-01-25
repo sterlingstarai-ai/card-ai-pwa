@@ -165,7 +165,7 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
         // 1) 카테고리 검색 (paged)
         const categoryResults = await Promise.all(
           codes.map((code) =>
-            fetchKakaoPlacesByRectPaged({ rect, categoryGroupCode: code, maxPages: 3, size: 15 })
+            fetchKakaoPlacesByRectPaged({ rect, categoryGroupCode: code, maxPages: 10, size: 15 })
           )
         );
 
@@ -185,7 +185,7 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
         const keywordResults = neededChainTags.size
           ? await Promise.all(
               [...neededChainTags].map((tag) =>
-                fetchKakaoPlacesByRectPaged({ rect, mode: 'keyword', query: CHAIN_TAG_TO_QUERY[tag], maxPages: 5, size: 15 })
+                fetchKakaoPlacesByRectPaged({ rect, mode: 'keyword', query: CHAIN_TAG_TO_QUERY[tag], maxPages: 10, size: 15 })
               )
             )
           : [];

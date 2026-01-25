@@ -176,7 +176,8 @@ async function main() {
   // 3: 64
   // 4: 256
   // 5: 1024
-  const maxDepth = 5;
+  // 6: 4096
+  const maxDepth = 6;
 
   await collectRect({
     query: opts.query,

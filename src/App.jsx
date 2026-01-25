@@ -219,12 +219,13 @@ export default function CardBenefitsApp() {
     loadData();
   }, [loadData]);
 
-  // 앱 시작 시 기본 위치(서울) 설정 - 권한 요청은 사용자 액션 시에만
+  // 앱 시작 시 위치 권한 요청 필요 여부 플래그
+  const [needsLocationRequest, setNeedsLocationRequest] = useState(false);
+
+  // 데이터 로드 완료 후 위치 권한 요청 플래그 설정
   useEffect(() => {
     if (dataLoaded && locationStatus === 'idle') {
-      // 권한 요청 없이 기본 위치(서울)로 시작
-      setUserLocation(CONFIG.DEFAULTS.LOCATION);
-      setLocationStatus('fallback');
+      setNeedsLocationRequest(true);
     }
   }, [dataLoaded, locationStatus]);
 
@@ -594,6 +595,14 @@ export default function CardBenefitsApp() {
       { timeout: CONFIG.TIMEOUTS.LOCATION, enableHighAccuracy: true, maximumAge: 60000 }
     );
   };
+
+  // 앱 시작 시 자동으로 위치 권한 요청
+  useEffect(() => {
+    if (needsLocationRequest) {
+      setNeedsLocationRequest(false);
+      requestLocation();
+    }
+  }, [needsLocationRequest]);
 
   const handleNearby = async () => {
     // fallback(기본 서울)이거나 idle이면 실제 위치 요청 시도

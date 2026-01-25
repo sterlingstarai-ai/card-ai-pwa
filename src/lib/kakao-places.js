@@ -52,7 +52,7 @@ export async function fetchKakaoPlacesByRect({
  * @param {string} [options.categoryGroupCode]
  * @param {string} [options.mode='category']
  * @param {string} [options.query]
- * @param {number} [options.maxPages=3] - Safety cap to control traffic/cost
+ * @param {number} [options.maxPages=10] - Safety cap to control traffic/cost
  * @param {number} [options.size=15]
  * @returns {Promise<Array>} Array of place objects (deduplicated by id)
  */
@@ -61,7 +61,7 @@ export async function fetchKakaoPlacesByRectPaged({
   categoryGroupCode,
   mode = 'category',
   query,
-  maxPages = 3,
+  maxPages = 10,
   size = 15,
 }) {
   const merged = {};
