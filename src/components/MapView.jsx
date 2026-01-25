@@ -10,8 +10,19 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { placeTypeConfig } from '../lib/utils';
+import { fetchKakaoPlacesByRectPaged } from '../lib/kakao-places';
 
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_APP_KEY || '';
+
+// 카테고리별 검색 쿼리
+const CATEGORY_SEARCH_QUERIES = {
+  cafe: ['스타벅스', '커피빈', '투썸플레이스', '이디야', '할리스'],
+  convenience: ['편의점', 'CU', 'GS25', '세븐일레븐'],
+  mart: ['이마트', '홈플러스', '롯데마트'],
+  gas: ['주유소'],
+  hotel: ['호텔'],
+  restaurant: ['맛집'],
+};
 
 const isInKoreaBounds = (lat, lng) => lat >= 32 && lat <= 39 && lng >= 124 && lng <= 132;
 
@@ -91,8 +102,11 @@ export const MapView = ({
   const markersByIdRef = useRef(new Map());
   const markerImageCacheRef = useRef({});
   const userMarkerRef = useRef(null);
+  const liveSearchTimerRef = useRef(null);
+  const liveSearchedRectsRef = useRef(new Set());
 
   const [mapReady, setMapReady] = useState(false);
+  const [livePlaces, setLivePlaces] = useState({});
   const [mapError, setMapError] = useState(null);
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [activeRegion, setActiveRegion] = useState('서울');
@@ -106,11 +120,25 @@ export const MapView = ({
     { name: '제주', lat: 33.38, lng: 126.55, zoom: 10 },
   ];
 
+  // 정적 데이터 + 실시간 검색 데이터 병합
   const filteredPlaces = useMemo(() => {
-    const arr = Array.isArray(places) ? places : Object.values(places || {});
-    if (!selectedCategory || selectedCategory === 'all') return arr;
-    return arr.filter((p) => p?.type === selectedCategory);
-  }, [places, selectedCategory]);
+    const staticArr = Array.isArray(places) ? places : Object.values(places || {});
+    const liveArr = Object.values(livePlaces || {});
+    const combined = [...staticArr, ...liveArr];
+
+    // 중복 제거 (kakaoId 기준)
+    const seen = new Set();
+    const unique = combined.filter(p => {
+      if (!p) return false;
+      const key = p.kakaoId || p.id;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    if (!selectedCategory || selectedCategory === 'all') return unique;
+    return unique.filter((p) => p?.type === selectedCategory);
+  }, [places, livePlaces, selectedCategory]);
 
   // SDK dynamic load (clusterer library included)
   useEffect(() => {
@@ -191,6 +219,14 @@ export const MapView = ({
           minLevel: 6,
           gridSize: 55,
           disableClickZoom: false,
+        });
+
+        // 지도 이동 완료 시 실시간 검색
+        window.kakao.maps.event.addListener(mapRef.current, 'idle', () => {
+          if (liveSearchTimerRef.current) clearTimeout(liveSearchTimerRef.current);
+          liveSearchTimerRef.current = setTimeout(() => {
+            searchLivePlaces();
+          }, 500);
         });
 
         // Safari WebView repaint workaround
@@ -362,6 +398,59 @@ export const MapView = ({
     overlay.setMap(mapRef.current);
     userMarkerRef.current = overlay;
   }, [mapReady, userLocation]);
+
+  // 현재 뷰포트에서 실시간 장소 검색
+  const searchLivePlaces = async () => {
+    if (!mapRef.current || !window.kakao?.maps) return;
+
+    const bounds = mapRef.current.getBounds();
+    const sw = bounds.getSouthWest();
+    const ne = bounds.getNorthEast();
+    const rect = `${sw.getLng()},${sw.getLat()},${ne.getLng()},${ne.getLat()}`;
+
+    // 이미 검색한 영역이면 스킵
+    if (liveSearchedRectsRef.current.has(rect)) return;
+    liveSearchedRectsRef.current.add(rect);
+
+    // 검색할 쿼리 결정 (카테고리에 따라)
+    const queries = selectedCategory && selectedCategory !== 'all'
+      ? (CATEGORY_SEARCH_QUERIES[selectedCategory] || [])
+      : ['스타벅스', '커피빈', '편의점']; // 기본 검색어
+
+    if (queries.length === 0) return;
+
+    console.log('[MapView] Live search:', rect, queries);
+
+    try {
+      const allResults = [];
+      for (const query of queries.slice(0, 3)) { // 최대 3개 쿼리
+        const results = await fetchKakaoPlacesByRectPaged({
+          rect,
+          mode: 'keyword',
+          query,
+          maxPages: 3,
+          size: 15,
+        });
+        allResults.push(...results);
+      }
+
+      // 결과를 livePlaces에 추가
+      if (allResults.length > 0) {
+        setLivePlaces(prev => {
+          const updated = { ...prev };
+          allResults.forEach(p => {
+            if (p?.id && !updated[p.id]) {
+              updated[p.id] = p;
+            }
+          });
+          return updated;
+        });
+        console.log('[MapView] Live search added:', allResults.length);
+      }
+    } catch (err) {
+      console.error('[MapView] Live search error:', err);
+    }
+  };
 
   const handleRegionClick = (region) => {
     if (!mapRef.current || !window.kakao?.maps) return;
