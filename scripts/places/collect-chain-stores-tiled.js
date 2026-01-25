@@ -127,7 +127,8 @@ async function collectRect({ query, rect, maxDepth, depth, storeMap, type, baseT
 
   // Kakao keyword search can be heavily truncated in dense areas.
   // If too many results in this rect, split it further.
-  const TOO_DENSE = pageable >= 650; // close to 45*15
+  // Note: pageable_count is capped at 45, so we use total_count instead
+  const TOO_DENSE = total > 45;
   if (TOO_DENSE && depth < maxDepth) {
     const subs = splitRect(rect);
     for (const sub of subs) {
@@ -173,7 +174,9 @@ async function main() {
   // 1: split into 4
   // 2: 16
   // 3: 64
-  const maxDepth = 3;
+  // 4: 256
+  // 5: 1024
+  const maxDepth = 5;
 
   await collectRect({
     query: opts.query,

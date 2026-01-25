@@ -1,0 +1,2048 @@
+{
+  "generatedAt": "2026-01-25T08:30:27.476Z",
+  "query": "커피빈",
+  "tag": "coffeebean",
+  "count": 120,
+  "stores": [
+    {
+      "id": "kakao:20059649",
+      "name": "디투커피 바리스타학원",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.55428082285578,
+      "lng": 129.30691229055623,
+      "address": "울산 중구 태화동 35-27",
+      "roadAddress": "울산 중구 태화로 293",
+      "phone": "052-211-5658",
+      "placeUrl": "http://place.map.kakao.com/20059649",
+      "source": "kakao",
+      "kakaoId": "20059649"
+    },
+    {
+      "id": "kakao:1748575785",
+      "name": "스팟커피빈벤더스",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 33.50423247890506,
+      "lng": 126.52127912821155,
+      "address": "제주특별자치도 제주시 삼도일동 540-4",
+      "roadAddress": "제주특별자치도 제주시 전농로 76",
+      "phone": "0502-5550-2654",
+      "placeUrl": "http://place.map.kakao.com/1748575785",
+      "source": "kakao",
+      "kakaoId": "1748575785"
+    },
+    {
+      "id": "kakao:422629057",
+      "name": "엔에스커피빈",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.2484935037699,
+      "lng": 127.077875430624,
+      "address": "경기 수원시 영통구 영통동 1022-4",
+      "roadAddress": "경기 수원시 영통구 매영로 424",
+      "phone": "031-891-1180",
+      "placeUrl": "http://place.map.kakao.com/422629057",
+      "source": "kakao",
+      "kakaoId": "422629057"
+    },
+    {
+      "id": "kakao:25995659",
+      "name": "커피빈",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.55267262976768,
+      "lng": 129.11898983204392,
+      "address": "강원특별자치도 동해시 묵호진동 2-274",
+      "roadAddress": "강원특별자치도 동해시 일출로 107",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/25995659",
+      "source": "kakao",
+      "kakaoId": "25995659"
+    },
+    {
+      "id": "kakao:8105265",
+      "name": "커피빈 강남대로센터점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5019169544599,
+      "lng": 127.026074609464,
+      "address": "서울 강남구 역삼동 814-5",
+      "roadAddress": "서울 강남구 강남대로 442",
+      "phone": "02-565-3345",
+      "placeUrl": "http://place.map.kakao.com/8105265",
+      "source": "kakao",
+      "kakaoId": "8105265"
+    },
+    {
+      "id": "kakao:8102543",
+      "name": "커피빈 강남대로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4955769506273,
+      "lng": 127.02834763399,
+      "address": "서울 서초구 서초동 1328-3",
+      "roadAddress": "서울 서초구 강남대로 369",
+      "phone": "02-588-5778",
+      "placeUrl": "http://place.map.kakao.com/8102543",
+      "source": "kakao",
+      "kakaoId": "8102543"
+    },
+    {
+      "id": "kakao:1862219579",
+      "name": "커피빈 강남역12번출구점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4988455657308,
+      "lng": 127.029316901779,
+      "address": "서울 강남구 역삼동 822-5",
+      "roadAddress": "서울 강남구 테헤란로 111",
+      "phone": "02-569-5838",
+      "placeUrl": "http://place.map.kakao.com/1862219579",
+      "source": "kakao",
+      "kakaoId": "1862219579"
+    },
+    {
+      "id": "kakao:17101526",
+      "name": "커피빈 강남역먹자골목점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.500098449489826,
+      "lng": 127.02729195389342,
+      "address": "서울 강남구 역삼동 816-6",
+      "roadAddress": "서울 강남구 테헤란로1길 29",
+      "phone": "02-552-6311",
+      "placeUrl": "http://place.map.kakao.com/17101526",
+      "source": "kakao",
+      "kakaoId": "17101526"
+    },
+    {
+      "id": "kakao:26624126",
+      "name": "커피빈 강남역세계빌딩점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.49861752417937,
+      "lng": 127.02582919310726,
+      "address": "서울 서초구 서초동 1317-31",
+      "roadAddress": "서울 서초구 서초대로73길 12",
+      "phone": "02-592-0053",
+      "placeUrl": "http://place.map.kakao.com/26624126",
+      "source": "kakao",
+      "kakaoId": "26624126"
+    },
+    {
+      "id": "kakao:485644198",
+      "name": "커피빈 강동경희대병원앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5524998923237,
+      "lng": 127.156037231775,
+      "address": "서울 강동구 명일동 48-6",
+      "roadAddress": "서울 강동구 동남로 885",
+      "phone": "02-481-9938",
+      "placeUrl": "http://place.map.kakao.com/485644198",
+      "source": "kakao",
+      "kakaoId": "485644198"
+    },
+    {
+      "id": "kakao:1769304087",
+      "name": "커피빈 강북구청앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.6391386116991,
+      "lng": 127.025750866472,
+      "address": "서울 강북구 수유동 191-70",
+      "roadAddress": "서울 강북구 한천로139길 25",
+      "phone": "02-994-8878",
+      "placeUrl": "http://place.map.kakao.com/1769304087",
+      "source": "kakao",
+      "kakaoId": "1769304087"
+    },
+    {
+      "id": "kakao:8556517",
+      "name": "커피빈 고대안암역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.58668847313567,
+      "lng": 127.02949397673571,
+      "address": "서울 성북구 안암동5가 101-3",
+      "roadAddress": "서울 성북구 개운사길 8",
+      "phone": "02-953-6652",
+      "placeUrl": "http://place.map.kakao.com/8556517",
+      "source": "kakao",
+      "kakaoId": "8556517"
+    },
+    {
+      "id": "kakao:26624127",
+      "name": "커피빈 광교아브뉴프랑점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.2903167893344,
+      "lng": 127.05018939644,
+      "address": "경기 수원시 영통구 이의동 1332",
+      "roadAddress": "경기 수원시 영통구 센트럴타운로 85",
+      "phone": "031-216-9308",
+      "placeUrl": "http://place.map.kakao.com/26624127",
+      "source": "kakao",
+      "kakaoId": "26624127"
+    },
+    {
+      "id": "kakao:1032907424",
+      "name": "커피빈 광명아브뉴프랑점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4163294821728,
+      "lng": 126.881839996375,
+      "address": "경기 광명시 일직동 513",
+      "roadAddress": "경기 광명시 양지로 16",
+      "phone": "02-899-7460",
+      "placeUrl": "http://place.map.kakao.com/1032907424",
+      "source": "kakao",
+      "kakaoId": "1032907424"
+    },
+    {
+      "id": "kakao:26488127",
+      "name": "커피빈 광화문역1번출구점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.57265000909145,
+      "lng": 126.97400828931754,
+      "address": "서울 종로구 내수동 1",
+      "roadAddress": "서울 종로구 새문안로5가길 7",
+      "phone": "02-723-3360",
+      "placeUrl": "http://place.map.kakao.com/26488127",
+      "source": "kakao",
+      "kakaoId": "26488127"
+    },
+    {
+      "id": "kakao:10826403",
+      "name": "커피빈 광화문점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5698678420412,
+      "lng": 126.979077004014,
+      "address": "서울 종로구 서린동 136",
+      "roadAddress": "서울 종로구 종로 14",
+      "phone": "02-3210-2326",
+      "placeUrl": "http://place.map.kakao.com/10826403",
+      "source": "kakao",
+      "kakaoId": "10826403"
+    },
+    {
+      "id": "kakao:1715105115",
+      "name": "커피빈 김포장기DT점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.63649721713446,
+      "lng": 126.67763429279992,
+      "address": "경기 김포시 장기동 2090-2",
+      "roadAddress": "경기 김포시 태장로 819",
+      "phone": "031-987-0409",
+      "placeUrl": "http://place.map.kakao.com/1715105115",
+      "source": "kakao",
+      "kakaoId": "1715105115"
+    },
+    {
+      "id": "kakao:1424901447",
+      "name": "커피빈 김포장기DT점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.6363759916064,
+      "lng": 126.677453543686,
+      "address": "경기 김포시 장기동 2090-2",
+      "roadAddress": "경기 김포시 태장로 819",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/1424901447",
+      "source": "kakao",
+      "kakaoId": "1424901447"
+    },
+    {
+      "id": "kakao:12119131",
+      "name": "커피빈 남부터미널역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4856141699288,
+      "lng": 127.015662170064,
+      "address": "서울 서초구 서초동 1602-5",
+      "roadAddress": "서울 서초구 서초중앙로 43",
+      "phone": "02-523-3671",
+      "placeUrl": "http://place.map.kakao.com/12119131",
+      "source": "kakao",
+      "kakaoId": "12119131"
+    },
+    {
+      "id": "kakao:21553924",
+      "name": "커피빈 남양연구소C1식당점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.159397189678565,
+      "lng": 126.81352215362118,
+      "address": "경기 화성시 남양읍 장덕리 772-1",
+      "roadAddress": "경기 화성시 남양읍 현대연구소로 150",
+      "phone": "031-357-8172",
+      "placeUrl": "http://place.map.kakao.com/21553924",
+      "source": "kakao",
+      "kakaoId": "21553924"
+    },
+    {
+      "id": "kakao:26624159",
+      "name": "커피빈 남양연구소PT동점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.15869888360276,
+      "lng": 126.81525646054803,
+      "address": "경기 화성시 남양읍 장덕리 772-1",
+      "roadAddress": "경기 화성시 남양읍 현대연구소로 150",
+      "phone": "031-355-1346",
+      "placeUrl": "http://place.map.kakao.com/26624159",
+      "source": "kakao",
+      "kakaoId": "26624159"
+    },
+    {
+      "id": "kakao:1318322043",
+      "name": "커피빈 남양주화도DT점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.6540830053302,
+      "lng": 127.273683579935,
+      "address": "경기 남양주시 화도읍 묵현리 411-4",
+      "roadAddress": "경기 남양주시 화도읍 경춘로 1641",
+      "phone": "031-591-2406",
+      "placeUrl": "http://place.map.kakao.com/1318322043",
+      "source": "kakao",
+      "kakaoId": "1318322043"
+    },
+    {
+      "id": "kakao:10826167",
+      "name": "커피빈 논현동수면센터점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5159573905542,
+      "lng": 127.029563395488,
+      "address": "서울 강남구 논현동 34-21",
+      "roadAddress": "서울 강남구 논현로 717",
+      "phone": "02-3443-5575",
+      "placeUrl": "http://place.map.kakao.com/10826167",
+      "source": "kakao",
+      "kakaoId": "10826167"
+    },
+    {
+      "id": "kakao:17101529",
+      "name": "커피빈 뉴압구정점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.52445075388536,
+      "lng": 127.02745467461493,
+      "address": "서울 강남구 신사동 570-12",
+      "roadAddress": "서울 강남구 논현로167길 9",
+      "phone": "02-545-3181",
+      "placeUrl": "http://place.map.kakao.com/17101529",
+      "source": "kakao",
+      "kakaoId": "17101529"
+    },
+    {
+      "id": "kakao:410193272",
+      "name": "커피빈 대구228공원앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.869960250399174,
+      "lng": 128.59861269084755,
+      "address": "대구 중구 공평동 13-3",
+      "roadAddress": "대구 중구 동성로3길 106",
+      "phone": "053-421-7436",
+      "placeUrl": "http://place.map.kakao.com/410193272",
+      "source": "kakao",
+      "kakaoId": "410193272"
+    },
+    {
+      "id": "kakao:1237656975",
+      "name": "커피빈 대전시청역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 36.351118680275874,
+      "lng": 127.38890953712529,
+      "address": "대전 서구 둔산동 1451",
+      "roadAddress": "대전 서구 둔산로 136",
+      "phone": "042-484-8926",
+      "placeUrl": "http://place.map.kakao.com/1237656975",
+      "source": "kakao",
+      "kakaoId": "1237656975"
+    },
+    {
+      "id": "kakao:17101532",
+      "name": "커피빈 대학로마로니에점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.58139335841107,
+      "lng": 127.00370318487201,
+      "address": "서울 종로구 동숭동 1-95",
+      "roadAddress": "서울 종로구 대학로12길 62",
+      "phone": "02-742-3318",
+      "placeUrl": "http://place.map.kakao.com/17101532",
+      "source": "kakao",
+      "kakaoId": "17101532"
+    },
+    {
+      "id": "kakao:12119147",
+      "name": "커피빈 도심공항타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.51041263562192,
+      "lng": 127.05850259781256,
+      "address": "서울 강남구 삼성동 159",
+      "roadAddress": "서울 강남구 테헤란로87길 36",
+      "phone": "02-2016-5330",
+      "placeUrl": "http://place.map.kakao.com/12119147",
+      "source": "kakao",
+      "kakaoId": "12119147"
+    },
+    {
+      "id": "kakao:1206486075",
+      "name": "커피빈 동탄능동DT점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.211050944438,
+      "lng": 127.056405079948,
+      "address": "경기 화성시 능동 453-4",
+      "roadAddress": "경기 화성시 동탄지성로 177",
+      "phone": "031-267-4182",
+      "placeUrl": "http://place.map.kakao.com/1206486075",
+      "source": "kakao",
+      "kakaoId": "1206486075"
+    },
+    {
+      "id": "kakao:8562769",
+      "name": "커피빈 동탄라마다호텔점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.205712009294345,
+      "lng": 127.07469755614258,
+      "address": "경기 화성시 반송동 90-3",
+      "roadAddress": "경기 화성시 노작로 199",
+      "phone": "031-8003-8374",
+      "placeUrl": "http://place.map.kakao.com/8562769",
+      "source": "kakao",
+      "kakaoId": "8562769"
+    },
+    {
+      "id": "kakao:916751877",
+      "name": "커피빈 동탄타임테라스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.2048556814469,
+      "lng": 127.069309898309,
+      "address": "경기 화성시 반송동 96",
+      "roadAddress": "경기 화성시 동탄중앙로 220",
+      "phone": "031-613-7684",
+      "placeUrl": "http://place.map.kakao.com/916751877",
+      "source": "kakao",
+      "kakaoId": "916751877"
+    },
+    {
+      "id": "kakao:1829666571",
+      "name": "커피빈 마곡케이스퀘어점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5629237549118,
+      "lng": 126.826077113546,
+      "address": "서울 강서구 마곡동 768-1",
+      "roadAddress": "서울 강서구 마곡중앙로 105-7",
+      "phone": "02-3662-9805",
+      "placeUrl": "http://place.map.kakao.com/1829666571",
+      "source": "kakao",
+      "kakaoId": "1829666571"
+    },
+    {
+      "id": "kakao:755567668",
+      "name": "커피빈 매헌역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.46896855163,
+      "lng": 127.040121170141,
+      "address": "서울 서초구 양재동 326-8",
+      "roadAddress": "서울 서초구 동산로 1",
+      "phone": "02-2058-0921",
+      "placeUrl": "http://place.map.kakao.com/755567668",
+      "source": "kakao",
+      "kakaoId": "755567668"
+    },
+    {
+      "id": "kakao:2110241707",
+      "name": "커피빈 명동거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.56148235783797,
+      "lng": 126.98569373367883,
+      "address": "서울 중구 충무로2가 65-4",
+      "roadAddress": "서울 중구 명동10길 52",
+      "phone": "02-522-7158",
+      "placeUrl": "http://place.map.kakao.com/2110241707",
+      "source": "kakao",
+      "kakaoId": "2110241707"
+    },
+    {
+      "id": "kakao:8546078",
+      "name": "커피빈 목동점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.527903594795134,
+      "lng": 126.87593976673033,
+      "address": "서울 양천구 목동 917-9",
+      "roadAddress": "서울 양천구 목동동로 293",
+      "phone": "02-2654-5981",
+      "placeUrl": "http://place.map.kakao.com/8546078",
+      "source": "kakao",
+      "kakaoId": "8546078"
+    },
+    {
+      "id": "kakao:12119138",
+      "name": "커피빈 방이점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.514451313505916,
+      "lng": 127.10786303714575,
+      "address": "서울 송파구 방이동 24-3",
+      "roadAddress": "서울 송파구 오금로11길 7",
+      "phone": "02-415-5561",
+      "placeUrl": "http://place.map.kakao.com/12119138",
+      "source": "kakao",
+      "kakaoId": "12119138"
+    },
+    {
+      "id": "kakao:706934458",
+      "name": "커피빈 부산남포역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.09888620498294,
+      "lng": 129.0356909462932,
+      "address": "부산 중구 동광동1가 15",
+      "roadAddress": "부산 중구 해관로 1",
+      "phone": "051-246-6284",
+      "placeUrl": "http://place.map.kakao.com/706934458",
+      "source": "kakao",
+      "kakaoId": "706934458"
+    },
+    {
+      "id": "kakao:1925116545",
+      "name": "커피빈 부산서면점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.156286991387,
+      "lng": 129.05798967752,
+      "address": "부산 부산진구 부전동 256-4",
+      "roadAddress": "부산 부산진구 서면로 62-1",
+      "phone": "051-802-4282",
+      "placeUrl": "http://place.map.kakao.com/1925116545",
+      "source": "kakao",
+      "kakaoId": "1925116545"
+    },
+    {
+      "id": "kakao:1774396797",
+      "name": "커피빈 부산중앙역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.1065589569564,
+      "lng": 129.036539759852,
+      "address": "부산 중구 중앙동4가 83-7",
+      "roadAddress": "부산 중구 중앙대로 102",
+      "phone": "051-466-8856",
+      "placeUrl": "http://place.map.kakao.com/1774396797",
+      "source": "kakao",
+      "kakaoId": "1774396797"
+    },
+    {
+      "id": "kakao:1120056823",
+      "name": "커피빈 부천북부역사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.48656833231001,
+      "lng": 126.78300870545542,
+      "address": "경기 부천시 원미구 심곡동 177-3",
+      "roadAddress": "경기 부천시 원미구 부천로 25",
+      "phone": "032-655-8954",
+      "placeUrl": "http://place.map.kakao.com/1120056823",
+      "source": "kakao",
+      "kakaoId": "1120056823"
+    },
+    {
+      "id": "kakao:55275034",
+      "name": "커피빈 부천스타필드시티점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.46109936713218,
+      "lng": 126.81352830764412,
+      "address": "경기 부천시 소사구 옥길동 768",
+      "roadAddress": "경기 부천시 소사구 옥길로 1",
+      "phone": "02-6386-1423",
+      "placeUrl": "http://place.map.kakao.com/55275034",
+      "source": "kakao",
+      "kakaoId": "55275034"
+    },
+    {
+      "id": "kakao:25008117",
+      "name": "커피빈 부평문화의거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4936795112905,
+      "lng": 126.725600126431,
+      "address": "인천 부평구 부평동 192-15",
+      "roadAddress": "인천 부평구 시장로 29",
+      "phone": "032-507-9901",
+      "placeUrl": "http://place.map.kakao.com/25008117",
+      "source": "kakao",
+      "kakaoId": "25008117"
+    },
+    {
+      "id": "kakao:11239991",
+      "name": "커피빈 분당수내점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.3778938875792,
+      "lng": 127.112436316125,
+      "address": "경기 성남시 분당구 수내동 21-1",
+      "roadAddress": "경기 성남시 분당구 황새울로214번길 8",
+      "phone": "031-713-9937",
+      "placeUrl": "http://place.map.kakao.com/11239991",
+      "source": "kakao",
+      "kakaoId": "11239991"
+    },
+    {
+      "id": "kakao:922054639",
+      "name": "커피빈 분당정자점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.3705332744498,
+      "lng": 127.105750981426,
+      "address": "경기 성남시 분당구 정자동 12-1",
+      "roadAddress": "경기 성남시 분당구 정자일로 227",
+      "phone": "031-786-1906",
+      "placeUrl": "http://place.map.kakao.com/922054639",
+      "source": "kakao",
+      "kakaoId": "922054639"
+    },
+    {
+      "id": "kakao:494365529",
+      "name": "커피빈 분당차병원본관앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4095282069734,
+      "lng": 127.125527437778,
+      "address": "경기 성남시 분당구 야탑동 502",
+      "roadAddress": "경기 성남시 분당구 야탑로 64",
+      "phone": "031-8017-8243",
+      "placeUrl": "http://place.map.kakao.com/494365529",
+      "source": "kakao",
+      "kakaoId": "494365529"
+    },
+    {
+      "id": "kakao:8102715",
+      "name": "커피빈 분당차병원점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4111778987684,
+      "lng": 127.12644287402,
+      "address": "경기 성남시 분당구 야탑동 354-1",
+      "roadAddress": "경기 성남시 분당구 야탑로65번길 16",
+      "phone": "031-781-0471",
+      "placeUrl": "http://place.map.kakao.com/8102715",
+      "source": "kakao",
+      "kakaoId": "8102715"
+    },
+    {
+      "id": "kakao:17101536",
+      "name": "커피빈 삼성로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5107300313351,
+      "lng": 127.054218398064,
+      "address": "서울 강남구 삼성동 120-13",
+      "roadAddress": "서울 강남구 삼성로 551",
+      "phone": "02-552-9311",
+      "placeUrl": "http://place.map.kakao.com/17101536",
+      "source": "kakao",
+      "kakaoId": "17101536"
+    },
+    {
+      "id": "kakao:8557201",
+      "name": "커피빈 삼성봉은사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.51451709096138,
+      "lng": 127.05954190297001,
+      "address": "서울 강남구 삼성동 77-12",
+      "roadAddress": "서울 강남구 영동대로 607",
+      "phone": "02-3443-5618",
+      "placeUrl": "http://place.map.kakao.com/8557201",
+      "source": "kakao",
+      "kakaoId": "8557201"
+    },
+    {
+      "id": "kakao:14819352",
+      "name": "커피빈 서울대입구역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4797021364826,
+      "lng": 126.952216735238,
+      "address": "서울 관악구 봉천동 863-13",
+      "roadAddress": "서울 관악구 관악로 161",
+      "phone": "02-882-3101",
+      "placeUrl": "http://place.map.kakao.com/14819352",
+      "source": "kakao",
+      "kakaoId": "14819352"
+    },
+    {
+      "id": "kakao:12119125",
+      "name": "커피빈 서울스퀘어점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5553426455751,
+      "lng": 126.973445040457,
+      "address": "서울 중구 봉래동2가 128",
+      "roadAddress": "서울 중구 한강대로 416",
+      "phone": "02-6456-8907",
+      "placeUrl": "http://place.map.kakao.com/12119125",
+      "source": "kakao",
+      "kakaoId": "12119125"
+    },
+    {
+      "id": "kakao:8103329",
+      "name": "커피빈 서초뱅뱅사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.48716681737602,
+      "lng": 127.03236071176507,
+      "address": "서울 서초구 서초동 1361-1",
+      "roadAddress": "서울 서초구 강남대로 267",
+      "phone": "02-523-8841",
+      "placeUrl": "http://place.map.kakao.com/8103329",
+      "source": "kakao",
+      "kakaoId": "8103329"
+    },
+    {
+      "id": "kakao:10827086",
+      "name": "커피빈 서초우성점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.491358839048125,
+      "lng": 127.03034975694526,
+      "address": "서울 서초구 서초동 1338-11",
+      "roadAddress": "서울 서초구 강남대로51길 1",
+      "phone": "02-582-0158",
+      "placeUrl": "http://place.map.kakao.com/10827086",
+      "source": "kakao",
+      "kakaoId": "10827086"
+    },
+    {
+      "id": "kakao:687615603",
+      "name": "커피빈 서현역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.385342402668,
+      "lng": 127.125236431223,
+      "address": "경기 성남시 분당구 서현동 246-4",
+      "roadAddress": "경기 성남시 분당구 황새울로360번길 27",
+      "phone": "031-706-7952",
+      "placeUrl": "http://place.map.kakao.com/687615603",
+      "source": "kakao",
+      "kakaoId": "687615603"
+    },
+    {
+      "id": "kakao:17097590",
+      "name": "커피빈 선릉로86길점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5033712925141,
+      "lng": 127.05068112896575,
+      "address": "서울 강남구 대치동 889-74",
+      "roadAddress": "서울 강남구 선릉로86길 11",
+      "phone": "02-2051-8875",
+      "placeUrl": "http://place.map.kakao.com/17097590",
+      "source": "kakao",
+      "kakaoId": "17097590"
+    },
+    {
+      "id": "kakao:1219654852",
+      "name": "커피빈 선릉역3번출구세방빌딩점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.50380536775,
+      "lng": 127.049042670767,
+      "address": "서울 강남구 역삼동 708-8",
+      "roadAddress": "서울 강남구 선릉로 433",
+      "phone": "02-2051-9328",
+      "placeUrl": "http://place.map.kakao.com/1219654852",
+      "source": "kakao",
+      "kakaoId": "1219654852"
+    },
+    {
+      "id": "kakao:301579321",
+      "name": "커피빈 선정릉역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.510226501061695,
+      "lng": 127.04294598579808,
+      "address": "서울 강남구 논현동 278-22",
+      "roadAddress": "서울 강남구 봉은사로 331",
+      "phone": "02-2058-3028",
+      "placeUrl": "http://place.map.kakao.com/301579321",
+      "source": "kakao",
+      "kakaoId": "301579321"
+    },
+    {
+      "id": "kakao:714328287",
+      "name": "커피빈 성균관대자연과학캠퍼스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.29214139965699,
+      "lng": 126.97556106160663,
+      "address": "경기 수원시 장안구 천천동 300",
+      "roadAddress": "경기 수원시 장안구 서부로 2066",
+      "phone": "031-278-7640",
+      "placeUrl": "http://place.map.kakao.com/714328287",
+      "source": "kakao",
+      "kakaoId": "714328287"
+    },
+    {
+      "id": "kakao:728359748",
+      "name": "커피빈 성남신흥점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.443432293005,
+      "lng": 127.140957166843,
+      "address": "경기 성남시 수정구 신흥동 5504",
+      "roadAddress": "경기 성남시 수정구 수정로 190",
+      "phone": "031-759-6675",
+      "placeUrl": "http://place.map.kakao.com/728359748",
+      "source": "kakao",
+      "kakaoId": "728359748"
+    },
+    {
+      "id": "kakao:695068613",
+      "name": "커피빈 송도트리플스트리트점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.3790055538319,
+      "lng": 126.662794923856,
+      "address": "인천 연수구 송도동 176-5",
+      "roadAddress": "인천 연수구 송도과학로16번길 33-4",
+      "phone": "032-310-9644",
+      "placeUrl": "http://place.map.kakao.com/695068613",
+      "source": "kakao",
+      "kakaoId": "695068613"
+    },
+    {
+      "id": "kakao:27165900",
+      "name": "커피빈 송도홈플러스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.3801441467034,
+      "lng": 126.656430798449,
+      "address": "인천 연수구 송도동 168-3",
+      "roadAddress": "인천 연수구 송도국제대로 165",
+      "phone": "032-822-5905",
+      "placeUrl": "http://place.map.kakao.com/27165900",
+      "source": "kakao",
+      "kakaoId": "27165900"
+    },
+    {
+      "id": "kakao:578797388",
+      "name": "커피빈 수원송죽DT점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.30508547867096,
+      "lng": 127.00295302751123,
+      "address": "경기 수원시 장안구 송죽동 451-24",
+      "roadAddress": "경기 수원시 장안구 경수대로 989",
+      "phone": "031-248-6086",
+      "placeUrl": "http://place.map.kakao.com/578797388",
+      "source": "kakao",
+      "kakaoId": "578797388"
+    },
+    {
+      "id": "kakao:1209780640",
+      "name": "커피빈 수원송죽DT점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.304954833172,
+      "lng": 127.002757883795,
+      "address": "경기 수원시 장안구 송죽동 451-24",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/1209780640",
+      "source": "kakao",
+      "kakaoId": "1209780640"
+    },
+    {
+      "id": "kakao:219249348",
+      "name": "커피빈 수원인계DT점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.268801335571574,
+      "lng": 127.02645963836875,
+      "address": "경기 수원시 팔달구 인계동 967-4",
+      "roadAddress": "경기 수원시 팔달구 인계로 79",
+      "phone": "031-898-8818",
+      "placeUrl": "http://place.map.kakao.com/219249348",
+      "source": "kakao",
+      "kakaoId": "219249348"
+    },
+    {
+      "id": "kakao:1576815454",
+      "name": "커피빈 수원AK플라자점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.26558847295244,
+      "lng": 127.00062569668681,
+      "address": "경기 수원시 팔달구 매산로1가 18",
+      "roadAddress": "경기 수원시 팔달구 덕영대로 924",
+      "phone": "031-240-2246",
+      "placeUrl": "http://place.map.kakao.com/1576815454",
+      "source": "kakao",
+      "kakaoId": "1576815454"
+    },
+    {
+      "id": "kakao:222177283",
+      "name": "커피빈 신논현역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5045407953024,
+      "lng": 127.025559802073,
+      "address": "서울 강남구 역삼동 601",
+      "roadAddress": "서울 강남구 봉은사로 108",
+      "phone": "02-569-9061",
+      "placeUrl": "http://place.map.kakao.com/222177283",
+      "source": "kakao",
+      "kakaoId": "222177283"
+    },
+    {
+      "id": "kakao:1531005871",
+      "name": "커피빈 신세계센텀시티점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.1688180253412,
+      "lng": 129.129522935807,
+      "address": "부산 해운대구 우동 1495",
+      "roadAddress": "부산 해운대구 센텀남대로 35",
+      "phone": "051-745-1821",
+      "placeUrl": "http://place.map.kakao.com/1531005871",
+      "source": "kakao",
+      "kakaoId": "1531005871"
+    },
+    {
+      "id": "kakao:2118107039",
+      "name": "커피빈 신용산역래미안점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.529015495753775,
+      "lng": 126.96658378447826,
+      "address": "서울 용산구 한강로2가 422",
+      "roadAddress": "서울 용산구 한강대로 95",
+      "phone": "02-2074-1049",
+      "placeUrl": "http://place.map.kakao.com/2118107039",
+      "source": "kakao",
+      "kakaoId": "2118107039"
+    },
+    {
+      "id": "kakao:26773899",
+      "name": "커피빈 신천역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.51148097282949,
+      "lng": 127.08170279179173,
+      "address": "서울 송파구 잠실동 181-3",
+      "roadAddress": "서울 송파구 올림픽로 100",
+      "phone": "02-417-8851",
+      "placeUrl": "http://place.map.kakao.com/26773899",
+      "source": "kakao",
+      "kakaoId": "26773899"
+    },
+    {
+      "id": "kakao:10821672",
+      "name": "커피빈 신촌점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.55626410622014,
+      "lng": 126.93708737814072,
+      "address": "서울 서대문구 창천동 18-29",
+      "roadAddress": "서울 서대문구 연세로 8-1",
+      "phone": "02-363-5572",
+      "placeUrl": "http://place.map.kakao.com/10821672",
+      "source": "kakao",
+      "kakaoId": "10821672"
+    },
+    {
+      "id": "kakao:2067962641",
+      "name": "커피빈 안양시청앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.39365783483502,
+      "lng": 126.95944469982844,
+      "address": "경기 안양시 동안구 관양동 1591-11",
+      "roadAddress": "경기 안양시 동안구 시민대로 260",
+      "phone": "031-5177-4770",
+      "placeUrl": "http://place.map.kakao.com/2067962641",
+      "source": "kakao",
+      "kakaoId": "2067962641"
+    },
+    {
+      "id": "kakao:63898456",
+      "name": "커피빈 안양LS타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.37238440614812,
+      "lng": 126.94736593422397,
+      "address": "경기 안양시 동안구 호계동 1026-6",
+      "roadAddress": "경기 안양시 동안구 엘에스로 127",
+      "phone": "031-429-9650",
+      "placeUrl": "http://place.map.kakao.com/63898456",
+      "source": "kakao",
+      "kakaoId": "63898456"
+    },
+    {
+      "id": "kakao:1040416253",
+      "name": "커피빈 압구정로데오2호점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5263371742072,
+      "lng": 127.038183423397,
+      "address": "서울 강남구 신사동 663-5",
+      "roadAddress": "서울 강남구 선릉로157길 22",
+      "phone": "02-3444-9973",
+      "placeUrl": "http://place.map.kakao.com/1040416253",
+      "source": "kakao",
+      "kakaoId": "1040416253"
+    },
+    {
+      "id": "kakao:8112722",
+      "name": "커피빈 압구정시티점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5237327175538,
+      "lng": 127.037114191964,
+      "address": "서울 강남구 신사동 648-12",
+      "roadAddress": "서울 강남구 도산대로49길 13",
+      "phone": "02-543-5922",
+      "placeUrl": "http://place.map.kakao.com/8112722",
+      "source": "kakao",
+      "kakaoId": "8112722"
+    },
+    {
+      "id": "kakao:10830318",
+      "name": "커피빈 양재스포타임점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.48283215018672,
+      "lng": 127.03521709342084,
+      "address": "서울 서초구 양재동 24",
+      "roadAddress": "서울 서초구 강남대로 213",
+      "phone": "02-578-6833",
+      "placeUrl": "http://place.map.kakao.com/10830318",
+      "source": "kakao",
+      "kakaoId": "10830318"
+    },
+    {
+      "id": "kakao:26624129",
+      "name": "커피빈 여의도순복음교회옆점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5307497574679,
+      "lng": 126.924999867395,
+      "address": "서울 영등포구 여의도동 11-11",
+      "roadAddress": "서울 영등포구 여의서로 43",
+      "phone": "02-780-7758",
+      "placeUrl": "http://place.map.kakao.com/26624129",
+      "source": "kakao",
+      "kakaoId": "26624129"
+    },
+    {
+      "id": "kakao:8105442",
+      "name": "커피빈 영동고앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5214794470514,
+      "lng": 127.03947053884,
+      "address": "서울 강남구 논현동 101-24",
+      "roadAddress": "서울 강남구 선릉로 749",
+      "phone": "02-544-3794",
+      "placeUrl": "http://place.map.kakao.com/8105442",
+      "source": "kakao",
+      "kakaoId": "8105442"
+    },
+    {
+      "id": "kakao:1023118493",
+      "name": "커피빈 영종도운서역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.49370816758793,
+      "lng": 126.4908154806419,
+      "address": "인천 중구 운서동 2803-1",
+      "roadAddress": "인천 중구 신도시남로142번길 6",
+      "phone": "032-746-9822",
+      "placeUrl": "http://place.map.kakao.com/1023118493",
+      "source": "kakao",
+      "kakaoId": "1023118493"
+    },
+    {
+      "id": "kakao:10827091",
+      "name": "커피빈 올림픽공원북2문앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.52449453962,
+      "lng": 127.127968765317,
+      "address": "서울 강동구 성내동 448-1",
+      "roadAddress": "서울 강동구 강동대로 193",
+      "phone": "02-471-2372",
+      "placeUrl": "http://place.map.kakao.com/10827091",
+      "source": "kakao",
+      "kakaoId": "10827091"
+    },
+    {
+      "id": "kakao:1187334898",
+      "name": "커피빈 용인에버랜드점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.290427340311375,
+      "lng": 127.20084574056408,
+      "address": "경기 용인시 처인구 포곡읍 가실리 156-1",
+      "roadAddress": "경기 용인시 처인구 포곡읍 에버랜드로 199",
+      "phone": "031-334-0556",
+      "placeUrl": "http://place.map.kakao.com/1187334898",
+      "source": "kakao",
+      "kakaoId": "1187334898"
+    },
+    {
+      "id": "kakao:4718442",
+      "name": "커피빈 용인역북점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.22949714012114,
+      "lng": 127.18822002186579,
+      "address": "경기 용인시 처인구 역북동 598-7",
+      "roadAddress": "경기 용인시 처인구 명지로 71",
+      "phone": "031-323-6886",
+      "placeUrl": "http://place.map.kakao.com/4718442",
+      "source": "kakao",
+      "kakaoId": "4718442"
+    },
+    {
+      "id": "kakao:853444784",
+      "name": "커피빈 원그로브점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5609057350456,
+      "lng": 126.826219886018,
+      "address": "서울 강서구 마곡동 769",
+      "roadAddress": "서울 강서구 공항대로 165",
+      "phone": "02-2653-8577",
+      "placeUrl": "http://place.map.kakao.com/853444784",
+      "source": "kakao",
+      "kakaoId": "853444784"
+    },
+    {
+      "id": "kakao:1551159351",
+      "name": "커피빈 원주혁신도시점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.32321572333463,
+      "lng": 127.98154390542601,
+      "address": "강원특별자치도 원주시 반곡동 1886-5",
+      "roadAddress": "강원특별자치도 원주시 입춘로 110",
+      "phone": "033-746-7951",
+      "placeUrl": "http://place.map.kakao.com/1551159351",
+      "source": "kakao",
+      "kakaoId": "1551159351"
+    },
+    {
+      "id": "kakao:1865574013",
+      "name": "커피빈 원주AK플라자점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.346019713160075,
+      "lng": 127.92798897115705,
+      "address": "강원특별자치도 원주시 단계동 1123",
+      "roadAddress": "강원특별자치도 원주시 봉화로 1",
+      "phone": "033-748-0631",
+      "placeUrl": "http://place.map.kakao.com/1865574013",
+      "source": "kakao",
+      "kakaoId": "1865574013"
+    },
+    {
+      "id": "kakao:1041031334",
+      "name": "커피빈 응암동점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.60042929234581,
+      "lng": 126.92103447098047,
+      "address": "서울 은평구 응암동 89-19",
+      "roadAddress": "서울 은평구 은평로 121",
+      "phone": "02-389-6283",
+      "placeUrl": "http://place.map.kakao.com/1041031334",
+      "source": "kakao",
+      "kakaoId": "1041031334"
+    },
+    {
+      "id": "kakao:255928198",
+      "name": "커피빈 의정부민락점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.7448757974441,
+      "lng": 127.095257457784,
+      "address": "경기 의정부시 민락동 805-3",
+      "roadAddress": "경기 의정부시 천보로 56",
+      "phone": "031-853-3455",
+      "placeUrl": "http://place.map.kakao.com/255928198",
+      "source": "kakao",
+      "kakaoId": "255928198"
+    },
+    {
+      "id": "kakao:27155393",
+      "name": "커피빈 이천하이닉스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.25207056131165,
+      "lng": 127.48612860389791,
+      "address": "경기 이천시 부발읍 아미리 712-7",
+      "roadAddress": "경기 이천시 부발읍 경충대로 2091",
+      "phone": "031-8094-7013",
+      "placeUrl": "http://place.map.kakao.com/27155393",
+      "source": "kakao",
+      "kakaoId": "27155393"
+    },
+    {
+      "id": "kakao:8103497",
+      "name": "커피빈 인사점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.57286931776403,
+      "lng": 126.98721409193786,
+      "address": "서울 종로구 낙원동 272",
+      "roadAddress": "서울 종로구 인사동4길 18",
+      "phone": "02-783-2043",
+      "placeUrl": "http://place.map.kakao.com/8103497",
+      "source": "kakao",
+      "kakaoId": "8103497"
+    },
+    {
+      "id": "kakao:1163531905",
+      "name": "커피빈 인천공항 T2랜드3F동편점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4699283141468,
+      "lng": 126.4359113209889,
+      "address": "인천 중구 운서동 2868",
+      "roadAddress": "",
+      "phone": "032-743-2894",
+      "placeUrl": "http://place.map.kakao.com/1163531905",
+      "source": "kakao",
+      "kakaoId": "1163531905"
+    },
+    {
+      "id": "kakao:26879531",
+      "name": "커피빈 인천공항탑승동105게이트앞점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.45815985963553,
+      "lng": 126.44898406335072,
+      "address": "인천 중구 운서동 2840",
+      "roadAddress": "인천 중구 공항로 272",
+      "phone": "032-743-7223",
+      "placeUrl": "http://place.map.kakao.com/26879531",
+      "source": "kakao",
+      "kakaoId": "26879531"
+    },
+    {
+      "id": "kakao:19658312",
+      "name": "커피빈 일산원마운트점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.6648086012533,
+      "lng": 126.754298952742,
+      "address": "경기 고양시 일산서구 대화동 2606",
+      "roadAddress": "경기 고양시 일산서구 한류월드로 300",
+      "phone": "031-961-6520",
+      "placeUrl": "http://place.map.kakao.com/19658312",
+      "source": "kakao",
+      "kakaoId": "19658312"
+    },
+    {
+      "id": "kakao:8102883",
+      "name": "커피빈 일산웨스턴돔1호점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.65589387799534,
+      "lng": 126.77203429117556,
+      "address": "경기 고양시 일산동구 장항동 868",
+      "roadAddress": "경기 고양시 일산동구 정발산로 24",
+      "phone": "031-931-5573",
+      "placeUrl": "http://place.map.kakao.com/8102883",
+      "source": "kakao",
+      "kakaoId": "8102883"
+    },
+    {
+      "id": "kakao:1472247924",
+      "name": "커피빈 제주동문시장점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 33.5128730952457,
+      "lng": 126.527560249616,
+      "address": "제주특별자치도 제주시 일도일동 1145-2",
+      "roadAddress": "제주특별자치도 제주시 동문로 8-1",
+      "phone": "064-726-9520",
+      "placeUrl": "http://place.map.kakao.com/1472247924",
+      "source": "kakao",
+      "kakaoId": "1472247924"
+    },
+    {
+      "id": "kakao:2065888112",
+      "name": "커피빈 제주아라점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 33.4844434283147,
+      "lng": 126.53453623259,
+      "address": "제주특별자치도 제주시 아라일동 2567",
+      "roadAddress": "제주특별자치도 제주시 연북로 511",
+      "phone": "064-758-1194",
+      "placeUrl": "http://place.map.kakao.com/2065888112",
+      "source": "kakao",
+      "kakaoId": "2065888112"
+    },
+    {
+      "id": "kakao:620044696",
+      "name": "커피빈 제주애월DT점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 33.47806657286693,
+      "lng": 126.36358167041251,
+      "address": "제주특별자치도 제주시 애월읍 신엄리 2728-1",
+      "roadAddress": "제주특별자치도 제주시 애월읍 애월해안로 560",
+      "phone": "064-799-3670",
+      "placeUrl": "http://place.map.kakao.com/620044696",
+      "source": "kakao",
+      "kakaoId": "620044696"
+    },
+    {
+      "id": "kakao:10827907",
+      "name": "커피빈 종로관철동점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.56847781311796,
+      "lng": 126.98672924436141,
+      "address": "서울 종로구 관철동 11-4",
+      "roadAddress": "서울 종로구 청계천로 83",
+      "phone": "02-738-5333",
+      "placeUrl": "http://place.map.kakao.com/10827907",
+      "source": "kakao",
+      "kakaoId": "10827907"
+    },
+    {
+      "id": "kakao:27423061",
+      "name": "커피빈 진주LH본사점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.17761884452726,
+      "lng": 128.146175253303,
+      "address": "경남 진주시 충무공동 227-2",
+      "roadAddress": "경남 진주시 충의로 19",
+      "phone": "055-763-3520",
+      "placeUrl": "http://place.map.kakao.com/27423061",
+      "source": "kakao",
+      "kakaoId": "27423061"
+    },
+    {
+      "id": "kakao:1812032819",
+      "name": "커피빈 창원시티세븐점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.23986255144988,
+      "lng": 128.65447077809313,
+      "address": "경남 창원시 성산구 대원동 121",
+      "roadAddress": "경남 창원시 성산구 원이대로 320",
+      "phone": "055-600-5361",
+      "placeUrl": "http://place.map.kakao.com/1812032819",
+      "source": "kakao",
+      "kakaoId": "1812032819"
+    },
+    {
+      "id": "kakao:8102885",
+      "name": "커피빈 청담에스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5250986350879,
+      "lng": 127.047214890867,
+      "address": "서울 강남구 청담동 118-17",
+      "roadAddress": "서울 강남구 압구정로 461",
+      "phone": "02-548-6052",
+      "placeUrl": "http://place.map.kakao.com/8102885",
+      "source": "kakao",
+      "kakaoId": "8102885"
+    },
+    {
+      "id": "kakao:13055389",
+      "name": "커피빈 청담카페점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5245158791098,
+      "lng": 127.044395408538,
+      "address": "서울 강남구 청담동 92-12",
+      "roadAddress": "서울 강남구 도산대로67길 7",
+      "phone": "02-514-5622",
+      "placeUrl": "http://place.map.kakao.com/13055389",
+      "source": "kakao",
+      "kakaoId": "13055389"
+    },
+    {
+      "id": "kakao:1893734394",
+      "name": "커피빈 춘천온의점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.866657702132656,
+      "lng": 127.72000998448544,
+      "address": "강원특별자치도 춘천시 온의동 587-8",
+      "roadAddress": "강원특별자치도 춘천시 춘천로17번길 17",
+      "phone": "033-252-3348",
+      "placeUrl": "http://place.map.kakao.com/1893734394",
+      "source": "kakao",
+      "kakaoId": "1893734394"
+    },
+    {
+      "id": "kakao:1606811763",
+      "name": "커피빈 캐리비안베이점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.2979986337967,
+      "lng": 127.201442208091,
+      "address": "경기 용인시 처인구 포곡읍 전대리 310",
+      "roadAddress": "경기 용인시 처인구 포곡읍 에버랜드로 199",
+      "phone": "031-336-9082",
+      "placeUrl": "http://place.map.kakao.com/1606811763",
+      "source": "kakao",
+      "kakaoId": "1606811763"
+    },
+    {
+      "id": "kakao:26099843",
+      "name": "커피빈 타임스퀘어점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.51712326682917,
+      "lng": 126.90308268877358,
+      "address": "서울 영등포구 영등포동4가 442",
+      "roadAddress": "서울 영등포구 영중로 15",
+      "phone": "02-2635-8830",
+      "placeUrl": "http://place.map.kakao.com/26099843",
+      "source": "kakao",
+      "kakaoId": "26099843"
+    },
+    {
+      "id": "kakao:171738146",
+      "name": "커피빈 파주운정홈플러스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.72909772795471,
+      "lng": 126.73723339214779,
+      "address": "경기 파주시 목동동 927",
+      "roadAddress": "경기 파주시 청암로17번길 17",
+      "phone": "031-949-1408",
+      "placeUrl": "http://place.map.kakao.com/171738146",
+      "source": "kakao",
+      "kakaoId": "171738146"
+    },
+    {
+      "id": "kakao:1054389179",
+      "name": "커피빈 파주DT점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.7063261147392,
+      "lng": 126.686215878017,
+      "address": "경기 파주시 문발동 530-5",
+      "roadAddress": "경기 파주시 문발로 131",
+      "phone": "031-8070-0028",
+      "placeUrl": "http://place.map.kakao.com/1054389179",
+      "source": "kakao",
+      "kakaoId": "1054389179"
+    },
+    {
+      "id": "kakao:2100545072",
+      "name": "커피빈 하남신세계백화점B1점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.54585594956213,
+      "lng": 127.22237964137841,
+      "address": "경기 하남시 신장동 616",
+      "roadAddress": "경기 하남시 미사대로 750",
+      "phone": "031-8072-1641",
+      "placeUrl": "http://place.map.kakao.com/2100545072",
+      "source": "kakao",
+      "kakaoId": "2100545072"
+    },
+    {
+      "id": "kakao:1899165715",
+      "name": "커피빈 한티역디마크빌딩점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4967423581031,
+      "lng": 127.055221522768,
+      "address": "서울 강남구 대치동 1024",
+      "roadAddress": "서울 강남구 도곡로 408",
+      "phone": "02-2052-6590",
+      "placeUrl": "http://place.map.kakao.com/1899165715",
+      "source": "kakao",
+      "kakaoId": "1899165715"
+    },
+    {
+      "id": "kakao:1876751004",
+      "name": "커피빈 해운대센텀호텔점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.16768358517724,
+      "lng": 129.13299850194315,
+      "address": "부산 해운대구 우동 1505",
+      "roadAddress": "부산 해운대구 센텀3로 20",
+      "phone": "051-743-5088",
+      "placeUrl": "http://place.map.kakao.com/1876751004",
+      "source": "kakao",
+      "kakaoId": "1876751004"
+    },
+    {
+      "id": "kakao:20110699",
+      "name": "커피빈 현대자동차남양연구소점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.15870788536342,
+      "lng": 126.81525080968967,
+      "address": "경기 화성시 남양읍 장덕리 772-1",
+      "roadAddress": "경기 화성시 남양읍 현대연구소로 150",
+      "phone": "031-357-8103",
+      "placeUrl": "http://place.map.kakao.com/20110699",
+      "source": "kakao",
+      "kakaoId": "20110699"
+    },
+    {
+      "id": "kakao:18970930",
+      "name": "커피빈 현대자동차성내점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5353187653053,
+      "lng": 127.133218984711,
+      "address": "서울 강동구 성내동 192-3",
+      "roadAddress": "서울 강동구 천호대로 1096",
+      "phone": "02-485-3361",
+      "placeUrl": "http://place.map.kakao.com/18970930",
+      "source": "kakao",
+      "kakaoId": "18970930"
+    },
+    {
+      "id": "kakao:17101558",
+      "name": "커피빈 현대자동차여의도점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.524943383457156,
+      "lng": 126.92737230232855,
+      "address": "서울 영등포구 여의도동 24-1",
+      "roadAddress": "서울 영등포구 국제금융로 20",
+      "phone": "02-783-3391",
+      "placeUrl": "http://place.map.kakao.com/17101558",
+      "source": "kakao",
+      "kakaoId": "17101558"
+    },
+    {
+      "id": "kakao:1213931154",
+      "name": "커피빈 혜화역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5835215575257,
+      "lng": 127.001154801619,
+      "address": "서울 종로구 명륜4가 7",
+      "roadAddress": "서울 종로구 대명길 5",
+      "phone": "02-745-9471",
+      "placeUrl": "http://place.map.kakao.com/1213931154",
+      "source": "kakao",
+      "kakaoId": "1213931154"
+    },
+    {
+      "id": "kakao:1761416043",
+      "name": "커피빈 홍대역8번출구점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5567742084775,
+      "lng": 126.92498284622,
+      "address": "서울 마포구 동교동 168-4",
+      "roadAddress": "서울 마포구 양화로18안길 7",
+      "phone": "02-338-9463",
+      "placeUrl": "http://place.map.kakao.com/1761416043",
+      "source": "kakao",
+      "kakaoId": "1761416043"
+    },
+    {
+      "id": "kakao:10822488",
+      "name": "커피빈 홍대역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5554684891094,
+      "lng": 126.923309189325,
+      "address": "서울 마포구 동교동 163-12",
+      "roadAddress": "서울 마포구 홍익로6길 26",
+      "phone": "02-333-4278",
+      "placeUrl": "http://place.map.kakao.com/10822488",
+      "source": "kakao",
+      "kakaoId": "10822488"
+    },
+    {
+      "id": "kakao:1709594264",
+      "name": "커피빈 화정중앙공원점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.63179536603483,
+      "lng": 126.83288173571079,
+      "address": "경기 고양시 덕양구 화정동 986",
+      "roadAddress": "경기 고양시 덕양구 화신로260번길 26",
+      "phone": "031-979-9402",
+      "placeUrl": "http://place.map.kakao.com/1709594264",
+      "source": "kakao",
+      "kakaoId": "1709594264"
+    },
+    {
+      "id": "kakao:1445993998",
+      "name": "커피빈 KB국민은행노원역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.65391659239365,
+      "lng": 127.06023437877728,
+      "address": "서울 노원구 상계동 731-5",
+      "roadAddress": "서울 노원구 동일로 1405",
+      "phone": "02-930-9486",
+      "placeUrl": "http://place.map.kakao.com/1445993998",
+      "source": "kakao",
+      "kakaoId": "1445993998"
+    },
+    {
+      "id": "kakao:1749565063",
+      "name": "커피빈준스",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 35.31481855825,
+      "lng": 128.967563653228,
+      "address": "경남 김해시 상동면 매리 224-5",
+      "roadAddress": "경남 김해시 상동면 동북로473번길 8",
+      "phone": "055-323-4242",
+      "placeUrl": "http://place.map.kakao.com/1749565063",
+      "source": "kakao",
+      "kakaoId": "1749565063"
+    },
+    {
+      "id": "kakao:1928780638",
+      "name": "킹콩커피빈",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5011779206638,
+      "lng": 126.863579011304,
+      "address": "서울 구로구 고척동 52-340",
+      "roadAddress": "서울 구로구 중앙로 34",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/1928780638",
+      "source": "kakao",
+      "kakaoId": "1928780638"
+    },
+    {
+      "id": "kakao:2047367390",
+      "name": "티타임커피빈",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 36.8172233353546,
+      "lng": 127.139303979576,
+      "address": "충남 천안시 서북구 성정동 712-3",
+      "roadAddress": "충남 천안시 서북구 성정5길 13",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/2047367390",
+      "source": "kakao",
+      "kakaoId": "2047367390"
+    },
+    {
+      "id": "kakao:415730481",
+      "name": "NS커피빈",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.2607220821263,
+      "lng": 127.061710012302,
+      "address": "경기 수원시 영통구 원천동 353-15",
+      "roadAddress": "경기 수원시 영통구 신원로294번길 40-16",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/415730481",
+      "source": "kakao",
+      "kakaoId": "415730481"
+    },
+    {
+      "id": "kakao:1802203161",
+      "name": "NS커피빈 경희대점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.2488483263476,
+      "lng": 127.078162087223,
+      "address": "경기 수원시 영통구 영통동 1019-4",
+      "roadAddress": "경기 수원시 영통구 매영로425번길 2",
+      "phone": "031-203-0706",
+      "placeUrl": "http://place.map.kakao.com/1802203161",
+      "source": "kakao",
+      "kakaoId": "1802203161"
+    }
+  ]
+}
