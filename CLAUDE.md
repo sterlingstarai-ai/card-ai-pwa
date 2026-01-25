@@ -107,24 +107,60 @@ vercel --prod        # Vercel 배포
 
 ---
 
-## 마지막 작업 세션 (2026-01-23)
+## 마지막 작업 세션 (2026-01-25)
 
 ### 완료된 작업
-1. **iOS 버전 1.0 심사 승인 확인**
-2. **버그 수정 및 1.0.1 제출**:
-   - OCR 카드 스캔 오류 수정 ("The string did not match the expected pattern" → 사용자 친화적 메시지)
-   - 지도 호텔 좌표 오류 수정:
-     - JW메리어트 서울: 127.0594 → 127.0049 (코엑스 → 반포)
-     - 파크하얏트 서울, 시그니엘 서울, 인터컨티넨탈 등 좌표 보정
-3. **iOS 1.0.1 (빌드 3) App Store 심사 제출 완료**
-4. **Vercel 배포 완료**: https://card-ai-pi.vercel.app
+1. **OCR 카드 스캔 완전 수정**:
+   - Capacitor Camera 플러그인 사용 (base64 직접 반환)
+   - API URL 절대경로로 변경 (`CONFIG.API.BASE_URL` 사용)
+   - 악센트 문자 정규화 추가 (osée → osee 매칭)
+   - Safari/WKWebView JSON 파싱 호환성 수정
+   - 이미지 품질: 70%, 최대 1600x1600 (Google Vision 4MB 제한)
+
+2. **Vercel 환경변수 추가**:
+   - `VISION_API_KEY`: Google Cloud Vision API 키
+
+3. **카드 데이터 확장** (총 약 110개):
+   - 신세계 THE S (삼성)
+   - 코스트코 리워드, 이마트 e카드, SSG.COM 카드
+   - 현대백화점, 갤러리아 VIP, 롯데백화점
+   - AK플라자, 홈플러스
+   - 각 카드사 법인카드 (BC, KB, 신한, 삼성)
+
+4. **커밋**: `eb38362` - fix: OCR 카드 인식 개선 및 카드 데이터 확장
+
+### 핵심 기술 메모
+
+#### OCR 플로우 (iOS)
+```
+Capacitor Camera → base64 (quality:70, 1600px)
+    → fetch(CONFIG.API.BASE_URL + '/api/ocr')
+    → Google Vision API
+    → 텍스트 정규화 (악센트 제거, 소문자, 공백 제거)
+    → cards.json ocrKeywords 매칭
+```
+
+#### 중요 설정값
+| 항목 | 값 |
+|------|-----|
+| API Base URL | `https://card-ai-pi.vercel.app` (config.js) |
+| Vision API 키 | Vercel 환경변수 `VISION_API_KEY` |
+| 이미지 품질 | 70% (OcrModal.jsx) |
+| 이미지 최대 크기 | 1600x1600 |
+| Google Vision 제한 | 4MB |
+
+#### 알려진 제한사항
+- OCR은 `ocrKeywords`에 등록된 카드만 인식
+- 법인카드는 회사명이 아닌 카드 종류로만 매칭
+- 체크카드/법인카드 중 일부는 데이터 미등록
 
 ### 현재 상태
 - **iOS 1.0**: 출시 완료
-- **iOS 1.0.1**: 심사 대기 중 (결과 24~48시간 내 예상)
-- **Android**: 비공개 테스트 준비 중 (테스터 20명 모집 필요)
+- **iOS 1.0.1**: 심사 대기 중
+- **Android**: 비공개 테스트 준비 중
+- **OCR**: ✅ 작동 확인 (카드 데이터 있으면 인식됨)
 
 ### 다음 할 일
-- iOS 1.0.1 심사 결과 확인
+- iOS 1.0.2 빌드 및 제출 (OCR 수정 반영)
+- 누락된 카드 데이터 추가 (사용자 피드백 기반)
 - Android 테스터 모집 후 비공개 테스트 시작
-- 앱스토어 리뷰/별점 확보 → 검색결과 스크린샷 미리보기 노출
