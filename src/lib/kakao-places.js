@@ -43,6 +43,61 @@ export async function fetchKakaoPlacesByRect({
 }
 
 /**
+ * Fetch places by bounding box with pagination (multiple pages)
+ * - Kakao Local API returns max 15 results per page
+ * - Dense areas often require multiple pages; without pagination, many stores are omitted.
+ *
+ * @param {Object} options
+ * @param {string} options.rect
+ * @param {string} [options.categoryGroupCode]
+ * @param {string} [options.mode='category']
+ * @param {string} [options.query]
+ * @param {number} [options.maxPages=3] - Safety cap to control traffic/cost
+ * @param {number} [options.size=15]
+ * @returns {Promise<Array>} Array of place objects (deduplicated by id)
+ */
+export async function fetchKakaoPlacesByRectPaged({
+  rect,
+  categoryGroupCode,
+  mode = 'category',
+  query,
+  maxPages = 3,
+  size = 15,
+}) {
+  const merged = {};
+  const safeMaxPages = Math.min(Math.max(Number(maxPages) || 1, 1), 45);
+
+  for (let page = 1; page <= safeMaxPages; page++) {
+    const body =
+      mode === 'keyword'
+        ? { mode: 'keyword', rect, query, size, page }
+        : { mode: 'category', rect, category_group_code: categoryGroupCode, size, page };
+
+    const r = await fetch('/api/kakao-places', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (!r.ok) {
+      const t = await r.text().catch(() => '');
+      throw new Error(`kakao places failed: ${r.status} ${t.slice(0, 200)}`);
+    }
+
+    const data = await r.json();
+    const places = Array.isArray(data.places) ? data.places : [];
+    places.forEach((p) => {
+      if (p?.id) merged[p.id] = p;
+    });
+
+    // meta.is_end = true means last page
+    if (data?.meta?.is_end) break;
+  }
+
+  return Object.values(merged);
+}
+
+/**
  * Fetch places by center point with radius
  * @param {Object} options
  * @param {number} options.x - Longitude

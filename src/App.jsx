@@ -79,8 +79,16 @@ export default function CardBenefitsApp() {
   const [dataError, setDataError] = useState(false);
   const [cardsData, setCardsData] = useState({});
   const [placesData, setPlacesData] = useState({});
+  // 런타임(카카오 live)에서 선택된 장소를 임시로 보관
+  // - 지도에서 고른 장소도 혜택 추천에 즉시 반영
+  // - 저장소(DB)에는 영구 저장하지 않고 세션용으로만 유지
+  const [dynamicPlacesData, setDynamicPlacesData] = useState({});
   const [benefitsData, setBenefitsData] = useState({});
   const [networkBenefits, setNetworkBenefits] = useState({});
+
+  const mergedPlacesData = useMemo(() => {
+    return { ...placesData, ...dynamicPlacesData };
+  }, [placesData, dynamicPlacesData]);
 
   // Benefits Engine (인덱싱된 혜택 조회)
   const benefitsEngine = useMemo(() => {
@@ -134,21 +142,28 @@ export default function CardBenefitsApp() {
 
   const showToast = useCallback((msg) => setToastMessage(msg), []);
 
-  const selectPlace = useCallback((placeId, options = {}) => {
-    if (!placeId) return;
+  const selectPlace = useCallback((placeOrId, options = {}) => {
+    if (!placeOrId) return;
     const { closeSheet = true, toast = true, focusHome = false } = options;
+
+    const placeId = typeof placeOrId === 'string' ? placeOrId : placeOrId.id;
+    const placeObj = typeof placeOrId === 'string' ? mergedPlacesData[placeId] : placeOrId;
+
+    // live 장소(예: kakao:12345)는 세션 내에서만 캐시
+    if (placeObj && !placesData[placeId]) {
+      setDynamicPlacesData(prev => (prev[placeId] ? prev : { ...prev, [placeId]: placeObj }));
+    }
 
     setSelectedPlaceId(placeId);
     setRecentPlaceIds(prev => [placeId, ...prev.filter(id => id !== placeId)].slice(0, CONFIG.UI.MAX_RECENT_PLACES));
     if (closeSheet) setShowPlaceSheet(false);
-    if (toast) showToast(MESSAGES.PLACE.SELECTED(placesData[placeId]?.name || '선택됨'));
+    if (toast) showToast(MESSAGES.PLACE.SELECTED(placeObj?.name || '선택됨'));
     vibrate([8]);
     if (focusHome) setActiveTab('home');
 
     // Track place selection
-    const place = placesData[placeId];
-    trackEvent(EventType.PLACE_SELECTED, { placeId, placeType: place?.type, placeName: place?.name });
-  }, [placesData, showToast, vibrate]);
+    trackEvent(EventType.PLACE_SELECTED, { placeId, placeType: placeObj?.type, placeName: placeObj?.name });
+  }, [mergedPlacesData, placesData, showToast, vibrate]);
 
   // Toggle favorite place
   const toggleFavorite = useCallback((placeId) => {
@@ -189,6 +204,7 @@ export default function CardBenefitsApp() {
       const { cards, places, benefits, networks } = await dataService.fetchAll();
       setCardsData(cards);
       setPlacesData(places);
+      setDynamicPlacesData({});
       setBenefitsData(benefits);
       setNetworkBenefits(networks);
 
@@ -229,16 +245,16 @@ export default function CardBenefitsApp() {
   useEffect(() => {
     if (!dataLoaded) return;
 
-    if (selectedPlaceId && !placesData[selectedPlaceId]) {
+    if (selectedPlaceId && !mergedPlacesData[selectedPlaceId]) {
       setSelectedPlaceId(null);
     }
 
     setRecentPlaceIds(prev => {
-      const next = prev.filter(id => !!placesData[id]).slice(0, CONFIG.UI.MAX_RECENT_PLACES);
+      const next = prev.filter(id => !!mergedPlacesData[id]).slice(0, CONFIG.UI.MAX_RECENT_PLACES);
       const same = next.length === prev.length && next.every((v, i) => v === prev[i]);
       return same ? prev : next;
     });
-  }, [dataLoaded, placesData, selectedPlaceId]);
+  }, [dataLoaded, mergedPlacesData, selectedPlaceId]);
 
 
   // Save user data (debounced to reduce I/O on mobile WebView)
@@ -247,12 +263,25 @@ export default function CardBenefitsApp() {
     if (!dataLoaded || isDemo) return;
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(() => {
-      void storage.set(CONFIG.DB.KEY, { myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds });
+      // live 장소(kakao:...)는 세션 캐시용으로만 유지하고 저장소에는 영구 저장하지 않습니다.
+      const persistSelectedPlaceId = selectedPlaceId && placesData[selectedPlaceId] ? selectedPlaceId : null;
+      const persistRecentPlaceIds = Array.isArray(recentPlaceIds)
+        ? recentPlaceIds.filter(id => !!placesData[id]).slice(0, CONFIG.UI.MAX_RECENT_PLACES)
+        : [];
+      const persistFavoritePlaceIds = Array.isArray(favoritePlaceIds)
+        ? favoritePlaceIds.filter(id => !!placesData[id])
+        : [];
+      void storage.set(CONFIG.DB.KEY, {
+        myCards,
+        selectedPlaceId: persistSelectedPlaceId,
+        recentPlaceIds: persistRecentPlaceIds,
+        favoritePlaceIds: persistFavoritePlaceIds,
+      });
     }, 400);
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
-  }, [myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds, dataLoaded, isDemo]);
+  }, [myCards, selectedPlaceId, recentPlaceIds, favoritePlaceIds, placesData, dataLoaded, isDemo]);
 
   // Debounce search
   useEffect(() => {
@@ -308,7 +337,7 @@ export default function CardBenefitsApp() {
     return filtered;
   }, [cardsByIssuer, walletSearch]);
 
-  const selectedPlace = selectedPlaceId ? placesData[selectedPlaceId] : null;
+  const selectedPlace = selectedPlaceId ? mergedPlacesData[selectedPlaceId] : null;
   const myCardObjects = useMemo(() => myCards.map(id => cardsData[id]).filter(Boolean), [myCards, cardsData]);
 
   // 사용자 카드의 네트워크+등급별 혜택 (NETWORKS_DATA 기반)
@@ -1029,7 +1058,7 @@ export default function CardBenefitsApp() {
             locationStatus={locationStatus}
             myCards={myCards}
             cardsData={cardsData}
-            placesData={placesData}
+            placesData={mergedPlacesData}
             benefitsData={benefitsData}
             requestLocation={requestLocation}
             handleReset={handleReset}
@@ -1048,7 +1077,7 @@ export default function CardBenefitsApp() {
 
       {showPlaceSheet && (
         <PlaceSheet
-          placesData={placesData}
+          placesData={mergedPlacesData}
           nearbyPlaces={nearbyPlaces}
           selectedPlaceId={selectedPlaceId}
           recentPlaceIds={recentPlaceIds}

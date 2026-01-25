@@ -5,7 +5,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { placeTypeConfig } from '../lib/utils';
-import { fetchKakaoPlacesByRect, getCategoryCodesForType } from '../lib/kakao-places';
+import { fetchKakaoPlacesByRectPaged, getCategoryCodesForType } from '../lib/kakao-places';
 
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_APP_KEY || '';
 
@@ -21,6 +21,18 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
   const [activeRegion, setActiveRegion] = useState('서울');
   const [previewPlace, setPreviewPlace] = useState(null);
   const [livePlaces, setLivePlaces] = useState({});
+
+  // 혜택 태그(브랜드)가 있는 경우, 해당 체인을 keyword 검색으로 보강해서 누락을 줄입니다.
+  // (카테고리 검색은 15개/페이지 제한이 있고, 도심 상권에서는 누락이 자주 발생)
+  const CHAIN_TAG_TO_QUERY = {
+    starbucks: '스타벅스',
+    coffeebean: '커피빈',
+    twosome: '투썸플레이스',
+    ediya: '이디야',
+    hollys: '할리스',
+    paulbassett: '폴바셋',
+    bluebottle: '블루보틀',
+  };
 
   const regions = [
     { name: '전체', lat: 36.5, lng: 127.5, zoom: 7 },
@@ -150,12 +162,38 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
         const codes = getCategoryCodesForType(selectedCategory);
         if (codes.length === 0) return;
 
-        const results = await Promise.all(
-          codes.map((code) => fetchKakaoPlacesByRect({ rect, categoryGroupCode: code }))
+        // 1) 카테고리 검색 (paged)
+        const categoryResults = await Promise.all(
+          codes.map((code) =>
+            fetchKakaoPlacesByRectPaged({ rect, categoryGroupCode: code, maxPages: 3, size: 15 })
+          )
         );
 
+        // 2) 체인(브랜드) 검색 (keyword) - 사용자 카드 혜택에 등장하는 브랜드만 보강
+        const neededChainTags = new Set();
+        if (benefitsData && myCards && Array.isArray(myCards)) {
+          for (const [, b] of Object.entries(benefitsData)) {
+            if (!b) continue;
+            if (!myCards.includes(b.cardId)) continue;
+            const pts = Array.isArray(b.placeTags) ? b.placeTags : [];
+            for (const t of pts) {
+              if (t in CHAIN_TAG_TO_QUERY) neededChainTags.add(t);
+            }
+          }
+        }
+
+        const keywordResults = neededChainTags.size
+          ? await Promise.all(
+              [...neededChainTags].map((tag) =>
+                fetchKakaoPlacesByRectPaged({ rect, mode: 'keyword', query: CHAIN_TAG_TO_QUERY[tag], maxPages: 5, size: 15 })
+              )
+            )
+          : [];
+
         const merged = {};
-        results.flat().forEach((p) => (merged[p.id] = p));
+        categoryResults.flat().forEach((p) => (merged[p.id] = p));
+        keywordResults.flat().forEach((p) => (merged[p.id] = p));
+
         setLivePlaces(merged);
       } catch (e) {
         // 조용히 실패 처리 (키 미설정/권한 등)
@@ -427,7 +465,7 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
             <button onClick={() => setPreviewPlace(null)} style={{ width: '28px', height: '28px', background: '#334155', borderRadius: '50%', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '14px' }}>✕</button>
           </div>
           <button
-            onClick={() => { onPlaceSelect(previewPlace.id); setPreviewPlace(null); }}
+            onClick={() => { onPlaceSelect(previewPlace); setPreviewPlace(null); }}
             style={{ width: '100%', padding: '14px', background: '#3b82f6', borderRadius: '12px', border: 'none', color: 'white', fontSize: '15px', fontWeight: 'bold', cursor: 'pointer' }}>
             이 장소 선택하기
           </button>
