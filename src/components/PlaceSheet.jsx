@@ -154,7 +154,8 @@ export const PlaceSheet = ({
               userLocation={userLocation}
               places={Object.values(placesData)}
               selectedPlaceId={selectedPlaceId}
-              onPlaceSelect={id => selectPlace(id)}
+              selectedCategory={placeCategoryFilter}
+              onPlaceSelect={selectPlace}
               onClose={() => setShowPlaceSheet(false)}
               onError={() => setPlaceSheetView('list')}
               benefitsData={benefitsData}
