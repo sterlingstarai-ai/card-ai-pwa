@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-01-25T10:21:39.715Z",
+  "generatedAt": "2026-01-25T10:24:57.301Z",
   "query": "스타벅스",
   "tag": "starbucks",
-  "count": 2530,
+  "count": 2537,
   "stores": [
     {
       "id": "kakao:1257493079",
@@ -5290,6 +5290,23 @@
       "placeUrl": "http://place.map.kakao.com/99236336",
       "source": "kakao",
       "kakaoId": "99236336"
+    },
+    {
+      "id": "kakao:312821024",
+      "name": "스타벅스 광화문우체국점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "starbucks"
+      ],
+      "lat": 37.5699721725557,
+      "lng": 126.978058216854,
+      "address": "서울 종로구 종로1가 89-3",
+      "roadAddress": "서울 종로구 종로 6",
+      "phone": "1522-3232",
+      "placeUrl": "http://place.map.kakao.com/312821024",
+      "source": "kakao",
+      "kakaoId": "312821024"
     },
     {
       "id": "kakao:7961649",
@@ -20388,6 +20405,23 @@
       "kakaoId": "1852017171"
     },
     {
+      "id": "kakao:660525167",
+      "name": "스타벅스 세종대로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "starbucks"
+      ],
+      "lat": 37.5685951382056,
+      "lng": 126.97643316578,
+      "address": "서울 중구 태평로1가 62-12",
+      "roadAddress": "서울 중구 세종대로 135-5",
+      "phone": "1522-3232",
+      "placeUrl": "http://place.map.kakao.com/660525167",
+      "source": "kakao",
+      "kakaoId": "660525167"
+    },
+    {
       "id": "kakao:817200452",
       "name": "스타벅스 세종반곡점",
       "type": "cafe",
@@ -27154,6 +27188,23 @@
       "kakaoId": "786078598"
     },
     {
+      "id": "kakao:476551453",
+      "name": "스타벅스 연합뉴스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "starbucks"
+      ],
+      "lat": 37.57418565488308,
+      "lng": 126.98050440160851,
+      "address": "서울 종로구 수송동 110",
+      "roadAddress": "서울 종로구 율곡로2길 25",
+      "phone": "1522-3232",
+      "placeUrl": "http://place.map.kakao.com/476551453",
+      "source": "kakao",
+      "kakaoId": "476551453"
+    },
+    {
       "id": "kakao:1432966034",
       "name": "스타벅스 연희동점",
       "type": "cafe",
@@ -30875,6 +30926,23 @@
       "placeUrl": "http://place.map.kakao.com/13582632",
       "source": "kakao",
       "kakaoId": "13582632"
+    },
+    {
+      "id": "kakao:1634458827",
+      "name": "스타벅스 이마빌딩점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "starbucks"
+      ],
+      "lat": 37.57395738939084,
+      "lng": 126.97868871125891,
+      "address": "서울 종로구 수송동 146-1",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/1634458827",
+      "source": "kakao",
+      "kakaoId": "1634458827"
     },
     {
       "id": "kakao:1073495846",
@@ -36026,6 +36094,23 @@
       "placeUrl": "http://place.map.kakao.com/1425327062",
       "source": "kakao",
       "kakaoId": "1425327062"
+    },
+    {
+      "id": "kakao:775444311",
+      "name": "스타벅스 창원NC파크R점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "starbucks"
+      ],
+      "lat": 35.223509398694915,
+      "lng": 128.5826011780034,
+      "address": "경남 창원시 마산회원구 양덕동 477",
+      "roadAddress": "경남 창원시 마산회원구 삼호로 63",
+      "phone": "1522-3232",
+      "placeUrl": "http://place.map.kakao.com/775444311",
+      "source": "kakao",
+      "kakaoId": "775444311"
     },
     {
       "id": "kakao:1226265015",
@@ -41791,6 +41876,23 @@
       "kakaoId": "833211918"
     },
     {
+      "id": "kakao:936923792",
+      "name": "스타벅스 KT광화문웨스트 B1F점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "starbucks"
+      ],
+      "lat": 37.5721417497781,
+      "lng": 126.977954569626,
+      "address": "서울 종로구 세종로 100",
+      "roadAddress": "서울 종로구 세종대로 178",
+      "phone": "1522-3232",
+      "placeUrl": "http://place.map.kakao.com/936923792",
+      "source": "kakao",
+      "kakaoId": "936923792"
+    },
+    {
       "id": "kakao:124818972",
       "name": "스타벅스 SSG랜더스필드1F점",
       "type": "cafe",
@@ -41925,6 +42027,23 @@
       "placeUrl": "http://place.map.kakao.com/1404654075",
       "source": "kakao",
       "kakaoId": "1404654075"
+    },
+    {
+      "id": "kakao:335296972",
+      "name": "스타벅스아카데미",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "starbucks"
+      ],
+      "lat": 37.56465288529272,
+      "lng": 126.97911694629433,
+      "address": "서울 중구 소공동 87-10",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/335296972",
+      "source": "kakao",
+      "kakaoId": "335296972"
     },
     {
       "id": "kakao:651839028",
