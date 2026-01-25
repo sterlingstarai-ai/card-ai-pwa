@@ -205,17 +205,17 @@ export const MapView = ({ userLocation, places, selectedPlaceId, onPlaceSelect, 
       const content = document.createElement('div');
       content.innerHTML = `
         <div style="
-          width: ${isSelected ? '44px' : '36px'};
-          height: ${isSelected ? '44px' : '36px'};
+          width: ${isSelected ? '32px' : '22px'};
+          height: ${isSelected ? '32px' : '22px'};
           background: ${isSelected ? '#3b82f6' : '#1e293b'};
           border: 2px solid ${isSelected ? '#60a5fa' : '#475569'};
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: ${isSelected ? '20px' : '16px'};
+          font-size: ${isSelected ? '14px' : '10px'};
           cursor: pointer;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
           transition: all 0.2s;
         ">${emoji}</div>
       `;
