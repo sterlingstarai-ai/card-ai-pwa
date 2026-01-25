@@ -219,15 +219,8 @@ export default function CardBenefitsApp() {
     loadData();
   }, [loadData]);
 
-  // 앱 시작 시 위치 권한 요청 필요 여부 플래그
-  const [needsLocationRequest, setNeedsLocationRequest] = useState(false);
-
-  // 데이터 로드 완료 후 위치 권한 요청 플래그 설정
-  useEffect(() => {
-    if (dataLoaded && locationStatus === 'idle') {
-      setNeedsLocationRequest(true);
-    }
-  }, [dataLoaded, locationStatus]);
+  // 앱 시작 시 자동 위치 권한 요청 추적
+  const locationRequestedRef = useRef(false);
 
   // 오프라인 상태 감지
   useEffect(() => {
@@ -596,13 +589,15 @@ export default function CardBenefitsApp() {
     );
   };
 
-  // 앱 시작 시 자동으로 위치 권한 요청
+  // 앱 시작 시 자동으로 위치 권한 요청 (1회만)
   useEffect(() => {
-    if (needsLocationRequest) {
-      setNeedsLocationRequest(false);
+    console.log('[Location] dataLoaded:', dataLoaded, 'locationStatus:', locationStatus, 'requested:', locationRequestedRef.current);
+    if (dataLoaded && locationStatus === 'idle' && !locationRequestedRef.current) {
+      console.log('[Location] Auto requesting location permission...');
+      locationRequestedRef.current = true;
       requestLocation();
     }
-  }, [needsLocationRequest]);
+  }, [dataLoaded, locationStatus]);
 
   const handleNearby = async () => {
     // fallback(기본 서울)이거나 idle이면 실제 위치 요청 시도

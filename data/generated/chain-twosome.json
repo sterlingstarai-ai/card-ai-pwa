@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-01-25T08:43:00.498Z",
+  "generatedAt": "2026-01-25T10:22:33.850Z",
   "query": "투썸플레이스",
   "tag": "twosome",
-  "count": 1651,
+  "count": 1781,
   "stores": [
     {
       "id": "kakao:20580894",
@@ -54,6 +54,23 @@
       "placeUrl": "http://place.map.kakao.com/632924742",
       "source": "kakao",
       "kakaoId": "632924742"
+    },
+    {
+      "id": "kakao:1683087037",
+      "name": "카카오T 투썸플레이스내방역점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4877594050781,
+      "lng": 126.993084567465,
+      "address": "서울 서초구 방배동 874-9",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/1683087037",
+      "source": "kakao",
+      "kakaoId": "1683087037"
     },
     {
       "id": "kakao:1038402747",
@@ -124,6 +141,23 @@
       "kakaoId": "1213042915"
     },
     {
+      "id": "kakao:675148585",
+      "name": "투썸 2.0 안국",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5763369324925,
+      "lng": 126.984586011807,
+      "address": "서울 종로구 안국동 163",
+      "roadAddress": "서울 종로구 율곡로 47",
+      "phone": "02-538-2369",
+      "placeUrl": "http://place.map.kakao.com/675148585",
+      "source": "kakao",
+      "kakaoId": "675148585"
+    },
+    {
       "id": "kakao:2081604576",
       "name": "투썸커피 천호CGV스윗바점",
       "type": "cafe",
@@ -190,6 +224,57 @@
       "placeUrl": "http://place.map.kakao.com/1033964356",
       "source": "kakao",
       "kakaoId": "1033964356"
+    },
+    {
+      "id": "kakao:710586475",
+      "name": "투썸플레이스 가락시장역2호점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.49313649752834,
+      "lng": 127.11885760050963,
+      "address": "서울 송파구 가락동 99-4",
+      "roadAddress": "서울 송파구 송파대로 260",
+      "phone": "02-3012-6789",
+      "placeUrl": "http://place.map.kakao.com/710586475",
+      "source": "kakao",
+      "kakaoId": "710586475"
+    },
+    {
+      "id": "kakao:569009754",
+      "name": "투썸플레이스 가락시장역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.49396416761626,
+      "lng": 127.12098256306685,
+      "address": "서울 송파구 가락동 79-2",
+      "roadAddress": "서울 송파구 중대로 113",
+      "phone": "02-443-6789",
+      "placeUrl": "http://place.map.kakao.com/569009754",
+      "source": "kakao",
+      "kakaoId": "569009754"
+    },
+    {
+      "id": "kakao:826491388",
+      "name": "투썸플레이스 가산대륭18차점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.46786672153026,
+      "lng": 126.88655187271654,
+      "address": "서울 금천구 가산동 670-2",
+      "roadAddress": "서울 금천구 가산디지털1로 19",
+      "phone": "02-2629-4579",
+      "placeUrl": "http://place.map.kakao.com/826491388",
+      "source": "kakao",
+      "kakaoId": "826491388"
     },
     {
       "id": "kakao:18446679",
@@ -447,6 +532,57 @@
       "kakaoId": "1489760227"
     },
     {
+      "id": "kakao:134476010",
+      "name": "투썸플레이스 강남세곡점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.46644308710204,
+      "lng": 127.10055387771672,
+      "address": "서울 강남구 세곡동 615",
+      "roadAddress": "",
+      "phone": "02-451-9200",
+      "placeUrl": "http://place.map.kakao.com/134476010",
+      "source": "kakao",
+      "kakaoId": "134476010"
+    },
+    {
+      "id": "kakao:1996568007",
+      "name": "투썸플레이스 강남세브란스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4926951441663,
+      "lng": 127.046606477164,
+      "address": "서울 강남구 도곡동 146-92",
+      "roadAddress": "서울 강남구 언주로 211",
+      "phone": "02-2058-2163",
+      "placeUrl": "http://place.map.kakao.com/1996568007",
+      "source": "kakao",
+      "kakaoId": "1996568007"
+    },
+    {
+      "id": "kakao:1276276851",
+      "name": "투썸플레이스 강남수서점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.48227272837821,
+      "lng": 127.09423565300524,
+      "address": "서울 강남구 수서동 791",
+      "roadAddress": "서울 강남구 광평로34길 30",
+      "phone": "02-459-0030",
+      "placeUrl": "http://place.map.kakao.com/1276276851",
+      "source": "kakao",
+      "kakaoId": "1276276851"
+    },
+    {
       "id": "kakao:26508465",
       "name": "투썸플레이스 강남신사점",
       "type": "cafe",
@@ -462,6 +598,40 @@
       "placeUrl": "http://place.map.kakao.com/26508465",
       "source": "kakao",
       "kakaoId": "26508465"
+    },
+    {
+      "id": "kakao:1032328311",
+      "name": "투썸플레이스 강남역더에셋점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.49597576832155,
+      "lng": 127.0258508999607,
+      "address": "서울 서초구 서초동 1321-20",
+      "roadAddress": "서울 서초구 서초대로74길 14",
+      "phone": "02-598-2388",
+      "placeUrl": "http://place.map.kakao.com/1032328311",
+      "source": "kakao",
+      "kakaoId": "1032328311"
+    },
+    {
+      "id": "kakao:1436772524",
+      "name": "투썸플레이스 강남역삼로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.493556788534356,
+      "lng": 127.03226735063637,
+      "address": "서울 강남구 역삼동 833",
+      "roadAddress": "서울 강남구 역삼로 118",
+      "phone": "02-564-0038",
+      "placeUrl": "http://place.map.kakao.com/1436772524",
+      "source": "kakao",
+      "kakaoId": "1436772524"
     },
     {
       "id": "kakao:1506049307",
@@ -513,6 +683,40 @@
       "placeUrl": "http://place.map.kakao.com/27113391",
       "source": "kakao",
       "kakaoId": "27113391"
+    },
+    {
+      "id": "kakao:25449113",
+      "name": "투썸플레이스 강남자곡점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.47521635376302,
+      "lng": 127.10455637399903,
+      "address": "서울 강남구 자곡동 597",
+      "roadAddress": "서울 강남구 자곡로 201",
+      "phone": "02-6247-2011",
+      "placeUrl": "http://place.map.kakao.com/25449113",
+      "source": "kakao",
+      "kakaoId": "25449113"
+    },
+    {
+      "id": "kakao:1768952941",
+      "name": "투썸플레이스 강남CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5016537945004,
+      "lng": 127.026373081127,
+      "address": "서울 강남구 역삼동 814-6",
+      "roadAddress": "서울 강남구 강남대로 438",
+      "phone": "1544-1122",
+      "placeUrl": "http://place.map.kakao.com/1768952941",
+      "source": "kakao",
+      "kakaoId": "1768952941"
     },
     {
       "id": "kakao:493947916",
@@ -751,6 +955,40 @@
       "placeUrl": "http://place.map.kakao.com/13534669",
       "source": "kakao",
       "kakaoId": "13534669"
+    },
+    {
+      "id": "kakao:2116519796",
+      "name": "투썸플레이스 강변역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.53566804906958,
+      "lng": 127.09195507517495,
+      "address": "서울 광진구 구의동 587-64",
+      "roadAddress": "서울 광진구 구의강변로 53",
+      "phone": "02-454-2408",
+      "placeUrl": "http://place.map.kakao.com/2116519796",
+      "source": "kakao",
+      "kakaoId": "2116519796"
+    },
+    {
+      "id": "kakao:12118829",
+      "name": "투썸플레이스 강변CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.53601114805179,
+      "lng": 127.09558854839024,
+      "address": "서울 광진구 구의동 546-4",
+      "roadAddress": "서울 광진구 광나루로56길 85",
+      "phone": "1544-1122",
+      "placeUrl": "http://place.map.kakao.com/12118829",
+      "source": "kakao",
+      "kakaoId": "12118829"
     },
     {
       "id": "kakao:1505302020",
@@ -1008,6 +1246,23 @@
       "kakaoId": "1893731799"
     },
     {
+      "id": "kakao:2085562417",
+      "name": "투썸플레이스 개포언주로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.47870404963183,
+      "lng": 127.05549993479748,
+      "address": "서울 강남구 개포동 1283",
+      "roadAddress": "서울 강남구 언주로7길 6",
+      "phone": "02-573-3375",
+      "placeUrl": "http://place.map.kakao.com/2085562417",
+      "source": "kakao",
+      "kakaoId": "2085562417"
+    },
+    {
       "id": "kakao:1008261252",
       "name": "투썸플레이스 개화산역점",
       "type": "cafe",
@@ -1142,6 +1397,23 @@
       "placeUrl": "http://place.map.kakao.com/12118821",
       "source": "kakao",
       "kakaoId": "12118821"
+    },
+    {
+      "id": "kakao:141843519",
+      "name": "투썸플레이스 건대입구CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5397303474124,
+      "lng": 127.066977769941,
+      "address": "서울 광진구 자양동 9-4",
+      "roadAddress": "서울 광진구 아차산로30길 26",
+      "phone": "02-526-8804",
+      "placeUrl": "http://place.map.kakao.com/141843519",
+      "source": "kakao",
+      "kakaoId": "141843519"
     },
     {
       "id": "kakao:891565538",
@@ -1295,6 +1567,23 @@
       "placeUrl": "http://place.map.kakao.com/93977215",
       "source": "kakao",
       "kakaoId": "93977215"
+    },
+    {
+      "id": "kakao:1076738162",
+      "name": "투썸플레이스 경복아파트사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.50860604614183,
+      "lng": 127.03904641094968,
+      "address": "서울 강남구 역삼동 680",
+      "roadAddress": "서울 강남구 봉은사로 302",
+      "phone": "02-6953-2551",
+      "placeUrl": "http://place.map.kakao.com/1076738162",
+      "source": "kakao",
+      "kakaoId": "1076738162"
     },
     {
       "id": "kakao:46999267",
@@ -1773,6 +2062,23 @@
       "kakaoId": "1635115915"
     },
     {
+      "id": "kakao:466102882",
+      "name": "투썸플레이스 고대참살이길점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.58417390157651,
+      "lng": 127.02909106489548,
+      "address": "서울 성북구 안암동5가 102-35",
+      "roadAddress": "서울 성북구 고려대로26길 42-15",
+      "phone": "070-4112-1101",
+      "placeUrl": "http://place.map.kakao.com/466102882",
+      "source": "kakao",
+      "kakaoId": "466102882"
+    },
+    {
       "id": "kakao:1823155152",
       "name": "투썸플레이스 고덕비즈밸리점",
       "type": "cafe",
@@ -1822,6 +2128,23 @@
       "placeUrl": "http://place.map.kakao.com/1014329571",
       "source": "kakao",
       "kakaoId": "1014329571"
+    },
+    {
+      "id": "kakao:18410992",
+      "name": "투썸플레이스 고려대법학관점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.59109418940602,
+      "lng": 127.03339073475094,
+      "address": "서울 성북구 안암동5가 1-2",
+      "roadAddress": "서울 성북구 안암로 145",
+      "phone": "02-927-2379",
+      "placeUrl": "http://place.map.kakao.com/18410992",
+      "source": "kakao",
+      "kakaoId": "18410992"
     },
     {
       "id": "kakao:1796279067",
@@ -2011,6 +2334,23 @@
       "kakaoId": "22645917"
     },
     {
+      "id": "kakao:1651866690",
+      "name": "투썸플레이스 고양향동점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5984358789487,
+      "lng": 126.890102111739,
+      "address": "경기 고양시 덕양구 향동동 494-5",
+      "roadAddress": "경기 고양시 덕양구 꽃내음1길 180",
+      "phone": "02-3159-3344",
+      "placeUrl": "http://place.map.kakao.com/1651866690",
+      "source": "kakao",
+      "kakaoId": "1651866690"
+    },
+    {
       "id": "kakao:1650026222",
       "name": "투썸플레이스 고잔신도시점",
       "type": "cafe",
@@ -2043,6 +2383,23 @@
       "placeUrl": "http://place.map.kakao.com/797321957",
       "source": "kakao",
       "kakaoId": "797321957"
+    },
+    {
+      "id": "kakao:1090103355",
+      "name": "투썸플레이스 공덕풍림빌딩점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.546348506777264,
+      "lng": 126.95222062272117,
+      "address": "서울 마포구 공덕동 404",
+      "roadAddress": "서울 마포구 마포대로 127",
+      "phone": "02-701-3992",
+      "placeUrl": "http://place.map.kakao.com/1090103355",
+      "source": "kakao",
+      "kakaoId": "1090103355"
     },
     {
       "id": "kakao:959447815",
@@ -2351,6 +2708,23 @@
       "kakaoId": "323539429"
     },
     {
+      "id": "kakao:1897453867",
+      "name": "투썸플레이스 광명소하점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.44757240317098,
+      "lng": 126.88293680350826,
+      "address": "경기 광명시 소하동 1342-1",
+      "roadAddress": "경기 광명시 소하로92번길 6-9",
+      "phone": "02-897-0011",
+      "placeUrl": "http://place.map.kakao.com/1897453867",
+      "source": "kakao",
+      "kakaoId": "1897453867"
+    },
+    {
       "id": "kakao:26522510",
       "name": "투썸플레이스 광명스마트타운점",
       "type": "cafe",
@@ -2417,6 +2791,23 @@
       "placeUrl": "http://place.map.kakao.com/255373954",
       "source": "kakao",
       "kakaoId": "255373954"
+    },
+    {
+      "id": "kakao:1778728607",
+      "name": "투썸플레이스 광명지타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.44533633556437,
+      "lng": 126.89368840569303,
+      "address": "경기 광명시 소하동 1344",
+      "roadAddress": "경기 광명시 소하로 190",
+      "phone": "02-897-2202",
+      "placeUrl": "http://place.map.kakao.com/1778728607",
+      "source": "kakao",
+      "kakaoId": "1778728607"
     },
     {
       "id": "kakao:22730970",
@@ -2553,6 +2944,23 @@
       "placeUrl": "http://place.map.kakao.com/538057795",
       "source": "kakao",
       "kakaoId": "538057795"
+    },
+    {
+      "id": "kakao:21296327",
+      "name": "투썸플레이스 광장힐스테이트점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.542520343931706,
+      "lng": 127.09949953181479,
+      "address": "서울 광진구 광장동 582",
+      "roadAddress": "서울 광진구 아차산로 537-17",
+      "phone": "02-457-1238",
+      "placeUrl": "http://place.map.kakao.com/21296327",
+      "source": "kakao",
+      "kakaoId": "21296327"
     },
     {
       "id": "kakao:618433233",
@@ -3405,6 +3813,23 @@
       "kakaoId": "1046468080"
     },
     {
+      "id": "kakao:1855869140",
+      "name": "투썸플레이스 광흥창역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.54827264533218,
+      "lng": 126.93132167658479,
+      "address": "서울 마포구 창전동 444",
+      "roadAddress": "서울 마포구 서강로 55",
+      "phone": "02-6954-2677",
+      "placeUrl": "http://place.map.kakao.com/1855869140",
+      "source": "kakao",
+      "kakaoId": "1855869140"
+    },
+    {
       "id": "kakao:21301236",
       "name": "투썸플레이스 교대역점",
       "type": "cafe",
@@ -3983,6 +4408,23 @@
       "kakaoId": "1577669267"
     },
     {
+      "id": "kakao:599886110",
+      "name": "투썸플레이스 구의역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.537977179226544,
+      "lng": 127.08365179559439,
+      "address": "서울 광진구 구의동 252-16",
+      "roadAddress": "서울 광진구 자양로 116",
+      "phone": "02-455-0113",
+      "placeUrl": "http://place.map.kakao.com/599886110",
+      "source": "kakao",
+      "kakaoId": "599886110"
+    },
+    {
       "id": "kakao:647533184",
       "name": "투썸플레이스 국군수도병원점",
       "type": "cafe",
@@ -3998,6 +4440,57 @@
       "placeUrl": "http://place.map.kakao.com/647533184",
       "source": "kakao",
       "kakaoId": "647533184"
+    },
+    {
+      "id": "kakao:1924946903",
+      "name": "투썸플레이스 국립중앙박물관1점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.52270664366401,
+      "lng": 126.97794423618082,
+      "address": "서울 용산구 용산동6가 168-6",
+      "roadAddress": "서울 용산구 서빙고로 137",
+      "phone": "02-749-4893",
+      "placeUrl": "http://place.map.kakao.com/1924946903",
+      "source": "kakao",
+      "kakaoId": "1924946903"
+    },
+    {
+      "id": "kakao:885188397",
+      "name": "투썸플레이스 국립중앙박물관2점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5240267291172,
+      "lng": 126.978578483737,
+      "address": "서울 용산구 용산동6가 11-426",
+      "roadAddress": "서울 용산구 서빙고로 137",
+      "phone": "02-749-4034",
+      "placeUrl": "http://place.map.kakao.com/885188397",
+      "source": "kakao",
+      "kakaoId": "885188397"
+    },
+    {
+      "id": "kakao:222538046",
+      "name": "투썸플레이스 국립중앙박물관3점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5227228515513,
+      "lng": 126.977889931934,
+      "address": "서울 용산구 용산동6가 168-6",
+      "roadAddress": "서울 용산구 서빙고로 137",
+      "phone": "02-798-6976",
+      "placeUrl": "http://place.map.kakao.com/222538046",
+      "source": "kakao",
+      "kakaoId": "222538046"
     },
     {
       "id": "kakao:1662257701",
@@ -4372,6 +4865,23 @@
       "placeUrl": "http://place.map.kakao.com/791220111",
       "source": "kakao",
       "kakaoId": "791220111"
+    },
+    {
+      "id": "kakao:20677491",
+      "name": "투썸플레이스 금호하이리버점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.55246169848434,
+      "lng": 127.02450105455291,
+      "address": "서울 성동구 금호동2가 1217",
+      "roadAddress": "서울 성동구 금호로 105",
+      "phone": "0507-1335-0465",
+      "placeUrl": "http://place.map.kakao.com/20677491",
+      "source": "kakao",
+      "kakaoId": "20677491"
     },
     {
       "id": "kakao:2089232286",
@@ -7230,6 +7740,23 @@
       "kakaoId": "1541347959"
     },
     {
+      "id": "kakao:1686799010",
+      "name": "투썸플레이스 대웅제약사옥점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.51493556565833,
+      "lng": 127.06557450570469,
+      "address": "서울 강남구 삼성동 163-1",
+      "roadAddress": "서울 강남구 봉은사로 644",
+      "phone": "02-2039-8922",
+      "placeUrl": "http://place.map.kakao.com/1686799010",
+      "source": "kakao",
+      "kakaoId": "1686799010"
+    },
+    {
       "id": "kakao:709808991",
       "name": "투썸플레이스 대전가수원대로DT점",
       "type": "cafe",
@@ -8301,6 +8828,23 @@
       "kakaoId": "773978953"
     },
     {
+      "id": "kakao:1518551994",
+      "name": "투썸플레이스 대치삼성점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.50833374565531,
+      "lng": 127.06586618901491,
+      "address": "서울 강남구 대치동 996-15",
+      "roadAddress": "서울 강남구 영동대로86길 21",
+      "phone": "02-3453-2388",
+      "placeUrl": "http://place.map.kakao.com/1518551994",
+      "source": "kakao",
+      "kakaoId": "1518551994"
+    },
+    {
       "id": "kakao:979223850",
       "name": "투썸플레이스 대치선릉점",
       "type": "cafe",
@@ -8333,6 +8877,40 @@
       "placeUrl": "http://place.map.kakao.com/466695328",
       "source": "kakao",
       "kakaoId": "466695328"
+    },
+    {
+      "id": "kakao:961399559",
+      "name": "투썸플레이스 대학로CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5834575925354,
+      "lng": 126.99984263011,
+      "address": "서울 종로구 명륜2가 41-9",
+      "roadAddress": "서울 종로구 대명길 28",
+      "phone": "1544-1122",
+      "placeUrl": "http://place.map.kakao.com/961399559",
+      "source": "kakao",
+      "kakaoId": "961399559"
+    },
+    {
+      "id": "kakao:718874207",
+      "name": "투썸플레이스 대흥역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.546729619456606,
+      "lng": 126.94399703021612,
+      "address": "서울 마포구 염리동 180-11",
+      "roadAddress": "서울 마포구 백범로 116",
+      "phone": "02-717-0925",
+      "placeUrl": "http://place.map.kakao.com/718874207",
+      "source": "kakao",
+      "kakaoId": "718874207"
     },
     {
       "id": "kakao:1164039553",
@@ -8437,6 +9015,23 @@
       "kakaoId": "126319167"
     },
     {
+      "id": "kakao:1587106217",
+      "name": "투썸플레이스 도산공원사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.520464635376854,
+      "lng": 127.03462618469588,
+      "address": "서울 강남구 논현동 97-23",
+      "roadAddress": "서울 강남구 언주로 732",
+      "phone": "02-511-2388",
+      "placeUrl": "http://place.map.kakao.com/1587106217",
+      "source": "kakao",
+      "kakaoId": "1587106217"
+    },
+    {
       "id": "kakao:654126741",
       "name": "투썸플레이스 도화점",
       "type": "cafe",
@@ -8486,6 +9081,23 @@
       "placeUrl": "http://place.map.kakao.com/2057420413",
       "source": "kakao",
       "kakaoId": "2057420413"
+    },
+    {
+      "id": "kakao:176483459",
+      "name": "투썸플레이스 동교동삼거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.55874892092093,
+      "lng": 126.92742891375458,
+      "address": "서울 서대문구 창천동 510-2",
+      "roadAddress": "서울 서대문구 신촌로 1",
+      "phone": "02-336-4006",
+      "placeUrl": "http://place.map.kakao.com/176483459",
+      "source": "kakao",
+      "kakaoId": "176483459"
     },
     {
       "id": "kakao:20203737",
@@ -9015,6 +9627,23 @@
       "kakaoId": "26857554"
     },
     {
+      "id": "kakao:1981612705",
+      "name": "투썸플레이스 두타몰점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5688854829136,
+      "lng": 127.008774774696,
+      "address": "서울 중구 을지로6가 18-12",
+      "roadAddress": "서울 중구 장충단로 275",
+      "phone": "02-6953-0024",
+      "placeUrl": "http://place.map.kakao.com/1981612705",
+      "source": "kakao",
+      "kakaoId": "1981612705"
+    },
+    {
       "id": "kakao:560599413",
       "name": "투썸플레이스 둔산은하수점",
       "type": "cafe",
@@ -9081,6 +9710,74 @@
       "placeUrl": "http://place.map.kakao.com/923348531",
       "source": "kakao",
       "kakaoId": "923348531"
+    },
+    {
+      "id": "kakao:756993733",
+      "name": "투썸플레이스 디지털미디어시티역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.57707119664338,
+      "lng": 126.8977296430877,
+      "address": "서울 마포구 상암동 1622",
+      "roadAddress": "서울 마포구 성암로 189",
+      "phone": "02-304-2388",
+      "placeUrl": "http://place.map.kakao.com/756993733",
+      "source": "kakao",
+      "kakaoId": "756993733"
+    },
+    {
+      "id": "kakao:2056941956",
+      "name": "투썸플레이스 래미안서초에스티지점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4924643309168,
+      "lng": 127.026807462524,
+      "address": "서울 서초구 서초동 1331-2",
+      "roadAddress": "서울 서초구 사임당로 157",
+      "phone": "02-2135-2624",
+      "placeUrl": "http://place.map.kakao.com/2056941956",
+      "source": "kakao",
+      "kakaoId": "2056941956"
+    },
+    {
+      "id": "kakao:2044786052",
+      "name": "투썸플레이스 롯데월드매직아일랜드점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5090697856116,
+      "lng": 127.099457376446,
+      "address": "서울 송파구 잠실동 47-1",
+      "roadAddress": "서울 송파구 송파나루길 15",
+      "phone": "02-2143-1270",
+      "placeUrl": "http://place.map.kakao.com/2044786052",
+      "source": "kakao",
+      "kakaoId": "2044786052"
+    },
+    {
+      "id": "kakao:12118822",
+      "name": "투썸플레이스 롯데월드점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.51070337775575,
+      "lng": 127.09829568605572,
+      "address": "서울 송파구 잠실동 40-1",
+      "roadAddress": "서울 송파구 올림픽로 240",
+      "phone": "02-411-0592",
+      "placeUrl": "http://place.map.kakao.com/12118822",
+      "source": "kakao",
+      "kakaoId": "12118822"
     },
     {
       "id": "kakao:1794944937",
@@ -9321,6 +10018,23 @@
       "kakaoId": "89300583"
     },
     {
+      "id": "kakao:24352277",
+      "name": "투썸플레이스 마포구청점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56585637530583,
+      "lng": 126.90290073873413,
+      "address": "서울 마포구 성산동 590-1",
+      "roadAddress": "서울 마포구 월드컵로36길 14",
+      "phone": "02-303-7054",
+      "placeUrl": "http://place.map.kakao.com/24352277",
+      "source": "kakao",
+      "kakaoId": "24352277"
+    },
+    {
       "id": "kakao:804577234",
       "name": "투썸플레이스 마포노고산점",
       "type": "cafe",
@@ -9353,6 +10067,40 @@
       "placeUrl": "http://place.map.kakao.com/2062076352",
       "source": "kakao",
       "kakaoId": "2062076352"
+    },
+    {
+      "id": "kakao:297360092",
+      "name": "투썸플레이스 마포대흥점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.55456457039466,
+      "lng": 126.945646874173,
+      "address": "서울 마포구 대흥동 806",
+      "roadAddress": "서울 마포구 대흥로 183",
+      "phone": "02-707-2529",
+      "placeUrl": "http://place.map.kakao.com/297360092",
+      "source": "kakao",
+      "kakaoId": "297360092"
+    },
+    {
+      "id": "kakao:1673804360",
+      "name": "투썸플레이스 마포망원점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5613800774614,
+      "lng": 126.904931379478,
+      "address": "서울 마포구 망원동 474-3",
+      "roadAddress": "서울 마포구 월드컵로 155",
+      "phone": "02-6956-1118",
+      "placeUrl": "http://place.map.kakao.com/1673804360",
+      "source": "kakao",
+      "kakaoId": "1673804360"
     },
     {
       "id": "kakao:1044533290",
@@ -9423,6 +10171,23 @@
       "kakaoId": "903997120"
     },
     {
+      "id": "kakao:1729760191",
+      "name": "투썸플레이스 매경미디어센터점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.560499131245095,
+      "lng": 126.99304502757374,
+      "address": "서울 중구 필동1가 30-1",
+      "roadAddress": "서울 중구 퇴계로 190",
+      "phone": "02-2269-2377",
+      "placeUrl": "http://place.map.kakao.com/1729760191",
+      "source": "kakao",
+      "kakaoId": "1729760191"
+    },
+    {
       "id": "kakao:404587168",
       "name": "투썸플레이스 명동대연각타워점",
       "type": "cafe",
@@ -9472,6 +10237,74 @@
       "placeUrl": "http://place.map.kakao.com/810653920",
       "source": "kakao",
       "kakaoId": "810653920"
+    },
+    {
+      "id": "kakao:268303131",
+      "name": "투썸플레이스 명동예술극장점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56417709411995,
+      "lng": 126.98454890223093,
+      "address": "서울 중구 명동1가 48-2",
+      "roadAddress": "서울 중구 명동7길 8",
+      "phone": "02-3789-2377",
+      "placeUrl": "http://place.map.kakao.com/268303131",
+      "source": "kakao",
+      "kakaoId": "268303131"
+    },
+    {
+      "id": "kakao:372411913",
+      "name": "투썸플레이스 명동CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56341191909186,
+      "lng": 126.98288749851747,
+      "address": "서울 중구 명동2가 83-5",
+      "roadAddress": "서울 중구 명동길 14",
+      "phone": "02-1544-1122",
+      "placeUrl": "http://place.map.kakao.com/372411913",
+      "source": "kakao",
+      "kakaoId": "372411913"
+    },
+    {
+      "id": "kakao:1913385620",
+      "name": "투썸플레이스 명동L7점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56126897750328,
+      "lng": 126.98704403768882,
+      "address": "서울 중구 충무로2가 62-12",
+      "roadAddress": "서울 중구 퇴계로 137",
+      "phone": "02-6310-1096",
+      "placeUrl": "http://place.map.kakao.com/1913385620",
+      "source": "kakao",
+      "kakaoId": "1913385620"
+    },
+    {
+      "id": "kakao:1828249094",
+      "name": "투썸플레이스 명지대점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5795427499246,
+      "lng": 126.924175464537,
+      "address": "서울 서대문구 남가좌동 324-34",
+      "roadAddress": "서울 서대문구 거북골로 31-1",
+      "phone": "02-6949-3776",
+      "placeUrl": "http://place.map.kakao.com/1828249094",
+      "source": "kakao",
+      "kakaoId": "1828249094"
     },
     {
       "id": "kakao:27583520",
@@ -9780,6 +10613,23 @@
       "kakaoId": "18437728"
     },
     {
+      "id": "kakao:344853728",
+      "name": "투썸플레이스 문정법조타운점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.48394203972446,
+      "lng": 127.12294504444527,
+      "address": "서울 송파구 문정동 651-8",
+      "roadAddress": "서울 송파구 송파대로 155",
+      "phone": "02-430-8450",
+      "placeUrl": "http://place.map.kakao.com/344853728",
+      "source": "kakao",
+      "kakaoId": "344853728"
+    },
+    {
       "id": "kakao:919835705",
       "name": "투썸플레이스 문정역점",
       "type": "cafe",
@@ -9795,6 +10645,23 @@
       "placeUrl": "http://place.map.kakao.com/919835705",
       "source": "kakao",
       "kakaoId": "919835705"
+    },
+    {
+      "id": "kakao:922163328",
+      "name": "투썸플레이스 문정KD70점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.485699105015,
+      "lng": 127.115709310567,
+      "address": "서울 송파구 문정동 511",
+      "roadAddress": "서울 송파구 정의로8길 4",
+      "phone": "02-6412-5008",
+      "placeUrl": "http://place.map.kakao.com/922163328",
+      "source": "kakao",
+      "kakaoId": "922163328"
     },
     {
       "id": "kakao:899700811",
@@ -10033,6 +10900,40 @@
       "placeUrl": "http://place.map.kakao.com/926815098",
       "source": "kakao",
       "kakaoId": "926815098"
+    },
+    {
+      "id": "kakao:1517787218",
+      "name": "투썸플레이스 방배카페거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.497392288225186,
+      "lng": 126.98550806901423,
+      "address": "서울 서초구 방배동 755-14",
+      "roadAddress": "서울 서초구 방배중앙로 204",
+      "phone": "02-537-3339",
+      "placeUrl": "http://place.map.kakao.com/1517787218",
+      "source": "kakao",
+      "kakaoId": "1517787218"
+    },
+    {
+      "id": "kakao:532637437",
+      "name": "투썸플레이스 방이한양건설점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5143690611295,
+      "lng": 127.115753559113,
+      "address": "서울 송파구 방이동 179-5",
+      "roadAddress": "서울 송파구 백제고분로50길 7",
+      "phone": "02-2240-4880",
+      "placeUrl": "http://place.map.kakao.com/532637437",
+      "source": "kakao",
+      "kakaoId": "532637437"
     },
     {
       "id": "kakao:861389811",
@@ -12551,6 +13452,23 @@
       "kakaoId": "25460374"
     },
     {
+      "id": "kakao:71089363",
+      "name": "투썸플레이스 삼호가든사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.50288601070856,
+      "lng": 127.01191218828234,
+      "address": "서울 서초구 반포동 30-25",
+      "roadAddress": "서울 서초구 서초중앙로 238",
+      "phone": "02-6949-2388",
+      "placeUrl": "http://place.map.kakao.com/71089363",
+      "source": "kakao",
+      "kakaoId": "71089363"
+    },
+    {
       "id": "kakao:1989237181",
       "name": "투썸플레이스 상계사거리점",
       "type": "cafe",
@@ -12583,6 +13501,40 @@
       "placeUrl": "http://place.map.kakao.com/27305734",
       "source": "kakao",
       "kakaoId": "27305734"
+    },
+    {
+      "id": "kakao:13064300",
+      "name": "투썸플레이스 상암우리센터점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.58309602443736,
+      "lng": 126.88581116825658,
+      "address": "서울 마포구 상암동 1585",
+      "roadAddress": "서울 마포구 월드컵북로60길 17",
+      "phone": "02-376-2388",
+      "placeUrl": "http://place.map.kakao.com/13064300",
+      "source": "kakao",
+      "kakaoId": "13064300"
+    },
+    {
+      "id": "kakao:551917880",
+      "name": "투썸플레이스 상암KBS미디어센터점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5765904743532,
+      "lng": 126.891133827687,
+      "address": "서울 마포구 상암동 1652",
+      "roadAddress": "서울 마포구 매봉산로 45",
+      "phone": "02-6949-5455",
+      "placeUrl": "http://place.map.kakao.com/551917880",
+      "source": "kakao",
+      "kakaoId": "551917880"
     },
     {
       "id": "kakao:1480772322",
@@ -12670,6 +13622,23 @@
       "kakaoId": "487452893"
     },
     {
+      "id": "kakao:13064311",
+      "name": "투썸플레이스 서강대점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5522772858055,
+      "lng": 126.938984039354,
+      "address": "서울 마포구 신수동 1-1",
+      "roadAddress": "서울 마포구 백범로 35",
+      "phone": "02-717-2748",
+      "placeUrl": "http://place.map.kakao.com/13064311",
+      "source": "kakao",
+      "kakaoId": "13064311"
+    },
+    {
       "id": "kakao:845460888",
       "name": "투썸플레이스 서귀포신시가지점",
       "type": "cafe",
@@ -12704,6 +13673,23 @@
       "kakaoId": "978121082"
     },
     {
+      "id": "kakao:1727798216",
+      "name": "투썸플레이스 서대문역바비엥점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56535319073762,
+      "lng": 126.96806730505133,
+      "address": "서울 중구 의주로1가 25-10",
+      "roadAddress": "서울 중구 통일로 114",
+      "phone": "02-6399-1399",
+      "placeUrl": "http://place.map.kakao.com/1727798216",
+      "source": "kakao",
+      "kakaoId": "1727798216"
+    },
+    {
       "id": "kakao:1917900427",
       "name": "투썸플레이스 서대문연희점",
       "type": "cafe",
@@ -12719,6 +13705,40 @@
       "placeUrl": "http://place.map.kakao.com/1917900427",
       "source": "kakao",
       "kakaoId": "1917900427"
+    },
+    {
+      "id": "kakao:1800722665",
+      "name": "투썸플레이스 서대문웨스트게이트타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.564951783179794,
+      "lng": 126.96639456172902,
+      "address": "서울 서대문구 미근동 332",
+      "roadAddress": "서울 서대문구 충정로 70",
+      "phone": "02-6956-6226",
+      "placeUrl": "http://place.map.kakao.com/1800722665",
+      "source": "kakao",
+      "kakaoId": "1800722665"
+    },
+    {
+      "id": "kakao:2136392038",
+      "name": "투썸플레이스 서대문홍은점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.584649143045006,
+      "lng": 126.92349777337175,
+      "address": "서울 서대문구 홍은동 344-2",
+      "roadAddress": "서울 서대문구 가좌로 143",
+      "phone": "02-303-4129",
+      "placeUrl": "http://place.map.kakao.com/2136392038",
+      "source": "kakao",
+      "kakaoId": "2136392038"
     },
     {
       "id": "kakao:2040132406",
@@ -12908,6 +13928,23 @@
       "kakaoId": "8566640"
     },
     {
+      "id": "kakao:2091023164",
+      "name": "투썸플레이스 서여의도점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.52963296543624,
+      "lng": 126.92018712037832,
+      "address": "서울 영등포구 여의도동 14-8",
+      "roadAddress": "서울 영등포구 국회대로70길 15-1",
+      "phone": "02-6949-1877",
+      "placeUrl": "http://place.map.kakao.com/2091023164",
+      "source": "kakao",
+      "kakaoId": "2091023164"
+    },
+    {
       "id": "kakao:12991036",
       "name": "투썸플레이스 서울대역중앙점",
       "type": "cafe",
@@ -13010,6 +14047,57 @@
       "kakaoId": "1197558373"
     },
     {
+      "id": "kakao:1717223412",
+      "name": "투썸플레이스 서초구청점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4846961206497,
+      "lng": 127.0294199159,
+      "address": "서울 서초구 서초동 1355-19",
+      "roadAddress": "서울 서초구 서운로 7",
+      "phone": "02-6956-7129",
+      "placeUrl": "http://place.map.kakao.com/1717223412",
+      "source": "kakao",
+      "kakaoId": "1717223412"
+    },
+    {
+      "id": "kakao:211995277",
+      "name": "투썸플레이스 서초센트럴아이파크점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.48729863219144,
+      "lng": 127.01150492050161,
+      "address": "서울 서초구 서초동 1582-3",
+      "roadAddress": "서울 서초구 반포대로18길 36",
+      "phone": "02-588-8584",
+      "placeUrl": "http://place.map.kakao.com/211995277",
+      "source": "kakao",
+      "kakaoId": "211995277"
+    },
+    {
+      "id": "kakao:972331371",
+      "name": "투썸플레이스 서초양재점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4728796962206,
+      "lng": 127.047771007827,
+      "address": "서울 서초구 양재동 392-5",
+      "roadAddress": "서울 서초구 동산로 84",
+      "phone": "02-6227-5875",
+      "placeUrl": "http://place.map.kakao.com/972331371",
+      "source": "kakao",
+      "kakaoId": "972331371"
+    },
+    {
       "id": "kakao:12118824",
       "name": "투썸플레이스 서초역점",
       "type": "cafe",
@@ -13025,6 +14113,40 @@
       "placeUrl": "http://place.map.kakao.com/12118824",
       "source": "kakao",
       "kakaoId": "12118824"
+    },
+    {
+      "id": "kakao:21539871",
+      "name": "투썸플레이스 서초유니온타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.49582554952348,
+      "lng": 127.01991171200471,
+      "address": "서울 서초구 서초동 1688-5",
+      "roadAddress": "서울 서초구 서초대로 353",
+      "phone": "02-3478-0900",
+      "placeUrl": "http://place.map.kakao.com/21539871",
+      "source": "kakao",
+      "kakaoId": "21539871"
+    },
+    {
+      "id": "kakao:527377518",
+      "name": "투썸플레이스 서초유니온타워점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4957940144792,
+      "lng": 127.019910572799,
+      "address": "서울 서초구 서초동 1688-5",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/527377518",
+      "source": "kakao",
+      "kakaoId": "527377518"
     },
     {
       "id": "kakao:962156325",
@@ -13231,6 +14353,40 @@
       "kakaoId": "15747233"
     },
     {
+      "id": "kakao:1697541484",
+      "name": "투썸플레이스 선릉로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.50426314486919,
+      "lng": 127.04431442470607,
+      "address": "서울 강남구 역삼동 703-5",
+      "roadAddress": "서울 강남구 선릉로93길 54",
+      "phone": "02-6952-2688",
+      "placeUrl": "http://place.map.kakao.com/1697541484",
+      "source": "kakao",
+      "kakaoId": "1697541484"
+    },
+    {
+      "id": "kakao:26560990",
+      "name": "투썸플레이스 선릉ING점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.50317135510791,
+      "lng": 127.04607126631491,
+      "address": "서울 강남구 역삼동 707-19",
+      "roadAddress": "서울 강남구 테헤란로 318",
+      "phone": "02-566-2388",
+      "placeUrl": "http://place.map.kakao.com/26560990",
+      "source": "kakao",
+      "kakaoId": "26560990"
+    },
+    {
       "id": "kakao:20540743",
       "name": "투썸플레이스 선유도역점",
       "type": "cafe",
@@ -13246,6 +14402,23 @@
       "placeUrl": "http://place.map.kakao.com/20540743",
       "source": "kakao",
       "kakaoId": "20540743"
+    },
+    {
+      "id": "kakao:1021210318",
+      "name": "투썸플레이스 성남고등점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4298808108718,
+      "lng": 127.094036618101,
+      "address": "경기 성남시 수정구 고등동 573-1",
+      "roadAddress": "경기 성남시 수정구 고등로2길 9",
+      "phone": "031-755-1142",
+      "placeUrl": "http://place.map.kakao.com/1021210318",
+      "source": "kakao",
+      "kakaoId": "1021210318"
     },
     {
       "id": "kakao:17256520",
@@ -13331,6 +14504,23 @@
       "placeUrl": "http://place.map.kakao.com/136165984",
       "source": "kakao",
       "kakaoId": "136165984"
+    },
+    {
+      "id": "kakao:1374752338",
+      "name": "투썸플레이스 성수낙낙점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.54692285719172,
+      "lng": 127.06567267510013,
+      "address": "서울 성동구 성수동2가 280-6",
+      "roadAddress": "서울 성동구 아차산로17길 49",
+      "phone": "02-6959-8800",
+      "placeUrl": "http://place.map.kakao.com/1374752338",
+      "source": "kakao",
+      "kakaoId": "1374752338"
     },
     {
       "id": "kakao:1604778806",
@@ -13450,6 +14640,23 @@
       "placeUrl": "http://place.map.kakao.com/951454424",
       "source": "kakao",
       "kakaoId": "951454424"
+    },
+    {
+      "id": "kakao:1067139607",
+      "name": "투썸플레이스 세종대학교점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5508777811531,
+      "lng": 127.075485410934,
+      "address": "서울 광진구 군자동 98",
+      "roadAddress": "서울 광진구 능동로 209",
+      "phone": "02-2205-1238",
+      "placeUrl": "http://place.map.kakao.com/1067139607",
+      "source": "kakao",
+      "kakaoId": "1067139607"
     },
     {
       "id": "kakao:327865026",
@@ -13637,6 +14844,23 @@
       "placeUrl": "http://place.map.kakao.com/1452773226",
       "source": "kakao",
       "kakaoId": "1452773226"
+    },
+    {
+      "id": "kakao:1434585928",
+      "name": "투썸플레이스 소공로북창점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5629569070424,
+      "lng": 126.977468318393,
+      "address": "서울 중구 북창동 18-9",
+      "roadAddress": "서울 중구 세종대로14길 15",
+      "phone": "02-318-2956",
+      "placeUrl": "http://place.map.kakao.com/1434585928",
+      "source": "kakao",
+      "kakaoId": "1434585928"
     },
     {
       "id": "kakao:898780961",
@@ -14096,6 +15320,23 @@
       "placeUrl": "http://place.map.kakao.com/2043127772",
       "source": "kakao",
       "kakaoId": "2043127772"
+    },
+    {
+      "id": "kakao:1195778906",
+      "name": "투썸플레이스 송파방이역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5102566135621,
+      "lng": 127.124006137416,
+      "address": "서울 송파구 방이동 201-4",
+      "roadAddress": "서울 송파구 위례성대로18길 28-20",
+      "phone": "02-2202-2014",
+      "placeUrl": "http://place.map.kakao.com/1195778906",
+      "source": "kakao",
+      "kakaoId": "1195778906"
     },
     {
       "id": "kakao:108997354",
@@ -14897,6 +16138,23 @@
       "kakaoId": "901961899"
     },
     {
+      "id": "kakao:1934368829",
+      "name": "투썸플레이스 숙명여대점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5445841558613,
+      "lng": 126.967563565027,
+      "address": "서울 용산구 청파동3가 111-9",
+      "roadAddress": "서울 용산구 청파로47길 49",
+      "phone": "02-702-6792",
+      "placeUrl": "http://place.map.kakao.com/1934368829",
+      "source": "kakao",
+      "kakaoId": "1934368829"
+    },
+    {
       "id": "kakao:1738106034",
       "name": "투썸플레이스 순천금당점",
       "type": "cafe",
@@ -15048,6 +16306,23 @@
       "placeUrl": "http://place.map.kakao.com/1153285353",
       "source": "kakao",
       "kakaoId": "1153285353"
+    },
+    {
+      "id": "kakao:1572710827",
+      "name": "투썸플레이스 순화타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5610646058311,
+      "lng": 126.972257995783,
+      "address": "서울 중구 순화동 66",
+      "roadAddress": "서울 중구 세종대로7길 43",
+      "phone": "02-2088-5520",
+      "placeUrl": "http://place.map.kakao.com/1572710827",
+      "source": "kakao",
+      "kakaoId": "1572710827"
     },
     {
       "id": "kakao:732848562",
@@ -15526,6 +16801,23 @@
       "kakaoId": "799513095"
     },
     {
+      "id": "kakao:27582982",
+      "name": "투썸플레이스 신설IBC호텔점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.57314713418692,
+      "lng": 127.02271021152927,
+      "address": "서울 종로구 숭인동 1396",
+      "roadAddress": "서울 종로구 난계로 241",
+      "phone": "02-2250-3111",
+      "placeUrl": "http://place.map.kakao.com/27582982",
+      "source": "kakao",
+      "kakaoId": "27582982"
+    },
+    {
       "id": "kakao:1523950039",
       "name": "투썸플레이스 신월사거리점",
       "type": "cafe",
@@ -15628,6 +16920,74 @@
       "kakaoId": "13064347"
     },
     {
+      "id": "kakao:763496937",
+      "name": "투썸플레이스 신촌대로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5558533713274,
+      "lng": 126.934005996666,
+      "address": "서울 마포구 노고산동 49-25",
+      "roadAddress": "서울 마포구 신촌로 74",
+      "phone": "02-6402-2366",
+      "placeUrl": "http://place.map.kakao.com/763496937",
+      "source": "kakao",
+      "kakaoId": "763496937"
+    },
+    {
+      "id": "kakao:886417161",
+      "name": "투썸플레이스 신촌세브란스점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56199105849343,
+      "lng": 126.94099530739138,
+      "address": "서울 서대문구 신촌동 134",
+      "roadAddress": "서울 서대문구 연세로 50-1",
+      "phone": "02-2227-8424",
+      "placeUrl": "http://place.map.kakao.com/886417161",
+      "source": "kakao",
+      "kakaoId": "886417161"
+    },
+    {
+      "id": "kakao:1930401377",
+      "name": "투썸플레이스 신촌연세동문회관점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56255038683556,
+      "lng": 126.94243456786648,
+      "address": "서울 서대문구 신촌동 134",
+      "roadAddress": "서울 서대문구 연세로 50",
+      "phone": "02-2088-2101",
+      "placeUrl": "http://place.map.kakao.com/1930401377",
+      "source": "kakao",
+      "kakaoId": "1930401377"
+    },
+    {
+      "id": "kakao:1402782800",
+      "name": "투썸플레이스 신촌연세로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5580895432947,
+      "lng": 126.937118664847,
+      "address": "서울 서대문구 창천동 31-27",
+      "roadAddress": "서울 서대문구 연세로 28",
+      "phone": "02-6959-0262",
+      "placeUrl": "http://place.map.kakao.com/1402782800",
+      "source": "kakao",
+      "kakaoId": "1402782800"
+    },
+    {
       "id": "kakao:36091815",
       "name": "투썸플레이스 신탄진대청호점",
       "type": "cafe",
@@ -15694,6 +17054,23 @@
       "placeUrl": "http://place.map.kakao.com/346649554",
       "source": "kakao",
       "kakaoId": "346649554"
+    },
+    {
+      "id": "kakao:318186091",
+      "name": "투썸플레이스 아리랑힐호텔점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.593559261292775,
+      "lng": 127.01655664405622,
+      "address": "서울 성북구 동선동4가 26",
+      "roadAddress": "서울 성북구 아리랑로 8",
+      "phone": "02-925-6303",
+      "placeUrl": "http://place.map.kakao.com/318186091",
+      "source": "kakao",
+      "kakaoId": "318186091"
     },
     {
       "id": "kakao:26910003",
@@ -15966,6 +17343,23 @@
       "placeUrl": "http://place.map.kakao.com/1538142330",
       "source": "kakao",
       "kakaoId": "1538142330"
+    },
+    {
+      "id": "kakao:12118841",
+      "name": "투썸플레이스 아크로비스타점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4991368229991,
+      "lng": 127.012883021344,
+      "address": "서울 서초구 서초동 1685-3",
+      "roadAddress": "서울 서초구 서초중앙로 188",
+      "phone": "02-536-3290",
+      "placeUrl": "http://place.map.kakao.com/12118841",
+      "source": "kakao",
+      "kakaoId": "12118841"
     },
     {
       "id": "kakao:2036405967",
@@ -16580,6 +17974,40 @@
       "kakaoId": "1940830202"
     },
     {
+      "id": "kakao:1909746508",
+      "name": "투썸플레이스 압구정역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.526206030805916,
+      "lng": 127.02691342916717,
+      "address": "서울 강남구 신사동 579-1",
+      "roadAddress": "서울 강남구 압구정로 158",
+      "phone": "02-512-2388",
+      "placeUrl": "http://place.map.kakao.com/1909746508",
+      "source": "kakao",
+      "kakaoId": "1909746508"
+    },
+    {
+      "id": "kakao:975007361",
+      "name": "투썸플레이스 앞 1-1 진입로",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5691921407208,
+      "lng": 126.979334143748,
+      "address": "서울 종로구 서린동 148",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/975007361",
+      "source": "kakao",
+      "kakaoId": "975007361"
+    },
+    {
       "id": "kakao:2107598286",
       "name": "투썸플레이스 야당역점",
       "type": "cafe",
@@ -16850,6 +18278,40 @@
       "placeUrl": "http://place.map.kakao.com/2041042546",
       "source": "kakao",
       "kakaoId": "2041042546"
+    },
+    {
+      "id": "kakao:881917279",
+      "name": "투썸플레이스 양재전화국사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.484431200317424,
+      "lng": 127.04150658289538,
+      "address": "서울 서초구 양재동 2-46",
+      "roadAddress": "서울 서초구 논현로 167",
+      "phone": "02-2088-0863",
+      "placeUrl": "http://place.map.kakao.com/881917279",
+      "source": "kakao",
+      "kakaoId": "881917279"
+    },
+    {
+      "id": "kakao:658252274",
+      "name": "투썸플레이스 양재하나로마트점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.463472669819026,
+      "lng": 127.04436042087568,
+      "address": "서울 서초구 양재동 230",
+      "roadAddress": "서울 서초구 청계산로 10",
+      "phone": "02-572-8222",
+      "placeUrl": "http://place.map.kakao.com/658252274",
+      "source": "kakao",
+      "kakaoId": "658252274"
     },
     {
       "id": "kakao:82753371",
@@ -17158,6 +18620,23 @@
       "kakaoId": "1044032361"
     },
     {
+      "id": "kakao:21306082",
+      "name": "투썸플레이스 엔타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.551130140536905,
+      "lng": 126.98787417410836,
+      "address": "서울 용산구 용산동2가 산 1-3",
+      "roadAddress": "서울 용산구 남산공원길 105",
+      "phone": "02-3455-9230",
+      "placeUrl": "http://place.map.kakao.com/21306082",
+      "source": "kakao",
+      "kakaoId": "21306082"
+    },
+    {
       "id": "kakao:112851109",
       "name": "투썸플레이스 여수둔덕점",
       "type": "cafe",
@@ -17379,6 +18858,40 @@
       "kakaoId": "203287904"
     },
     {
+      "id": "kakao:2146892654",
+      "name": "투썸플레이스 여의도광복회관점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.52723395678611,
+      "lng": 126.91679009910987,
+      "address": "서울 영등포구 여의도동 17-6",
+      "roadAddress": "서울 영등포구 국회대로62길 15",
+      "phone": "02-786-2388",
+      "placeUrl": "http://place.map.kakao.com/2146892654",
+      "source": "kakao",
+      "kakaoId": "2146892654"
+    },
+    {
+      "id": "kakao:1523949934",
+      "name": "투썸플레이스 여의도롯데캐슬아이비점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.51999076979969,
+      "lng": 126.93225256472202,
+      "address": "서울 영등포구 여의도동 43-4",
+      "roadAddress": "서울 영등포구 국제금융로 86",
+      "phone": "02-6954-2388",
+      "placeUrl": "http://place.map.kakao.com/1523949934",
+      "source": "kakao",
+      "kakaoId": "1523949934"
+    },
+    {
       "id": "kakao:8115422",
       "name": "투썸플레이스 여의도점",
       "type": "cafe",
@@ -17394,6 +18907,40 @@
       "placeUrl": "http://place.map.kakao.com/8115422",
       "source": "kakao",
       "kakaoId": "8115422"
+    },
+    {
+      "id": "kakao:1700802302",
+      "name": "투썸플레이스 여의도파크원점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.52667319479574,
+      "lng": 126.92718961757056,
+      "address": "서울 영등포구 여의도동 22",
+      "roadAddress": "서울 영등포구 여의대로 108",
+      "phone": "02-2118-0113",
+      "placeUrl": "http://place.map.kakao.com/1700802302",
+      "source": "kakao",
+      "kakaoId": "1700802302"
+    },
+    {
+      "id": "kakao:953501034",
+      "name": "투썸플레이스 여의도CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5254782667775,
+      "lng": 126.925425981398,
+      "address": "서울 영등포구 여의도동 23",
+      "roadAddress": "서울 영등포구 국제금융로 10",
+      "phone": "02-6137-5377",
+      "placeUrl": "http://place.map.kakao.com/953501034",
+      "source": "kakao",
+      "kakaoId": "953501034"
     },
     {
       "id": "kakao:1257483815",
@@ -17464,6 +19011,23 @@
       "kakaoId": "20089944"
     },
     {
+      "id": "kakao:478131653",
+      "name": "투썸플레이스 역삼자이점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5002747065111,
+      "lng": 127.04346954683,
+      "address": "서울 강남구 역삼동 721-39",
+      "roadAddress": "서울 강남구 언주로 419",
+      "phone": "02-2039-9366",
+      "placeUrl": "http://place.map.kakao.com/478131653",
+      "source": "kakao",
+      "kakaoId": "478131653"
+    },
+    {
       "id": "kakao:11720991",
       "name": "투썸플레이스 역삼점",
       "type": "cafe",
@@ -17479,6 +19043,23 @@
       "placeUrl": "http://place.map.kakao.com/11720991",
       "source": "kakao",
       "kakaoId": "11720991"
+    },
+    {
+      "id": "kakao:1585121108",
+      "name": "투썸플레이스 역촌역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.6052745442788,
+      "lng": 126.921978374134,
+      "address": "서울 은평구 역촌동 27-1",
+      "roadAddress": "서울 은평구 진흥로 93",
+      "phone": "02-356-6122",
+      "placeUrl": "http://place.map.kakao.com/1585121108",
+      "source": "kakao",
+      "kakaoId": "1585121108"
     },
     {
       "id": "kakao:1866677736",
@@ -17615,6 +19196,40 @@
       "placeUrl": "http://place.map.kakao.com/20466220",
       "source": "kakao",
       "kakaoId": "20466220"
+    },
+    {
+      "id": "kakao:842416292",
+      "name": "투썸플레이스 영등포로터리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5176920533606,
+      "lng": 126.912648196716,
+      "address": "서울 영등포구 영등포동1가 94-2",
+      "roadAddress": "서울 영등포구 경인로 900",
+      "phone": "070-7623-0202",
+      "placeUrl": "http://place.map.kakao.com/842416292",
+      "source": "kakao",
+      "kakaoId": "842416292"
+    },
+    {
+      "id": "kakao:1038634598",
+      "name": "투썸플레이스 영등포문래점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5201627386834,
+      "lng": 126.890145748373,
+      "address": "서울 영등포구 문래동3가 82-29",
+      "roadAddress": "서울 영등포구 선유로 70",
+      "phone": "070-7625-0105",
+      "placeUrl": "http://place.map.kakao.com/1038634598",
+      "source": "kakao",
+      "kakaoId": "1038634598"
     },
     {
       "id": "kakao:1645110005",
@@ -18246,6 +19861,40 @@
       "kakaoId": "736948290"
     },
     {
+      "id": "kakao:447162299",
+      "name": "투썸플레이스 용답역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5623729719021,
+      "lng": 127.051539388996,
+      "address": "서울 성동구 용답동 40-9",
+      "roadAddress": "서울 성동구 용답길 85",
+      "phone": "02-6215-3889",
+      "placeUrl": "http://place.map.kakao.com/447162299",
+      "source": "kakao",
+      "kakaoId": "447162299"
+    },
+    {
+      "id": "kakao:133403995",
+      "name": "투썸플레이스 용마산역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.57521331079307,
+      "lng": 127.08530431260299,
+      "address": "서울 중랑구 면목동 372-20",
+      "roadAddress": "서울 중랑구 면목로 249",
+      "phone": "02-491-0701",
+      "placeUrl": "http://place.map.kakao.com/133403995",
+      "source": "kakao",
+      "kakaoId": "133403995"
+    },
+    {
       "id": "kakao:2104394576",
       "name": "투썸플레이스 용문산입구점",
       "type": "cafe",
@@ -18261,6 +19910,57 @@
       "placeUrl": "http://place.map.kakao.com/2104394576",
       "source": "kakao",
       "kakaoId": "2104394576"
+    },
+    {
+      "id": "kakao:26908102",
+      "name": "투썸플레이스 용산아이파크몰점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.52939531078533,
+      "lng": 126.96517283430008,
+      "address": "서울 용산구 한강로3가 40-999",
+      "roadAddress": "서울 용산구 한강대로23길 55",
+      "phone": "02-2012-0604",
+      "placeUrl": "http://place.map.kakao.com/26908102",
+      "source": "kakao",
+      "kakaoId": "26908102"
+    },
+    {
+      "id": "kakao:18560244",
+      "name": "투썸플레이스 용산청파삼거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.54790062292779,
+      "lng": 126.97058242027994,
+      "address": "서울 용산구 청파동1가 180-24",
+      "roadAddress": "서울 용산구 청파로 314",
+      "phone": "02-714-2011",
+      "placeUrl": "http://place.map.kakao.com/18560244",
+      "source": "kakao",
+      "kakaoId": "18560244"
+    },
+    {
+      "id": "kakao:980525181",
+      "name": "투썸플레이스 용산트윈시티점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.55101498811104,
+      "lng": 126.97272457268274,
+      "address": "서울 용산구 동자동 56",
+      "roadAddress": "서울 용산구 한강대로 366",
+      "phone": "02-6222-3990",
+      "placeUrl": "http://place.map.kakao.com/980525181",
+      "source": "kakao",
+      "kakaoId": "980525181"
     },
     {
       "id": "kakao:18716275",
@@ -19334,6 +21034,23 @@
       "kakaoId": "700613531"
     },
     {
+      "id": "kakao:1009436090",
+      "name": "투썸플레이스 월곡역코업스타점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.60182279151072,
+      "lng": 127.04043927905184,
+      "address": "서울 성북구 하월곡동 46-73",
+      "roadAddress": "서울 성북구 화랑로 76",
+      "phone": "02-6956-2000",
+      "placeUrl": "http://place.map.kakao.com/1009436090",
+      "source": "kakao",
+      "kakaoId": "1009436090"
+    },
+    {
       "id": "kakao:1275335466",
       "name": "투썸플레이스 위례세계로병원점",
       "type": "cafe",
@@ -19417,6 +21134,23 @@
       "placeUrl": "http://place.map.kakao.com/1775664892",
       "source": "kakao",
       "kakaoId": "1775664892"
+    },
+    {
+      "id": "kakao:1393377666",
+      "name": "투썸플레이스 은평이마트점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.599877463576,
+      "lng": 126.920405436489,
+      "address": "서울 은평구 응암동 110-2",
+      "roadAddress": "서울 은평구 은평로 114",
+      "phone": "02-353-8585",
+      "placeUrl": "http://place.map.kakao.com/1393377666",
+      "source": "kakao",
+      "kakaoId": "1393377666"
     },
     {
       "id": "kakao:393149131",
@@ -19878,6 +21612,23 @@
       "kakaoId": "41589888"
     },
     {
+      "id": "kakao:806447073",
+      "name": "투썸플레이스 이대역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5572360514845,
+      "lng": 126.94569812655,
+      "address": "서울 서대문구 대현동 40-4",
+      "roadAddress": "서울 서대문구 이화여대길 7",
+      "phone": "02-312-8014",
+      "placeUrl": "http://place.map.kakao.com/806447073",
+      "source": "kakao",
+      "kakaoId": "806447073"
+    },
+    {
       "id": "kakao:290317606",
       "name": "투썸플레이스 이마트김포점",
       "type": "cafe",
@@ -20080,6 +21831,23 @@
       "placeUrl": "http://place.map.kakao.com/446977929",
       "source": "kakao",
       "kakaoId": "446977929"
+    },
+    {
+      "id": "kakao:563817665",
+      "name": "투썸플레이스 이태원점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5346007898212,
+      "lng": 126.992546214987,
+      "address": "서울 용산구 이태원동 119-19",
+      "roadAddress": "서울 용산구 이태원로 167",
+      "phone": "02-6953-9997",
+      "placeUrl": "http://place.map.kakao.com/563817665",
+      "source": "kakao",
+      "kakaoId": "563817665"
     },
     {
       "id": "kakao:646813236",
@@ -20896,6 +22664,23 @@
       "placeUrl": "http://place.map.kakao.com/1287312910",
       "source": "kakao",
       "kakaoId": "1287312910"
+    },
+    {
+      "id": "kakao:513152312",
+      "name": "투썸플레이스 인천문학점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4382209211848,
+      "lng": 126.68760437899,
+      "address": "인천 미추홀구 문학동 380-10",
+      "roadAddress": "인천 미추홀구 매소홀로 590",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/513152312",
+      "source": "kakao",
+      "kakaoId": "513152312"
     },
     {
       "id": "kakao:1586485690",
@@ -21867,6 +23652,23 @@
       "kakaoId": "915979688"
     },
     {
+      "id": "kakao:21685460",
+      "name": "투썸플레이스 잠실3단지점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.50786882542388,
+      "lng": 127.08800313010764,
+      "address": "서울 송파구 잠실동 242",
+      "roadAddress": "서울 송파구 석촌호수로 100",
+      "phone": "02-424-3100",
+      "placeUrl": "http://place.map.kakao.com/21685460",
+      "source": "kakao",
+      "kakaoId": "21685460"
+    },
+    {
       "id": "kakao:1577826088",
       "name": "투썸플레이스 잠실레이크팰리스점",
       "type": "cafe",
@@ -21882,6 +23684,23 @@
       "placeUrl": "http://place.map.kakao.com/1577826088",
       "source": "kakao",
       "kakaoId": "1577826088"
+    },
+    {
+      "id": "kakao:1732687801",
+      "name": "투썸플레이스 잠실롯데점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5113649039479,
+      "lng": 127.098068077991,
+      "address": "서울 송파구 잠실동 40-1",
+      "roadAddress": "서울 송파구 올림픽로 240",
+      "phone": "02-2143-1457",
+      "placeUrl": "http://place.map.kakao.com/1732687801",
+      "source": "kakao",
+      "kakaoId": "1732687801"
     },
     {
       "id": "kakao:14981572",
@@ -22001,6 +23820,23 @@
       "placeUrl": "http://place.map.kakao.com/24178318",
       "source": "kakao",
       "kakaoId": "24178318"
+    },
+    {
+      "id": "kakao:289966098",
+      "name": "투썸플레이스 장한평역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5609931541847,
+      "lng": 127.065101005418,
+      "address": "서울 성동구 용답동 233-1",
+      "roadAddress": "서울 성동구 천호대로 416",
+      "phone": "070-7701-5343",
+      "placeUrl": "http://place.map.kakao.com/289966098",
+      "source": "kakao",
+      "kakaoId": "289966098"
     },
     {
       "id": "kakao:5519241",
@@ -22496,6 +24332,40 @@
       "kakaoId": "14549521"
     },
     {
+      "id": "kakao:326582834",
+      "name": "투썸플레이스 정동길점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56809714292724,
+      "lng": 126.96965875203908,
+      "address": "서울 중구 정동 22",
+      "roadAddress": "서울 중구 정동길 3",
+      "phone": "02-739-7773",
+      "placeUrl": "http://place.map.kakao.com/326582834",
+      "source": "kakao",
+      "kakaoId": "326582834"
+    },
+    {
+      "id": "kakao:1215588026",
+      "name": "투썸플레이스 정릉중앙점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.60372656480225,
+      "lng": 127.01229630047565,
+      "address": "서울 성북구 정릉동 150-27",
+      "roadAddress": "서울 성북구 정릉로 262",
+      "phone": "02-9432-2000",
+      "placeUrl": "http://place.map.kakao.com/1215588026",
+      "source": "kakao",
+      "kakaoId": "1215588026"
+    },
+    {
       "id": "kakao:129885471",
       "name": "투썸플레이스 정읍공장",
       "type": "cafe",
@@ -22547,6 +24417,23 @@
       "kakaoId": "1335230971"
     },
     {
+      "id": "kakao:104266652",
+      "name": "투썸플레이스 제기동역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5785811112044,
+      "lng": 127.033693072818,
+      "address": "서울 동대문구 제기동 1158-50",
+      "roadAddress": "서울 동대문구 왕산로 91",
+      "phone": "02-928-9900",
+      "placeUrl": "http://place.map.kakao.com/104266652",
+      "source": "kakao",
+      "kakaoId": "104266652"
+    },
+    {
       "id": "kakao:1420227518",
       "name": "투썸플레이스 제부도점",
       "type": "cafe",
@@ -22562,6 +24449,23 @@
       "placeUrl": "http://place.map.kakao.com/1420227518",
       "source": "kakao",
       "kakaoId": "1420227518"
+    },
+    {
+      "id": "kakao:720552589",
+      "name": "투썸플레이스 제일제당사옥점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5639735341943,
+      "lng": 127.003252972991,
+      "address": "서울 중구 쌍림동 292",
+      "roadAddress": "서울 중구 동호로 330",
+      "phone": "02-2039-2188",
+      "placeUrl": "http://place.map.kakao.com/720552589",
+      "source": "kakao",
+      "kakaoId": "720552589"
     },
     {
       "id": "kakao:1939306729",
@@ -22972,6 +24876,23 @@
       "kakaoId": "19615597"
     },
     {
+      "id": "kakao:17688326",
+      "name": "투썸플레이스 종로구청점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.572933213989124,
+      "lng": 126.98015607267425,
+      "address": "서울 종로구 수송동 80-6",
+      "roadAddress": "서울 종로구 종로5길 58",
+      "phone": "02-734-2377",
+      "placeUrl": "http://place.map.kakao.com/17688326",
+      "source": "kakao",
+      "kakaoId": "17688326"
+    },
+    {
       "id": "kakao:323328500",
       "name": "투썸플레이스 종로알파빌딩점",
       "type": "cafe",
@@ -23004,6 +24925,23 @@
       "placeUrl": "http://place.map.kakao.com/1273452250",
       "source": "kakao",
       "kakaoId": "1273452250"
+    },
+    {
+      "id": "kakao:1705048598",
+      "name": "투썸플레이스 종암점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5993633041235,
+      "lng": 127.034039896948,
+      "address": "서울 성북구 종암동 87-6",
+      "roadAddress": "서울 성북구 종암로 103",
+      "phone": "02-2038-7699",
+      "placeUrl": "http://place.map.kakao.com/1705048598",
+      "source": "kakao",
+      "kakaoId": "1705048598"
     },
     {
       "id": "kakao:58014111",
@@ -24179,6 +26117,23 @@
       "kakaoId": "81808050"
     },
     {
+      "id": "kakao:8125981",
+      "name": "투썸플레이스 청계천광교점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.56791061388944,
+      "lng": 126.98303588311687,
+      "address": "서울 중구 남대문로1가 18",
+      "roadAddress": "서울 중구 남대문로 120",
+      "phone": "02-2135-5622",
+      "placeUrl": "http://place.map.kakao.com/8125981",
+      "source": "kakao",
+      "kakaoId": "8125981"
+    },
+    {
       "id": "kakao:839744793",
       "name": "투썸플레이스 청구역점",
       "type": "cafe",
@@ -24211,6 +26166,23 @@
       "placeUrl": "http://place.map.kakao.com/1947917477",
       "source": "kakao",
       "kakaoId": "1947917477"
+    },
+    {
+      "id": "kakao:5923886",
+      "name": "투썸플레이스 청담CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.522897518887,
+      "lng": 127.037016491453,
+      "address": "서울 강남구 신사동 651-21",
+      "roadAddress": "서울 강남구 도산대로 323",
+      "phone": "02-540-8961",
+      "placeUrl": "http://place.map.kakao.com/5923886",
+      "source": "kakao",
+      "kakaoId": "5923886"
     },
     {
       "id": "kakao:1938486188",
@@ -25811,6 +27783,23 @@
       "kakaoId": "20637643"
     },
     {
+      "id": "kakao:1346424702",
+      "name": "투썸플레이스 파이낸셜뉴스빌딩점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.491151594860064,
+      "lng": 127.03039829589069,
+      "address": "서울 서초구 서초동 1338-23",
+      "roadAddress": "서울 서초구 강남대로 315",
+      "phone": "02-523-2377",
+      "placeUrl": "http://place.map.kakao.com/1346424702",
+      "source": "kakao",
+      "kakaoId": "1346424702"
+    },
+    {
       "id": "kakao:1030563249",
       "name": "투썸플레이스 파인애비뉴점",
       "type": "cafe",
@@ -26627,6 +28616,23 @@
       "kakaoId": "26452947"
     },
     {
+      "id": "kakao:242064460",
+      "name": "투썸플레이스 포이사거리점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.47881195270357,
+      "lng": 127.04546614620475,
+      "address": "서울 강남구 개포동 1245-12",
+      "roadAddress": "서울 강남구 개포로15길 6",
+      "phone": "02-6368-1245",
+      "placeUrl": "http://place.map.kakao.com/242064460",
+      "source": "kakao",
+      "kakaoId": "242064460"
+    },
+    {
       "id": "kakao:643047923",
       "name": "투썸플레이스 포이DI점",
       "type": "cafe",
@@ -27103,6 +29109,23 @@
       "kakaoId": "234418150"
     },
     {
+      "id": "kakao:332118989",
+      "name": "투썸플레이스 학동역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5141903150713,
+      "lng": 127.030379360049,
+      "address": "서울 강남구 논현동 58-7",
+      "roadAddress": "서울 강남구 학동로 177",
+      "phone": "02-2138-1005",
+      "placeUrl": "http://place.map.kakao.com/332118989",
+      "source": "kakao",
+      "kakaoId": "332118989"
+    },
+    {
       "id": "kakao:1107907637",
       "name": "투썸플레이스 한강미사 아이에스비즈타워점",
       "type": "cafe",
@@ -27137,6 +29160,23 @@
       "kakaoId": "158646650"
     },
     {
+      "id": "kakao:263497142",
+      "name": "투썸플레이스 한국은행사옥점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5624995852026,
+      "lng": 126.979581601845,
+      "address": "서울 중구 남대문로3가 110",
+      "roadAddress": "서울 중구 남대문로 39",
+      "phone": "02-759-4338",
+      "placeUrl": "http://place.map.kakao.com/263497142",
+      "source": "kakao",
+      "kakaoId": "263497142"
+    },
+    {
       "id": "kakao:1801740199",
       "name": "투썸플레이스 한국잡월드점",
       "type": "cafe",
@@ -27152,6 +29192,23 @@
       "placeUrl": "http://place.map.kakao.com/1801740199",
       "source": "kakao",
       "kakaoId": "1801740199"
+    },
+    {
+      "id": "kakao:932779419",
+      "name": "투썸플레이스 한티점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4999092337636,
+      "lng": 127.051592551904,
+      "address": "서울 강남구 대치동 921",
+      "roadAddress": "서울 강남구 선릉로 338",
+      "phone": "02-6953-1250",
+      "placeUrl": "http://place.map.kakao.com/932779419",
+      "source": "kakao",
+      "kakaoId": "932779419"
     },
     {
       "id": "kakao:877288977",
@@ -27545,6 +29602,23 @@
       "kakaoId": "1351720419"
     },
     {
+      "id": "kakao:1703962909",
+      "name": "투썸플레이스 홍대서교점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.55608713985756,
+      "lng": 126.92008761477473,
+      "address": "서울 마포구 서교동 445-4",
+      "roadAddress": "서울 마포구 월드컵북로 13",
+      "phone": "0503-7153-2288",
+      "placeUrl": "http://place.map.kakao.com/1703962909",
+      "source": "kakao",
+      "kakaoId": "1703962909"
+    },
+    {
       "id": "kakao:1730452240",
       "name": "투썸플레이스 홍대예술의거리점",
       "type": "cafe",
@@ -27577,6 +29651,23 @@
       "placeUrl": "http://place.map.kakao.com/26532091",
       "source": "kakao",
       "kakaoId": "26532091"
+    },
+    {
+      "id": "kakao:1122349532",
+      "name": "투썸플레이스 홍대CGV스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5564267925965,
+      "lng": 126.922760441141,
+      "address": "서울 마포구 동교동 159-8",
+      "roadAddress": "서울 마포구 양화로 153",
+      "phone": "02-3143-6753",
+      "placeUrl": "http://place.map.kakao.com/1122349532",
+      "source": "kakao",
+      "kakaoId": "1122349532"
     },
     {
       "id": "kakao:369433332",
@@ -27919,6 +30010,23 @@
       "kakaoId": "11026160"
     },
     {
+      "id": "kakao:1308298199",
+      "name": "투썸플레이스 회현역점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5585431393535,
+      "lng": 126.978628590637,
+      "address": "서울 중구 회현동1가 194-15",
+      "roadAddress": "서울 중구 퇴계로 52",
+      "phone": "02-2138-0054",
+      "placeUrl": "http://place.map.kakao.com/1308298199",
+      "source": "kakao",
+      "kakaoId": "1308298199"
+    },
+    {
       "id": "kakao:1986901608",
       "name": "투썸플레이스 횡성점",
       "type": "cafe",
@@ -27953,6 +30061,23 @@
       "kakaoId": "491664026"
     },
     {
+      "id": "kakao:948019753",
+      "name": "투썸플레이스 CGV상봉스윗바점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.5974067997692,
+      "lng": 127.092178207219,
+      "address": "서울 중랑구 상봉동 501",
+      "roadAddress": "서울 중랑구 상봉로 131",
+      "phone": "1544-1122",
+      "placeUrl": "http://place.map.kakao.com/948019753",
+      "source": "kakao",
+      "kakaoId": "948019753"
+    },
+    {
       "id": "kakao:913891489",
       "name": "투썸플레이스 CGV소풍스윗바점",
       "type": "cafe",
@@ -27968,6 +30093,57 @@
       "placeUrl": "http://place.map.kakao.com/913891489",
       "source": "kakao",
       "kakaoId": "913891489"
+    },
+    {
+      "id": "kakao:2009843681",
+      "name": "투썸플레이스 CJ더센터점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.55452867903518,
+      "lng": 126.97594303458922,
+      "address": "서울 중구 남대문로5가 500",
+      "roadAddress": "서울 중구 소월로2길 12",
+      "phone": "02-726-8930",
+      "placeUrl": "http://place.map.kakao.com/2009843681",
+      "source": "kakao",
+      "kakaoId": "2009843681"
+    },
+    {
+      "id": "kakao:16059476",
+      "name": "투썸플레이스 CJENM커머스부문점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.468974686962,
+      "lng": 126.98736180752,
+      "address": "서울 서초구 방배동 2724",
+      "roadAddress": "서울 서초구 과천대로 870-13",
+      "phone": "02-2107-0095",
+      "placeUrl": "http://place.map.kakao.com/16059476",
+      "source": "kakao",
+      "kakaoId": "16059476"
+    },
+    {
+      "id": "kakao:289216037",
+      "name": "투썸플레이스내방역점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.4877521972788,
+      "lng": 126.993089090976,
+      "address": "서울 서초구 방배동 874-9",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/289216037",
+      "source": "kakao",
+      "kakaoId": "289216037"
     },
     {
       "id": "kakao:822986633",
@@ -28021,6 +30197,23 @@
       "kakaoId": "891856116"
     },
     {
+      "id": "kakao:7986504",
+      "name": "CGV 대학로",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.583458493533186,
+      "lng": 126.99984149795074,
+      "address": "서울 종로구 명륜2가 41-9",
+      "roadAddress": "서울 종로구 대명길 28",
+      "phone": "1544-1122",
+      "placeUrl": "http://place.map.kakao.com/7986504",
+      "source": "kakao",
+      "kakaoId": "7986504"
+    },
+    {
       "id": "kakao:242326235",
       "name": "KM파크 투썸플레이스 대구두산동DT점 주차장",
       "type": "cafe",
@@ -28070,6 +30263,23 @@
       "placeUrl": "http://place.map.kakao.com/1509816891",
       "source": "kakao",
       "kakaoId": "1509816891"
+    },
+    {
+      "id": "kakao:1640999507",
+      "name": "KM파크 투썸플레이스내방역점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "twosome"
+      ],
+      "lat": 37.48777472214772,
+      "lng": 126.993083435341,
+      "address": "서울 서초구 방배동 874-9",
+      "roadAddress": "",
+      "phone": "02-3272-3500",
+      "placeUrl": "http://place.map.kakao.com/1640999507",
+      "source": "kakao",
+      "kakaoId": "1640999507"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-01-25T08:42:28.847Z",
+  "generatedAt": "2026-01-25T10:22:00.656Z",
   "query": "커피빈",
   "tag": "coffeebean",
-  "count": 187,
+  "count": 207,
   "stores": [
     {
       "id": "kakao:20059649",
@@ -20,6 +20,23 @@
       "placeUrl": "http://place.map.kakao.com/20059649",
       "source": "kakao",
       "kakaoId": "20059649"
+    },
+    {
+      "id": "kakao:773528182",
+      "name": "룸파이브로스트웍스",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.574786435485,
+      "lng": 126.967420286599,
+      "address": "서울 종로구 사직동 228",
+      "roadAddress": "서울 종로구 사직로 73",
+      "phone": "0503-7153-4501",
+      "placeUrl": "http://place.map.kakao.com/773528182",
+      "source": "kakao",
+      "kakaoId": "773528182"
     },
     {
       "id": "kakao:1748575785",
@@ -173,6 +190,23 @@
       "placeUrl": "http://place.map.kakao.com/26624126",
       "source": "kakao",
       "kakaoId": "26624126"
+    },
+    {
+      "id": "kakao:1336874750",
+      "name": "커피빈 강남포스코센터점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.50485996343691,
+      "lng": 127.0561922181448,
+      "address": "서울 강남구 대치동 893",
+      "roadAddress": "서울 강남구 삼성로85길 11",
+      "phone": "02-541-7404",
+      "placeUrl": "http://place.map.kakao.com/1336874750",
+      "source": "kakao",
+      "kakaoId": "1336874750"
     },
     {
       "id": "kakao:485644198",
@@ -566,6 +600,23 @@
       "kakaoId": "1318322043"
     },
     {
+      "id": "kakao:299886145",
+      "name": "커피빈 논현201-5번지점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.50550115070393,
+      "lng": 127.02609168968793,
+      "address": "서울 강남구 논현동 201-5",
+      "roadAddress": "서울 강남구 강남대로112길 20",
+      "phone": "02-541-9563",
+      "placeUrl": "http://place.map.kakao.com/299886145",
+      "source": "kakao",
+      "kakaoId": "299886145"
+    },
+    {
       "id": "kakao:10826167",
       "name": "커피빈 논현동수면센터점",
       "type": "cafe",
@@ -734,6 +785,23 @@
       "placeUrl": "http://place.map.kakao.com/8562768",
       "source": "kakao",
       "kakaoId": "8562768"
+    },
+    {
+      "id": "kakao:10826166",
+      "name": "커피빈 도심공항점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5097582003016,
+      "lng": 127.05911737458503,
+      "address": "서울 강남구 삼성동 159-6",
+      "roadAddress": "서울 강남구 테헤란로87길 22",
+      "phone": "02-551-6456",
+      "placeUrl": "http://place.map.kakao.com/10826166",
+      "source": "kakao",
+      "kakaoId": "10826166"
     },
     {
       "id": "kakao:12119147",
@@ -991,6 +1059,23 @@
       "kakaoId": "1717114125"
     },
     {
+      "id": "kakao:1356140527",
+      "name": "커피빈 문정동환인제약빌딩점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.483616503253266,
+      "lng": 127.12233961404506,
+      "address": "서울 송파구 문정동 651-13",
+      "roadAddress": "서울 송파구 법원로6길 11",
+      "phone": "02-449-9569",
+      "placeUrl": "http://place.map.kakao.com/1356140527",
+      "source": "kakao",
+      "kakaoId": "1356140527"
+    },
+    {
       "id": "kakao:896698798",
       "name": "커피빈 문정역엠스테이트점",
       "type": "cafe",
@@ -1246,6 +1331,40 @@
       "kakaoId": "17101536"
     },
     {
+      "id": "kakao:1760874425",
+      "name": "커피빈 삼성로점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5107084337004,
+      "lng": 127.054160698503,
+      "address": "서울 강남구 삼성동 120-13",
+      "roadAddress": "서울 강남구 삼성로 551",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/1760874425",
+      "source": "kakao",
+      "kakaoId": "1760874425"
+    },
+    {
+      "id": "kakao:1391862421",
+      "name": "커피빈 삼성루첸타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.507075253396025,
+      "lng": 127.05862553459559,
+      "address": "서울 강남구 대치동 943",
+      "roadAddress": "서울 강남구 테헤란로 510",
+      "phone": "02-994-8879",
+      "placeUrl": "http://place.map.kakao.com/1391862421",
+      "source": "kakao",
+      "kakaoId": "1391862421"
+    },
+    {
       "id": "kakao:1029850962",
       "name": "커피빈 삼성본관빌딩점",
       "type": "cafe",
@@ -1295,6 +1414,23 @@
       "placeUrl": "http://place.map.kakao.com/12119146",
       "source": "kakao",
       "kakaoId": "12119146"
+    },
+    {
+      "id": "kakao:8105437",
+      "name": "커피빈 삼성생명강남사옥점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.496966893101835,
+      "lng": 127.02577095122103,
+      "address": "서울 서초구 서초동 1321-15",
+      "roadAddress": "서울 서초구 서초대로74길 4",
+      "phone": "02-581-5562",
+      "placeUrl": "http://place.map.kakao.com/8105437",
+      "source": "kakao",
+      "kakaoId": "8105437"
     },
     {
       "id": "kakao:10827085",
@@ -1450,6 +1586,40 @@
       "kakaoId": "10827086"
     },
     {
+      "id": "kakao:820497172",
+      "name": "커피빈 서초중앙로점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5003190537582,
+      "lng": 127.011824701104,
+      "address": "서울 서초구 반포동 51-7",
+      "roadAddress": "서울 서초구 서초중앙로 209",
+      "phone": "02-537-2992",
+      "placeUrl": "http://place.map.kakao.com/820497172",
+      "source": "kakao",
+      "kakaoId": "820497172"
+    },
+    {
+      "id": "kakao:11240086",
+      "name": "커피빈 서초지파이브점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.4953304683816,
+      "lng": 127.01687644416,
+      "address": "서울 서초구 서초동 1685-8",
+      "roadAddress": "서울 서초구 서초중앙로24길 27",
+      "phone": "02-3477-5580",
+      "placeUrl": "http://place.map.kakao.com/11240086",
+      "source": "kakao",
+      "kakaoId": "11240086"
+    },
+    {
       "id": "kakao:687615603",
       "name": "커피빈 서현역점",
       "type": "cafe",
@@ -1484,6 +1654,23 @@
       "kakaoId": "17097590"
     },
     {
+      "id": "kakao:17101537",
+      "name": "커피빈 선릉로93길점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.505638478050166,
+      "lng": 127.04790836480421,
+      "address": "서울 강남구 역삼동 696-42",
+      "roadAddress": "서울 강남구 선릉로93길 6",
+      "phone": "02-552-3177",
+      "placeUrl": "http://place.map.kakao.com/17101537",
+      "source": "kakao",
+      "kakaoId": "17101537"
+    },
+    {
       "id": "kakao:1219654852",
       "name": "커피빈 선릉역3번출구세방빌딩점",
       "type": "cafe",
@@ -1501,6 +1688,23 @@
       "kakaoId": "1219654852"
     },
     {
+      "id": "kakao:1424175530",
+      "name": "커피빈 선릉KSA한국표준협회점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.50625822739497,
+      "lng": 127.05248361741178,
+      "address": "서울 강남구 삼성동 142-26",
+      "roadAddress": "서울 강남구 테헤란로69길 5",
+      "phone": "02-3141-7948",
+      "placeUrl": "http://place.map.kakao.com/1424175530",
+      "source": "kakao",
+      "kakaoId": "1424175530"
+    },
+    {
       "id": "kakao:301579321",
       "name": "커피빈 선정릉역점",
       "type": "cafe",
@@ -1516,6 +1720,23 @@
       "placeUrl": "http://place.map.kakao.com/301579321",
       "source": "kakao",
       "kakaoId": "301579321"
+    },
+    {
+      "id": "kakao:1193182546",
+      "name": "커피빈 성균관대법학관점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5875252007349,
+      "lng": 126.9905844660818,
+      "address": "서울 종로구 명륜3가 53-21",
+      "roadAddress": "서울 종로구 성균관로 25-2",
+      "phone": "02-740-1958",
+      "placeUrl": "http://place.map.kakao.com/1193182546",
+      "source": "kakao",
+      "kakaoId": "1193182546"
     },
     {
       "id": "kakao:714328287",
@@ -1943,6 +2164,23 @@
       "kakaoId": "1699590524"
     },
     {
+      "id": "kakao:712374662",
+      "name": "커피빈 여의도교보증권점 주차장",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5223474875116,
+      "lng": 126.92432953896,
+      "address": "서울 영등포구 여의도동 26-4",
+      "roadAddress": "",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/712374662",
+      "source": "kakao",
+      "kakaoId": "712374662"
+    },
+    {
       "id": "kakao:21947632",
       "name": "커피빈 여의도교보증권카페점",
       "type": "cafe",
@@ -2045,6 +2283,23 @@
       "kakaoId": "24385315"
     },
     {
+      "id": "kakao:8562771",
+      "name": "커피빈 역삼포스틸타워뒷점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.49912896829196,
+      "lng": 127.0342092125734,
+      "address": "서울 강남구 역삼동 735-32",
+      "roadAddress": "서울 강남구 테헤란로20길 10",
+      "phone": "02-554-9962",
+      "placeUrl": "http://place.map.kakao.com/8562771",
+      "source": "kakao",
+      "kakaoId": "8562771"
+    },
+    {
       "id": "kakao:1274866128",
       "name": "커피빈 역삼KSA한국표준협회교육센터점",
       "type": "cafe",
@@ -2060,6 +2315,23 @@
       "placeUrl": "http://place.map.kakao.com/1274866128",
       "source": "kakao",
       "kakaoId": "1274866128"
+    },
+    {
+      "id": "kakao:770873123",
+      "name": "커피빈 연세암병원점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.5613393480581,
+      "lng": 126.938658607796,
+      "address": "서울 서대문구 신촌동 134",
+      "roadAddress": "서울 서대문구 연세로 50-1",
+      "phone": "02-392-8812",
+      "placeUrl": "http://place.map.kakao.com/770873123",
+      "source": "kakao",
+      "kakaoId": "770873123"
     },
     {
       "id": "kakao:8105442",
@@ -2606,6 +2878,23 @@
       "kakaoId": "26350564"
     },
     {
+      "id": "kakao:8584207",
+      "name": "커피빈 차병원점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.506500871311395,
+      "lng": 127.03463896102151,
+      "address": "서울 강남구 역삼동 650-17",
+      "roadAddress": "서울 강남구 논현로 566",
+      "phone": "",
+      "placeUrl": "http://place.map.kakao.com/8584207",
+      "source": "kakao",
+      "kakaoId": "8584207"
+    },
+    {
       "id": "kakao:1812032819",
       "name": "커피빈 창원시티세븐점",
       "type": "cafe",
@@ -2759,6 +3048,23 @@
       "kakaoId": "26099843"
     },
     {
+      "id": "kakao:17101551",
+      "name": "커피빈 테헤란로비젼타워점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.50302487475516,
+      "lng": 127.0450770785153,
+      "address": "서울 강남구 역삼동 707-2",
+      "roadAddress": "서울 강남구 테헤란로 312",
+      "phone": "02-558-7101",
+      "placeUrl": "http://place.map.kakao.com/17101551",
+      "source": "kakao",
+      "kakaoId": "17101551"
+    },
+    {
       "id": "kakao:8105613",
       "name": "커피빈 테헤란로하이닉스뒷점",
       "type": "cafe",
@@ -2825,6 +3131,23 @@
       "placeUrl": "http://place.map.kakao.com/1054389179",
       "source": "kakao",
       "kakaoId": "1054389179"
+    },
+    {
+      "id": "kakao:1217093617",
+      "name": "커피빈 포스코옆삼성로86길점",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.50586177526803,
+      "lng": 127.05827058751869,
+      "address": "서울 강남구 대치동 942-16",
+      "roadAddress": "서울 강남구 삼성로86길 11",
+      "phone": "02-569-7501",
+      "placeUrl": "http://place.map.kakao.com/1217093617",
+      "source": "kakao",
+      "kakaoId": "1217093617"
     },
     {
       "id": "kakao:254258780",
@@ -3114,6 +3437,23 @@
       "placeUrl": "http://place.map.kakao.com/1749565063",
       "source": "kakao",
       "kakaoId": "1749565063"
+    },
+    {
+      "id": "kakao:26888129",
+      "name": "커피빈코리아 본사",
+      "type": "cafe",
+      "tags": [
+        "cafe",
+        "coffeebean"
+      ],
+      "lat": 37.51466233951611,
+      "lng": 127.05916988078414,
+      "address": "서울 강남구 삼성동 77-18",
+      "roadAddress": "서울 강남구 봉은사로99길 7",
+      "phone": "02-1577-4708",
+      "placeUrl": "http://place.map.kakao.com/26888129",
+      "source": "kakao",
+      "kakaoId": "26888129"
     },
     {
       "id": "kakao:1928780638",
