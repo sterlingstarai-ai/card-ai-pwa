@@ -1,9 +1,13 @@
 /**
  * OcrModal - OCR 카드 스캔 모달
  * 카드 촬영, 인식, 확인 플로우
+ * iOS: Capacitor Camera 플러그인 사용 (base64 직접 반환)
+ * Web: input[type=file] 사용
  */
 
 import { useRef } from 'react';
+import { Capacitor } from '@capacitor/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 export const OcrModal = ({
   // Data
@@ -12,6 +16,7 @@ export const OcrModal = ({
   ocrCandidates,
   // Handlers
   handleOCR,
+  handleOCRBase64,
   confirmCard,
   cancelOcrRun,
   setShowOcrModal,
@@ -41,6 +46,37 @@ export const OcrModal = ({
     setActiveTab('wallet');
   };
 
+  // Capacitor Camera로 촬영 (iOS/Android)
+  const handleCameraCapture = async () => {
+    if (Capacitor.isNativePlatform()) {
+      try {
+        const image = await Camera.getPhoto({
+          quality: 80,
+          allowEditing: false,
+          resultType: CameraResultType.Base64,
+          source: CameraSource.Camera,
+          correctOrientation: true,
+        });
+
+        if (image.base64String) {
+          // base64 직접 전달 (파일 변환 불필요)
+          handleOCRBase64(image.base64String);
+        }
+      } catch (err) {
+        console.error('[Camera] Error:', err);
+        // 사용자가 취소한 경우 무시
+        if (err.message?.includes('cancelled') || err.message?.includes('canceled')) {
+          return;
+        }
+        setOcrStatus('notfound');
+        setOcrMessage('카메라 오류: ' + err.message);
+      }
+    } else {
+      // 웹에서는 기존 input 사용
+      fileInputRef.current?.click();
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-black/90 z-50 flex items-end" role="dialog" aria-modal="true">
       <div className="bg-[#1a1a1f] w-full rounded-t-3xl p-6 max-h-[80vh] overflow-y-auto" style={{ maxWidth: '430px', margin: '0 auto', paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))' }}>
@@ -50,12 +86,12 @@ export const OcrModal = ({
           <button onClick={handleClose} className="text-slate-400 text-2xl">×</button>
         </div>
 
-        {/* Hidden File Input */}
+        {/* Hidden File Input (웹 전용) */}
         <input ref={fileInputRef} type="file" accept="image/*" capture="environment" onChange={handleOCR} className="hidden" />
 
         {/* Idle State - Camera Button */}
         {ocrStatus === 'idle' && (
-          <button onClick={() => fileInputRef.current?.click()} className="w-full py-12 bg-slate-800 rounded-2xl border-2 border-dashed border-slate-600 flex flex-col items-center gap-3 active:scale-[0.98]">
+          <button onClick={handleCameraCapture} className="w-full py-12 bg-slate-800 rounded-2xl border-2 border-dashed border-slate-600 flex flex-col items-center gap-3 active:scale-[0.98]">
             <span className="text-5xl">📷</span>
             <span className="font-medium">카드 사진 촬영</span>
           </button>

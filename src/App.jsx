@@ -848,6 +848,90 @@ export default function CardBenefitsApp() {
     }
   };
 
+  // Capacitor Camera에서 base64를 직접 받아서 OCR 처리 (iOS용)
+  const handleOCRBase64 = async (base64Image) => {
+    const runId = ++ocrRunIdRef.current;
+    const safeSet = (fn) => { if (ocrRunIdRef.current === runId) fn(); };
+
+    safeSet(() => setOcrStatus('loading'));
+    safeSet(() => setOcrMessage('카드 분석중...'));
+    trackEvent(EventType.OCR_START);
+
+    if (!navigator.onLine) {
+      showToast('📵 오프라인 상태입니다');
+      safeSet(() => setOcrStatus('network_error'));
+      trackEvent(EventType.OCR_FAIL, { reason: 'offline' });
+      return;
+    }
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUTS.OCR);
+
+      const response = await fetch('/api/ocr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: base64Image }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `OCR 서비스 오류: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (ocrRunIdRef.current !== runId) return;
+
+      const recognizedText = data.text || '';
+      Logger.log('OCR result:', { textLength: recognizedText.length, hasText: !!recognizedText });
+
+      const normalizedText = recognizedText.toLowerCase().replace(/\s/g, '');
+
+      const candidates = Object.values(cardsData)
+        .map(c => ({
+          card: c,
+          match: [
+            ...(c.ocrKeywords || []),
+            c.issuer,
+            c.name,
+            c.issuer + c.name
+          ].filter(k => normalizedText.includes(k.toLowerCase().replace(/\s/g, ''))).length
+        }))
+        .filter(c => c.match > 0)
+        .sort((a, b) => b.match - a.match)
+        .slice(0, CONFIG.UI.MAX_OCR_CANDIDATES)
+        .map(c => ({ ...c.card, matchScore: c.match }));
+
+      safeSet(() => {
+        if (candidates.length > 0) {
+          setOcrCandidates(candidates);
+          setOcrStatus('confirm');
+          showToast(`✨ ${candidates.length}개 카드 인식됨`);
+          trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidates.length });
+        } else {
+          setOcrStatus('notfound');
+          showToast('카드 정보를 찾지 못했습니다');
+          trackEvent(EventType.OCR_FAIL, { reason: 'no_match', textLength: recognizedText.length });
+        }
+      });
+    } catch (err) {
+      if (ocrRunIdRef.current !== runId) return;
+
+      Logger.error('OCR Error:', err);
+      if (err.name === 'AbortError') {
+        showToast('⏱️ OCR 시간 초과');
+        safeSet(() => setOcrStatus('timeout'));
+      } else {
+        showToast('카드 인식에 실패했습니다');
+        safeSet(() => setOcrStatus('notfound'));
+      }
+      trackEvent(EventType.OCR_FAIL, { reason: 'error', message: err.message });
+    }
+  };
+
   const confirmCard = (card) => {
     if (!myCards.includes(card.id)) {
       setMyCards(prev => (prev.includes(card.id) ? prev : [...prev, card.id]));
@@ -1112,6 +1196,7 @@ export default function CardBenefitsApp() {
           ocrMessage={ocrMessage}
           ocrCandidates={ocrCandidates}
           handleOCR={handleOCR}
+          handleOCRBase64={handleOCRBase64}
           confirmCard={confirmCard}
           cancelOcrRun={cancelOcrRun}
           setShowOcrModal={setShowOcrModal}
