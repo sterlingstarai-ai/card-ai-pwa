@@ -62,7 +62,7 @@ export const OcrModal = ({
           const requested = await Camera.requestPermissions();
           console.log('[Camera] Requested permissions:', requested);
           if (requested.camera === 'denied') {
-            alert('카메라 권한이 필요합니다. 설정에서 카메라 권한을 허용해주세요.');
+            window.alert('카메라 권한이 필요합니다. 설정에서 카메라 권한을 허용해주세요.');
             return;
           }
         }
@@ -96,7 +96,7 @@ export const OcrModal = ({
         }
 
         // 오류 메시지 표시
-        alert('카메라 오류: ' + (err.message || '알 수 없는 오류'));
+        window.alert('카메라 오류: ' + (err.message || '알 수 없는 오류'));
       }
     } else {
       // 웹에서는 기존 input 사용

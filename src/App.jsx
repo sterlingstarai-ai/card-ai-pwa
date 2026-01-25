@@ -682,6 +682,143 @@ export default function CardBenefitsApp() {
     });
   };
 
+  // 카드 식별(구글렌즈 유사) 신호 정규화/매칭
+  // - OCR 텍스트가 빈약하거나(또는 0) 디자인 카드처럼 글자가 거의 없을 때 WEB_DETECTION 결과로 보정
+  // - 데이터에 없는 신규 카드는 "인식"은 가능하지만, 혜택 데이터는 별도 수집이 필요(추측 금지)
+  const normalizeKey = (input) => {
+    if (!input) return '';
+    try {
+      return String(input)
+        .toLowerCase()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '') // diacritics 제거 (예: osée -> osee)
+        .replace(/\s+/g, '')
+        .replace(/[^a-z0-9가-힣]+/g, '');
+    } catch {
+      return String(input).toLowerCase().replace(/\s+/g, '');
+    }
+  };
+
+  const buildSignalString = (parts) => {
+    const joined = (parts || []).filter(Boolean).join(' | ');
+    return normalizeKey(joined);
+  };
+
+  const scoreKeyMatch = (signal, key, baseWeight = 1) => {
+    if (!key) return 0;
+    const k = normalizeKey(key);
+    if (!k) return 0;
+    const len = k.length;
+    // 너무 짧은 키워드(3자 미만)는 오탐 가능성이 높으므로 무시
+    if (len < 3) return 0;
+    if (!signal.includes(k)) return 0;
+    // 긴 키워드는 더 높은 가중치
+    const lengthBoost = len >= 10 ? 3 : len >= 6 ? 2 : 1;
+    return baseWeight * lengthBoost;
+  };
+
+  const findCardCandidatesFromSignals = ({ ocrText = '', bestGuessLabels = [], webEntities = [], logos = [] }) => {
+    const logoStrs = (logos || []).map(l => l?.description).filter(Boolean);
+    const entityStrs = (webEntities || []).map(e => e?.description).filter(Boolean);
+    const signal = buildSignalString([ocrText, ...bestGuessLabels, ...entityStrs, ...logoStrs]);
+
+    if (!signal || Object.keys(cardsData).length === 0) return [];
+
+    return Object.values(cardsData)
+      .map(card => {
+        let score = 0;
+
+        // issuer/name은 더 강한 가중치
+        score += scoreKeyMatch(signal, card.issuer, 4);
+        score += scoreKeyMatch(signal, card.name, 5);
+        score += scoreKeyMatch(signal, `${card.issuer} ${card.name}`, 6);
+
+        // OCR 키워드(별칭)
+        for (const k of (card.ocrKeywords || [])) score += scoreKeyMatch(signal, k, 2);
+
+        // 네트워크/등급은 힌트 수준
+        score += scoreKeyMatch(signal, card.network, 1);
+        score += scoreKeyMatch(signal, card.grade, 1);
+
+        // 로고 기반 추가 부스트 (예: VISA/Mastercard가 잡히면 해당 네트워크 카드에 가점)
+        const networkHit = logoStrs.some(ls => normalizeKey(ls) === normalizeKey(card.network));
+        if (networkHit) score += 3;
+
+        return { card, score };
+      })
+      .filter(x => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, CONFIG.UI.MAX_OCR_CANDIDATES)
+      .map(x => ({ ...x.card, matchScore: x.score }));
+  };
+
+  const fetchVisionIdentify = async ({ base64Image, timeoutMs = 20000 }) => {
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const res = await fetch(`${CONFIG.API.BASE_URL}/api/identify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: base64Image }),
+        signal: controller.signal,
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        // 상태 코드별 에러 메시지 분류
+        const status = res.status;
+        let errorMsg = err?.error || 'Vision 서비스 오류';
+        if (status === 429) errorMsg = '요청이 너무 많습니다. 잠시 후 다시 시도해주세요';
+        else if (status === 403) errorMsg = 'API 키 오류 또는 할당량 초과';
+        else if (status === 400) errorMsg = '이미지 형식이 올바르지 않습니다';
+        else if (status >= 500) errorMsg = '서버 오류가 발생했습니다';
+        throw new Error(errorMsg);
+      }
+      return await res.json();
+    } finally {
+      clearTimeout(t);
+    }
+  };
+
+  // 2단계 OCR 처리 공유 로직 (향후 리팩토링용)
+  // 1차: OCR 텍스트 기반 매칭 → 2차: Vision WEB_DETECTION 폴백
+  const _processTwoStepOcr = async ({ base64Image, runId, safeSet, recognizedText }) => {
+    // 1차: OCR 텍스트 기반 후보 추출
+    const candidatesFromOcr = findCardCandidatesFromSignals({ ocrText: recognizedText });
+
+    if (candidatesFromOcr.length > 0) {
+      return { candidates: candidatesFromOcr, source: 'ocr' };
+    }
+
+    // 2차: 구글렌즈 유사 (Vision WEB_DETECTION)로 이미지 기반 힌트 확보
+    safeSet(() => setOcrMessage('이미지 검색 중...'));
+
+    let vision = null;
+    try {
+      vision = await fetchVisionIdentify({ base64Image, timeoutMs: 20000 });
+    } catch (visionErr) {
+      Logger.warn('Vision identify failed:', visionErr);
+      vision = null;
+    }
+
+    // 취소 확인
+    if (ocrRunIdRef.current !== runId) return null;
+
+    const candidatesFromVision = findCardCandidatesFromSignals({
+      ocrText: recognizedText,
+      bestGuessLabels: vision?.web?.bestGuessLabels || [],
+      webEntities: vision?.web?.webEntities || [],
+      logos: vision?.logos || [],
+    });
+
+    if (candidatesFromVision.length > 0) {
+      return { candidates: candidatesFromVision, source: 'vision_web_detection' };
+    }
+
+    return { candidates: [], source: 'none', textLength: recognizedText.length };
+  };
+
   const handleOCR = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -776,31 +913,46 @@ export default function CardBenefitsApp() {
         // 보안: 텍스트 내용 대신 메타데이터만 로깅
         Logger.log('OCR result:', { textLength: recognizedText.length, hasText: !!recognizedText });
 
-        // 공백 제거 + 소문자 변환
-        const normalizedText = recognizedText.toLowerCase().replace(/\s/g, '');
+        // 1차: OCR 텍스트 기반 후보 추출
+        const candidatesFromOcr = findCardCandidatesFromSignals({ ocrText: recognizedText });
 
-        // 카드 매칭
-        const candidates = Object.values(cardsData)
-          .map(c => ({
-            card: c,
-            match: [
-              ...(c.ocrKeywords || []),
-              c.issuer,
-              c.name,
-              c.issuer + c.name
-            ].filter(k => normalizedText.includes(k.toLowerCase().replace(/\s/g, ''))).length
-          }))
-          .filter(c => c.match > 0)
-          .sort((a, b) => b.match - a.match)
-          .slice(0, CONFIG.UI.MAX_OCR_CANDIDATES)
-          .map(c => ({ ...c.card, matchScore: c.match }));
+        if (candidatesFromOcr.length > 0) {
+          safeSet(() => {
+            setOcrCandidates(candidatesFromOcr);
+            setOcrStatus('confirm');
+            showToast(`✨ ${candidatesFromOcr.length}개 카드 인식됨`);
+            trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidatesFromOcr.length, source: 'ocr' });
+          });
+          return;
+        }
+
+        // 2차: 구글렌즈 유사 (Vision WEB_DETECTION)로 이미지 기반 힌트 확보
+        safeSet(() => setOcrMessage('이미지 검색 중...'));
+
+        let vision = null;
+        try {
+          vision = await fetchVisionIdentify({ base64Image, timeoutMs: 20000 });
+        } catch (visionErr) {
+          Logger.warn('Vision identify failed:', visionErr);
+          vision = null;
+        }
+
+        // 취소 확인
+        if (ocrRunIdRef.current !== runId) return;
+
+        const candidatesFromVision = findCardCandidatesFromSignals({
+          ocrText: recognizedText,
+          bestGuessLabels: vision?.web?.bestGuessLabels || [],
+          webEntities: vision?.web?.webEntities || [],
+          logos: vision?.logos || [],
+        });
 
         safeSet(() => {
-          if (candidates.length > 0) {
-            setOcrCandidates(candidates);
+          if (candidatesFromVision.length > 0) {
+            setOcrCandidates(candidatesFromVision);
             setOcrStatus('confirm');
-            showToast(`✨ ${candidates.length}개 카드 인식됨`);
-            trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidates.length });
+            showToast(`✨ ${candidatesFromVision.length}개 카드 인식됨`);
+            trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidatesFromVision.length, source: 'vision_web_detection' });
           } else {
             setOcrStatus('notfound');
             // 민감정보 보호: OCR 텍스트를 사용자에게 노출하지 않음
@@ -887,7 +1039,7 @@ export default function CardBenefitsApp() {
 
       if (!response.ok) {
         let errorData = {};
-        try { errorData = JSON.parse(responseText); } catch {}
+        try { errorData = JSON.parse(responseText); } catch { /* JSON parse error ignored */ }
         console.error('[OCR] Error response:', errorData);
         throw new Error(errorData.error || `OCR 서비스 오류: ${response.status}`);
       }
@@ -908,35 +1060,46 @@ export default function CardBenefitsApp() {
       console.log('[OCR] Recognized text:', recognizedText);
       console.log('[OCR] Logos detected:', data.logos);
 
-      // 악센트 제거 및 정규화 (osée → osee)
-      const normalizeText = (text) => text
-        .toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // 악센트 제거
-        .replace(/\s/g, '');
+      // 1차: OCR 텍스트 기반 후보 추출
+      const candidatesFromOcr = findCardCandidatesFromSignals({ ocrText: recognizedText });
 
-      const normalizedText = normalizeText(recognizedText);
+      if (candidatesFromOcr.length > 0) {
+        safeSet(() => {
+          setOcrCandidates(candidatesFromOcr);
+          setOcrStatus('confirm');
+          showToast(`✨ ${candidatesFromOcr.length}개 카드 인식됨`);
+          trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidatesFromOcr.length, source: 'ocr' });
+        });
+        return;
+      }
 
-      const candidates = Object.values(cardsData)
-        .map(c => ({
-          card: c,
-          match: [
-            ...(c.ocrKeywords || []),
-            c.issuer,
-            c.name,
-            c.issuer + c.name
-          ].filter(k => normalizedText.includes(normalizeText(k))).length
-        }))
-        .filter(c => c.match > 0)
-        .sort((a, b) => b.match - a.match)
-        .slice(0, CONFIG.UI.MAX_OCR_CANDIDATES)
-        .map(c => ({ ...c.card, matchScore: c.match }));
+      // 2차: 구글렌즈 유사 (Vision WEB_DETECTION)로 이미지 기반 힌트 확보
+      safeSet(() => setOcrMessage('이미지 검색 중...'));
+
+      let vision = null;
+      try {
+        vision = await fetchVisionIdentify({ base64Image, timeoutMs: 20000 });
+      } catch (visionErr) {
+        Logger.warn('Vision identify failed:', visionErr);
+        vision = null;
+      }
+
+      // 취소 확인
+      if (ocrRunIdRef.current !== runId) return;
+
+      const candidatesFromVision = findCardCandidatesFromSignals({
+        ocrText: recognizedText,
+        bestGuessLabels: vision?.web?.bestGuessLabels || [],
+        webEntities: vision?.web?.webEntities || [],
+        logos: vision?.logos || [],
+      });
 
       safeSet(() => {
-        if (candidates.length > 0) {
-          setOcrCandidates(candidates);
+        if (candidatesFromVision.length > 0) {
+          setOcrCandidates(candidatesFromVision);
           setOcrStatus('confirm');
-          showToast(`✨ ${candidates.length}개 카드 인식됨`);
-          trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidates.length });
+          showToast(`✨ ${candidatesFromVision.length}개 카드 인식됨`);
+          trackEvent(EventType.OCR_SUCCESS, { candidateCount: candidatesFromVision.length, source: 'vision_web_detection' });
         } else {
           setOcrStatus('notfound');
           showToast('카드 정보를 찾지 못했습니다');

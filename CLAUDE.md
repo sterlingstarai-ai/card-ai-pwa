@@ -77,11 +77,14 @@ vercel --prod        # Vercel 배포
 
 ### iOS
 - **버전 1.0**: ✅ 승인 완료 (2026년 1월 23일)
-- **버전 1.0.1**: 🟡 심사 대기 중 (빌드 3)
-  - 제출일: 2026년 1월 23일
+- **버전 1.0.1**: ✅ 승인 완료
+- **버전 1.0.2**: 🟡 심사 대기 중 (빌드 4)
+  - 제출일: 2026년 1월 26일
   - **수정 내용**:
-    - OCR 카드 스캔 에러 처리 개선
-    - 지도 호텔 좌표 오류 수정 (JW메리어트 서울 등)
+    - OCR 카드 인식 대폭 개선 (Google Vision WEB_DETECTION 폴백)
+    - 2단계 인식 로직: 1차 OCR → 2차 이미지 검색
+    - 에러 처리 및 사용자 메시지 개선
+    - 코드 품질 개선 (정규식, 키워드 필터, 보안)
 
 ### Android (테스터 모집 중)
 - **상태**: 🟡 비공개 테스트 준비
@@ -107,38 +110,41 @@ vercel --prod        # Vercel 배포
 
 ---
 
-## 마지막 작업 세션 (2026-01-25)
+## 마지막 작업 세션 (2026-01-26)
 
 ### 완료된 작업
-1. **OCR 카드 스캔 완전 수정**:
-   - Capacitor Camera 플러그인 사용 (base64 직접 반환)
-   - API URL 절대경로로 변경 (`CONFIG.API.BASE_URL` 사용)
-   - 악센트 문자 정규화 추가 (osée → osee 매칭)
-   - Safari/WKWebView JSON 파싱 호환성 수정
-   - 이미지 품질: 70%, 최대 1600x1600 (Google Vision 4MB 제한)
+1. **OCR 카드 인식 대폭 개선 (구글렌즈 유사 방식)**:
+   - `/api/identify.js` 신규 추가 (Vision WEB_DETECTION + LOGO_DETECTION)
+   - **2단계 인식 로직**:
+     - 1차: 기존 OCR 텍스트 기반 매칭
+     - 2차: OCR 실패 시 → WEB_DETECTION (구글렌즈 유사) 폴백
+   - 신호 매칭 함수 추가: `normalizeKey`, `buildSignalString`, `scoreKeyMatch`, `findCardCandidatesFromSignals`
+   - diacritics 정규화 개선 (osée → osee)
+   - 가중치 기반 점수 시스템 (issuer/name > ocrKeywords > network/grade)
 
-2. **Vercel 환경변수 추가**:
-   - `VISION_API_KEY`: Google Cloud Vision API 키
-
-3. **카드 데이터 확장** (총 약 110개):
-   - 신세계 THE S (삼성)
-   - 코스트코 리워드, 이마트 e카드, SSG.COM 카드
-   - 현대백화점, 갤러리아 VIP, 롯데백화점
-   - AK플라자, 홈플러스
-   - 각 카드사 법인카드 (BC, KB, 신한, 삼성)
-
-4. **커밋**: `eb38362` - fix: OCR 카드 인식 개선 및 카드 데이터 확장
+2. **린트 에러 수정**:
+   - OcrModal.jsx: `alert` → `window.alert`
+   - App.jsx: 빈 catch 블록 수정
 
 ### 핵심 기술 메모
 
-#### OCR 플로우 (iOS)
+#### OCR 플로우 (2단계)
 ```
 Capacitor Camera → base64 (quality:70, 1600px)
-    → fetch(CONFIG.API.BASE_URL + '/api/ocr')
-    → Google Vision API
-    → 텍스트 정규화 (악센트 제거, 소문자, 공백 제거)
-    → cards.json ocrKeywords 매칭
+    → /api/ocr (DOCUMENT_TEXT_DETECTION)
+    → 1차: findCardCandidatesFromSignals(ocrText)
+    → 후보 있으면 완료
+
+    → 후보 없으면 2차:
+    → /api/identify (WEB_DETECTION + LOGO_DETECTION)
+    → findCardCandidatesFromSignals(ocrText + bestGuessLabels + webEntities + logos)
+    → 카드 후보 표시
 ```
+
+#### 신규 API 엔드포인트
+| 파일 | 용도 |
+|------|------|
+| `api/identify.js` | Vision WEB_DETECTION (구글렌즈 유사) |
 
 #### 중요 설정값
 | 항목 | 값 |
@@ -148,19 +154,41 @@ Capacitor Camera → base64 (quality:70, 1600px)
 | 이미지 품질 | 70% (OcrModal.jsx) |
 | 이미지 최대 크기 | 1600x1600 |
 | Google Vision 제한 | 4MB |
+| WEB_DETECTION 타임아웃 | 20초 |
+
+#### 매칭 가중치
+| 신호 유형 | 가중치 |
+|----------|--------|
+| issuer + name 조합 | 6 |
+| name | 5 |
+| issuer | 4 |
+| 네트워크 로고 매칭 | +3 |
+| ocrKeywords | 2 |
+| network / grade | 1 |
 
 #### 알려진 제한사항
-- OCR은 `ocrKeywords`에 등록된 카드만 인식
-- 법인카드는 회사명이 아닌 카드 종류로만 매칭
-- 체크카드/법인카드 중 일부는 데이터 미등록
+- WEB_DETECTION은 OCR 실패 시에만 호출 (비용/지연 최소화)
+- 카드 데이터에 없는 신규 카드는 인식 후 "데이터 없음" 처리 필요
+- 혜택 데이터는 출처 검증 없이 자동 생성 금지
 
 ### 현재 상태
 - **iOS 1.0**: 출시 완료
-- **iOS 1.0.1**: 심사 대기 중
+- **iOS 1.0.1**: 출시 완료
+- **iOS 1.0.2**: 심사 대기 중 (빌드 4)
 - **Android**: 비공개 테스트 준비 중
-- **OCR**: ✅ 작동 확인 (카드 데이터 있으면 인식됨)
+- **OCR**: ✅ 2단계 인식 적용 (구글렌즈 유사 폴백)
+
+### 완료된 추가 작업 (2026-01-26 오후)
+1. **코드 리뷰 권고사항 적용**:
+   - `normalizeKey` 정규식 개선 (`[\u0300-\u036f]`)
+   - `scoreKeyMatch` 최소 키워드 길이 필터 (3자 미만 무시)
+   - `fetchVisionIdentify` 상태 코드별 에러 메시지
+   - `api/identify.js` 프로덕션 에러 메시지 보안 강화
+2. **Vercel 프로덕션 배포 완료**
+3. **iOS 1.0.2 (빌드 4) 앱스토어 심사 제출 완료**
 
 ### 다음 할 일
-- iOS 1.0.2 빌드 및 제출 (OCR 수정 반영)
-- 누락된 카드 데이터 추가 (사용자 피드백 기반)
-- Android 테스터 모집 후 비공개 테스트 시작
+- iOS 1.0.2 심사 결과 확인 (24-48시간)
+- Android 테스터 20명 모집 → 비공개 테스트 시작
+- 체크카드 데이터 추가 검토
+- 카드 데이터 확장 (인식용 목록은 넓게, 혜택 데이터는 출처 기반)
