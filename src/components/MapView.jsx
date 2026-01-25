@@ -305,14 +305,18 @@ export const MapView = ({
     }
   }, [mapReady, filteredPlaces]);
 
-  // Update selected marker image without rebuilding everything
-  const lastSelectedRef = useRef(null);
+  // Update selected/preview marker image without rebuilding everything
+  const lastHighlightedRef = useRef(null);
   useEffect(() => {
     if (!mapReady || !window.kakao?.maps) return;
     const kakao = window.kakao;
 
-    const last = lastSelectedRef.current;
-    if (last && markersByIdRef.current.has(last)) {
+    // previewPlace가 있으면 그것을 하이라이트, 없으면 selectedPlaceId
+    const highlightId = previewPlace?.id || selectedPlaceId;
+
+    // 이전 하이라이트 해제
+    const last = lastHighlightedRef.current;
+    if (last && last !== highlightId && markersByIdRef.current.has(last)) {
       const place = filteredPlaces.find((p) => p?.id === last);
       if (place) {
         const emoji = placeTypeConfig[place.type]?.emoji || '📍';
@@ -323,20 +327,21 @@ export const MapView = ({
       }
     }
 
-    if (selectedPlaceId && markersByIdRef.current.has(selectedPlaceId)) {
-      const place = filteredPlaces.find((p) => p?.id === selectedPlaceId);
+    // 새로운 하이라이트 설정
+    if (highlightId && markersByIdRef.current.has(highlightId)) {
+      const place = filteredPlaces.find((p) => p?.id === highlightId);
       if (place) {
         const emoji = placeTypeConfig[place.type]?.emoji || '📍';
         const selectedImage = getOrCreateMarkerImage(kakao, markerImageCacheRef, emoji, true);
-        const marker = markersByIdRef.current.get(selectedPlaceId);
+        const marker = markersByIdRef.current.get(highlightId);
         marker.setImage(selectedImage);
         marker.setZIndex(10);
       }
     }
 
-    lastSelectedRef.current = selectedPlaceId || null;
+    lastHighlightedRef.current = highlightId || null;
     if (clustererRef.current) clustererRef.current.redraw();
-  }, [mapReady, selectedPlaceId, filteredPlaces]);
+  }, [mapReady, selectedPlaceId, previewPlace, filteredPlaces]);
 
   // User location marker + pan once when a real location arrives
   const lastPanLocationRef = useRef(null);

@@ -524,91 +524,37 @@ export default function CardBenefitsApp() {
     setLocationStatus('loading');
     trackEvent(EventType.LOCATION_PROMPT);
 
-    // 타임아웃 헬퍼 (iOS 시뮬레이터에서 API가 응답 안 하는 경우 대비)
-    const withTimeout = (promise, ms, errorMsg) => {
-      return Promise.race([
-        promise,
-        new Promise((_, reject) => setTimeout(() => reject(new Error(errorMsg)), ms))
-      ]);
-    };
-
     // Capacitor 네이티브 앱인 경우 네이티브 플러그인 사용
     if (Capacitor.isNativePlatform()) {
       try {
-        console.log('[Location] Native platform detected, checking permissions...');
+        // 권한 요청 (iOS에서 팝업 표시)
+        const permission = await Geolocation.requestPermissions();
+        console.log('[Location] Permission result:', permission.location);
 
-        // 먼저 현재 권한 상태 확인 (5초 타임아웃)
-        let currentStatus;
-        try {
-          currentStatus = await withTimeout(
-            Geolocation.checkPermissions(),
-            5000,
-            'Permission check timeout'
-          );
-          console.log('[Location] Current permission status:', JSON.stringify(currentStatus));
-        } catch (checkErr) {
-          console.warn('[Location] checkPermissions failed:', checkErr.message);
-          // 권한 확인 실패 시 바로 요청 시도
-          currentStatus = { location: 'prompt' };
-        }
-
-        // 권한 상태에 따라 처리
-        if (currentStatus.location === 'denied') {
-          console.log('[Location] Permission previously denied');
-          setUserLocation(CONFIG.DEFAULTS.LOCATION);
-          setLocationStatus('fallback');
+        if (permission.location === 'denied') {
+          setUserLocation(null);
+          setLocationStatus('denied');
           showToast(MESSAGES.LOCATION.DENIED);
-          trackEvent(EventType.LOCATION_DENIED, { reason: 'previously_denied' });
+          trackEvent(EventType.LOCATION_DENIED, { reason: 'user_denied' });
           return;
         }
 
-        // 권한이 아직 요청되지 않은 경우 (prompt) 또는 부분 허용인 경우
-        if (currentStatus.location === 'prompt' || currentStatus.location === 'prompt-with-rationale') {
-          console.log('[Location] Requesting permission (will show popup)...');
-          try {
-            const permission = await withTimeout(
-              Geolocation.requestPermissions(),
-              10000,
-              'Permission request timeout'
-            );
-            console.log('[Location] Permission result:', JSON.stringify(permission));
-
-            if (permission.location === 'denied') {
-              setUserLocation(CONFIG.DEFAULTS.LOCATION);
-              setLocationStatus('fallback');
-              showToast(MESSAGES.LOCATION.DENIED);
-              trackEvent(EventType.LOCATION_DENIED, { reason: 'user_denied' });
-              return;
-            }
-          } catch (permErr) {
-            console.warn('[Location] requestPermissions failed:', permErr.message);
-            // 권한 요청 실패해도 위치 가져오기 시도
-          }
-        }
-
-        // 위치 가져오기 (granted 또는 방금 허용된 경우)
-        console.log('[Location] Getting current position...');
-        const position = await withTimeout(
-          Geolocation.getCurrentPosition({
-            enableHighAccuracy: false, // 시뮬레이터에서는 false가 더 안정적
-            timeout: 10000,
-            maximumAge: 60000
-          }),
-          15000,
-          'Position request timeout'
-        );
-        console.log('[Location] Position obtained:', position.coords.latitude, position.coords.longitude);
+        // 위치 가져오기
+        const position = await Geolocation.getCurrentPosition({
+          enableHighAccuracy: true,
+          timeout: CONFIG.TIMEOUTS.LOCATION,
+          maximumAge: 60000
+        });
+        console.log('[Location] Position:', position.coords.latitude, position.coords.longitude);
         setUserLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
         setLocationStatus('success');
         showToast(MESSAGES.LOCATION.SUCCESS);
         trackEvent(EventType.LOCATION_GRANTED);
       } catch (err) {
-        console.error('[Location] Capacitor Geolocation error:', err);
-        console.error('[Location] Error details:', err.message, err.code);
-        // 기본 위치(서울)로 폴백
-        setUserLocation(CONFIG.DEFAULTS.LOCATION);
-        setLocationStatus('fallback');
-        showToast('📍 기본 위치(서울) 사용');
+        console.error('[Location] Error:', err.message);
+        setUserLocation(null);
+        setLocationStatus('denied');
+        showToast(MESSAGES.LOCATION.DENIED);
         trackEvent(EventType.LOCATION_DENIED, { reason: 'error', message: err.message });
       }
       return;
@@ -630,17 +576,10 @@ export default function CardBenefitsApp() {
         trackEvent(EventType.LOCATION_GRANTED);
       },
       err => {
-        if (err.code === 1) {
-          setUserLocation(null);
-          setLocationStatus('denied');
-          showToast(MESSAGES.LOCATION.DENIED);
-          trackEvent(EventType.LOCATION_DENIED, { reason: 'user_denied' });
-        } else {
-          setUserLocation(CONFIG.DEFAULTS.LOCATION);
-          setLocationStatus('fallback');
-          showToast(MESSAGES.LOCATION.FALLBACK);
-          trackEvent(EventType.LOCATION_DENIED, { reason: 'error', code: err.code });
-        }
+        setUserLocation(null);
+        setLocationStatus('denied');
+        showToast(MESSAGES.LOCATION.DENIED);
+        trackEvent(EventType.LOCATION_DENIED, { reason: err.code === 1 ? 'user_denied' : 'error', code: err.code });
       },
       { timeout: CONFIG.TIMEOUTS.LOCATION, enableHighAccuracy: true, maximumAge: 60000 }
     );
@@ -657,9 +596,9 @@ export default function CardBenefitsApp() {
   }, [dataLoaded, locationStatus]);
 
   const handleNearby = async () => {
-    // fallback(기본 서울)이거나 idle이면 실제 위치 요청 시도
-    // denied는 이미 거부했으므로 재요청 안 함
-    if (locationStatus === 'idle' || locationStatus === 'fallback') {
+    // idle이면 위치 요청 시도
+    // denied여도 다시 시도할 수 있게 함 (사용자가 설정에서 변경했을 수 있음)
+    if (locationStatus === 'idle' || locationStatus === 'denied') {
       await requestLocation();
     }
     setShowPlaceSheet(true);
@@ -671,70 +610,76 @@ export default function CardBenefitsApp() {
     }
   };
 
-  // OCR 이미지를 JPEG로 변환 (EXIF 회전 보정 + iOS HEIC 호환 + 동적 압축)
-  const compressImage = async (file, maxSize = 1920, targetMaxBytes = 3 * 1024 * 1024) => {
-    // createImageBitmap으로 EXIF 회전 자동 보정 시도
-    let imgSource;
-    let objectUrl = null;
+  // OCR 이미지를 JPEG로 변환 (iOS HEIC 호환성 개선)
+  const compressImage = async (file, maxSize = 1920) => {
+    console.log('[OCR] compressImage start:', file.type, file.size);
 
-    try {
-      // createImageBitmap은 EXIF orientation을 자동 적용 (iOS Safari 15+, Chrome, Firefox)
-      if (typeof createImageBitmap === 'function') {
-        imgSource = await createImageBitmap(file, { imageOrientation: 'from-image' });
-      } else {
-        throw new Error('createImageBitmap not supported');
-      }
-    } catch {
-      // fallback: Image() 사용 (EXIF 미적용 가능성)
-      imgSource = await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        console.log('[OCR] FileReader loaded, length:', reader.result?.length);
+
         const img = new Image();
-        objectUrl = URL.createObjectURL(file);
-        img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error('이미지를 불러올 수 없습니다'));
-        img.src = objectUrl;
-      });
-    }
 
-    try {
-      let { width, height } = imgSource;
+        img.onload = () => {
+          console.log('[OCR] Image loaded:', img.width, 'x', img.height);
 
-      // 최대 크기 제한
-      if (width > maxSize || height > maxSize) {
-        if (width > height) {
-          height = Math.round((height * maxSize) / width);
-          width = maxSize;
-        } else {
-          width = Math.round((width * maxSize) / height);
-          height = maxSize;
-        }
-      }
+          try {
+            let { width, height } = img;
 
-      const canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(imgSource, 0, 0, width, height);
+            // 최대 크기 제한
+            if (width > maxSize || height > maxSize) {
+              if (width > height) {
+                height = Math.round((height * maxSize) / width);
+                width = maxSize;
+              } else {
+                width = Math.round((width * maxSize) / height);
+                height = maxSize;
+              }
+            }
 
-      // 동적 압축: targetMaxBytes 이하가 될 때까지 quality 낮춤
-      let quality = 0.85;
-      let blob = null;
-      const minQuality = 0.4;
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
 
-      while (quality >= minQuality) {
-        blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
-        if (!blob) {
-          throw new Error('이미지 변환에 실패했습니다');
-        }
-        if (blob.size <= targetMaxBytes) break;
-        quality -= 0.1;
-      }
+            // JPEG로 변환
+            canvas.toBlob(
+              (blob) => {
+                if (blob) {
+                  console.log('[OCR] Blob created:', blob.size);
+                  resolve(blob);
+                } else {
+                  console.error('[OCR] toBlob returned null');
+                  reject(new Error('이미지 변환 실패'));
+                }
+              },
+              'image/jpeg',
+              0.8
+            );
+          } catch (err) {
+            console.error('[OCR] Canvas error:', err);
+            reject(err);
+          }
+        };
 
-      Logger.log(`Image converted: ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB (quality: ${(quality * 100).toFixed(0)}%)`);
-      return blob;
-    } finally {
-      if (objectUrl) URL.revokeObjectURL(objectUrl);
-      if (imgSource && typeof imgSource.close === 'function') imgSource.close();
-    }
+        img.onerror = (e) => {
+          console.error('[OCR] Image load error:', e);
+          reject(new Error('이미지를 불러올 수 없습니다'));
+        };
+
+        img.src = reader.result;
+      };
+
+      reader.onerror = (e) => {
+        console.error('[OCR] FileReader error:', e);
+        reject(new Error('파일을 읽을 수 없습니다'));
+      };
+
+      reader.readAsDataURL(file);
+    });
   };
 
   const handleOCR = async (e) => {
