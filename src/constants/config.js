@@ -10,6 +10,12 @@ export const CONFIG = {
     DEBUG: false,  // 프로덕션: 디버그 모드 비활성화
   },
 
+  // API 설정
+  API: {
+    // Capacitor 앱에서는 절대 URL 필요 (capacitor:// 프로토콜은 Vercel API 라우팅 안됨)
+    BASE_URL: 'https://card-ai-pi.vercel.app',
+  },
+
   // 기본값
   DEFAULTS: {
     CARDS: [], // Empty by default for onboarding demo

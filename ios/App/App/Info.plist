@@ -37,6 +37,8 @@
 	<string>주변 혜택을 추천해드리기 위해 위치 정보가 필요합니다. 위치를 허용하지 않아도 앱의 핵심 기능(카드 검색, 지갑, 혜택 조회)은 정상 이용 가능합니다.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>저장된 카드 이미지를 스캔하기 위해 사진 라이브러리 접근이 필요합니다. 사진 접근을 허용하지 않아도 카메라로 직접 촬영하거나 수동 등록이 가능합니다.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>촬영한 카드 이미지를 저장하기 위해 사진 라이브러리 접근이 필요합니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

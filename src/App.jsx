@@ -750,7 +750,8 @@ export default function CardBenefitsApp() {
 
       try {
         // Call serverless OCR proxy (keeps API key secure)
-        const response = await fetch('/api/ocr', {
+        // Capacitor 앱에서는 절대 URL 필요 (capacitor:// 프로토콜은 Vercel API 라우팅 안됨)
+        const response = await fetch(`${CONFIG.API.BASE_URL}/api/ocr`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ image: base64Image }),
@@ -868,7 +869,8 @@ export default function CardBenefitsApp() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUTS.OCR);
 
-      const response = await fetch('/api/ocr', {
+      console.log('[OCR] Sending request, base64 length:', base64Image.length);
+      const response = await fetch(`${CONFIG.API.BASE_URL}/api/ocr`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ image: base64Image }),
@@ -876,19 +878,43 @@ export default function CardBenefitsApp() {
       });
 
       clearTimeout(timeoutId);
+      console.log('[OCR] Response status:', response.status);
+
+      // Safari/WKWebView에서 response.json() 파싱 오류 방지
+      const responseText = await response.text();
+      console.log('[OCR] Response text length:', responseText.length);
+      console.log('[OCR] Response text preview:', responseText.substring(0, 200));
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
+        let errorData = {};
+        try { errorData = JSON.parse(responseText); } catch {}
+        console.error('[OCR] Error response:', errorData);
         throw new Error(errorData.error || `OCR 서비스 오류: ${response.status}`);
       }
 
-      const data = await response.json();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseErr) {
+        console.error('[OCR] JSON parse error:', parseErr.message);
+        console.error('[OCR] Raw response:', responseText);
+        throw new Error('응답 파싱 실패');
+      }
+      console.log('[OCR] Response data:', data);
       if (ocrRunIdRef.current !== runId) return;
 
       const recognizedText = data.text || '';
       Logger.log('OCR result:', { textLength: recognizedText.length, hasText: !!recognizedText });
+      console.log('[OCR] Recognized text:', recognizedText);
+      console.log('[OCR] Logos detected:', data.logos);
 
-      const normalizedText = recognizedText.toLowerCase().replace(/\s/g, '');
+      // 악센트 제거 및 정규화 (osée → osee)
+      const normalizeText = (text) => text
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // 악센트 제거
+        .replace(/\s/g, '');
+
+      const normalizedText = normalizeText(recognizedText);
 
       const candidates = Object.values(cardsData)
         .map(c => ({
@@ -898,7 +924,7 @@ export default function CardBenefitsApp() {
             c.issuer,
             c.name,
             c.issuer + c.name
-          ].filter(k => normalizedText.includes(k.toLowerCase().replace(/\s/g, ''))).length
+          ].filter(k => normalizedText.includes(normalizeText(k))).length
         }))
         .filter(c => c.match > 0)
         .sort((a, b) => b.match - a.match)
@@ -921,6 +947,9 @@ export default function CardBenefitsApp() {
       if (ocrRunIdRef.current !== runId) return;
 
       Logger.error('OCR Error:', err);
+      console.error('[OCR] Error name:', err.name);
+      console.error('[OCR] Error message:', err.message);
+      console.error('[OCR] Error stack:', err.stack);
       if (err.name === 'AbortError') {
         showToast('⏱️ OCR 시간 초과');
         safeSet(() => setOcrStatus('timeout'));

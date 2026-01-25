@@ -48,31 +48,59 @@ export const OcrModal = ({
 
   // Capacitor Camera로 촬영 (iOS/Android)
   const handleCameraCapture = async () => {
+    console.log('[Camera] handleCameraCapture called, isNative:', Capacitor.isNativePlatform());
+
     if (Capacitor.isNativePlatform()) {
       try {
+        // 카메라 권한 먼저 확인
+        console.log('[Camera] Checking permissions...');
+        const permissions = await Camera.checkPermissions();
+        console.log('[Camera] Current permissions:', permissions);
+
+        if (permissions.camera === 'denied') {
+          console.log('[Camera] Permission denied, requesting...');
+          const requested = await Camera.requestPermissions();
+          console.log('[Camera] Requested permissions:', requested);
+          if (requested.camera === 'denied') {
+            alert('카메라 권한이 필요합니다. 설정에서 카메라 권한을 허용해주세요.');
+            return;
+          }
+        }
+
+        console.log('[Camera] Opening camera...');
         const image = await Camera.getPhoto({
-          quality: 80,
+          quality: 70,
           allowEditing: false,
           resultType: CameraResultType.Base64,
           source: CameraSource.Camera,
           correctOrientation: true,
+          width: 1600,
+          height: 1600,
         });
 
+        console.log('[Camera] Photo taken, base64 length:', image.base64String?.length);
+
         if (image.base64String) {
-          // base64 직접 전달 (파일 변환 불필요)
           handleOCRBase64(image.base64String);
         }
       } catch (err) {
         console.error('[Camera] Error:', err);
+        console.error('[Camera] Error name:', err.name);
+        console.error('[Camera] Error message:', err.message);
+
         // 사용자가 취소한 경우 무시
-        if (err.message?.includes('cancelled') || err.message?.includes('canceled')) {
+        if (err.message?.includes('cancel') || err.message?.includes('Cancel') ||
+            err.message?.includes('User denied') || err.message?.includes('dismissed')) {
+          console.log('[Camera] User cancelled');
           return;
         }
-        setOcrStatus('notfound');
-        setOcrMessage('카메라 오류: ' + err.message);
+
+        // 오류 메시지 표시
+        alert('카메라 오류: ' + (err.message || '알 수 없는 오류'));
       }
     } else {
       // 웹에서는 기존 input 사용
+      console.log('[Camera] Web platform, using file input');
       fileInputRef.current?.click();
     }
   };
