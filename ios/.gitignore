@@ -8,6 +8,3 @@ Pods/
 build/
 DerivedData/
 *.xcuserstate
-
-# Swift Package Manager - let Xcode Cloud resolve fresh
-*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
