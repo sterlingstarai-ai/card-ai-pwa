@@ -25,7 +25,7 @@
     "data:merge": "node scripts/ingest/03_merge_to_src_data.js"
   },
   "dependencies": {
-    "@capacitor/android": "^8.0.1",
+    "@capacitor/android": "^8.0.2",
     "@capacitor/camera": "^8.0.0",
     "@capacitor/cli": "^8.0.2",
     "@capacitor/core": "^8.0.2",
