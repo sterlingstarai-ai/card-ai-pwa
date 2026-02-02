@@ -73,6 +73,58 @@ vercel --prod        # Vercel 배포
 
 2. **Kakao Maps 도메인 제한**: capacitor.config.json의 hostname이 카카오 개발자 콘솔에 등록된 도메인과 일치해야 함.
 
+## Xcode Cloud 트러블슈팅 가이드
+
+### ⚠️ 빌드 실패 시 확인 순서 (중요!)
+
+**에러 메시지를 맹신하지 말 것!** 실제 원인과 다를 수 있음.
+
+1. **스키마 공유 여부 확인** (가장 먼저!)
+   ```bash
+   ls ios/App/App.xcodeproj/xcshareddata/xcschemes/
+   ```
+   - 없으면 Xcode에서 Scheme → Manage Schemes → Shared 체크
+   - 또는 `App.xcscheme` 파일 직접 생성
+
+2. **Package.resolved 존재 여부**
+   ```bash
+   cat ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+   ```
+
+3. **ci_post_clone.sh 스크립트 확인**
+   - Package.resolved를 삭제하는 코드가 있으면 안 됨
+   - 단순하게 유지: npm ci → build → cap sync
+
+### 필수 파일 목록
+
+| 파일 | 용도 |
+|------|------|
+| `ios/App/App.xcodeproj/xcshareddata/xcschemes/App.xcscheme` | 공유 스키마 (필수!) |
+| `ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved` | SPM 의존성 잠금 |
+| `ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings` | 워크스페이스 설정 |
+| `ios/App/ci_scripts/ci_post_clone.sh` | 빌드 전 스크립트 |
+
+### 흔한 에러와 실제 원인
+
+| 에러 메시지 | 실제 원인 (확인 순서) |
+|------------|---------------------|
+| "Package.resolved required" | 1. 스키마 없음 2. Package.resolved 없음 |
+| "automatic dependency resolution is disabled" | 1. 스키마 없음 2. WorkspaceSettings 문제 |
+| "scheme not found" | 스키마가 공유되지 않음 |
+
+### ci_post_clone.sh 권장 구조
+
+```bash
+#!/bin/sh
+set -e
+cd "$CI_PRIMARY_REPOSITORY_PATH"
+brew install node
+npm ci
+npm run build
+npx cap sync ios
+# Package.resolved 건드리지 않기!
+```
+
 ## 앱스토어 제출 상태
 
 ### iOS
