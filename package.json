@@ -44,7 +44,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "openai": "^4.77.0",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "vite": "^5.0.0",
     "vite-plugin-pwa": "^0.17.4"
   }
