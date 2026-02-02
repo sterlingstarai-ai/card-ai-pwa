@@ -1,27 +1,23 @@
 #!/bin/sh
 
 # Xcode Cloud ci_post_clone.sh
-# This script runs after the repository is cloned
-
 set -e
 
-echo "=== Installing Node.js dependencies ==="
+echo "=== Installing Node.js ==="
 cd "$CI_PRIMARY_REPOSITORY_PATH"
-
-# Install Node.js using Homebrew (Xcode Cloud has Homebrew)
 brew install node
 
-# Install npm dependencies
+echo "=== Installing npm dependencies ==="
 npm ci
 
-# Build the web app
+echo "=== Building web app ==="
 npm run build
 
-# Sync Capacitor
+echo "=== Syncing Capacitor ==="
 npx cap sync ios
 
-# Remove stale Package.resolved to force dependency resolution
-echo "=== Removing stale Package.resolved ==="
-rm -f ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+echo "=== Resolving Swift Package Dependencies ==="
+cd ios/App
+xcodebuild -resolvePackageDependencies -project App.xcodeproj -scheme App
 
-echo "=== Capacitor sync complete ==="
+echo "=== Build preparation complete ==="
