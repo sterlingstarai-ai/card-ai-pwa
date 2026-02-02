@@ -20,4 +20,8 @@ npm run build
 # Sync Capacitor
 npx cap sync ios
 
+# Remove stale Package.resolved to force dependency resolution
+echo "=== Removing stale Package.resolved ==="
+rm -f ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+
 echo "=== Capacitor sync complete ==="
