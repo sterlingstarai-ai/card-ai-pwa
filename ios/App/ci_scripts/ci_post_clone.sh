@@ -16,8 +16,11 @@ npm run build
 echo "=== Syncing Capacitor ==="
 npx cap sync ios
 
+echo "=== Removing old Package.resolved ==="
+rm -f ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+
 echo "=== Resolving Swift Package Dependencies ==="
 cd ios/App
-xcodebuild -resolvePackageDependencies -project App.xcodeproj -scheme App
+xcodebuild -resolvePackageDependencies -project App.xcodeproj -clonedSourcePackagesDirPath /tmp/SourcePackages
 
 echo "=== Build preparation complete ==="
