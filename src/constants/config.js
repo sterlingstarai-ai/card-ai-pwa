@@ -5,7 +5,7 @@
 export const CONFIG = {
   // 앱 정보
   APP: {
-    VERSION: 'Final',
+    VERSION: '1.0.4',
     NAME: 'Card AI',
     DEBUG: false,  // 프로덕션: 디버그 모드 비활성화
   },
@@ -132,8 +132,8 @@ export const CONFIG = {
 
   // 빌드 정보
   BUILD: {
-    VERSION: '1.0.2',
-    BUILD_NUMBER: '4',
+    VERSION: '1.0.4',
+    BUILD_NUMBER: '8',
     COMMIT_HASH: import.meta.env.VITE_COMMIT_HASH || 'dev',
     BUILD_DATE: import.meta.env.VITE_BUILD_DATE || new Date().toISOString().split('T')[0],
   },

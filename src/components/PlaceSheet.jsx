@@ -157,7 +157,6 @@ export const PlaceSheet = ({
               selectedCategory={placeCategoryFilter}
               onPlaceSelect={selectPlace}
               onClose={() => setShowPlaceSheet(false)}
-              onError={() => setPlaceSheetView('list')}
               benefitsData={benefitsData}
               cardsData={cardsData}
               myCards={myCards}

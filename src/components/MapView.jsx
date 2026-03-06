@@ -12,7 +12,26 @@ import { Capacitor } from '@capacitor/core';
 import { placeTypeConfig } from '../lib/utils';
 import { fetchKakaoPlacesByRectPaged } from '../lib/kakao-places';
 
-const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_APP_KEY || '';
+export const normalizeKakaoAppKey = (rawValue) => {
+  const raw = String(rawValue ?? '').trim();
+  if (!raw) return '';
+
+  const tokens = raw
+    .split(/[\s"'`,]+/)
+    .map((token) => token.trim())
+    .filter(Boolean);
+
+  const extracted = tokens.find((token) => /^[a-f0-9]{32}$/i.test(token));
+  if (extracted) return extracted;
+
+  if (/^your_/i.test(raw) || /^vite_[a-z0-9_]+$/i.test(raw)) {
+    return '';
+  }
+
+  return raw;
+};
+
+const KAKAO_APP_KEY = normalizeKakaoAppKey(import.meta.env.VITE_KAKAO_APP_KEY);
 
 // 카테고리별 검색 쿼리
 const CATEGORY_SEARCH_QUERIES = {

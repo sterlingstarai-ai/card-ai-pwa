@@ -145,7 +145,7 @@ export const ReportModal = ({
     setError(null);
 
     try {
-      const response = await fetch('/api/report', {
+      const response = await fetch(`${CONFIG.API.BASE_URL}/api/report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
