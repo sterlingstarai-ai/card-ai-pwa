@@ -1,0 +1,576 @@
+[
+  {
+    "id": "icn-t1",
+    "name": "인천공항 제1터미널",
+    "type": "airport",
+    "tags": [
+      "airport",
+      "lounge",
+      "valet",
+      "cafe"
+    ],
+    "benefitCount": 206
+  },
+  {
+    "id": "icn-t2",
+    "name": "인천공항 제2터미널",
+    "type": "airport",
+    "tags": [
+      "airport",
+      "lounge",
+      "valet",
+      "cafe"
+    ],
+    "benefitCount": 206
+  },
+  {
+    "id": "gmp",
+    "name": "김포공항",
+    "type": "airport",
+    "tags": [
+      "airport",
+      "lounge",
+      "valet"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "pus",
+    "name": "김해공항",
+    "type": "airport",
+    "tags": [
+      "airport",
+      "lounge"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "tae",
+    "name": "대구공항",
+    "type": "airport",
+    "tags": [
+      "airport",
+      "lounge"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "matina-t1-east",
+    "name": "마티나라운지 T1 동편",
+    "type": "lounge",
+    "tags": [
+      "lounge",
+      "airport"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "matina-t1-west",
+    "name": "마티나라운지 T1 서편",
+    "type": "lounge",
+    "tags": [
+      "lounge",
+      "airport"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "matina-t2",
+    "name": "마티나라운지 T2",
+    "type": "lounge",
+    "tags": [
+      "lounge",
+      "airport"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "skyhub-gimpo",
+    "name": "스카이허브라운지 김포",
+    "type": "lounge",
+    "tags": [
+      "lounge",
+      "airport"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "skyhub-t1",
+    "name": "스카이허브라운지 T1",
+    "type": "lounge",
+    "tags": [
+      "lounge",
+      "airport"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "skyhub-t2",
+    "name": "스카이허브라운지 T2",
+    "type": "lounge",
+    "tags": [
+      "lounge",
+      "airport"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "cju",
+    "name": "제주공항",
+    "type": "airport",
+    "tags": [
+      "airport",
+      "lounge"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "cjj",
+    "name": "청주공항",
+    "type": "airport",
+    "tags": [
+      "airport",
+      "lounge"
+    ],
+    "benefitCount": 149
+  },
+  {
+    "id": "lotte-jamsil",
+    "name": "롯데백화점 잠실",
+    "type": "department",
+    "tags": [
+      "shopping",
+      "valet",
+      "fnb",
+      "entertainment",
+      "lotte"
+    ],
+    "benefitCount": 112
+  },
+  {
+    "id": "hyundai-seoul",
+    "name": "더현대 서울",
+    "type": "department",
+    "tags": [
+      "shopping",
+      "valet",
+      "fnb",
+      "cafe",
+      "hyundai-dept"
+    ],
+    "benefitCount": 107
+  },
+  {
+    "id": "hyundai-pangyo",
+    "name": "현대백화점 판교",
+    "type": "department",
+    "tags": [
+      "shopping",
+      "valet",
+      "fnb",
+      "cafe",
+      "hyundai-dept"
+    ],
+    "benefitCount": 107
+  },
+  {
+    "id": "kyobo-gwanghwamun",
+    "name": "교보문고 광화문점",
+    "type": "entertainment",
+    "tags": [
+      "shopping",
+      "books",
+      "kyobo"
+    ],
+    "benefitCount": 103
+  },
+  {
+    "id": "11st",
+    "name": "11번가",
+    "type": "online",
+    "tags": [
+      "online",
+      "shopping",
+      "points",
+      "skpay"
+    ],
+    "benefitCount": 92
+  },
+  {
+    "id": "shilla-jeju",
+    "name": "신라호텔 제주",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "shilla",
+      "golf",
+      "luxury"
+    ],
+    "benefitCount": 73
+  },
+  {
+    "id": "lotte-world",
+    "name": "롯데월드",
+    "type": "entertainment",
+    "tags": [
+      "entertainment",
+      "themepark",
+      "lotte"
+    ],
+    "benefitCount": 64
+  },
+  {
+    "id": "lotte-hotel-busan",
+    "name": "롯데호텔 부산",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "lotte",
+      "luxury"
+    ],
+    "benefitCount": 62
+  },
+  {
+    "id": "lotte-hotel-seoul",
+    "name": "롯데호텔 서울",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "lotte",
+      "luxury"
+    ],
+    "benefitCount": 62
+  },
+  {
+    "id": "lotte-hotel-jeju",
+    "name": "롯데호텔 제주",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "lotte",
+      "luxury"
+    ],
+    "benefitCount": 62
+  },
+  {
+    "id": "signiel-busan",
+    "name": "시그니엘 부산",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "lotte",
+      "luxury"
+    ],
+    "benefitCount": 62
+  },
+  {
+    "id": "signiel-seoul",
+    "name": "시그니엘 서울",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "lotte",
+      "luxury"
+    ],
+    "benefitCount": 62
+  },
+  {
+    "id": "grand-walkerhill",
+    "name": "그랜드워커힐 서울",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "walkerhill",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "grand-intercontinental-parnas",
+    "name": "그랜드인터컨티넨탈 파르나스",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "ihg",
+      "luxury",
+      "parnas"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "grand-josun-busan",
+    "name": "그랜드조선 부산",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "grand-josun-jeju",
+    "name": "그랜드조선 제주",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "grand-hyatt",
+    "name": "그랜드하얏트 서울",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "hyatt",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "grand-hyatt-jeju",
+    "name": "그랜드하얏트 제주",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "hyatt",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "plaza-seoul",
+    "name": "더플라자 서울",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "marriott",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "lescape-hotel",
+    "name": "레스케이프 호텔",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "mondrian-seoul",
+    "name": "몬드리안 서울 이태원",
+    "type": "hotel",
+    "tags": [
+      "hotel",
+      "valet",
+      "fnb",
+      "accor",
+      "luxury"
+    ],
+    "benefitCount": 61
+  },
+  {
+    "id": "lotte-cinema-world",
+    "name": "롯데시네마 월드타워",
+    "type": "entertainment",
+    "tags": [
+      "entertainment",
+      "movie",
+      "lotte-cinema"
+    ],
+    "benefitCount": 57
+  },
+  {
+    "id": "lotte-cinema-jamsil",
+    "name": "롯데시네마 잠실",
+    "type": "entertainment",
+    "tags": [
+      "entertainment",
+      "movie",
+      "lotte-cinema"
+    ],
+    "benefitCount": 57
+  },
+  {
+    "id": "lotte-gangnam",
+    "name": "롯데백화점 강남",
+    "type": "department",
+    "tags": [
+      "shopping",
+      "valet",
+      "fnb",
+      "lotte"
+    ],
+    "benefitCount": 55
+  },
+  {
+    "id": "lotte-gwangbok",
+    "name": "롯데백화점 광복",
+    "type": "department",
+    "tags": [
+      "shopping",
+      "valet",
+      "fnb",
+      "lotte"
+    ],
+    "benefitCount": 55
+  },
+  {
+    "id": "lotte-main",
+    "name": "롯데백화점 본점",
+    "type": "department",
+    "tags": [
+      "shopping",
+      "valet",
+      "fnb",
+      "lotte"
+    ],
+    "benefitCount": 55
+  },
+  {
+    "id": "hyundai-oilbank",
+    "name": "현대오일뱅크",
+    "type": "gas",
+    "tags": [
+      "gas",
+      "points",
+      "hpoint",
+      "bluemembers"
+    ],
+    "benefitCount": 55
+  },
+  {
+    "id": "lotte-dutyfree-main",
+    "name": "롯데면세점 본점",
+    "type": "dutyfree",
+    "tags": [
+      "shopping",
+      "dutyfree"
+    ],
+    "benefitCount": 46
+  },
+  {
+    "id": "lotte-dutyfree-world",
+    "name": "롯데면세점 월드타워",
+    "type": "dutyfree",
+    "tags": [
+      "shopping",
+      "dutyfree"
+    ],
+    "benefitCount": 46
+  },
+  {
+    "id": "shilla-dutyfree-main",
+    "name": "신라면세점 서울",
+    "type": "dutyfree",
+    "tags": [
+      "shopping",
+      "dutyfree"
+    ],
+    "benefitCount": 46
+  },
+  {
+    "id": "shinsegae-dutyfree",
+    "name": "신세계면세점 명동",
+    "type": "dutyfree",
+    "tags": [
+      "shopping",
+      "dutyfree"
+    ],
+    "benefitCount": 46
+  },
+  {
+    "id": "hyundai-dutyfree",
+    "name": "현대백화점면세점",
+    "type": "dutyfree",
+    "tags": [
+      "shopping",
+      "dutyfree"
+    ],
+    "benefitCount": 46
+  },
+  {
+    "id": "cu-conv",
+    "name": "CU 편의점",
+    "type": "convenience",
+    "tags": [
+      "convenience",
+      "points",
+      "mpoint",
+      "okcashbag"
+    ],
+    "benefitCount": 24
+  },
+  {
+    "id": "southcape",
+    "name": "사우스케이프",
+    "type": "golf",
+    "tags": [
+      "golf",
+      "fnb"
+    ],
+    "benefitCount": 15
+  },
+  {
+    "id": "sky72",
+    "name": "스카이72 GC",
+    "type": "golf",
+    "tags": [
+      "golf",
+      "fnb"
+    ],
+    "benefitCount": 15
+  },
+  {
+    "id": "anyang-cc",
+    "name": "안양컨트리클럽",
+    "type": "golf",
+    "tags": [
+      "golf",
+      "fnb"
+    ],
+    "benefitCount": 15
+  },
+  {
+    "id": "jack-nicklaus",
+    "name": "잭니클라우스GC",
+    "type": "golf",
+    "tags": [
+      "golf",
+      "fnb"
+    ],
+    "benefitCount": 15
+  }
+]

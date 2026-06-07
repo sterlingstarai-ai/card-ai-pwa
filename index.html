@@ -7,6 +7,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Card AI" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Card AI - 신용카드 혜택 추천" />
+    <meta property="og:description" content="지금, 여기서 어떤 카드 쓸지 알려드려요. 장소별 카드 혜택 비교." />
+    <meta property="og:image" content="https://card-ai-pwa.vercel.app/og-image.png" />
+    <meta property="og:url" content="https://card-ai-pwa.vercel.app" />
+    <meta property="og:locale" content="ko_KR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Card AI - 신용카드 혜택 추천" />
+    <meta name="twitter:description" content="지금, 여기서 어떤 카드 쓸지 알려드려요" />
+    <meta name="twitter:image" content="https://card-ai-pwa.vercel.app/og-image.png" />
     
     <title>Card AI - 스마트 카드 추천</title>
     
@@ -16,19 +30,6 @@
     <!-- Pretendard Font -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif'],
-            },
-          },
-        },
-      }
-    </script>
   </head>
   <body class="bg-[#0a0a0f] font-sans">
     <div id="root"></div>

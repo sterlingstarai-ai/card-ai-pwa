@@ -5,6 +5,8 @@
  */
 
 import * as Sentry from '@sentry/react';
+import { firebaseLogEvent } from './firebase';
+import { mixpanelTrack } from './mixpanel';
 
 // Sentry DSN - set via environment variable
 const SENTRY_DSN = import.meta.env.VITE_SENTRY_DSN || '';
@@ -72,6 +74,9 @@ export const EventType = {
   // Demo mode events
   DEMO_START: 'demo_start',
   DEMO_END: 'demo_end',
+
+  // CPA events
+  CPA_LINK_CLICK: 'cpa_link_click',
 };
 
 // Event queue for batching
@@ -141,16 +146,21 @@ export function setUser(user) {
  * In this MVP, we just log to console and Sentry breadcrumbs
  * Future: send to analytics API
  */
-function flushEvents() {
+export function flushEvents() {
   if (eventQueue.length === 0) {
     flushTimeout = null;
     return;
   }
 
-  // In production, send to analytics API
-  if (import.meta.env.PROD && eventQueue.length > 0) {
-    // Future: POST to /api/analytics
-    // For now, events are tracked via Sentry breadcrumbs
+  if (import.meta.env.PROD) {
+    for (const event of eventQueue) {
+      firebaseLogEvent(event.name, event.properties);
+      mixpanelTrack(event.name, {
+        ...event.properties,
+        session_id: event.properties.sessionId,
+        timestamp: event.properties.timestamp,
+      });
+    }
   }
 
   // Clear queue
@@ -168,6 +178,16 @@ function getSessionId() {
     window.sessionStorage.setItem('cardai_session_id', sessionId);
   }
   return sessionId;
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') flushEvents();
+  });
+
+  window.addEventListener('beforeunload', () => {
+    flushEvents();
+  });
 }
 
 // Export Sentry for advanced usage

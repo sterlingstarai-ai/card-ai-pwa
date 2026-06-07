@@ -3,8 +3,11 @@
  */
 
 import { categoryConfig } from '../lib/utils';
+import { trackEvent, EventType } from '../lib/analytics';
+import { shareOrCopy } from '../lib/share';
+import { CONFIG } from '../constants/config';
 
-export const BenefitDetailModal = ({ benefit, cardsData, onClose, onReport }) => {
+export const BenefitDetailModal = ({ benefit, cardsData, onClose, onReport, selectedPlaceId }) => {
   if (!benefit) return null;
   const card = cardsData?.[benefit.cardId];
 
@@ -17,6 +20,26 @@ export const BenefitDetailModal = ({ benefit, cardsData, onClose, onReport }) =>
     return { status: 'fresh', text: `${daysSince}일 전 검증됨`, color: 'text-green-400' };
   };
   const verification = getVerificationStatus();
+
+  const handleShare = async () => {
+    try {
+      await shareOrCopy({
+        title: 'Card AI - 신용카드 혜택 추천',
+        text: `${benefit.title} 혜택을 확인해보세요`,
+        url: CONFIG.LINKS.APP_SHARE_URL,
+      });
+    } catch {
+      // ignore share failures
+    }
+  };
+
+  const handleSourceClick = () => {
+    trackEvent(EventType.CPA_LINK_CLICK, {
+      card_id: benefit.cardId,
+      place_id: selectedPlaceId || null,
+      link_type: 'benefit_detail',
+    });
+  };
 
   return (
     <div
@@ -33,7 +56,7 @@ export const BenefitDetailModal = ({ benefit, cardsData, onClose, onReport }) =>
       >
         <div className="flex justify-between items-start">
           <div className="text-3xl">{categoryConfig[benefit.category]?.emoji || '✨'}</div>
-          <button onClick={onClose} className="text-slate-500 text-2xl hover:text-white transition-colors" aria-label="닫기">✕</button>
+          <button onClick={onClose} className="text-slate-400 text-2xl hover:text-white transition-colors" aria-label="닫기">✕</button>
         </div>
         <div>
           <h2 id="benefit-modal-title" className="text-xl font-bold mb-1">{benefit.title}</h2>
@@ -51,21 +74,28 @@ export const BenefitDetailModal = ({ benefit, cardsData, onClose, onReport }) =>
         {/* Source & Verification Section */}
         <div className="bg-slate-900/50 rounded-xl p-3 text-[11px] space-y-1.5 border border-white/5">
           <div className="flex items-center justify-between">
-            <span className="text-slate-500">출처</span>
+            <span className="text-slate-400">출처</span>
             {benefit.sourceUrl ? (
-              <a href={benefit.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline truncate max-w-[200px]">
+              <a href={benefit.sourceUrl} target="_blank" rel="noopener noreferrer" onClick={handleSourceClick} className="text-blue-400 hover:underline truncate max-w-[200px]">
                 {benefit.sourceUrl.replace(/^https?:\/\//, '').split('/')[0]}
               </a>
             ) : (
-              <span className="text-slate-500">미기재</span>
+              <span className="text-slate-400">미기재</span>
             )}
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-slate-500">검증일</span>
+            <span className="text-slate-400">검증일</span>
             <span className={verification.color}>{verification.text}</span>
           </div>
         </div>
         <div className="flex gap-2">
+          <button
+            onClick={handleShare}
+            className="py-4 px-4 bg-emerald-600/20 border border-emerald-500/30 rounded-2xl text-sm font-medium text-emerald-300 active:scale-[0.98] transition-transform"
+            aria-label="혜택 공유"
+          >
+            🔗
+          </button>
           <button
             onClick={onClose}
             className="flex-1 py-4 bg-blue-600 rounded-2xl font-bold active:scale-[0.98] transition-transform"

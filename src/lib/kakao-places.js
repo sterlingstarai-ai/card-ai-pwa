@@ -3,7 +3,7 @@
  * Fetches nearby places dynamically via serverless proxy
  */
 
-import { CONFIG } from '../constants/config';
+import { postJson } from './api-client';
 
 /**
  * Fetch places by bounding box (rect) with category or keyword search
@@ -29,11 +29,7 @@ export async function fetchKakaoPlacesByRect({
       ? { mode: 'keyword', rect, query, size, page }
       : { mode: 'category', rect, category_group_code: categoryGroupCode, size, page };
 
-  const r = await fetch(`${CONFIG.API.BASE_URL}/api/kakao-places`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  const r = await postJson('/api/kakao-places', body);
 
   if (!r.ok) {
     const t = await r.text().catch(() => '');
@@ -75,11 +71,7 @@ export async function fetchKakaoPlacesByRectPaged({
         ? { mode: 'keyword', rect, query, size, page }
         : { mode: 'category', rect, category_group_code: categoryGroupCode, size, page };
 
-    const r = await fetch(`${CONFIG.API.BASE_URL}/api/kakao-places`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
+    const r = await postJson('/api/kakao-places', body);
 
     if (!r.ok) {
       const t = await r.text().catch(() => '');
@@ -125,11 +117,7 @@ export async function fetchKakaoPlacesByRadius({
       ? { mode: 'keyword', x, y, radius, query, size, page }
       : { mode: 'category', x, y, radius, category_group_code: categoryGroupCode, size, page };
 
-  const r = await fetch(`${CONFIG.API.BASE_URL}/api/kakao-places`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  const r = await postJson('/api/kakao-places', body);
 
   if (!r.ok) {
     const t = await r.text().catch(() => '');

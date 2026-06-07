@@ -6,6 +6,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { CONFIG } from '../constants/config';
+import { postJson, readJsonSafely } from '../lib/api-client';
 
 const REPORT_TYPES = [
   { id: 'error', label: '오류 수정', desc: '잘못된 혜택 정보', emoji: '🔧' },
@@ -145,23 +146,19 @@ export const ReportModal = ({
     setError(null);
 
     try {
-      const response = await fetch(`${CONFIG.API.BASE_URL}/api/report`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: reportType,
-          cardName: cardName.trim(),
-          placeName: placeName.trim(),
-          benefitContent: benefitContent.trim(),
-          sourceUrl: sourceUrl.trim(),
-          description: description.trim(),
-          appVersion: CONFIG.BUILD.VERSION,
-          buildNumber: CONFIG.BUILD.BUILD_NUMBER,
-        }),
+      const response = await postJson('/api/report', {
+        type: reportType,
+        cardName: cardName.trim(),
+        placeName: placeName.trim(),
+        benefitContent: benefitContent.trim(),
+        sourceUrl: sourceUrl.trim(),
+        description: description.trim(),
+        appVersion: CONFIG.BUILD.VERSION,
+        buildNumber: CONFIG.BUILD.BUILD_NUMBER,
       });
 
       if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
+        const data = await readJsonSafely(response);
         // Rate limit 특별 처리
         if (response.status === 429) {
           throw new Error('요청이 많아요. 잠시 후 다시 시도해주세요.');
@@ -302,7 +299,7 @@ export const ReportModal = ({
           )}
 
           {/* Privacy Notice */}
-          <p className="text-[10px] text-slate-500 text-center">
+          <p className="text-[11px] text-slate-400 text-center">
             카드 번호, 위치 좌표 등 개인정보는 절대 수집하지 않습니다
           </p>
         </div>
@@ -319,7 +316,7 @@ export const ReportModal = ({
               >
                 📋 진단 정보 복사
               </button>
-              <p className="text-[10px] text-amber-400/70 text-center mt-2">
+              <p className="text-[11px] text-amber-400/70 text-center mt-2">
                 복사 후 이메일({CONFIG.LINKS.DATA_REPORT_EMAIL})로 보내주세요
               </p>
             </div>

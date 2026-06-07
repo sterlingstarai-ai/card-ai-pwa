@@ -1,3 +1,9 @@
+import {
+  DEFAULT_DEPLOYED_BASE_URL,
+  resolveApiBaseUrl,
+  resolvePublicAppBaseUrl,
+} from '../lib/runtime-config';
+
 /**
  * 앱 전역 설정 (Configuration)
  */
@@ -5,15 +11,17 @@
 export const CONFIG = {
   // 앱 정보
   APP: {
-    VERSION: '1.0.4',
+    VERSION: '1.0.6',
     NAME: 'Card AI',
     DEBUG: false,  // 프로덕션: 디버그 모드 비활성화
   },
 
   // API 설정
   API: {
-    // Capacitor 앱에서는 절대 URL 필요 (capacitor:// 프로토콜은 Vercel API 라우팅 안됨)
-    BASE_URL: 'https://card-ai-pi.vercel.app',
+    // 로컬/프리뷰/프로덕션/Capacitor 환경에 맞춰 API 기준점을 자동 결정
+    BASE_URL: resolveApiBaseUrl(),
+    PUBLIC_APP_BASE_URL: resolvePublicAppBaseUrl(),
+    DEFAULT_DEPLOYED_BASE_URL,
   },
 
   // 기본값
@@ -128,12 +136,13 @@ export const CONFIG = {
     SUPPORT_EMAIL: 'sterling.star.ai@gmail.com',
     FEEDBACK_EMAIL: 'sterling.star.ai@gmail.com',
     DATA_REPORT_EMAIL: 'sterling.star.ai@gmail.com',
+    APP_SHARE_URL: resolvePublicAppBaseUrl(),
   },
 
   // 빌드 정보
   BUILD: {
-    VERSION: '1.0.4',
-    BUILD_NUMBER: '8',
+    VERSION: '1.0.6',
+    BUILD_NUMBER: '9',
     COMMIT_HASH: import.meta.env.VITE_COMMIT_HASH || 'dev',
     BUILD_DATE: import.meta.env.VITE_BUILD_DATE || new Date().toISOString().split('T')[0],
   },

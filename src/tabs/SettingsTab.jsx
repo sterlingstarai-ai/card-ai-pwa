@@ -5,6 +5,7 @@
 
 import { CONFIG } from '../constants/config';
 import { storage } from '../lib/storage';
+import { shareOrCopy } from '../lib/share';
 
 export const SettingsTab = ({
   // Data
@@ -18,6 +19,19 @@ export const SettingsTab = ({
   handleReset,
   showToast
 }) => {
+  const handleAppShare = async () => {
+    try {
+      await shareOrCopy({
+        title: 'Card AI - 신용카드 혜택 추천',
+        text: '지금, 여기서 어떤 카드 쓸지 알려드려요',
+        url: CONFIG.LINKS.APP_SHARE_URL,
+        onCopied: () => showToast('링크가 복사되었습니다'),
+      });
+    } catch {
+      showToast('공유에 실패했습니다');
+    }
+  };
+
   return (
     <div className="p-5 space-y-4" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom, 0px))' }}>
       {/* Location Permission */}
@@ -36,6 +50,7 @@ export const SettingsTab = ({
       {/* Contact & Support */}
       <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
         <h3 className="font-bold mb-3">💬 문의 및 지원</h3>
+        <button onClick={handleAppShare} className="block w-full py-2.5 bg-emerald-600/20 text-emerald-300 rounded-xl text-sm font-medium text-center border border-emerald-500/30 mb-2">🔗 앱 공유하기</button>
         <a href={`mailto:${CONFIG.LINKS.SUPPORT_EMAIL}?subject=[Card AI] 문의사항`} className="block w-full py-2.5 bg-blue-600/20 text-blue-400 rounded-xl text-sm font-medium text-center border border-blue-500/30 mb-2">📧 문의하기</a>
         <a href={`mailto:${CONFIG.LINKS.DATA_REPORT_EMAIL}?subject=[Card AI] 데이터 제보&body=제보 유형: (오류/누락/신규)%0A%0A관련 정보:%0A- 카드명: %0A- 장소명: %0A- 혜택 내용: %0A%0A상세 설명:%0A`} className="block w-full py-2.5 bg-amber-600/20 text-amber-400 rounded-xl text-sm font-medium text-center border border-amber-500/30 mb-2">📝 정보 수정 제보</a>
         <button onClick={() => {
@@ -53,10 +68,10 @@ export const SettingsTab = ({
       <div className="bg-slate-800/50 rounded-2xl p-4 border border-white/5">
         <h3 className="font-bold mb-3">📋 약관 및 정책</h3>
         <a href={CONFIG.LINKS.PRIVACY_POLICY} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 text-sm text-slate-300">
-          <span>🔒 개인정보처리방침</span><span className="text-slate-500">→</span>
+          <span>🔒 개인정보처리방침</span><span className="text-slate-400">→</span>
         </a>
         <a href={CONFIG.LINKS.TERMS_OF_SERVICE} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 text-sm text-slate-300 border-t border-white/5">
-          <span>📄 이용약관</span><span className="text-slate-500">→</span>
+          <span>📄 이용약관</span><span className="text-slate-400">→</span>
         </a>
       </div>
 
@@ -64,7 +79,7 @@ export const SettingsTab = ({
       <button onClick={handleReset} className="w-full py-3 bg-red-600/20 text-red-400 rounded-2xl text-sm font-medium border border-red-500/30">🗑️ 초기화</button>
 
       {/* App Info */}
-      <div className="text-center text-[10px] text-slate-600 mt-4 space-y-1">
+      <div className="text-center text-[11px] text-slate-400 mt-4 space-y-1">
         <p>{CONFIG.APP.NAME} v{CONFIG.BUILD.VERSION} ({CONFIG.BUILD.BUILD_NUMBER})</p>
         <p>{Object.keys(cardsData || {}).length}카드 · {Object.keys(placesData || {}).length}장소 · {Object.keys(benefitsData || {}).length}혜택</p>
         <p className="text-slate-700">Build: {CONFIG.BUILD.COMMIT_HASH} · {CONFIG.BUILD.BUILD_DATE}</p>

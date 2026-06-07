@@ -15,12 +15,12 @@ export const SummaryBar = ({
       className="w-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-2xl p-4 flex items-center justify-between active:scale-[0.99] transition-transform"
     >
       <div className="flex-1 min-w-0 text-left">
-        <p className="text-[10px] text-blue-400 font-bold tracking-wider mb-0.5">📍 {placeName}</p>
+        <p className="text-[11px] text-blue-400 font-bold tracking-wider mb-0.5">📍 {placeName}</p>
         <p className="text-sm font-medium truncate">{benefitSummary}</p>
       </div>
       <div className="text-right shrink-0 ml-3">
         <p className="text-lg font-bold text-green-400">{estimatedValue.toLocaleString()}원</p>
-        <p className="text-[10px] text-slate-500">예상 가치</p>
+        <p className="text-[11px] text-slate-400">예상 가치</p>
       </div>
     </button>
   );

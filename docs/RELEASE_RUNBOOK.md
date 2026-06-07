@@ -6,17 +6,8 @@ Card AI v1.0.0 릴리즈 런북
 
 ### 코드 품질
 ```bash
-# 린트 검사
-npm run lint
-
-# 데이터 검증
-npm run validate
-
-# 시크릿 검사
-npm run secrets:check
-
-# 프로덕션 빌드
-npm run build
+# 로컬 릴리즈 프리플라이트
+npm run release:preflight
 ```
 
 ### 환경변수 확인
@@ -39,6 +30,22 @@ node scripts/data-audit.js
 # - 장소: icn-t2 (인천공항 T2)
 # - 카드: hyundai-purple, samsung-taptap-o, shinhan-the-best
 ```
+
+프리플라이트 스크립트는 아래 항목을 자동으로 묶습니다.
+- `lint`
+- `validate`
+- `test:unit`
+- `test:e2e`
+- `build`
+- `secrets:check`
+- PWA 빌드 아티팩트 확인
+- `data-audit` 실행 및 리포트 경고 출력
+
+### UX 회귀 스모크
+- 하단 탭 전환 시 스크롤이 이전 탭 위치를 물고 가지 않는지 확인
+- 홈 검색에서 혜택 선택 시 Benefits 탭 필터와 해당 카테고리 섹션이 함께 열리는지 확인
+- 장소 시트/혜택 상세/OCR/제보 모달이 헤더·하단 탭보다 위에 올라오고 닫기 동작이 자연스러운지 확인
+- 장소 시트 카테고리 필터에서 `cafe`, `mart` 실시간 로딩과 기본 정적 필터가 모두 비어 있지 않은지 확인
 
 ---
 
@@ -66,6 +73,9 @@ vercel --prod
 
 # 배포 확인
 curl -s https://card-ai-pi.vercel.app | head -20
+
+# 배포 후 스모크
+npm run release:postdeploy -- https://card-ai-pi.vercel.app
 ```
 
 ### 2.3 네이티브 앱 빌드
@@ -180,11 +190,11 @@ vercel --prod
 # 전체 CI 파이프라인
 npm run ci
 
-# 개별 검증
-npm run lint          # ESLint
-npm run validate      # 데이터 검증
-npm run secrets:check # 시크릿 검사
-npm run build         # 프로덕션 빌드
+# 릴리즈 직전
+npm run release:preflight
+
+# 배포 직후
+npm run release:postdeploy -- https://card-ai-pi.vercel.app
 ```
 
 ---

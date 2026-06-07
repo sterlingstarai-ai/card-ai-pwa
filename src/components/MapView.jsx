@@ -7,7 +7,7 @@
  * - We cache marker images per (emoji, selected) so we don't create thousands of unique assets.
  */
 
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { placeTypeConfig } from '../lib/utils';
 import { fetchKakaoPlacesByRectPaged } from '../lib/kakao-places';
@@ -139,6 +139,11 @@ export const MapView = ({
     { name: '제주', lat: 33.38, lng: 126.55, zoom: 10 },
   ];
 
+  const selectedCategoryRef = useRef(selectedCategory);
+  useEffect(() => {
+    selectedCategoryRef.current = selectedCategory;
+  }, [selectedCategory]);
+
   // 정적 데이터 + 실시간 검색 데이터 병합
   const filteredPlaces = useMemo(() => {
     const staticArr = Array.isArray(places) ? places : Object.values(places || {});
@@ -158,6 +163,56 @@ export const MapView = ({
     if (!selectedCategory || selectedCategory === 'all') return unique;
     return unique.filter((p) => p?.type === selectedCategory);
   }, [places, livePlaces, selectedCategory]);
+
+  // 현재 뷰포트에서 실시간 장소 검색
+  const searchLivePlaces = useCallback(async () => {
+    if (!mapRef.current || !window.kakao?.maps) return;
+
+    const bounds = mapRef.current.getBounds();
+    const sw = bounds.getSouthWest();
+    const ne = bounds.getNorthEast();
+    const rect = `${sw.getLng()},${sw.getLat()},${ne.getLng()},${ne.getLat()}`;
+
+    // 이미 검색한 영역이면 스킵
+    if (liveSearchedRectsRef.current.has(rect)) return;
+    liveSearchedRectsRef.current.add(rect);
+
+    const category = selectedCategoryRef.current;
+    const queries =
+      category && category !== 'all'
+        ? CATEGORY_SEARCH_QUERIES[category] || []
+        : ['스타벅스', '커피빈', '편의점'];
+
+    if (queries.length === 0) return;
+
+    try {
+      const allResults = [];
+      for (const query of queries.slice(0, 3)) {
+        const results = await fetchKakaoPlacesByRectPaged({
+          rect,
+          mode: 'keyword',
+          query,
+          maxPages: 3,
+          size: 15,
+        });
+        allResults.push(...results);
+      }
+
+      if (allResults.length > 0) {
+        setLivePlaces((prev) => {
+          const updated = { ...prev };
+          allResults.forEach((p) => {
+            if (p?.id && !updated[p.id]) {
+              updated[p.id] = p;
+            }
+          });
+          return updated;
+        });
+      }
+    } catch (err) {
+      console.error('[MapView] Live search error:', err);
+    }
+  }, []);
 
   // SDK dynamic load (clusterer library included)
   useEffect(() => {
@@ -212,6 +267,7 @@ export const MapView = ({
   const initialUserLocation = useRef(userLocation);
   useEffect(() => {
     if (!sdkLoaded || !window.kakao || !window.kakao.maps) return;
+    const markerMap = markersByIdRef.current;
 
     window.kakao.maps.load(() => {
       if (!mapContainerRef.current) return;
@@ -270,15 +326,15 @@ export const MapView = ({
       if (clustererRef.current) {
         try {
           clustererRef.current.clear();
-        } catch (_) {
+        } catch {
           // ignore
         }
       }
-      markersByIdRef.current.forEach((m) => m.setMap(null));
-      markersByIdRef.current.clear();
+      markerMap.forEach((m) => m.setMap(null));
+      markerMap.clear();
       if (userMarkerRef.current) userMarkerRef.current.setMap(null);
     };
-  }, [sdkLoaded, onError]);
+  }, [sdkLoaded, onError, searchLivePlaces]);
 
   // Build (or rebuild) place markers when the dataset changes
   useEffect(() => {
@@ -322,7 +378,7 @@ export const MapView = ({
     if (selectedPlaceId && markersByIdRef.current.has(selectedPlaceId)) {
       markersByIdRef.current.get(selectedPlaceId).setZIndex(10);
     }
-  }, [mapReady, filteredPlaces]);
+  }, [mapReady, filteredPlaces, selectedPlaceId]);
 
   // Update selected/preview marker image without rebuilding everything
   const lastHighlightedRef = useRef(null);
@@ -422,59 +478,6 @@ export const MapView = ({
     overlay.setMap(mapRef.current);
     userMarkerRef.current = overlay;
   }, [mapReady, userLocation]);
-
-  // 현재 뷰포트에서 실시간 장소 검색
-  const searchLivePlaces = async () => {
-    if (!mapRef.current || !window.kakao?.maps) return;
-
-    const bounds = mapRef.current.getBounds();
-    const sw = bounds.getSouthWest();
-    const ne = bounds.getNorthEast();
-    const rect = `${sw.getLng()},${sw.getLat()},${ne.getLng()},${ne.getLat()}`;
-
-    // 이미 검색한 영역이면 스킵
-    if (liveSearchedRectsRef.current.has(rect)) return;
-    liveSearchedRectsRef.current.add(rect);
-
-    // 검색할 쿼리 결정 (카테고리에 따라)
-    const queries = selectedCategory && selectedCategory !== 'all'
-      ? (CATEGORY_SEARCH_QUERIES[selectedCategory] || [])
-      : ['스타벅스', '커피빈', '편의점']; // 기본 검색어
-
-    if (queries.length === 0) return;
-
-    console.log('[MapView] Live search:', rect, queries);
-
-    try {
-      const allResults = [];
-      for (const query of queries.slice(0, 3)) { // 최대 3개 쿼리
-        const results = await fetchKakaoPlacesByRectPaged({
-          rect,
-          mode: 'keyword',
-          query,
-          maxPages: 3,
-          size: 15,
-        });
-        allResults.push(...results);
-      }
-
-      // 결과를 livePlaces에 추가
-      if (allResults.length > 0) {
-        setLivePlaces(prev => {
-          const updated = { ...prev };
-          allResults.forEach(p => {
-            if (p?.id && !updated[p.id]) {
-              updated[p.id] = p;
-            }
-          });
-          return updated;
-        });
-        console.log('[MapView] Live search added:', allResults.length);
-      }
-    } catch (err) {
-      console.error('[MapView] Live search error:', err);
-    }
-  };
 
   const handleRegionClick = (region) => {
     if (!mapRef.current || !window.kakao?.maps) return;

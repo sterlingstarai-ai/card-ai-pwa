@@ -25,7 +25,7 @@ export const WalletTab = ({
       {isDemo && (
         <div className="bg-purple-600/20 border border-purple-500/30 rounded-xl p-3 flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <span className="bg-purple-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">DEMO</span>
+            <span className="bg-purple-500 text-white text-[11px] px-2 py-0.5 rounded-full font-bold">DEMO</span>
             <span className="text-sm text-slate-300">체험용 카드가 표시됩니다</span>
           </div>
           <button onClick={exitDemo} className="text-xs text-purple-400 underline">종료</button>
@@ -40,7 +40,7 @@ export const WalletTab = ({
         onChange={(e) => setWalletSearch(e.target.value)}
         className="w-full bg-slate-800/50 border border-white/10 rounded-xl px-4 py-2.5 text-sm mb-4 focus:border-blue-500/50 focus:outline-none"
       />
-      <p className="text-xs text-slate-500 mb-4">
+      <p className="text-xs text-slate-400 mb-4">
         {walletSearch ? `검색 결과 · ${Object.values(filteredCardsByIssuer).flat().length}장` : `카드사를 탭하여 펼치기 · ${myCards.length}장 보유`}
       </p>
 
@@ -56,7 +56,7 @@ export const WalletTab = ({
                   <span className="font-bold">{issuer}</span>
                   <div className="flex items-center gap-2">
                     {myCount > 0 && <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">{myCount}</span>}
-                    <span className={`text-slate-500 transition-transform ${isExpanded ? 'rotate-90' : ''}`}>›</span>
+                    <span className={`text-slate-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`}>›</span>
                   </div>
                 </button>
                 {isExpanded && (
@@ -69,7 +69,7 @@ export const WalletTab = ({
                           showToast(isAdding ? MESSAGES.CARD.ADDED(card.name) : MESSAGES.CARD.REMOVED(card.name));
                         }} className="w-5 h-5 rounded-full" />
                         <div className="w-8 h-5 rounded" style={{ background: `linear-gradient(135deg, ${card.color}, #1a1a1a)` }} />
-                        <div className="flex-1"><p className="text-sm font-medium">{card.name}</p><p className="text-[10px] text-slate-500">{card.network} · {card.grade}</p></div>
+                        <div className="flex-1"><p className="text-sm font-medium">{card.name}</p><p className="text-[11px] text-slate-400">{card.network} · {card.grade}</p></div>
                       </label>
                     ))}
                   </div>
@@ -78,7 +78,7 @@ export const WalletTab = ({
             );
           })
         ) : (
-          <div className="text-center py-16 text-slate-500">
+          <div className="text-center py-16 text-slate-400">
             <span className="text-4xl">🔍</span>
             <p className="mt-4">검색 결과가 없습니다</p>
           </div>

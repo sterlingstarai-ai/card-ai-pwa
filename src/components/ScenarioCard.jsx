@@ -31,7 +31,7 @@ export const ScenarioCard = ({
       <div className="relative z-10">
         {/* Badge */}
         {badge && (
-          <span className="inline-block bg-purple-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mb-3">
+          <span className="inline-block bg-purple-500 text-white text-[11px] px-2 py-0.5 rounded-full font-bold mb-3">
             {badge}
           </span>
         )}

@@ -3,9 +3,11 @@
  * 목록 보기, 지도 보기, 즐겨찾기, 최근 장소, 카테고리 필터
  */
 
+import { useEffect, useMemo, useState } from 'react';
 import { formatDistance, placeTypeConfig, placeCategories } from '../lib/utils';
 import { CONFIG } from '../constants/config';
 import { MapView } from './MapView';
+import { fetchKakaoPlacesByRadius, getCategoryCodesForType } from '../lib/kakao-places';
 
 export const PlaceSheet = ({
   // Data
@@ -31,6 +33,83 @@ export const PlaceSheet = ({
   requestLocation,
   showToast
 }) => {
+  const [liveCategoryPlaces, setLiveCategoryPlaces] = useState([]);
+  const [liveCategoryLoading, setLiveCategoryLoading] = useState(false);
+
+  useEffect(() => {
+    const isDynamicCategory = placeCategoryFilter === 'cafe' || placeCategoryFilter === 'mart';
+    if (!isDynamicCategory) {
+      setLiveCategoryPlaces([]);
+      setLiveCategoryLoading(false);
+      return;
+    }
+
+    let canceled = false;
+    const location = userLocation || CONFIG.DEFAULTS.LOCATION;
+    const categoryCodes = getCategoryCodesForType(placeCategoryFilter);
+    const categoryCode = categoryCodes[0];
+    if (!categoryCode) return;
+
+    const load = async () => {
+      setLiveCategoryLoading(true);
+      try {
+        const [page1, page2] = await Promise.all([
+          fetchKakaoPlacesByRadius({
+            x: location.lng,
+            y: location.lat,
+            radius: 5000,
+            mode: 'category',
+            categoryGroupCode: categoryCode,
+            size: 15,
+            page: 1,
+          }),
+          fetchKakaoPlacesByRadius({
+            x: location.lng,
+            y: location.lat,
+            radius: 5000,
+            mode: 'category',
+            categoryGroupCode: categoryCode,
+            size: 15,
+            page: 2,
+          }),
+        ]);
+        if (canceled) return;
+        const merged = [...page1, ...page2];
+        const deduped = Object.values(
+          merged.reduce((acc, place) => {
+            if (place?.id) acc[place.id] = place;
+            return acc;
+          }, {})
+        );
+        setLiveCategoryPlaces(deduped);
+      } catch (error) {
+        console.error('[PlaceSheet] Live category search failed:', error);
+        if (!canceled) showToast('실시간 장소 검색에 실패했습니다');
+      } finally {
+        if (!canceled) setLiveCategoryLoading(false);
+      }
+    };
+
+    void load();
+
+    return () => {
+      canceled = true;
+    };
+  }, [placeCategoryFilter, userLocation, showToast]);
+
+  const filteredStaticPlaces = useMemo(
+    () =>
+      Object.values(placesData).filter(
+        (p) => placeCategoryFilter === 'all' || p.type === placeCategoryFilter
+      ),
+    [placesData, placeCategoryFilter]
+  );
+
+  const displayPlaces =
+    placeCategoryFilter === 'cafe' || placeCategoryFilter === 'mart'
+      ? liveCategoryPlaces
+      : filteredStaticPlaces;
+
   return (
     <div className="fixed inset-0 bg-black/80 z-50" onClick={() => setShowPlaceSheet(false)} role="dialog" aria-modal="true">
       <div className="absolute bottom-0 left-0 right-0 bg-[#1a1a1f] rounded-t-3xl overflow-hidden" onClick={e => e.stopPropagation()} style={{ maxWidth: '430px', margin: '0 auto', height: '75vh' }}>
@@ -64,13 +143,13 @@ export const PlaceSheet = ({
               {(locationStatus === 'idle' || locationStatus === 'denied') && (
                 <button onClick={requestLocation} disabled={locationStatus === 'loading'} className="w-full p-4 mb-4 bg-blue-600/20 rounded-2xl border border-blue-500/30 text-left disabled:opacity-60">
                   <p className="font-bold text-blue-400">📍 내 위치 찾기</p>
-                  <p className="text-xs text-slate-500 mt-1">GPS 권한 허용 시 주변 혜택 자동 추천</p>
+                  <p className="text-xs text-slate-400 mt-1">GPS 권한 허용 시 주변 혜택 자동 추천</p>
                 </button>
               )}
               {locationStatus === 'loading' && (
                 <div className="w-full p-4 mb-4 bg-slate-800/40 rounded-2xl border border-white/5 text-left">
                   <p className="font-bold text-slate-200">📍 내 위치 확인 중...</p>
-                  <p className="text-xs text-slate-500 mt-1">잠시만 기다려주세요</p>
+                  <p className="text-xs text-slate-400 mt-1">잠시만 기다려주세요</p>
                 </div>
               )}
 
@@ -91,7 +170,7 @@ export const PlaceSheet = ({
               {/* Recent places */}
               {recentPlaceIds.length > 0 && placeCategoryFilter === 'all' && (
                 <div className="mb-4">
-                  <p className="text-xs text-slate-500 font-bold mb-2">🕘 최근</p>
+                  <p className="text-xs text-slate-400 font-bold mb-2">🕘 최근</p>
                   <div className="flex flex-wrap gap-2">
                     {recentPlaceIds.filter(id => !favoritePlaceIds.includes(id)).map(id => placesData[id]).filter(Boolean).map(p => (
                       <button key={p.id} onClick={() => selectPlace(p.id)} className={`px-3 py-2 rounded-full text-xs border active:scale-[0.98] ${selectedPlaceId === p.id ? 'bg-blue-600 border-blue-400/40' : 'bg-slate-800/50 border-white/10'}`}>
@@ -130,19 +209,22 @@ export const PlaceSheet = ({
               </div>
 
               {/* Filtered Place List */}
-              <p className="text-xs text-slate-500 font-bold mb-2">
+              <p className="text-xs text-slate-400 font-bold mb-2">
                 {placeCategoryFilter === 'all' ? '📋 전체' : `${placeTypeConfig[placeCategoryFilter]?.emoji || '📋'} ${placeTypeConfig[placeCategoryFilter]?.label || '전체'}`}
               </p>
-              {Object.values(placesData)
-                .filter(p => placeCategoryFilter === 'all' || p.type === placeCategoryFilter)
-                .map(p => (
+              {liveCategoryLoading && (
+                <div className="w-full p-4 mb-3 bg-slate-800/40 rounded-xl border border-white/5 text-sm text-slate-300">
+                  실시간 장소를 불러오는 중...
+                </div>
+              )}
+              {displayPlaces.map(p => (
                 <div key={p.id} className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 ${selectedPlaceId === p.id ? 'bg-blue-600' : 'bg-slate-800/30'}`}>
                   <button onClick={() => selectPlace(p.id)} className="flex-1 flex items-center gap-3 text-left active:scale-[0.98]">
                     <span className="text-xl">{placeTypeConfig[p.type]?.emoji}</span>
                     <span className="font-medium text-sm">{p.name}</span>
                   </button>
                   <button onClick={(e) => { e.stopPropagation(); toggleFavorite(p.id); }} className="p-2 rounded-lg active:scale-90">
-                    <span className={favoritePlaceIds.includes(p.id) ? 'text-amber-400' : 'text-slate-600'}>
+                    <span className={favoritePlaceIds.includes(p.id) ? 'text-amber-400' : 'text-slate-400'}>
                       {favoritePlaceIds.includes(p.id) ? '★' : '☆'}
                     </span>
                   </button>

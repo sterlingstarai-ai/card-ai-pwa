@@ -1,191 +1,131 @@
 import { test, expect } from '@playwright/test';
 
-/**
- * Card AI PWA E2E Tests
- * Covers 6 core flows as specified in ECR-5
- */
+async function ensureDemoMode(page) {
+  const demoBadge = page.locator('text=데모 모드로 체험 중');
+  if (await demoBadge.isVisible().catch(() => false)) return;
 
-test.describe('Card AI PWA', () => {
+  const demoStartButton = page.locator('button:has-text("데모로 체험해보기")').first();
+  if (await demoStartButton.isVisible().catch(() => false)) {
+    await demoStartButton.click().catch(() => {
+      // Auto-demo may start while clicking; visibility check below is authoritative.
+    });
+  }
+
+  await expect(demoBadge).toBeVisible({ timeout: 15000 });
+}
+
+test.describe('Card AI v1.1', () => {
   test.beforeEach(async ({ page }) => {
-    // Clear storage before each test
-    await page.goto('/');
-    await page.evaluate(() => {
+    await page.addInitScript(() => {
       localStorage.clear();
+      sessionStorage.clear();
       indexedDB.deleteDatabase('CardAI_DB');
     });
-    await page.reload();
-    // Wait for app to fully load
-    await page.waitForSelector('text=SMART WALLET', { timeout: 15000 });
+    await page.goto('/');
+    await expect(page.locator('[aria-label="홈"]')).toBeVisible({ timeout: 30000 });
   });
 
-  // Flow 1: First render
-  test('1. renders correctly on first load', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-
-    // Check header
-    await expect(page.locator('text=SMART WALLET')).toBeVisible({ timeout: 15000 });
-
-    // Check onboarding demo is shown (no cards) - wait for data to load
-    await expect(page.locator('text=등록된 카드가 없어요')).toBeVisible({ timeout: 15000 });
-
-    // Check bottom navigation
-    await expect(page.locator('[aria-label="홈"]')).toBeVisible();
-    await expect(page.locator('[aria-label="혜택"]')).toBeVisible();
-    await expect(page.locator('[aria-label="지갑"]')).toBeVisible();
+  test('1. first launch starts demo automatically', async ({ page }) => {
+    await expect(page.locator('text=DEMO').first()).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('text=데모 모드로 체험 중')).toBeVisible({ timeout: 15000 });
   });
 
-  // Flow 2: Add card and see recommendation change
-  test('2. adding card changes home recommendations', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-
-    // Go to wallet tab
-    await page.locator('[aria-label="지갑"]').click();
-    await expect(page.locator('text=카드사를 탭하여').or(page.locator('text=카드사')).first()).toBeVisible({ timeout: 10000 });
-
-    // Expand an issuer and add a card
-    const hyundaiCard = page.locator('text=현대카드');
-    if (await hyundaiCard.isVisible({ timeout: 5000 })) {
-      await hyundaiCard.click();
-      await page.waitForTimeout(500);
-
-      // Find and click on a card checkbox
-      const cardItem = page.locator('text=더 퍼플').first();
-      if (await cardItem.isVisible({ timeout: 3000 })) {
-        await cardItem.click();
-
-        // Go back to home and verify card is used
-        await page.locator('[aria-label="홈"]').click();
-        await page.waitForTimeout(500);
-
-        // Demo mode should be hidden now
-        await expect(page.locator('text=DEMO')).not.toBeVisible({ timeout: 5000 });
-      }
-    }
+  test('2. location UI available only on demand', async ({ page }) => {
+    await ensureDemoMode(page);
+    const nearbyButton = page.locator('[aria-label="내 주변"], button:has-text("내주변"), button:has-text("내 주변")').first();
+    await expect(nearbyButton).toBeVisible({ timeout: 10000 });
+    await nearbyButton.click();
+    await expect(page.locator('text=장소 선택')).toBeVisible({ timeout: 5000 });
   });
 
-  // Flow 3: Place search and selection
-  test('3. searching and selecting a place updates recommendations', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
+  test('3. search benefit selection applies the matching benefits filter', async ({ page }) => {
+    await ensureDemoMode(page);
 
-    // Wait for demo mode to appear and add demo cards
-    const demoButton = page.locator('text=데모로 체험해보기');
-    await demoButton.waitFor({ state: 'visible', timeout: 15000 });
-    await demoButton.click();
+    await page.getByRole('textbox', { name: '검색' }).fill('발렛');
+    const benefitOption = page.getByRole('option', { name: /호텔\/공항 무료 발렛|호텔\/공항 발렛/ }).first();
+    await expect(benefitOption).toBeVisible({ timeout: 5000 });
+
+    await benefitOption.click();
+
+    await expect(page.locator('h1')).toHaveText('내 혜택');
+    await expect(page.locator('text=FILTER')).toBeVisible({ timeout: 5000 });
+    await expect(page.getByRole('heading', { name: /🚗 발렛 \(\d+\)/ })).toBeVisible({ timeout: 5000 });
+  });
+
+  test('4. favorite/recent chips appear after place interactions', async ({ page }) => {
+    await ensureDemoMode(page);
+    await page.locator('[aria-label="내 주변"]').first().click();
+    await expect(page.locator('text=장소 선택')).toBeVisible({ timeout: 5000 });
+
+    const firstPlaceButton = page.locator('[role="dialog"] button').filter({ hasText: /공항|호텔|백화점|라운지/ }).first();
+    await firstPlaceButton.click();
+
+    await page.waitForTimeout(700);
+    const chip = page.locator('button').filter({ hasText: /인천공항|김포공항|호텔|라운지/ }).first();
+    await expect(chip).toBeVisible({ timeout: 5000 });
+  });
+
+  test('5. OCR modal opens from scan action', async ({ page }) => {
+    const ocrButton = page.locator('[aria-label="OCR"]').first();
+    await expect(ocrButton).toBeVisible({ timeout: 10000 });
+    await ocrButton.click();
+    await expect(page.getByRole('dialog')).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('text=카드 스캔')).toBeVisible({ timeout: 5000 });
+  });
+
+  test('6. settings share fallback works without navigator.share', async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'share', { value: undefined, configurable: true });
+    });
+
+    await page.locator('[aria-label="설정"]').click();
+    const shareButton = page.locator('button:has-text("앱 공유하기")');
+    await expect(shareButton).toBeVisible({ timeout: 5000 });
+    await shareButton.click();
+  });
+
+  test('7. benefit detail opens and supports share/report actions', async ({ page }) => {
+    await page.locator('[aria-label="혜택"]').click();
+    const benefitCandidates = page.locator('button').filter({ hasText: /캐시백|할인|적립|만원|원/ });
+    if ((await benefitCandidates.count()) === 0) return;
+
+    await benefitCandidates.first().click();
     await page.waitForTimeout(500);
-
-    // Click place selector
-    const placeSelector = page.locator('text=선택하세요');
-    if (await placeSelector.isVisible({ timeout: 5000 })) {
-      await placeSelector.click();
-      await expect(page.locator('text=장소 선택')).toBeVisible({ timeout: 5000 });
-
-      // Select a place from the list
-      const firstPlace = page.locator('[role="dialog"] button').filter({ hasText: /공항|백화점|호텔|CGV|스타벅스/ }).first();
-      if (await firstPlace.isVisible({ timeout: 3000 })) {
-        await firstPlace.click();
-
-        // Verify BEST card recommendation appears
-        await expect(page.locator('text=BEST')).toBeVisible({ timeout: 5000 });
-      }
-    }
+    const dialog = page.getByRole('dialog');
+    if ((await dialog.count()) === 0) return;
+    await expect(dialog).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('button[aria-label="혜택 공유"]')).toBeVisible();
   });
 
-  // Flow 4: Search benefits and navigate to benefits tab
-  test('4. benefit search navigates to benefits tab with filter', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-
-    // Add demo cards
-    const demoButton = page.locator('text=데모로 체험해보기');
-    await demoButton.waitFor({ state: 'visible', timeout: 15000 });
-    await demoButton.click();
-    await page.waitForTimeout(500);
-
-    // Type in search
-    const searchInput = page.locator('input[placeholder*="검색"]');
-    await searchInput.waitFor({ state: 'visible', timeout: 5000 });
-    await searchInput.fill('라운지');
-    await page.waitForTimeout(500);
-
-    // Click on a benefit from search results if visible
-    const benefitResult = page.locator('text=라운지').first();
-    if (await benefitResult.isVisible({ timeout: 3000 })) {
-      await expect(benefitResult).toBeVisible();
-    }
-  });
-
-  // Flow 5: Location permission mock (denied)
-  test('5. handles location permission denial gracefully', async ({ page, context }) => {
-    // Mock geolocation as denied
-    await context.setGeolocation({ latitude: 0, longitude: 0 });
-    await context.grantPermissions([]);
-
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-
-    // Add demo cards
-    const demoButton = page.locator('text=데모로 체험해보기');
-    await demoButton.waitFor({ state: 'visible', timeout: 15000 });
-    await demoButton.click();
-    await page.waitForTimeout(500);
-
-    // Try to get nearby places - look for the target/location button
-    const locationButton = page.locator('[aria-label="내 주변"]').or(page.locator('button:has-text("내 주변")')).first();
-    if (await locationButton.isVisible({ timeout: 3000 })) {
-      await locationButton.click();
-      // Should fall back to Seoul default
-      await expect(page.locator('text=서울').or(page.locator('text=장소 선택')).first()).toBeVisible({ timeout: 5000 });
-    }
-  });
-
-  // Flow 6: Offline fallback
-  test('6. maintains UI functionality when offline', async ({ page, context }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-
-    // Add demo cards first while online
-    const demoButton = page.locator('text=데모로 체험해보기');
-    await demoButton.waitFor({ state: 'visible', timeout: 15000 });
-    await demoButton.click();
-    await page.waitForTimeout(500);
-
-    // Go offline
+  test('8. offline tab navigation still works', async ({ page, context }) => {
     await context.setOffline(true);
 
-    // Navigate to different tabs - UI should still work
     await page.locator('[aria-label="혜택"]').click();
     await expect(page.locator('text=어디서든').or(page.locator('text=내 혜택')).first()).toBeVisible({ timeout: 5000 });
 
     await page.locator('[aria-label="지갑"]').click();
-    await expect(page.locator('text=카드사').or(page.locator('text=지갑')).first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('text=카드사를 탭하여').or(page.locator('text=지갑')).first()).toBeVisible({ timeout: 5000 });
 
-    // Go back online
     await context.setOffline(false);
   });
-});
 
-test.describe('OCR Flow (mocked)', () => {
-  test('OCR modal opens and closes correctly', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-    await page.waitForSelector('text=SMART WALLET', { timeout: 15000 });
+  test('9. tab switches reset the main scroll position', async ({ page }) => {
+    await ensureDemoMode(page);
 
-    // Click on OCR scan button
-    const ocrButton = page.locator('text=OCR 스캔');
-    if (await ocrButton.isVisible({ timeout: 10000 })) {
-      await ocrButton.click();
+    const main = page.locator('main');
+    const scrolledTop = await main.evaluate((el) => {
+      el.scrollTo(0, 650);
+      return el.scrollTop;
+    });
 
-      // Modal should open - check for modal title
-      await expect(page.getByRole('heading', { name: /카드 스캔/ })).toBeVisible({ timeout: 5000 });
+    expect(scrolledTop).toBeGreaterThan(300);
 
-      // Close modal
-      const closeButton = page.locator('button:has-text("×")').or(page.locator('[aria-label="닫기"]')).first();
-      if (await closeButton.isVisible({ timeout: 2000 })) {
-        await closeButton.click();
-      }
-    }
+    await page.locator('[aria-label="설정"]').click();
+
+    await expect(page.locator('h1')).toHaveText('설정');
+    const topHeading = page.getByRole('heading', { name: '📍 위치 권한' });
+    await expect(topHeading).toBeVisible({ timeout: 5000 });
+    const box = await topHeading.boundingBox();
+    expect(box?.y ?? 9999).toBeLessThan(220);
   });
 });

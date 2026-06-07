@@ -19,18 +19,24 @@ git push origin main
 
 ### 수동 배포
 ```bash
-# 프로덕션 빌드
-npm run build
+# 릴리즈 프리플라이트
+npm run release:preflight
 
 # Vercel CLI로 배포
 npx vercel --prod
+
+# 배포 후 스모크
+npm run release:postdeploy -- https://your-production-url
 ```
 
 ### 배포 전 체크리스트
-- [ ] `npm run validate` 통과
-- [ ] `npm run lint` 통과
-- [ ] `npm run build` 성공
-- [ ] `npm run secrets:check` 통과
+- [ ] `npm run release:preflight` 통과
+- [ ] UX 회귀 점검 완료
+  - [ ] 레이어링: 헤더 `z-30`, 하단 탭 `z-40`, 바텀시트/모달 `z-50+`에서 가림/클릭 막힘 없음
+  - [ ] 필터: 홈 검색 → 혜택 탭 카테고리 필터, 장소 시트 카테고리 필터(`cafe`, `mart` 실시간 포함) 정상
+  - [ ] SPA 스크롤: 깊게 스크롤한 뒤 탭 전환 시 새 탭이 상단에서 열리고, 모달/시트 닫은 뒤 배경 스크롤이 어색하지 않음
+- [ ] PWA 빌드 아티팩트 확인 (`manifest.webmanifest`, `sw.js`, `registerSW.js`, 앱 아이콘)
+- [ ] 데이터 감사 리포트 검토 (`docs/audit-report.md`)
 
 ---
 
@@ -115,8 +121,10 @@ android {
 ### 공통
 - [ ] 버전 번호 업데이트 (versioning.md 참조)
 - [ ] 변경 로그 작성
-- [ ] 데이터 검증 (`npm run validate`)
+- [ ] 로컬 프리플라이트 완료 (`npm run release:preflight`)
 - [ ] 기능 테스트 완료
+- [ ] UX 회귀 점검 완료 (레이어링, 필터, SPA 스크롤)
+- [ ] 배포 후 스모크 완료 (`npm run release:postdeploy -- <url>`)
 
 ### iOS
 - [ ] Info.plist 권한 문구 확인

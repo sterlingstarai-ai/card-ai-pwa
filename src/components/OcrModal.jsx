@@ -8,6 +8,7 @@
 import { useRef } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Logger } from '../constants/config';
 
 export const OcrModal = ({
   // Data
@@ -48,26 +49,26 @@ export const OcrModal = ({
 
   // Capacitor Camera로 촬영 (iOS/Android)
   const handleCameraCapture = async () => {
-    console.log('[Camera] handleCameraCapture called, isNative:', Capacitor.isNativePlatform());
+    Logger.log('[Camera] capture start', { native: Capacitor.isNativePlatform() });
 
     if (Capacitor.isNativePlatform()) {
       try {
         // 카메라 권한 먼저 확인
-        console.log('[Camera] Checking permissions...');
+        Logger.log('[Camera] checking permissions');
         const permissions = await Camera.checkPermissions();
-        console.log('[Camera] Current permissions:', permissions);
+        Logger.log('[Camera] permissions received');
 
         if (permissions.camera === 'denied') {
-          console.log('[Camera] Permission denied, requesting...');
+          Logger.log('[Camera] requesting permissions');
           const requested = await Camera.requestPermissions();
-          console.log('[Camera] Requested permissions:', requested);
+          Logger.log('[Camera] permission request completed');
           if (requested.camera === 'denied') {
             window.alert('카메라 권한이 필요합니다. 설정에서 카메라 권한을 허용해주세요.');
             return;
           }
         }
 
-        console.log('[Camera] Opening camera...');
+        Logger.log('[Camera] opening camera');
         const image = await Camera.getPhoto({
           quality: 70,
           allowEditing: false,
@@ -78,7 +79,7 @@ export const OcrModal = ({
           height: 1600,
         });
 
-        console.log('[Camera] Photo taken, base64 length:', image.base64String?.length);
+        Logger.log('[Camera] photo captured', { hasBase64: !!image.base64String, length: image.base64String?.length });
 
         if (image.base64String) {
           handleOCRBase64(image.base64String);
@@ -91,7 +92,7 @@ export const OcrModal = ({
         // 사용자가 취소한 경우 무시
         if (err.message?.includes('cancel') || err.message?.includes('Cancel') ||
             err.message?.includes('User denied') || err.message?.includes('dismissed')) {
-          console.log('[Camera] User cancelled');
+          Logger.log('[Camera] user cancelled');
           return;
         }
 
@@ -100,7 +101,7 @@ export const OcrModal = ({
       }
     } else {
       // 웹에서는 기존 input 사용
-      console.log('[Camera] Web platform, using file input');
+      Logger.log('[Camera] web platform, using file input');
       fileInputRef.current?.click();
     }
   };
@@ -143,9 +144,9 @@ export const OcrModal = ({
                   <div className="w-14 h-9 rounded-lg border border-white/20" style={{ background: `linear-gradient(135deg, ${card.color}, #1a1a1a)` }} />
                   <div className="flex-1 text-left">
                     <p className="font-bold">{card.name}</p>
-                    <p className="text-xs text-slate-500">{card.issuer}</p>
+                    <p className="text-xs text-slate-400">{card.issuer}</p>
                   </div>
-                  {card.matchScore && <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded-full">{card.matchScore}개 일치</span>}
+                  {card.matchScore && <span className="text-[11px] bg-green-500/20 text-green-400 px-2 py-1 rounded-full">{card.matchScore}개 일치</span>}
                 </button>
               ))}
             </div>

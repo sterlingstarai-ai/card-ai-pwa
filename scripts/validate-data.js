@@ -34,6 +34,33 @@ Object.entries(places).forEach(([placeId, place]) => {
   if (place.tags) place.tags.forEach(tag => placeMatchSet.add(tag));
 });
 
+// Dynamic Kakao categories/tags are valid even if not present in curated places.json.
+[
+  'cafe',
+  'mart',
+  'convenience',
+  'gas',
+  'hotel',
+  'restaurant',
+  'starbucks',
+  'twosome',
+  'ediya',
+  'hollys',
+  'coffeebean',
+  'paulbassett',
+  'bluebottle',
+  'emart',
+  'homeplus',
+  'lottemart',
+  'costco',
+  'traders',
+  'cu',
+  'gs25',
+  'seveneleven',
+  'emart24',
+  'ministop',
+].forEach((tag) => placeMatchSet.add(tag));
+
 // Valid categories from categoryConfig
 const validCategories = new Set([
   'airport', 'valet', 'lounge', 'fnb', 'hotel', 'golf',

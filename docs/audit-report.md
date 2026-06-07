@@ -1,15 +1,15 @@
 # Data Quality Audit Report
 
-Generated: 2026-01-24
+Generated: 2026-03-15
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| Total Cards | 128 |
-| Total Places | 157 |
-| Total Benefits | 222 |
-| **Risk Score** | **767** |
+| Total Cards | 141 |
+| Total Places | 140 |
+| Total Benefits | 551 |
+| **Risk Score** | **617** |
 
 ## Risk Assessment
 
@@ -22,7 +22,7 @@ Generated: 2026-01-24
 | Missing sourceUrl | 199 | Medium |
 | Missing lastVerifiedAt | 199 | High |
 | Stale verification (>180d) | 20 | Medium |
-| Cards without benefits | 30 | High |
+| Cards without benefits | 0 | High |
 | Missing required fields | 0 | Critical |
 
 ## Demo Scenario Health
@@ -38,14 +38,14 @@ Generated: 2026-01-24
 
 ### Demo Benefits Detail
 
-- **호텔/공항 무료 발렛** (the Purple)
-  - Category: valet
-  - Value: 월 5회
-  - Source: ✅
-  - Verified: 2025-01-14
 - **PP 라운지** (the Purple)
   - Category: lounge
   - Value: PP카드
+  - Source: ✅
+  - Verified: 2025-01-14
+- **호텔/공항 무료 발렛** (the Purple)
+  - Category: valet
+  - Value: 월 5회
   - Source: ✅
   - Verified: 2025-01-14
 - **카페 30~50%** (taptap O)
@@ -70,61 +70,32 @@ Generated: 2026-01-24
 None
 
 ### High: Benefits Without Verification Date
-- `samsung-id-platinum-lounge` (iD PLATINUM): The Lounge
-- `samsung-id-platinum-valet` (iD PLATINUM): 호텔/공항 발렛
-- `samsung-id-platinum-cafe` (iD PLATINUM): 스타벅스 3천원
-- `samsung-id-titanium-lounge` (iD TITANIUM): The Lounge
-- `samsung-id-titanium-valet` (iD TITANIUM): 호텔/공항 발렛
-- `samsung-mileage-lounge` (앤 마일리지 플래티넘): 마티나 라운지
-- `samsung-mileage-cafe` (앤 마일리지 플래티넘): 공항 커피
-- `samsung-taptap-movie` (taptap O): CGV 5,000원
-- `samsung-taptap-shopping` (taptap O): 쇼핑 7%
-- `samsung-5-cafe` (삼성카드 5): 커피 10%
+- `bc-airplus-master-points` (에어플러스 에어 마스터): 마일리지 적립
+- `bc-airplus-max-cafe` (에어플러스 에어 맥스): 카페 추가적립
+- `bc-airplus-max-points` (에어플러스 에어 맥스): 마일리지 적립
+- `bc-baro-cafe` (바로카드): 커피 10%
+- `bc-baro-conv` (바로카드): 편의점 5%
+- `bc-baro-gas` (바로카드): 주유 5%
+- `bc-bliss5-golf` (BLISS.5 PRESTIGE): 파3 무료
+- `bc-bliss5-lounge` (BLISS.5 PRESTIGE): 공항라운지
+- `bc-bliss5-valet` (BLISS.5 PRESTIGE): 호텔 발렛
+- `bc-bliss7-golf` (BLISS.7): 골프 그린피
 
 ### Medium: Benefits Without Source URL
-- `samsung-id-platinum-lounge` (iD PLATINUM): The Lounge
-- `samsung-id-platinum-valet` (iD PLATINUM): 호텔/공항 발렛
-- `samsung-id-platinum-cafe` (iD PLATINUM): 스타벅스 3천원
-- `samsung-id-titanium-lounge` (iD TITANIUM): The Lounge
-- `samsung-id-titanium-valet` (iD TITANIUM): 호텔/공항 발렛
-- `samsung-mileage-lounge` (앤 마일리지 플래티넘): 마티나 라운지
-- `samsung-mileage-cafe` (앤 마일리지 플래티넘): 공항 커피
-- `samsung-taptap-movie` (taptap O): CGV 5,000원
-- `samsung-taptap-shopping` (taptap O): 쇼핑 7%
-- `samsung-5-cafe` (삼성카드 5): 커피 10%
+- `bc-airplus-master-points` (에어플러스 에어 마스터): 마일리지 적립
+- `bc-airplus-max-cafe` (에어플러스 에어 맥스): 카페 추가적립
+- `bc-airplus-max-points` (에어플러스 에어 맥스): 마일리지 적립
+- `bc-baro-cafe` (바로카드): 커피 10%
+- `bc-baro-conv` (바로카드): 편의점 5%
+- `bc-baro-gas` (바로카드): 주유 5%
+- `bc-bliss5-golf` (BLISS.5 PRESTIGE): 파3 무료
+- `bc-bliss5-lounge` (BLISS.5 PRESTIGE): 공항라운지
+- `bc-bliss5-valet` (BLISS.5 PRESTIGE): 호텔 발렛
+- `bc-bliss7-golf` (BLISS.7): 골프 그린피
 
 ## Cards Without Benefits
 
-- 카카오뱅크 카카오뱅크 체크카드 (`kakaobank-check`)
-- 카카오뱅크 카카오뱅크 mini (`kakaobank-mini`)
-- 카카오뱅크 카카오프렌즈 체크 (`kakaobank-friends`)
-- 토스뱅크 토스뱅크 체크카드 (`tossbank-check`)
-- 토스뱅크 토스 프라임 (`toss-prime`)
-- 케이뱅크 케이뱅크 체크카드 (`kbank-check`)
-- 케이뱅크 케이뱅크 플러스 체크 (`kbank-plus`)
-- 한국씨티은행 씨티 프레스티지 (`citi-prestige`)
-- 한국씨티은행 씨티 리워드 (`citi-rewards`)
-- 한국씨티은행 씨티 클리어 (`citi-clear`)
-- IBK기업은행 스카이패스 (`ibk-skypass`)
-- IBK기업은행 IBK PREMIUM (`ibk-premium`)
-- IBK기업은행 참! 좋은 LIFE (`ibk-life`)
-- SC제일은행 The FIRST (`sc-the-first`)
-- SC제일은행 SC Platinum (`sc-platinum`)
-- 수협은행 오션 (`suhyup-ocean`)
-- DGB대구은행 DGB 플래티넘 (`dgb-daegu`)
-- BNK부산은행 BNK 플래티넘 (`bnk-busan`)
-- 전북은행 JB 프리미엄 (`jeonbuk-jb`)
-- 광주은행 KJ 플래티넘 (`kwangju-kj`)
-- 제주은행 제주 플래티넘 (`jeju-jj`)
-- 현대카드 the X (`hyundai-x`)
-- 현대카드 M포인트 (`hyundai-m`)
-- 현대카드 ZERO Edition2 (`hyundai-zero`)
-- 삼성카드 디지털러버 (`samsung-digital`)
-- 삼성카드 쇼핑앤카드 (`samsung-shopping`)
-- 신한카드 러브 체크 (`shinhan-love`)
-- 신한카드 심플 체크 (`shinhan-simple`)
-- KB국민카드 노블레스 (`kb-noblesse`)
-- KB국민카드 청춘대로 (`kb-check`)
+All cards have at least one benefit.
 
 ## Recommendations
 
