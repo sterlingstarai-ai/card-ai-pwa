@@ -36,6 +36,18 @@
 - **활성화**: 서버 env `OCR_DAILY_MAX` / `IDENTIFY_DAILY_MAX` / `KAKAO_DAILY_MAX` 에 상한 설정.
   미설정/0 이면 no-op(기본 비활성). 일일 정상 사용량 + 여유를 보고 값 설정 권장.
 
+## 버전 게이트 — 무중단 활성화 ✅ (구현됨)
+- `verifyAppRequest`가 `APP_AUTH_MIN_VERSION` 을 읽어, 그 미만(또는 `x-app-version` 미상)인
+  구버전 앱은 grace 통과시키고 그 이상만 토큰 강제. 클라이언트는 `x-app-version`(=빌드 버전) 전송.
+- **이미 출시된 앱(iOS 1.0.4 등)을 깨지 않고** 신버전부터 인증을 즉시 켤 수 있다.
+- ⚠️ `x-app-version` 은 위조 가능 → 보안 경계가 아니라 **마이그레이션 장치**. grace 구간 남용은
+  rate-limit(fail-closed) + cost-guard(전역 일일 상한)로 묶인다.
+- **활성화 절차(안전)**:
+  1. 토큰을 싣는 릴리스 버전 결정(예: 1.2.0). 그 버전으로 웹 재배포 + 네이티브 신규 출시.
+  2. Vercel env: `APP_REQUEST_SECRET`, `VITE_APP_REQUEST_SECRET`(동일값), `APP_AUTH_MIN_VERSION=1.2.0`.
+  3. 이 시점부터 1.2.0+ 요청은 인증 강제, 구버전(1.0.4 등)은 grace 통과(무중단).
+  4. 구버전 사용량이 충분히 소멸하면 `APP_AUTH_MIN_VERSION` 제거 → 전체 strict.
+
 ## Phase 2 — 기기 검증(진짜 인증)
 - **iOS**: Apple App Attest (DeviceCheck) — 앱이 정품 기기의 정품 앱임을 암호학적으로 증명.
 - **Android**: Google Play Integrity API.

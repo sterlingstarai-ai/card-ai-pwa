@@ -12,6 +12,12 @@
  *     박힌 토큰은 추출이 훨씬 어려워 네이티브 경로엔 실효가 있다.
  *   - APP_REQUEST_SECRET 미설정 시: 통과(no-op) — 기존 배포 무중단. 단 1회 경고 로그.
  *
+ * 버전 게이트(마이그레이션): APP_AUTH_MIN_VERSION 설정 시 그 미만 버전(또는 x-app-version
+ *   미상=토큰 지원 이전 출시 앱)은 grace 통과, 그 이상만 토큰 강제. 출시된 구버전 앱을 깨지
+ *   않고 신버전부터 인증을 즉시 켤 수 있다. x-app-version은 위조 가능하므로 보안 경계가 아니라
+ *   마이그레이션 장치이며, grace 구간 남용은 rate-limit/cost-guard로 묶인다. 구버전 소멸 후
+ *   APP_AUTH_MIN_VERSION 제거 시 모든 요청에 토큰 강제(strict).
+ *
  * Phase 2 (계획): 기기 검증(Apple App Attest / Google Play Integrity)을 이 함수에
  *   드롭인. docs/ENDPOINT_AUTH_PLAN.md 참조.
  */
@@ -24,6 +30,18 @@ function safeEqual(a, b) {
   const bb = Buffer.from(String(b));
   if (ba.length !== bb.length) return false;
   return crypto.timingSafeEqual(ba, bb);
+}
+
+// '1.2.0' vs '1.0.4' 비교(숫자 파트만). a<b → -1, a==b → 0, a>b → 1.
+function compareVersions(a, b) {
+  const pa = String(a).split('.').map((n) => parseInt(n, 10) || 0);
+  const pb = String(b).split('.').map((n) => parseInt(n, 10) || 0);
+  const len = Math.max(pa.length, pb.length);
+  for (let i = 0; i < len; i++) {
+    const diff = (pa[i] || 0) - (pb[i] || 0);
+    if (diff !== 0) return diff < 0 ? -1 : 1;
+  }
+  return 0;
 }
 
 let warnedMissingSecret = false;
@@ -40,6 +58,18 @@ export function verifyAppRequest(req) {
       warnedMissingSecret = true;
     }
     return { ok: true, reason: 'disabled' };
+  }
+
+  // 버전 게이트(마이그레이션): APP_AUTH_MIN_VERSION 미만 또는 버전 미상(토큰 지원 이전
+  // 출시 앱)은 grace 통과 → 이미 출시된 구버전 앱(예: iOS 1.0.4)을 깨지 않고 신버전부터
+  // 인증을 켤 수 있다. ⚠️ x-app-version은 위조 가능 → 보안 경계가 아니라 마이그레이션 장치.
+  // grace 구간 남용은 rate-limit + cost-guard로 묶이며, 구버전 소멸 후 이 env를 제거하면 strict.
+  const minVersion = process.env.APP_AUTH_MIN_VERSION;
+  if (minVersion) {
+    const clientVersion = req.headers['x-app-version'];
+    if (!clientVersion || compareVersions(clientVersion, minVersion) < 0) {
+      return { ok: true, reason: 'grace-legacy-version' };
+    }
   }
 
   const token = req.headers['x-app-token'];
