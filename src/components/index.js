@@ -13,3 +13,4 @@ export { EmptyState } from './EmptyState';
 export { ScenarioCard } from './ScenarioCard';
 export { SummaryBar } from './SummaryBar';
 export { ReportModal } from './ReportModal';
+export { ConsentBanner } from './ConsentBanner';

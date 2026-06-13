@@ -6,7 +6,42 @@ function getClientIp(req) {
   return forwarded || req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
 }
 
-export async function checkRateLimit(req, res, { max = 10, window = '60 s', prefix = 'default' } = {}) {
+function hasUpstashEnv() {
+  // Redis.fromEnv()가 허용하는 모든 변수명을 반영(UPSTASH_* 및 Vercel KV의 KV_REST_API_*).
+  // 한쪽만 검사하면 KV로 프로비저닝된 배포에서 리미터가 정상인데도 전 비용 트래픽이 503으로 막힌다.
+  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+  return Boolean(url && token);
+}
+
+/**
+ * 한도 판정을 내릴 수 없을 때(Upstash 미설정/장애)의 처리.
+ * - 기본은 FAIL-CLOSED: 비용이 발생하는 엔드포인트(Vision/Kakao 프록시)는
+ *   리미터가 죽으면 무제한 호출 = 비용-DoS로 직결되므로 503으로 막는다.
+ * - failOpen:true는 비용이 없는 경로(예: /api/report → GitHub 이슈)에서만
+ *   명시적으로 선택한다. fake한 X-RateLimit-Remaining 헤더는 내보내지 않는다(장애 은폐 방지).
+ */
+function handleLimiterUnavailable(res, { failOpen, reason }) {
+  console.error(`[RateLimit] limiter unavailable (${reason}); ${failOpen ? 'failing open' : 'failing closed'}`);
+
+  if (failOpen) {
+    return true;
+  }
+
+  res.setHeader('Retry-After', '30');
+  res.status(503).json({ error: 'Service temporarily unavailable. Please try again shortly.' });
+  return false;
+}
+
+export async function checkRateLimit(
+  req,
+  res,
+  { max = 10, window = '60 s', prefix = 'default', failOpen = false } = {}
+) {
+  if (!hasUpstashEnv()) {
+    return handleLimiterUnavailable(res, { failOpen, reason: 'missing env' });
+  }
+
   try {
     const identifier = `${prefix}:${getClientIp(req)}`;
 
@@ -30,10 +65,6 @@ export async function checkRateLimit(req, res, { max = 10, window = '60 s', pref
 
     return true;
   } catch (error) {
-    console.error('[RateLimit] Upstash unavailable, bypassing limit:', error?.message || error);
-    res.setHeader('X-RateLimit-Limit', String(max));
-    res.setHeader('X-RateLimit-Remaining', String(max));
-    res.setHeader('X-RateLimit-Reset', '0');
-    return true;
+    return handleLimiterUnavailable(res, { failOpen, reason: error?.message || String(error) });
   }
 }

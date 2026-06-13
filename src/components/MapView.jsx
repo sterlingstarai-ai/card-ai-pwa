@@ -9,7 +9,7 @@
 
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Capacitor } from '@capacitor/core';
-import { placeTypeConfig } from '../lib/utils';
+import { placeTypeConfig, hasRealLocation } from '../lib/utils';
 import { fetchKakaoPlacesByRectPaged } from '../lib/kakao-places';
 
 export const normalizeKakaoAppKey = (rawValue) => {
@@ -32,6 +32,7 @@ export const normalizeKakaoAppKey = (rawValue) => {
 };
 
 const KAKAO_APP_KEY = normalizeKakaoAppKey(import.meta.env.VITE_KAKAO_APP_KEY);
+const noop = () => {};
 
 // 카테고리별 검색 쿼리
 const CATEGORY_SEARCH_QUERIES = {
@@ -108,7 +109,7 @@ export const MapView = ({
   selectedPlaceId,
   onPlaceSelect,
   onClose,
-  onError = () => {},
+  onError = noop,
   benefitsData,
   cardsData,
   myCards,
@@ -351,6 +352,9 @@ export const MapView = ({
 
     for (const place of filteredPlaces) {
       if (!place) continue;
+      // 실제 위치가 없는 브랜드/태그 placeholder는 마커로 그리지 않는다
+      // (서울시청 한 점에 수십 개가 뭉치는 현상 방지). 라이브 검색 결과는 실좌표라 정상 표시.
+      if (!hasRealLocation(place)) continue;
       const coords = normalizeLatLng(place.lat, place.lng);
       if (!coords) continue;
 

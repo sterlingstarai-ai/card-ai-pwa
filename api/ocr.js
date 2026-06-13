@@ -6,6 +6,9 @@
 
 import { handleCors } from './lib/cors.js';
 import { checkRateLimit } from './lib/rate-limit.js';
+import { checkCostBudget } from './lib/cost-guard.js';
+import { validateBase64Image } from './lib/validate.js';
+import { verifyAppRequest } from './lib/app-auth.js';
 
 export const config = {
   api: {
@@ -24,8 +27,15 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  if (!verifyAppRequest(req).ok) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+
   const rateAllowed = await checkRateLimit(req, res, { max: 10, window: '60 s', prefix: 'ocr' });
   if (!rateAllowed) return;
+
+  const budgetOk = await checkCostBudget(res, { endpoint: 'ocr', dailyMax: Number(process.env.OCR_DAILY_MAX) || 0 });
+  if (!budgetOk) return;
 
   const VISION_API_KEY = process.env.VISION_API_KEY;
   if (!VISION_API_KEY) {
@@ -36,8 +46,10 @@ export default async function handler(req, res) {
   try {
     const { image } = req.body || {};
 
-    if (!image) {
-      return res.status(400).json({ error: 'No image provided' });
+    // 임의 콘텐츠가 Vision으로 그대로 흘러가지 않도록 형식·용량 사전 검증
+    const validated = validateBase64Image(image, { maxDecodedBytes: 4 * 1024 * 1024 });
+    if (!validated.ok) {
+      return res.status(400).json({ error: validated.error });
     }
 
     const visionResponse = await fetch(
@@ -48,7 +60,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           requests: [
             {
-              image: { content: image },
+              image: { content: validated.image },
               features: [
                 { type: 'DOCUMENT_TEXT_DETECTION', maxResults: 1 },
                 { type: 'LOGO_DETECTION', maxResults: 5 },

@@ -20,6 +20,22 @@ export const haversineDistance = (pos1, pos2) => {
 
 export const formatDistance = (m) => m < 1000 ? `${Math.round(m)}m` : `${(m / 1000).toFixed(1)}km`;
 
+// 브랜드/태그 전용(편의점·온라인·주유 등) placeholder 장소는 실제 위치가 없어
+// 데이터에서 서울시청 좌표(37.5665, 126.978)를 sentinel로 공유한다.
+// 이런 항목은 거리 계산("가장 가까운 곳")과 지도 마커에서 제외해야
+// 한 점에 뭉치거나 수백 km 떨어진 곳이 "근처"로 표시되는 것을 막는다.
+const PLACEHOLDER_LAT = 37.5665;
+const PLACEHOLDER_LNG = 126.978;
+
+export const hasRealLocation = (place) => {
+  if (!place) return false;
+  const lat = Number(place.lat);
+  const lng = Number(place.lng);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return false;
+  if (lat === PLACEHOLDER_LAT && Math.abs(lng - PLACEHOLDER_LNG) < 1e-6) return false;
+  return true;
+};
+
 // ============================================================================
 // Benefit value estimation
 // ============================================================================

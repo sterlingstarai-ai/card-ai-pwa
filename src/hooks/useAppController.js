@@ -13,6 +13,7 @@ import { postJson, readJsonSafely } from '../lib/api-client';
 
 import {
   haversineDistance,
+  hasRealLocation,
   estimateValue,
   findTag,
   expandSearchQuery,
@@ -156,6 +157,10 @@ export function useAppController() {
     trackEvent(EventType.PLACE_SELECTED, { placeId, placeType: placeObj?.type, placeName: placeObj?.name });
   }, [mergedPlacesData, placesData, showToast, vibrate]);
 
+  // 영구 저장 가능한 장소인지(=정적 데이터셋에 존재). 라이브(kakao:) 장소는
+  // dynamicPlacesData에만 있어 새로고침 시 사라지므로 즐겨찾기로 저장할 수 없다.
+  const isFavoritablePlace = useCallback((placeId) => !!placesData[placeId], [placesData]);
+
   // Toggle favorite place
   const toggleFavorite = useCallback((placeId) => {
     setFavoritePlaceIds(prev => {
@@ -163,13 +168,18 @@ export function useAppController() {
       if (isFav) {
         showToast('즐겨찾기에서 제거됨');
         return prev.filter(id => id !== placeId);
-      } else {
-        showToast('⭐ 즐겨찾기에 추가됨');
-        return [...prev, placeId];
       }
+      // 정적 데이터에 없는 장소(라이브 검색 결과 등)는 영구 저장이 안 된다.
+      // "추가됨" 토스트 후 persist 단계에서 조용히 누락되는 데이터 손실을 막기 위해 차단.
+      if (!placesData[placeId]) {
+        showToast('이 장소는 즐겨찾기를 지원하지 않습니다');
+        return prev;
+      }
+      showToast('⭐ 즐겨찾기에 추가됨');
+      return [...prev, placeId];
     });
     vibrate([5]);
-  }, [showToast, vibrate]);
+  }, [showToast, vibrate, placesData]);
 
   const loadUserState = useCallback(async () => {
     try {
@@ -280,9 +290,27 @@ export function useAppController() {
     if (!showOcrModal) cancelOcrRun();
   }, [showOcrModal, cancelOcrRun]);
 
+  // AppReview는 "콜드런치"가 아니라 사용자가 적극적으로 카드를 3장 이상으로 늘린
+  // 긍정적 순간에만 요청한다. (iOS HIG: 앱 실행 직후/맥락 없는 리뷰 요청 지양)
+  // loadUserState가 매 실행 myCards를 복원하므로, 복원만으로는 발동하지 않도록
+  // 하이드레이션 직후 기준값을 잡고 그 뒤 <3 → >=3 상승 전이에서만 요청한다.
+  const reviewPrevCardCountRef = useRef(null);
   useEffect(() => {
+    if (!userDataLoaded) return;
+
+    // 하이드레이션 직후: 복원된 카드 수를 기준값으로만 기록(발동 안 함)
+    if (reviewPrevCardCountRef.current === null) {
+      reviewPrevCardCountRef.current = myCards.length;
+      return;
+    }
+
+    const prevCount = reviewPrevCardCountRef.current;
+    reviewPrevCardCountRef.current = myCards.length;
+
     if (isDemo) return;
-    if (myCards.length < 3) return;
+    // <3 → >=3 으로 "증가"한 경우에만 (세션 중 사용자가 직접 추가한 긍정 행동)
+    if (!(prevCount < 3 && myCards.length >= 3)) return;
+
     const hasRequestedReview = localStorage.getItem('cardai_review_requested');
     if (hasRequestedReview) return;
 
@@ -292,7 +320,7 @@ export function useAppController() {
     void AppReview.requestReview().catch((error) => {
       Logger.warn('AppReview request failed:', error?.message || error);
     });
-  }, [myCards.length, isDemo]);
+  }, [myCards.length, isDemo, userDataLoaded]);
 
   // Computed values
   const cardsByIssuer = useMemo(() => {
@@ -357,9 +385,17 @@ export function useAppController() {
     });
   }, [myCardObjects, networkBenefits]);
   
-  const nearbyPlaces = useMemo(() => 
-    userLocation ? Object.values(placesData).map(p => ({ ...p, distance: haversineDistance(userLocation, p) })).sort((a, b) => a.distance - b.distance) : []
-  , [userLocation, placesData]);
+  // "내 주변": 실제 위치가 있는 장소만, 그리고 합리적 반경 내(MAX_NEARBY_RADIUS_M)만.
+  // - placeholder(서울시청 sentinel) 장소 제외 → 한 점 뭉침/거리 오염 방지
+  // - 반경 밖이면 비워서(서울 외 지역) "267km가 가장 가까움" 같은 오표시를 막는다
+  const nearbyPlaces = useMemo(() => {
+    if (!userLocation) return [];
+    return Object.values(placesData)
+      .filter(hasRealLocation)
+      .map(p => ({ ...p, distance: haversineDistance(userLocation, p) }))
+      .filter(p => p.distance <= CONFIG.UI.MAX_NEARBY_RADIUS_M)
+      .sort((a, b) => a.distance - b.distance);
+  }, [userLocation, placesData]);
 
   const searchResults = useMemo(() => {
     if (!debouncedQuery.trim()) return { places: [], benefits: [] };
@@ -1128,6 +1164,7 @@ export function useAppController() {
     handleNearby,
     selectPlace,
     toggleFavorite,
+    isFavoritablePlace,
     pickNearestPlace,
     handleOCR,
     handleOCRBase64,

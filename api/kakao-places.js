@@ -4,6 +4,8 @@
 
 import { handleCors } from './lib/cors.js';
 import { checkRateLimit } from './lib/rate-limit.js';
+import { checkCostBudget } from './lib/cost-guard.js';
+import { verifyAppRequest } from './lib/app-auth.js';
 
 function mapGroupToType(categoryGroupCode) {
   switch (categoryGroupCode) {
@@ -84,8 +86,15 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  if (!verifyAppRequest(req).ok) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+
   const rateAllowed = await checkRateLimit(req, res, { max: 30, window: '60 s', prefix: 'kakao' });
   if (!rateAllowed) return;
+
+  const budgetOk = await checkCostBudget(res, { endpoint: 'kakao', dailyMax: Number(process.env.KAKAO_DAILY_MAX) || 0 });
+  if (!budgetOk) return;
 
   try {
     const kakaoKey = process.env.KAKAO_REST_API_KEY;
