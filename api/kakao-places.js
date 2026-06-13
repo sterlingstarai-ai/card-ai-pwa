@@ -4,6 +4,7 @@
 
 import { handleCors } from './lib/cors.js';
 import { checkRateLimit } from './lib/rate-limit.js';
+import { verifyAppRequest } from './lib/app-auth.js';
 
 function mapGroupToType(categoryGroupCode) {
   switch (categoryGroupCode) {
@@ -82,6 +83,10 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  if (!verifyAppRequest(req).ok) {
+    return res.status(403).json({ error: 'Forbidden' });
   }
 
   const rateAllowed = await checkRateLimit(req, res, { max: 30, window: '60 s', prefix: 'kakao' });

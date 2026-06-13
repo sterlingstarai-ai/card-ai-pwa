@@ -5,6 +5,7 @@
 
 import { handleCors } from './lib/cors.js';
 import { checkRateLimit } from './lib/rate-limit.js';
+import { verifyAppRequest } from './lib/app-auth.js';
 
 // 좌표 등 위치 PII가 공개 제보(GitHub 이슈)로 새지 않도록 차단.
 // - lat/lng 영문 키워드는 \b로 묶어 'Platinum'('lat' 포함) 같은 오탐을 피한다.
@@ -44,6 +45,10 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  if (!verifyAppRequest(req).ok) {
+    return res.status(403).json({ error: 'Forbidden' });
   }
 
   // report는 비용이 없는 경로(GitHub 이슈/로그)라 리미터 장애 시 soft-fail 허용.

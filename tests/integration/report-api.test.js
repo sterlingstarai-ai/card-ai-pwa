@@ -69,6 +69,19 @@ describe('api/report integration', () => {
     vi.doUnmock('../../api/lib/cors.js');
   });
 
+  it('rejects with 403 when APP_REQUEST_SECRET is set but no app token is sent', async () => {
+    mockRateLimitPass();
+    process.env.APP_REQUEST_SECRET = 'server-only-secret';
+    const { default: handler } = await import('../../api/report.js');
+    const req = createReq({ body: validBody }); // no x-app-token header
+    const res = createRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(403);
+    expect(res.body).toEqual({ error: 'Forbidden' });
+  });
+
   it('blocks disallowed origins with 403', async () => {
     mockRateLimitPass();
     const { default: handler } = await import('../../api/report.js');
