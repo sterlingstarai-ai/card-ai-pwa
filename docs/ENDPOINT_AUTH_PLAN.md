@@ -27,11 +27,14 @@
   - 설정법: Vercel 환경변수 `APP_REQUEST_SECRET` 와 빌드 환경변수 `VITE_APP_REQUEST_SECRET`
     에 **동일한 무작위 값**을 넣고 배포. 유출 의심 시 두 값을 함께 교체.
 
-## Phase 1.5 — 전역 비용 서킷브레이커 (권장 다음)
+## Phase 1.5 — 전역 비용 서킷브레이커 ✅ (구현됨)
+- `api/lib/cost-guard.js` `checkCostBudget()`: ocr/identify/kakao가 rate-limit 직후 호출.
 - per-IP 리밋은 IP 회전으로 우회 가능 → **엔드포인트별 일일 총량 상한**을 Upstash 카운터로
-  두고 초과 시 503. 누가 호출하든 **최악의 청구액을 상한**으로 묶는다.
-- 스케치: `INCR cardai:budget:<endpoint>:<YYYY-MM-DD>` + 첫 호출에 `EXPIRE ~25h`,
-  `> DAILY_MAX` 면 503(Retry-After). env(`OCR_DAILY_MAX` 등) 미설정이면 no-op.
+  두고 초과 시 503(Retry-After). 누가 호출하든 **최악의 청구액을 상한**으로 묶는다.
+- 구현: `INCR cardai:budget:<endpoint>:<YYYY-MM-DD>` + 첫 호출에 `EXPIRE ~25h`,
+  `> dailyMax` 면 503. Upstash 불가 시 통과(rate-limit이 fail-closed로 관장).
+- **활성화**: 서버 env `OCR_DAILY_MAX` / `IDENTIFY_DAILY_MAX` / `KAKAO_DAILY_MAX` 에 상한 설정.
+  미설정/0 이면 no-op(기본 비활성). 일일 정상 사용량 + 여유를 보고 값 설정 권장.
 
 ## Phase 2 — 기기 검증(진짜 인증)
 - **iOS**: Apple App Attest (DeviceCheck) — 앱이 정품 기기의 정품 앱임을 암호학적으로 증명.

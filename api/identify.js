@@ -4,6 +4,7 @@
 
 import { handleCors } from './lib/cors.js';
 import { checkRateLimit } from './lib/rate-limit.js';
+import { checkCostBudget } from './lib/cost-guard.js';
 import { validateBase64Image } from './lib/validate.js';
 import { verifyAppRequest } from './lib/app-auth.js';
 
@@ -30,6 +31,9 @@ export default async function handler(req, res) {
 
   const rateAllowed = await checkRateLimit(req, res, { max: 8, window: '60 s', prefix: 'identify' });
   if (!rateAllowed) return;
+
+  const budgetOk = await checkCostBudget(res, { endpoint: 'identify', dailyMax: Number(process.env.IDENTIFY_DAILY_MAX) || 0 });
+  if (!budgetOk) return;
 
   const VISION_API_KEY = process.env.VISION_API_KEY;
   if (!VISION_API_KEY) {
