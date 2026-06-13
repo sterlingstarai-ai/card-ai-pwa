@@ -48,12 +48,15 @@
   3. 이 시점부터 1.2.0+ 요청은 인증 강제, 구버전(1.0.4 등)은 grace 통과(무중단).
   4. 구버전 사용량이 충분히 소멸하면 `APP_AUTH_MIN_VERSION` 제거 → 전체 strict.
 
-## Phase 2 — 기기 검증(진짜 인증)
-- **iOS**: Apple App Attest (DeviceCheck) — 앱이 정품 기기의 정품 앱임을 암호학적으로 증명.
-- **Android**: Google Play Integrity API.
+## Phase 2 — 기기 검증(진짜 인증) 🚧 착수
+- 서버 토대 착수: `api/lib/attestation.js`(nonce 챌린지 인프라 구현·테스트 + 검증 stub),
+  env `ATTESTATION_REQUIRED`(기본 false). **전체 스펙·남은 작업: `docs/PHASE2_ATTESTATION_SPEC.md`**.
+- **iOS**: Apple App Attest (DCAppAttestService), **Android**: Google Play Integrity API.
 - 클라이언트가 attestation 토큰을 받아 전송 → 서버가 Apple/Google로 검증 →
   `verifyAppRequest`가 이 검증을 우선 경로로 사용(공유 토큰은 웹 폴백/회전 보조로 잔존).
 - 웹 PWA는 attestation 불가 → 웹 트래픽은 Phase 1 토큰 + 레이트리밋 + 비용캡으로 계속 방어.
+- 남은 핵심: 네이티브 Capacitor 플러그인(Swift/Kotlin) + Apple/Google 토큰 검증 + 키 저장소
+  + 엔드포인트 + `verifyAppRequest` 연결 + 콘솔 설정(이 환경에서 빌드/실기기 불가 → 핸드오프).
 
 ## 결정 필요
 - Phase 1 토큰을 **즉시 활성화**할지(= Vercel/빌드에 시크릿 주입). 활성화 전까지는 no-op이라
