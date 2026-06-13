@@ -132,4 +132,76 @@ describe('api/report integration', () => {
     expect(res.statusCode).toBe(429);
     expect(res.body).toEqual({ error: 'Too Many Requests' });
   });
+
+  it('does not treat normal card names containing "lat" as coordinates', async () => {
+    mockRateLimitPass();
+    const { default: handler } = await import('../../api/report.js');
+    const req = createReq({
+      body: {
+        ...validBody,
+        cardName: 'The Platinum Card',
+        description: 'Platinum benefit is missing',
+      },
+    });
+    const res = createRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+  });
+
+  it('still blocks coordinate-like personal location data', async () => {
+    mockRateLimitPass();
+    const { default: handler } = await import('../../api/report.js');
+    const req = createReq({
+      body: {
+        ...validBody,
+        description: 'lat: 37.123456, lng: 127.123456',
+      },
+    });
+    const res = createRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toContain('개인정보');
+  });
+
+  // Regression guard for the PII regex over-correction: a bare/space/Korean coordinate
+  // (no English keyword, no comma) must still be blocked from reaching a public issue.
+  it.each([
+    ['bare single coordinate', '내 위치는 37.566535 입니다'],
+    ['space-separated lat/lng pair', '37.566535 126.977969'],
+    ['Korean 위도 keyword', '위도 37.566535'],
+    ['Korean 좌표 keyword', '좌표 37.566535, 126.977969'],
+  ])('blocks %s as location PII', async (_label, description) => {
+    mockRateLimitPass();
+    const { default: handler } = await import('../../api/report.js');
+    const req = createReq({ body: { ...validBody, description } });
+    const res = createRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toContain('개인정보');
+  });
+
+  // The standalone-coordinate pattern is range-anchored to Korea lat/lng so legit
+  // high-precision decimals in normal report text are NOT false-positived as PII.
+  it.each([
+    ['reward rate', '포인트 적립률이 1.25000 배로 잘못 표기되어 있어요'],
+    ['price with decimals', '가격 19.99000 달러로 표시됨'],
+    ['rating average', '별점 4.66667 평균인 맛집'],
+  ])('allows legit high-precision decimal in %s', async (_label, description) => {
+    mockRateLimitPass();
+    const { default: handler } = await import('../../api/report.js');
+    const req = createReq({ body: { ...validBody, description } });
+    const res = createRes();
+
+    await handler(req, res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+  });
 });

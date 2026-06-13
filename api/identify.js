@@ -4,6 +4,7 @@
 
 import { handleCors } from './lib/cors.js';
 import { checkRateLimit } from './lib/rate-limit.js';
+import { validateBase64Image } from './lib/validate.js';
 
 export const config = {
   api: {
@@ -33,7 +34,12 @@ export default async function handler(req, res) {
 
   try {
     const { image } = req.body || {};
-    if (!image) return res.status(400).json({ error: 'No image provided' });
+
+    // 임의 콘텐츠가 Vision으로 그대로 흘러가지 않도록 형식·용량 사전 검증
+    const validated = validateBase64Image(image, { maxDecodedBytes: 8 * 1024 * 1024 });
+    if (!validated.ok) {
+      return res.status(400).json({ error: validated.error });
+    }
 
     const visionResponse = await fetch(
       `https://vision.googleapis.com/v1/images:annotate?key=${VISION_API_KEY}`,
@@ -43,7 +49,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           requests: [
             {
-              image: { content: image },
+              image: { content: validated.image },
               features: [
                 { type: 'WEB_DETECTION', maxResults: 10 },
                 { type: 'DOCUMENT_TEXT_DETECTION', maxResults: 1 },

@@ -1,6 +1,6 @@
 import { initSentry } from './lib/analytics';
 import { CONFIG } from './constants/config';
-import { Toast, LoadingScreen, ErrorScreen, BenefitDetailModal, PlaceSheet, OcrModal, ReportModal } from './components';
+import { Toast, LoadingScreen, ErrorScreen, BenefitDetailModal, PlaceSheet, OcrModal, ReportModal, ConsentBanner } from './components';
 import { HomeTab, BenefitsTab, WalletTab, SettingsTab } from './tabs';
 import { useAppController } from './hooks/useAppController';
 
@@ -65,6 +65,7 @@ export default function CardBenefitsApp() {
     setPlaceSheetView,
     setPlaceCategoryFilter,
     toggleFavorite,
+    isFavoritablePlace,
     pickNearestPlace,
     showOcrModal,
     ocrStatus,
@@ -249,6 +250,7 @@ export default function CardBenefitsApp() {
           setPlaceCategoryFilter={setPlaceCategoryFilter}
           selectPlace={selectPlace}
           toggleFavorite={toggleFavorite}
+          isFavoritablePlace={isFavoritablePlace}
           pickNearestPlace={pickNearestPlace}
           requestLocation={requestLocation}
           showToast={showToast}
@@ -271,6 +273,8 @@ export default function CardBenefitsApp() {
           setActiveTab={setActiveTab}
         />
       )}
+
+      <ConsentBanner />
 
       {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
       {selectedBenefit && (

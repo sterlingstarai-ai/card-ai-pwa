@@ -11,7 +11,7 @@ import {
 export const CONFIG = {
   // 앱 정보
   APP: {
-    VERSION: '1.0.6',
+    VERSION: '1.1.0',
     NAME: 'Card AI',
     DEBUG: false,  // 프로덕션: 디버그 모드 비활성화
   },
@@ -61,6 +61,9 @@ export const CONFIG = {
       PLACES: 5,
     },
     MAX_NEARBY_PLACES: 8,
+    // "내 주변/가장 가까운 곳"에 노출할 최대 반경(m). 이보다 먼 장소는
+    // 큐레이션 데이터가 해당 지역을 못 덮는 것이므로 근처로 표시하지 않는다.
+    MAX_NEARBY_RADIUS_M: 30000,
     MAX_RECENT_PLACES: 5,
     MAX_CARD_RANKING: 4,
     MAX_BENEFITS_PER_CATEGORY: 5,
@@ -141,8 +144,8 @@ export const CONFIG = {
 
   // 빌드 정보
   BUILD: {
-    VERSION: '1.0.6',
-    BUILD_NUMBER: '9',
+    VERSION: '1.1.0',
+    BUILD_NUMBER: '10',
     COMMIT_HASH: import.meta.env.VITE_COMMIT_HASH || 'dev',
     BUILD_DATE: import.meta.env.VITE_BUILD_DATE || new Date().toISOString().split('T')[0],
   },

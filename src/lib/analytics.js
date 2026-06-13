@@ -7,6 +7,7 @@
 import * as Sentry from '@sentry/react';
 import { firebaseLogEvent } from './firebase';
 import { mixpanelTrack } from './mixpanel';
+import { hasAnalyticsConsent } from './consent';
 
 // Sentry DSN - set via environment variable
 const SENTRY_DSN = import.meta.env.VITE_SENTRY_DSN || '';
@@ -18,27 +19,33 @@ export function initSentry() {
     return;
   }
 
-  Sentry.init({
-    dsn: SENTRY_DSN,
-    environment: import.meta.env.MODE || 'development',
-    integrations: [
-      Sentry.browserTracingIntegration(),
+  // 세션 리플레이는 동의가 있을 때만. 기본 오류 추적은 안정성 목적으로 유지(텍스트/미디어 마스킹).
+  const replayConsented = hasAnalyticsConsent();
+  const integrations = [Sentry.browserTracingIntegration()];
+  if (replayConsented) {
+    integrations.push(
       Sentry.replayIntegration({
         // 개인정보 보호: 모든 텍스트와 미디어 마스킹
         maskAllText: true,
         blockAllMedia: true,
-      }),
-    ],
+      })
+    );
+  }
+
+  Sentry.init({
+    dsn: SENTRY_DSN,
+    environment: import.meta.env.MODE || 'development',
+    integrations,
     // Performance monitoring
     tracesSampleRate: 0.1, // 10% of transactions
-    // Session replay
-    replaysSessionSampleRate: 0.1,
-    replaysOnErrorSampleRate: 1.0,
+    // Session replay (동의 시에만)
+    replaysSessionSampleRate: replayConsented ? 0.1 : 0,
+    replaysOnErrorSampleRate: replayConsented ? 1.0 : 0,
     // Don't send in development
     enabled: import.meta.env.PROD,
   });
 
-  console.log('[Analytics] Sentry initialized');
+  console.log('[Analytics] Sentry initialized', { replay: replayConsented });
 }
 
 // Event types for tracking
@@ -152,7 +159,9 @@ export function flushEvents() {
     return;
   }
 
-  if (import.meta.env.PROD) {
+  // 동의가 있을 때만 외부 제공자(Firebase/Mixpanel)로 전송. 미동의 시 큐는 그냥 비운다
+  // (무한 증가 방지). PROD가 아니면 어차피 전송하지 않음.
+  if (import.meta.env.PROD && hasAnalyticsConsent()) {
     for (const event of eventQueue) {
       firebaseLogEvent(event.name, event.properties);
       mixpanelTrack(event.name, {

@@ -29,6 +29,7 @@ export const PlaceSheet = ({
   setPlaceCategoryFilter,
   selectPlace,
   toggleFavorite,
+  isFavoritablePlace,
   pickNearestPlace,
   requestLocation,
   showToast
@@ -219,15 +220,19 @@ export const PlaceSheet = ({
               )}
               {displayPlaces.map(p => (
                 <div key={p.id} className={`w-full flex items-center gap-3 p-3 rounded-xl mb-2 ${selectedPlaceId === p.id ? 'bg-blue-600' : 'bg-slate-800/30'}`}>
-                  <button onClick={() => selectPlace(p.id)} className="flex-1 flex items-center gap-3 text-left active:scale-[0.98]">
+                  <button onClick={() => selectPlace(p)} className="flex-1 flex items-center gap-3 text-left active:scale-[0.98]">
                     <span className="text-xl">{placeTypeConfig[p.type]?.emoji}</span>
                     <span className="font-medium text-sm">{p.name}</span>
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); toggleFavorite(p.id); }} className="p-2 rounded-lg active:scale-90">
-                    <span className={favoritePlaceIds.includes(p.id) ? 'text-amber-400' : 'text-slate-400'}>
-                      {favoritePlaceIds.includes(p.id) ? '★' : '☆'}
-                    </span>
-                  </button>
+                  {/* 영구 저장 가능한(정적 데이터) 장소에만 즐겨찾기 별 표시 —
+                      라이브(kakao:) 장소는 저장이 안 되므로 별을 숨겨 무손실 방지 */}
+                  {(!isFavoritablePlace || isFavoritablePlace(p.id)) && (
+                    <button onClick={(e) => { e.stopPropagation(); toggleFavorite(p.id); }} className="p-2 rounded-lg active:scale-90">
+                      <span className={favoritePlaceIds.includes(p.id) ? 'text-amber-400' : 'text-slate-400'}>
+                        {favoritePlaceIds.includes(p.id) ? '★' : '☆'}
+                      </span>
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
